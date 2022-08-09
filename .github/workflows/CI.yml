@@ -49,7 +49,7 @@ jobs:
     - name: Deploy
       if: runner.os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: gh-pages
-          single-commit: true
+      with:
+        branch: gh-pages
+        folder: gh-pages
+        single-commit: true
