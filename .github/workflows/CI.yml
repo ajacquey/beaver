@@ -35,7 +35,13 @@ jobs:
       shell: bash -l {0}
       run: |
         make test -j 2
-    - name: Coverage
+    - name: Generate coverage report
+      if: runner.os == 'Linux'
+      uses: danielealbano/lcov-action@v1
+      with:
+        output_lcov_info: lcov.info
+    - name: Upload coverage to Codecov
+      if: runner.os == 'Linux'
       uses: codecov/codecov-action@v3.1.0
       with:
         files: lcov.info
