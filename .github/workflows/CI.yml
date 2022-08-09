@@ -1,9 +1,11 @@
-name: Build
+name: CI
 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ main ]
+    branches:
+      - main
+    tags: '*'
+  pull_request:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -25,18 +27,29 @@ jobs:
         mamba-version: "*"
         activate-environment: moose
         channels: "conda-forge, https://conda.software.inl.gov/public"
-    - name: Install moose packages
+    - name: Install MOOSE packages
       shell: bash -l {0}
       run: |
         mamba install moose-tools moose-libmesh
-    - name: Compile and test Beaver
+    - name: Compile and test BEAVER
       shell: bash -l {0}
       run: |
         make test -j 2
-    # - name: Build doc
-    #   shell: bash -l {0}
-    #   run: |
-    #     conda activate moose
-    #     mkdir gh-pages
-    #     cd doc
-    #     ./moosedocs.py build --destination ../gh-pages/
+    - name: Coverage
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        files: lcov.info
+    - name: Documentation
+      if: runner.os == 'Linux'
+      shell: bash -l {0}
+      run: |
+        mkdir gh-pages
+        cd doc
+        ./moosedocs.py build --destination ../gh-pages/
+    - name: Deploy
+      if: runner.os == 'Linux'
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: gh-pages
+          single-commit: true
