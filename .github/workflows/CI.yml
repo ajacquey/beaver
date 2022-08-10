@@ -51,7 +51,6 @@ jobs:
         lcov --gcov-tool gcov --capture --ignore-errors gcov,source --directory src/ --directory build/ --output-file gh-pages/coverage/covered.info
         lcov --gcov-tool gcov --add-tracefile gh-pages/coverage/initialize.info --add-tracefile gh-pages/coverage/covered.info --output-file gh-pages/coverage/final.info
         lcov --gcov-tool gcov --extract gh-pages/coverage/final.info \*src/\* --extract gh-pages/coverage/final.info \*include/\* --output-file gh-pages/coverage/coverage.info
-        lcov --gcov-tool gcov --capture --directory src/ --directory build/ --output-file lcov.info
     - name: Upload coverage to Codecov
       if: runner.os == 'Linux'
       uses: codecov/codecov-action@v3.1.0
