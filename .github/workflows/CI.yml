@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     strategy:
       matrix:
-        os: ["ubuntu", "macos"]
+        os: ["ubuntu"]
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -30,16 +30,16 @@ jobs:
     - name: Install MOOSE packages
       shell: bash -l {0}
       run: |
-        mamba install moose-tools moose-libmesh
+        mamba install moose-tools moose-libmesh lcov
     - name: Compile and test BEAVER
       shell: bash -l {0}
       run: |
         make test -j 2
     - name: Generate coverage report
       if: runner.os == 'Linux'
-      uses: danielealbano/lcov-action@v1
-      with:
-        output_lcov_info: lcov.info
+      shell: bash -l {0}
+      run: |
+        lcov --gcov-tool gcov  --capture --directory src/ --directory build/ --output-file lcov.info
     - name: Upload coverage to Codecov
       if: runner.os == 'Linux'
       uses: codecov/codecov-action@v3.1.0
