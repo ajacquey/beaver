@@ -1,0 +1,7 @@
+Applications:
+    beaver:
+        exe_directory:     ${ROOT_DIR}
+        exe_name:          beaver
+        app_types:
+            - beaverApp
+        content_directory: doc/content

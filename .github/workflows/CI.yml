@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-    tags: '*'
-  pull_request:
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -30,20 +29,46 @@ jobs:
     - name: Install MOOSE packages
       shell: bash -l {0}
       run: |
-        mamba install moose-tools moose-libmesh lcov
-    - name: Compile and test BEAVER
+        mamba install moose-tools moose-libmesh
+    - name: Compile BEAVER
       shell: bash -l {0}
       run: |
-        make test -j 2
-    - name: Documentation
-      if: runner.os == 'Linux'
+        make -j 2
+    - name: Test BEAVER
+      shell: bash -l {0}
+      run: |
+        ./run_tests -j 2
+
+  doc:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        mamba-version: "*"
+        activate-environment: moose
+        channels: "conda-forge, https://conda.software.inl.gov/public"
+    - name: Install MOOSE packages
+      shell: bash -l {0}
+      run: |
+        mamba install moose-tools moose-libmesh lcov
+    - name: Compile and test BEAVER (with coverage)
+      shell: bash -l {0}
+      run: |
+        coverage=true make test -j 2
+    - name: Build documentation
       shell: bash -l {0}
       run: |
         mkdir gh-pages
         cd doc
+        ./moosedocs.py check
         ./moosedocs.py build --destination ../gh-pages/
     - name: Generate coverage report
-      if: runner.os == 'Linux'
       shell: bash -l {0}
       run: |
         mkdir gh-pages/coverage
@@ -52,12 +77,12 @@ jobs:
         lcov --gcov-tool gcov --add-tracefile gh-pages/coverage/initialize.info --add-tracefile gh-pages/coverage/covered.info --output-file gh-pages/coverage/final.info
         lcov --gcov-tool gcov --extract gh-pages/coverage/final.info \*src/\* --extract gh-pages/coverage/final.info \*include/\* --output-file gh-pages/coverage/coverage.info
     - name: Upload coverage to Codecov
-      if: runner.os == 'Linux'
+      if: ${{ github.event_name == 'push' }}
       uses: codecov/codecov-action@v3.1.0
       with:
         files: gh-pages/coverage/coverage.info
     - name: Deploy
-      if: runner.os == 'Linux'
+      if: ${{ github.event_name == 'push' }}
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         branch: gh-pages
