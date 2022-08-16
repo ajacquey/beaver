@@ -14,7 +14,7 @@
             "compilerPath": "${HOME}/mambaforge3/envs/moose/bin/x86_64-conda-linux-gnu-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64",
+            "intelliSenseMode": "gcc-x64",
             "compileCommands": "${workspaceFolder}/compile_commands.json",
             "browse": {"path": ["${workspaceFolder}",
                                 "${workspaceFolder}/build/header_symlinks",
