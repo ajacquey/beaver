@@ -62,12 +62,14 @@
     variable = strain_xy
     index_i = 0
     index_j = 1
+    execute_on = 'TIMESTEP_END'
   []
   [stress_xy_aux]
     type = BVStressComponentAux
     variable = stress_xy
     index_i = 0
     index_j = 1
+    execute_on = 'TIMESTEP_END'
   []
 []
 
