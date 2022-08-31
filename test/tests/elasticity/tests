@@ -1,0 +1,7 @@
+[Tests]
+  [uniaxial]
+    type = 'Exodiff'
+    input = 'uniaxial.i'
+    exodiff = 'uniaxial_out.e'
+  []
+[]
