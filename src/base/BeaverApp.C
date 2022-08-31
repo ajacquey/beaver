@@ -9,6 +9,9 @@ BeaverApp::validParams()
 {
   InputParameters params = MooseApp::validParams();
 
+  // Do not use legacy material output
+  params.set<bool>("use_legacy_material_output") = false;
+
   return params;
 }
 
@@ -27,6 +30,8 @@ BeaverApp::registerAll(Factory & f, ActionFactory & af, Syntax & syntax)
   Registry::registerActionsTo(af, {"BeaverApp"});
 
   /* register custom execute flags, action syntax, etc. here */
+  registerSyntax("EmptyAction", "BCs/BVPressure");
+  registerSyntax("BVPressureAction", "BCs/BVPressure/*");
 }
 
 void
