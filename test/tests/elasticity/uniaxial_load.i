@@ -1,9 +1,15 @@
 [Mesh]
   type = GeneratedMesh
   dim = 3
-  nx = 3
-  ny = 3
-  nz = 3
+  nx = 10
+  ny = 2
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 0.1
+  zmin = 0
+  zmax = 0.1
 []
 
 [Variables]
@@ -40,46 +46,46 @@
 []
 
 [AuxVariables]
-  [stress_zz]
+  [stress_xx]
     order = CONSTANT
     family = MONOMIAL
   []
 []
 
 [AuxKernels]
-  [stress_zz_aux]
+  [stress_xx_aux]
     type = BVStressComponentAux
-    variable = stress_zz
-    index_i = 2
-    index_j = 2
+    variable = stress_xx
+    index_i = 0
+    index_j = 0
     execute_on = 'TIMESTEP_END'
   []
 []
 
 [BCs]
-  [symmy]
-    type = DirichletBC
-    variable = disp_y
-    boundary = bottom
-    value = 0
-  []
-  [symmx]
+  [no_x_left]
     type = DirichletBC
     variable = disp_x
     boundary = left
     value = 0
   []
-  [symmz]
+  [load_x_right]
+    type = NeumannBC
+    variable = disp_x
+    boundary = right
+    value = 2.0e+06
+  []
+  [no_y_bottom]
+    type = DirichletBC
+    variable = disp_y
+    boundary = bottom
+    value = 0
+  []
+  [no_z_back]
     type = DirichletBC
     variable = disp_z
     boundary = back
     value = 0
-  []
-  [tdisp]
-    type = DirichletBC
-    variable = disp_z
-    boundary = front
-    value = 0.1
   []
 []
 
@@ -87,8 +93,8 @@
   [elasticity]
     type = BVMechanicalMaterial
     displacements = 'disp_x disp_y disp_z'
-    bulk_modulus = 8.0e+09
-    shear_modulus = 3.5e+09
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
   []
 []
 
@@ -103,10 +109,10 @@
 
 [Executioner]
   type = Transient
-  dt = 0.05
   solve_type = 'NEWTON'
-  dtmin = 0.05
-  num_steps = 1
+  start_time = 0.0
+  end_time = 1.0
+  dt = 1.0
 []
 
 [Outputs]

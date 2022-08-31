@@ -30,10 +30,14 @@ BVMechanicalMaterial::validParams()
   params.addParam<MooseEnum>(
       "strain_model", strain_model, "The model to use to calculate the strain rate tensor.");
   // Elastic moduli parameters
-  params.addRequiredRangeCheckedParam<Real>(
+  params.addRangeCheckedParam<Real>(
       "bulk_modulus", "bulk_modulus > 0.0", "The bulk modulus of the material.");
-  params.addRequiredRangeCheckedParam<Real>(
+  params.addRangeCheckedParam<Real>(
       "shear_modulus", "shear_modulus > 0.0", "The shear modulus of the material.");
+  params.addRangeCheckedParam<Real>(
+      "young_modulus", "young_modulus > 0.0", "The Young's modulus of the material.");
+  params.addRangeCheckedParam<Real>(
+      "poisson_ratio", "poisson_ratio > 0.0", "The Poisson's ratio of the material.");
   // Initial stress
   params.addParam<std::vector<FunctionName>>(
       "initial_stress", "The initial stress principal components (negative in compression).");
@@ -50,9 +54,6 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
     _grad_disp_old(3),
     // Strain parameters
     _strain_model(getParam<MooseEnum>("strain_model")),
-    // Elastic moduli parameters
-    _bulk_modulus(getParam<Real>("bulk_modulus")),
-    _shear_modulus(getParam<Real>("shear_modulus")),
     // Initial stress
     _initial_stress_fct(getParam<std::vector<FunctionName>>("initial_stress")),
     _num_ini_stress(_initial_stress_fct.size()),
@@ -79,7 +80,10 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
 void
 BVMechanicalMaterial::initialSetup()
 {
+  elasticModuliInputCheck();
+
   displacementIntegrityCheck();
+
   // Fetch coupled variables and gradients
   for (unsigned int i = 0; i < _ndisp; ++i)
   {
@@ -96,6 +100,28 @@ BVMechanicalMaterial::initialSetup()
     _grad_disp[i] = &_ad_grad_zero;
     _grad_disp_old[i] = &_grad_zero;
   }
+}
+
+void
+BVMechanicalMaterial::elasticModuliInputCheck()
+{
+  if (isParamValid("bulk_modulus") && isParamValid("shear_modulus"))
+  {
+    _bulk_modulus = getParam<Real>("bulk_modulus");
+    _shear_modulus = getParam<Real>("shear_modulus");
+  }
+  else if (isParamValid("young_modulus") && isParamValid("poisson_ratio"))
+  {
+    Real E = getParam<Real>("young_modulus");
+    Real nu = getParam<Real>("poisson_ratio");
+
+    _bulk_modulus = E / (3.0 * (1.0 - 2.0 * nu));
+    _shear_modulus = E / (2.0 * (1.0 + nu));
+  }
+  else
+    paramError("bulk_modulus",
+               "Please provide 'bulk_modulus' and 'shear_modulus' OR 'young_modulus' and "
+               "'poisson_ratio' as elastic parameters!");
 }
 
 void
@@ -148,13 +174,13 @@ BVMechanicalMaterial::computeQpStrainIncrement()
       computeQpFiniteStrain(grad_tensor, grad_tensor_old);
       break;
     default:
-      mooseError("Unknown strain model. Specify 'small' or 'finite'!");
+      paramError("strain_model", "Unknown strain model. Specify 'small' or 'finite'!");
   }
 }
 
 void
 BVMechanicalMaterial::computeQpSmallStrain(const ADRankTwoTensor & grad_tensor,
-                                         const RankTwoTensor & grad_tensor_old)
+                                           const RankTwoTensor & grad_tensor_old)
 {
   ADRankTwoTensor A = grad_tensor - grad_tensor_old;
 
@@ -164,7 +190,7 @@ BVMechanicalMaterial::computeQpSmallStrain(const ADRankTwoTensor & grad_tensor,
 
 void
 BVMechanicalMaterial::computeQpFiniteStrain(const ADRankTwoTensor & grad_tensor,
-                                          const RankTwoTensor & grad_tensor_old)
+                                            const RankTwoTensor & grad_tensor_old)
 {
   ADRankTwoTensor F = grad_tensor;
   RankTwoTensor F_old = grad_tensor_old;

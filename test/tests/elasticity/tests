@@ -4,4 +4,20 @@
     input = 'uniaxial.i'
     exodiff = 'uniaxial_out.e'
   []
+  [uniaxial_load]
+    type = 'Exodiff'
+    input = 'uniaxial_load.i'
+    exodiff = 'uniaxial_load_out.e'
+  []
+  [shear]
+    type = 'Exodiff'
+    input = 'shear.i'
+    exodiff = 'shear_out.e'
+  []
+  [error_moduli]
+    type = RunException
+    input = error_moduli.i
+    expect_err = "Please provide 'bulk_modulus' and 'shear_modulus' OR 'young_modulus' and 'poisson_ratio' as elastic parameters!"
+    match_literal = false
+  []
 []

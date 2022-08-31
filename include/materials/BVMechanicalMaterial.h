@@ -21,6 +21,7 @@ public:
   static InputParameters validParams();
   BVMechanicalMaterial(const InputParameters & parameters);
   void initialSetup() override;
+  void elasticModuliInputCheck();
   void displacementIntegrityCheck();
 
 protected:
@@ -44,8 +45,8 @@ protected:
   const unsigned int _strain_model;
 
   // Elastic parameters
-  const Real _bulk_modulus;
-  const Real _shear_modulus;
+  Real _bulk_modulus;
+  Real _shear_modulus;
 
   // Initial stress
   const std::vector<FunctionName> _initial_stress_fct;

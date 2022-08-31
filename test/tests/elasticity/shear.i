@@ -1,9 +1,15 @@
 [Mesh]
   type = GeneratedMesh
   dim = 3
-  nx = 3
-  ny = 3
-  nz = 3
+  nx = 8
+  ny = 8
+  nz = 2
+  xmin = 0
+  xmax = 10
+  ymin = 0
+  ymax = 10
+  zmin = 0
+  zmax = 2.5
 []
 
 [Variables]
@@ -40,46 +46,58 @@
 []
 
 [AuxVariables]
-  [stress_zz]
+  [strain_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_xy]
     order = CONSTANT
     family = MONOMIAL
   []
 []
 
 [AuxKernels]
-  [stress_zz_aux]
+  [strain_xy_aux]
+    type = BVStrainComponentAux
+    variable = strain_xy
+    index_i = 0
+    index_j = 1
+  []
+  [stress_xy_aux]
     type = BVStressComponentAux
-    variable = stress_zz
-    index_i = 2
-    index_j = 2
-    execute_on = 'TIMESTEP_END'
+    variable = stress_xy
+    index_i = 0
+    index_j = 1
+  []
+[]
+
+[Functions]
+  [disp_y_func]
+    type = ParsedFunction
+    value = 'm*t*x'
+    vars = 'm'
+    vals = '-0.1'
   []
 []
 
 [BCs]
-  [symmy]
-    type = DirichletBC
-    variable = disp_y
-    boundary = bottom
-    value = 0
-  []
-  [symmx]
+  [no_x]
     type = DirichletBC
     variable = disp_x
-    boundary = left
-    value = 0
+    boundary = 'left right bottom top front back'
+    value = 0.0
   []
-  [symmz]
+  [no_z]
     type = DirichletBC
     variable = disp_z
-    boundary = back
-    value = 0
+    boundary = 'left right bottom top front back'
+    value = 0.0
   []
-  [tdisp]
-    type = DirichletBC
-    variable = disp_z
-    boundary = front
-    value = 0.1
+  [disp_y_plate]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = 'left right bottom top front back'
+    function = disp_y_func
   []
 []
 
@@ -87,8 +105,8 @@
   [elasticity]
     type = BVMechanicalMaterial
     displacements = 'disp_x disp_y disp_z'
-    bulk_modulus = 8.0e+09
-    shear_modulus = 3.5e+09
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
   []
 []
 
@@ -103,10 +121,10 @@
 
 [Executioner]
   type = Transient
-  dt = 0.05
   solve_type = 'NEWTON'
-  dtmin = 0.05
-  num_steps = 1
+  start_time = 0.0
+  end_time = 2.0
+  dt = 1.0
 []
 
 [Outputs]
