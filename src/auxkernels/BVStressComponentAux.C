@@ -21,21 +21,16 @@ BVStressComponentAux::validParams()
 {
   InputParameters params = BVStressAuxBase::validParams();
   params.addClassDescription("Class for outputting components of the stress tensor.");
-  params.addRequiredRangeCheckedParam<unsigned int>(
-      "index_i",
-      "index_i >= 0 & index_i <= 2",
-      "The index i of ij for the stress tensor (0, 1, 2)");
-  params.addRequiredRangeCheckedParam<unsigned int>(
-      "index_j",
-      "index_j >= 0 & index_j <= 2",
-      "The index j of ij for the stress tensor (0, 1, 2)");
+  MooseEnum component("x y z");
+  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the stress tensor.");
+  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the stress tensor.");
   return params;
 }
 
 BVStressComponentAux::BVStressComponentAux(const InputParameters & parameters)
   : BVStressAuxBase(parameters),
-    _i(getParam<unsigned int>("index_i")),
-    _j(getParam<unsigned int>("index_j"))
+    _i(getParam<MooseEnum>("index_i")),
+    _j(getParam<MooseEnum>("index_j"))
 {
 }
 

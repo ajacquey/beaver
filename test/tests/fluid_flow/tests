@@ -1,0 +1,17 @@
+[Tests]
+  [single_phase_1D]
+    type = 'Exodiff'
+    input = 'single_phase_1D.i'
+    exodiff = 'single_phase_1D_out.e'
+  []
+  [single_phase_1D_transient]
+    type = 'Exodiff'
+    input = 'single_phase_1D_transient.i'
+    exodiff = 'single_phase_1D_transient_out.e'
+  []
+  [single_phase_Mose]
+    type = 'Exodiff'
+    input = 'single_phase_Mose.i'
+    exodiff = 'single_phase_Mose_out.e'
+  []
+[]

@@ -11,32 +11,28 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
+#include "BVSinglePhaseTimeDerivative.h"
 
-registerMooseObject("BeaverApp", BVStrainComponentAux);
+registerMooseObject("BeaverApp", BVSinglePhaseTimeDerivative);
 
 InputParameters
-BVStrainComponentAux::validParams()
+BVSinglePhaseTimeDerivative::validParams()
 {
-  InputParameters params = BVStrainAuxBase::validParams();
-  params.addClassDescription("Class for outputting components of the strain tensor.");
-  MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
+  InputParameters params = ADKernelValue::validParams();
+  params.addClassDescription("Kernel for the transient term for single phase flow.");
   return params;
 }
 
-BVStrainComponentAux::BVStrainComponentAux(const InputParameters & parameters)
-  : BVStrainAuxBase(parameters),
-    _u_old(uOld()),
-    _i(getParam<MooseEnum>("index_i")),
-    _j(getParam<MooseEnum>("index_j"))
+BVSinglePhaseTimeDerivative::BVSinglePhaseTimeDerivative(const InputParameters & parameters)
+  : ADKernelValue(parameters),
+    _porosity(getADMaterialProperty<Real>("porosity")),
+    _density(getADMaterialProperty<Real>("density")),
+    _density_old(getMaterialPropertyOld<Real>("density"))
 {
 }
 
-Real
-BVStrainComponentAux::computeValue()
+ADReal
+BVSinglePhaseTimeDerivative::precomputeQpResidual()
 {
-  return _u_old[_qp] + MetaPhysicL::raw_value(_strain_increment[_qp](_i, _j));
+  return _porosity[_qp] / _density[_qp] * (_density[_qp] - _density_old[_qp]) / _dt;
 }

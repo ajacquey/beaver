@@ -11,32 +11,27 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
+#include "BVConstantPermeability.h"
 
-registerMooseObject("BeaverApp", BVStrainComponentAux);
+registerMooseObject("BeaverApp", BVConstantPermeability);
 
 InputParameters
-BVStrainComponentAux::validParams()
+BVConstantPermeability::validParams()
 {
-  InputParameters params = BVStrainAuxBase::validParams();
-  params.addClassDescription("Class for outputting components of the strain tensor.");
-  MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
+  InputParameters params = BVPermeabilityBase::validParams();
+  params.addClassDescription("Computes a constant permeability value for the porous medium.");
+  params.addRequiredRangeCheckedParam<Real>(
+      "permeability", "permeability>0", "The permeability of the porous medium.");
   return params;
 }
 
-BVStrainComponentAux::BVStrainComponentAux(const InputParameters & parameters)
-  : BVStrainAuxBase(parameters),
-    _u_old(uOld()),
-    _i(getParam<MooseEnum>("index_i")),
-    _j(getParam<MooseEnum>("index_j"))
+BVConstantPermeability::BVConstantPermeability(const InputParameters & parameters)
+  : BVPermeabilityBase(parameters), _permeability0(getParam<Real>("permeability"))
 {
 }
 
-Real
-BVStrainComponentAux::computeValue()
+void
+BVConstantPermeability::computeQpProperties()
 {
-  return _u_old[_qp] + MetaPhysicL::raw_value(_strain_increment[_qp](_i, _j));
+  _permeability[_qp] = _permeability0;
 }

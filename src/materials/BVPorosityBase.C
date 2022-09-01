@@ -11,32 +11,18 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
-
-registerMooseObject("BeaverApp", BVStrainComponentAux);
+#include "BVPorosityBase.h"
 
 InputParameters
-BVStrainComponentAux::validParams()
+BVPorosityBase::validParams()
 {
-  InputParameters params = BVStrainAuxBase::validParams();
-  params.addClassDescription("Class for outputting components of the strain tensor.");
-  MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
+  InputParameters params = Material::validParams();
+  params.addClassDescription("Base class for computing the porosity of a porous material for "
+                             "single and multi phase flow.");
   return params;
 }
 
-BVStrainComponentAux::BVStrainComponentAux(const InputParameters & parameters)
-  : BVStrainAuxBase(parameters),
-    _u_old(uOld()),
-    _i(getParam<MooseEnum>("index_i")),
-    _j(getParam<MooseEnum>("index_j"))
+BVPorosityBase::BVPorosityBase(const InputParameters & parameters)
+  : Material(parameters), _porosity(declareADProperty<Real>("porosity"))
 {
-}
-
-Real
-BVStrainComponentAux::computeValue()
-{
-  return _u_old[_qp] + MetaPhysicL::raw_value(_strain_increment[_qp](_i, _j));
 }

@@ -11,32 +11,26 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
+#include "BVSinglePhaseDarcy.h"
 
-registerMooseObject("BeaverApp", BVStrainComponentAux);
+registerMooseObject("BeaverApp", BVSinglePhaseDarcy);
 
 InputParameters
-BVStrainComponentAux::validParams()
+BVSinglePhaseDarcy::validParams()
 {
-  InputParameters params = BVStrainAuxBase::validParams();
-  params.addClassDescription("Class for outputting components of the strain tensor.");
-  MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
+  InputParameters params = ADKernelGrad::validParams();
+  params.addClassDescription("Kernel for the divergence of Darcy's velocity for single phase flow.");
   return params;
 }
 
-BVStrainComponentAux::BVStrainComponentAux(const InputParameters & parameters)
-  : BVStrainAuxBase(parameters),
-    _u_old(uOld()),
-    _i(getParam<MooseEnum>("index_i")),
-    _j(getParam<MooseEnum>("index_j"))
+BVSinglePhaseDarcy::BVSinglePhaseDarcy(const InputParameters & parameters)
+  : ADKernelGrad(parameters),
+    _lambda(getADMaterialProperty<Real>("fluid_mobility"))
 {
 }
 
-Real
-BVStrainComponentAux::computeValue()
+ADRealVectorValue
+BVSinglePhaseDarcy::precomputeQpResidual()
 {
-  return _u_old[_qp] + MetaPhysicL::raw_value(_strain_increment[_qp](_i, _j));
+  return _lambda[_qp] * _grad_u[_qp];
 }
