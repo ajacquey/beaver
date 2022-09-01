@@ -30,17 +30,17 @@
 [Kernels]
   [stress_x]
     type = BVStressDivergence
-    component = 0
+    component = x
     variable = disp_x
   []
   [stress_y]
     type = BVStressDivergence
-    component = 1
+    component = y
     variable = disp_y
   []
   [stress_z]
     type = BVStressDivergence
-    component = 2
+    component = z
     variable = disp_z
   []
 []
@@ -56,8 +56,8 @@
   [stress_xx_aux]
     type = BVStressComponentAux
     variable = stress_xx
-    index_i = 0
-    index_j = 0
+    index_i = x
+    index_j = x
     execute_on = 'TIMESTEP_END'
   []
 []

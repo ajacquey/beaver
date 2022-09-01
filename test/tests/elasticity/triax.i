@@ -44,17 +44,17 @@
 [Kernels]
   [stress_x]
     type = BVStressDivergence
-    component = 0
+    component = x
     variable = disp_x
   []
   [stress_y]
     type = BVStressDivergence
-    component = 1
+    component = y
     variable = disp_y
   []
   [stress_z]
     type = BVStressDivergence
-    component = 2
+    component = z
     variable = disp_z
   []
 []
@@ -82,15 +82,15 @@
   [strain_zz_aux]
     type = BVStrainComponentAux
     variable = strain_zz
-    index_i = 2
-    index_j = 2
+    index_i = z
+    index_j = z
     execute_on = 'TIMESTEP_END'
   []
   [stress_zz_aux]
     type = BVStressComponentAux
     variable = stress_zz
-    index_i = 2
-    index_j = 2
+    index_i = z
+    index_j = z
     execute_on = 'TIMESTEP_END'
   []
   [pressure_aux]

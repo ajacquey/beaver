@@ -11,32 +11,30 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVStrainComponentAux);
+#include "Material.h"
+#include "SinglePhaseFluidProperties.h"
 
-InputParameters
-BVStrainComponentAux::validParams()
+class BVFluidProperties : public Material
 {
-  InputParameters params = BVStrainAuxBase::validParams();
-  params.addClassDescription("Class for outputting components of the strain tensor.");
-  MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVFluidProperties(const InputParameters & parameters);
+//   std::string phase_ext();
 
-BVStrainComponentAux::BVStrainComponentAux(const InputParameters & parameters)
-  : BVStrainAuxBase(parameters),
-    _u_old(uOld()),
-    _i(getParam<MooseEnum>("index_i")),
-    _j(getParam<MooseEnum>("index_j"))
-{
-}
+protected:
+  virtual void initQpStatefulProperties() override;
+  virtual void computeQpProperties() override;
 
-Real
-BVStrainComponentAux::computeValue()
-{
-  return _u_old[_qp] + MetaPhysicL::raw_value(_strain_increment[_qp](_i, _j));
-}
+  const ADVariableValue & _pf;
+  const ADVariableValue & _temp;
+
+//   const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
+//   const std::string _ext;
+
+  const SinglePhaseFluidProperties & _fp;
+
+  ADMaterialProperty<Real> & _density;
+  ADMaterialProperty<Real> & _viscosity;
+};

@@ -11,32 +11,20 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVStrainComponentAux);
+#include "ADKernelValue.h"
 
-InputParameters
-BVStrainComponentAux::validParams()
+class BVSinglePhaseTimeDerivative : public ADKernelValue
 {
-  InputParameters params = BVStrainAuxBase::validParams();
-  params.addClassDescription("Class for outputting components of the strain tensor.");
-  MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVSinglePhaseTimeDerivative(const InputParameters & parameters);
 
-BVStrainComponentAux::BVStrainComponentAux(const InputParameters & parameters)
-  : BVStrainAuxBase(parameters),
-    _u_old(uOld()),
-    _i(getParam<MooseEnum>("index_i")),
-    _j(getParam<MooseEnum>("index_j"))
-{
-}
+protected:
+  virtual ADReal precomputeQpResidual() override;
 
-Real
-BVStrainComponentAux::computeValue()
-{
-  return _u_old[_qp] + MetaPhysicL::raw_value(_strain_increment[_qp](_i, _j));
-}
+  const ADMaterialProperty<Real> & _porosity;
+  const ADMaterialProperty<Real> & _density;
+  const MaterialProperty<Real> & _density_old;
+};
