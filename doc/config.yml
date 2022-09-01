@@ -8,6 +8,8 @@ Content:
             - css/*
             - contrib/**
             - media/**
+    fluid_properties:
+        root_dir: ${MOOSE_DIR}/modules/fluid_properties/doc/content
 
 Renderer:
     type: MooseDocs.base.MaterializeRenderer
@@ -15,6 +17,11 @@ Renderer:
 Extensions:
     MooseDocs.extensions.navigation:
         name: Beaver
+        repo: https://github.com/ajacquey/beaver
+        menu:
+            Documentation: documentation/documentation.menu.md
+                # Beaver syntax: documentation/beaver.md
+                # Fluid Properties syntax: documentation/fluid_properties.md
     MooseDocs.extensions.appsyntax:
         executable: ${ROOT_DIR}
         remove: !include ${MOOSE_DIR}/framework/doc/remove.yml
