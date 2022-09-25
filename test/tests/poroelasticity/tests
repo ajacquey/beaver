@@ -1,0 +1,7 @@
+[Tests]
+  [terzaghi]
+    type = 'Exodiff'
+    input = 'terzaghi.i'
+    exodiff = 'terzaghi_out.e'
+  []
+[]
