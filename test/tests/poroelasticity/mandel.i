@@ -1,20 +1,20 @@
-# Terzaghi's problem of consolodation of a soil layer
+# Mandel's problem
 #
 # See Arnold Verruijt "Theory and Problems of Poroelasticity" 2015
-# Section 2.2 Terzaghi's problem
+# Section 3.2 Mandel's problem
 # 
 # Time dimension is t = Cv * t / h^2
-# Space dimension is z = z / h
+# Space dimension is x = x / a
 
 [Mesh]
   type = GeneratedMesh
   dim = 2
-  nx = 1
+  nx = 10
   ny = 10
-  xmin = -1.0
+  xmin = 0.0
   xmax = 1.0
-  ymin = 0
-  ymax = 1
+  ymin = 0.0
+  ymax = 1.0
 []
 
 [Variables]
@@ -60,7 +60,7 @@
     type = DirichletBC
     variable = disp_x
     value = 0
-    boundary = 'left right'
+    boundary = 'left'
   []
   [base_fixed]
     type = DirichletBC
@@ -74,11 +74,11 @@
     value = -1
     boundary = 'top'
   []
-  [topdrained]
+  [sides_drained]
     type = DirichletBC
     variable = pf
     value = 0
-    boundary = 'top'
+    boundary = 'right'
   []
 []
 
@@ -86,8 +86,8 @@
   [mechanical]
     type = BVMechanicalMaterial
     displacements = 'disp_x disp_y'
-    bulk_modulus = 4
-    shear_modulus = 3
+    bulk_modulus = 1
+    shear_modulus = 0.6
   []
   [fluid_flow_mat]
     type = BVSinglePhaseFlowMaterial
@@ -98,7 +98,7 @@
   []
   [permeability]
     type = BVConstantPermeability
-    permeability = 1.5e-02 # scaled by effective space
+    permeability = 1.5 # scaled by effective space
   []
   [porosity]
     type = BVConstantPorosity
@@ -117,18 +117,26 @@
     [simple_fluid]
       type = SimpleFluidProperties
       density0 = 1.0
-      viscosity = 0.13953488372093023 # scaled by effective time
+      viscosity = 3.821656050955414 # scaled by effective time
       bulk_modulus = 8.0
     []
   []
 []
 
 [Preconditioning]
-  [precond]
+  [asm]
     type = SMP
-    full = true
-    petsc_options_iname = '-ksp_type -pc_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type'
-    petsc_options_value = 'bcgs bjacobi 1E-14 1E-10 100 basic'
+    petsc_options = '-snes_ksp_ew'
+    petsc_options_iname = '-ksp_type -ksp_rtol -ksp_max_it
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it
+                           -ksp_gmres_restart'
+    petsc_options_value = 'fgmres 1e-10 100
+                           asm
+                           ilu
+                           newtonls 1e-12 1e-08 100
+                           201'
   []
 []
 
@@ -140,7 +148,7 @@
   end_time = 0.01
   [TimeStepper]
     type = LogConstantDT
-    first_dt = 0.0001
+    first_dt = 0.001
     log_dt = 0.044
   []
 []

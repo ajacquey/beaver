@@ -4,4 +4,9 @@
     input = 'terzaghi.i'
     exodiff = 'terzaghi_out.e'
   []
+  [mandel]
+    type = 'Exodiff'
+    input = 'mandel.i'
+    exodiff = 'mandel_out.e'
+  []
 []
