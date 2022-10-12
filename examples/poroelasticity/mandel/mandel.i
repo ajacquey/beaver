@@ -10,8 +10,8 @@
 [Mesh]
   type = GeneratedMesh
   dim = 2
-  nx = 4
-  ny = 4
+  nx = 40
+  ny = 40
   xmin = 0.0
   xmax = 1.0
   ymin = 0.0
@@ -128,16 +128,61 @@
   [asm]
     type = SMP
     petsc_options = '-snes_ksp_ew'
-    petsc_options_iname = '-ksp_type -ksp_rtol -ksp_max_it
+    petsc_options_iname = '-ksp_type
                            -pc_type
                            -sub_pc_type
                            -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
                            -ksp_gmres_restart'
-    petsc_options_value = 'fgmres 1e-10 100
+    petsc_options_value = 'fgmres
                            asm
                            ilu
-                           newtonls 1e-12 1e-08 100 basic
+                           newtonls 1e-10 1e-10 100 basic
                            201'
+  []
+[]
+
+[Postprocessors]
+  [U]
+    type = SideAverageValue
+    boundary = top
+    outputs = 'csv_t'
+    variable = disp_y
+  []
+  [P1]
+    type = PointValue
+    outputs = 'csv_t'
+    point = '0.0 0.0 0.0'
+    variable = pf
+  []
+  [P2]
+    type = PointValue
+    outputs = 'csv_t'
+    point = '0.25 0.0 0.0'
+    variable = pf
+  []
+  [P3]
+    type = PointValue
+    outputs = 'csv_t'
+    point = '0.5 0.0 0.0'
+    variable = pf
+  []
+  [P4]
+    type = PointValue
+    outputs = 'csv_t'
+    point = '0.75 0.0 0.0'
+    variable = pf
+  []
+[]
+
+[VectorPostprocessors]
+  [line_pf]
+    type = LineValueSampler
+    variable = pf
+    start_point = '0.0 0.0 0.0'
+    end_point = '1.0 0.0 0.0'
+    num_points = 40
+    sort_by = 'x'
+    outputs = 'csv_p'
   []
 []
 
@@ -146,11 +191,11 @@
   solve_type = 'NEWTON'
   automatic_scaling = true
   start_time = 0
-  end_time = 0.01
+  end_time = 10
   [TimeStepper]
     type = LogConstantDT
     first_dt = 0.001
-    log_dt = 0.044
+    log_dt = 0.022
   []
 []
 
@@ -159,4 +204,12 @@
   execute_on = 'TIMESTEP_END'
   print_linear_residuals = false
   exodus = true
+  [csv_p]
+    type = CSV
+    sync_only = true
+    sync_times = '0.01 0.1 0.5 1.0 2.0'
+  []
+  [csv_t]
+    type = CSV
+  []
 []

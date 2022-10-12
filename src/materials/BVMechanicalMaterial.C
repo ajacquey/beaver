@@ -120,10 +120,17 @@ BVMechanicalMaterial::elasticModuliInputCheck()
     _bulk_modulus = E / (3.0 * (1.0 - 2.0 * nu));
     _shear_modulus = E / (2.0 * (1.0 + nu));
   }
+  else if (isParamValid("bulk_modulus") && isParamValid("poisson_ratio"))
+  {
+    Real nu = getParam<Real>("poisson_ratio");
+
+    _bulk_modulus = getParam<Real>("bulk_modulus");
+    _shear_modulus = 3.0 * _bulk_modulus * (1.0 - 2.0 * nu) / (2.0 * (1.0 + nu));
+  }
   else
     paramError("bulk_modulus",
                "Please provide 'bulk_modulus' and 'shear_modulus' OR 'young_modulus' and "
-               "'poisson_ratio' as elastic parameters!");
+               "'poisson_ratio' OR 'bulk_modulus' and 'poisson_ratio' as elastic parameters!");
 }
 
 void

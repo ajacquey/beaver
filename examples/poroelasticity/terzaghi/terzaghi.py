@@ -115,13 +115,11 @@ if __name__ == "__main__":
 
   ax.set_xlim(0.0, 1.1)
   ax.set_ylim(0.0, 1.0)
-  # ax.grid()
   ax.set_xlabel(r'$\frac{p_{f}}{p_{0}}$', fontsize=16)
   ax.set_ylabel(r'$\frac{z}{h}$', rotation=0, fontsize=16)
   ax.set_title('Terzaghi\'s consolidation problem')
 
   plt.savefig('terzaghi_pf.png', dpi=200, bbox_inches='tight') 
-
 
   # Figure displacement
   plt.rc('text', usetex=True)
@@ -132,7 +130,6 @@ if __name__ == "__main__":
 
   ax.set_xlim(1.0e-04, 1.0e+01)
   ax.set_ylim(0.0, 1.0)
-  # ax.grid()
   ax.invert_yaxis()
   ax.set_xscale("log")
   ax.set_xlabel(r'$\frac{c_{v} t}{h^{2}}$', fontsize=16)

@@ -123,15 +123,6 @@
   []
 []
 
-# [Preconditioning]
-#   [hypre]
-#     type = SMP
-#     full = true
-#     petsc_options_iname = '-pc_type -pc_hypre_type -snes_atol -snes_linesearch_type'
-#     petsc_options_value = 'hypre boomeramg 1.0e-10 basic'
-#   []
-# []
-
 [Preconditioning]
   [precond]
     type = SMP
