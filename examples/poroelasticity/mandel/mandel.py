@@ -1,7 +1,6 @@
 import os, csv
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
 plt.rcParams['text.usetex'] = True
 
 # Mandel's problem
@@ -190,7 +189,7 @@ if __name__ == "__main__":
 
   ax.set_xlim(0.0, 1.0)
   ax.set_ylim(0.0, 1.2)
-  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16)
+  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16, labelpad=20)
   ax.set_xlabel(r'$\frac{x}{a}$', fontsize=16)
   ax.set_title('Mandel\'s problem')
 
@@ -208,7 +207,7 @@ if __name__ == "__main__":
   ax.set_ylim(0.0, 1.2)
   ax.set_xscale("log")
   ax.set_xlabel(r'$\frac{c_{v} t}{a^{2}}$', fontsize=16)
-  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16)
+  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16, labelpad=20)
   
   ax.set_title('Mandel\'s problem')
 
@@ -226,7 +225,7 @@ if __name__ == "__main__":
   ax.invert_yaxis()
   ax.set_xscale("log")
   ax.set_xlabel(r'$\frac{c_{v} t}{a^{2}}$', fontsize=16)
-  ax.set_ylabel(r'$U$', rotation=0, fontsize=16)
+  ax.set_ylabel(r'$U$', rotation=0, fontsize=16, labelpad=20)
   ax.set_title('Mandel\'s problem')
 
   plt.savefig('mandel_u.png', dpi=200, bbox_inches='tight')
