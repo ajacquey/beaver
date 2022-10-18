@@ -59,29 +59,6 @@
   []
 []
 
-# [AuxVariables]
-#   [ur]
-#     order = FIRST
-#     family = LAGRANGE
-#   []
-# []
-
-# [AuxKernels]
-#   [ur_aux]
-#     type = FunctionAux
-#     variable = ur
-#     function = disp_r_fct
-#     execute_on = 'TIMESTEP_END'
-#   []
-# []
-
-# [Functions]
-#   [disp_r_fct]
-#     type = ParsedFunction
-#     value = 'disp_x^2+disp_y^2+disp_z^2'
-#   []
-# []
-
 [BCs]
   [confine_x]
     type = DirichletBC
@@ -175,12 +152,6 @@
 []
 
 [Postprocessors]
-  # [U]
-  #   type = SideAverageValue
-  #   boundary = top
-  #   outputs = 'csv_t'
-  #   variable = disp_y
-  # []
   [Pc]
     type = PointValue
     outputs = 'csv_t'
@@ -207,11 +178,6 @@
   execute_on = 'TIMESTEP_END'
   print_linear_residuals = false
   exodus = true
-  # [csv_p]
-  #   type = CSV
-  #   sync_only = true
-  #   sync_times = '0.01 0.1 0.5 1.0 2.0'
-  # []
   [csv_t]
     type = CSV
   []
