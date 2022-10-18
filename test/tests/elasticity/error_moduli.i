@@ -87,7 +87,7 @@
     [elasticity]
       type = BVMechanicalMaterial
       displacements = 'disp_x disp_y disp_z'
-      bulk_modulus = 8.0e+09
+      shear_modulus = 8.0e+09
       poisson_ratio = 0.25
     []
   []

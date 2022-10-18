@@ -19,6 +19,7 @@ Extensions:
         name: Beaver
         repo: https://github.com/ajacquey/beaver
         menu:
+            Examples: examples/examples.menu.md
             Documentation: documentation/documentation.menu.md
                 # Beaver syntax: documentation/beaver.md
                 # Fluid Properties syntax: documentation/fluid_properties.md

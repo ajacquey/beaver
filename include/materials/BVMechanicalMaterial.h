@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "ADMaterial.h"
+#include "Material.h"
 
-class BVMechanicalMaterial : public ADMaterial
+class BVMechanicalMaterial : public Material
 {
 public:
   static InputParameters validParams();
@@ -55,6 +55,9 @@ protected:
   // Strain properties
   ADMaterialProperty<RankTwoTensor> & _strain_increment;
   ADMaterialProperty<RankTwoTensor> & _spin_increment;
+
+  // Elastic property
+  ADMaterialProperty<Real> & _K;
 
   // Stress properties
   ADMaterialProperty<RankTwoTensor> & _stress;

@@ -35,12 +35,13 @@ BVStressDivergence::validParams()
 
 BVStressDivergence::BVStressDivergence(const InputParameters & parameters)
   : ADKernel(parameters),
+    _coupled_pf(isCoupled("fluid_pressure")),
     _pf(coupledValue("fluid_pressure")),
     _component(getParam<MooseEnum>("component")),
     // _rho(getParam<Real>("density")),
     // _gravity(getParam<RealVectorValue>("gravity")),
-    _stress(getADMaterialProperty<RankTwoTensor>("stress"))
-// _biot(getMaterialProperty<Real>("biot_coefficient"))
+    _stress(getADMaterialProperty<RankTwoTensor>("stress")),
+    _biot(_coupled_pf ? &getADMaterialProperty<Real>("biot_coefficient") : nullptr)
 {
 }
 
@@ -50,7 +51,8 @@ BVStressDivergence::computeQpResidual()
   //   RealVectorValue grav_term = -_rho * _gravity;
 
   ADRealVectorValue stress_row = _stress[_qp].row(_component);
-  //   stress_row(_component) -= _biot[_qp] * _pf[_qp];
+  if (_coupled_pf)
+    stress_row(_component) -= (*_biot)[_qp] * _pf[_qp];
 
   return stress_row * _grad_test[_i][_qp]; // + grav_term(_component) * _test[_i][_qp];
 }

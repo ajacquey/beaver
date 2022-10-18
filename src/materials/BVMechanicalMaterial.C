@@ -19,7 +19,7 @@ registerMooseObject("BeaverApp", BVMechanicalMaterial);
 InputParameters
 BVMechanicalMaterial::validParams()
 {
-  InputParameters params = ADMaterial::validParams();
+  InputParameters params = Material::validParams();
   params.addClassDescription("Material for computing the deformation of a porous material.");
   // Coupled variables
   params.addRequiredCoupledVar(
@@ -47,7 +47,7 @@ BVMechanicalMaterial::validParams()
 }
 
 BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
-  : ADMaterial(parameters),
+  : Material(parameters),
     // Coupled variables
     _ndisp(coupledComponents("displacements")),
     _grad_disp(3),
@@ -60,6 +60,8 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
     // Strain properties
     _strain_increment(declareADProperty<RankTwoTensor>("strain_increment")),
     _spin_increment(declareADProperty<RankTwoTensor>("spin_increment")),
+    // Elastic property
+    _K(declareADProperty<Real>("bulk_modulus")),
     // Stress properties
     _stress(declareADProperty<RankTwoTensor>("stress")),
     _stress_old(getMaterialPropertyOld<RankTwoTensor>("stress"))
@@ -118,10 +120,17 @@ BVMechanicalMaterial::elasticModuliInputCheck()
     _bulk_modulus = E / (3.0 * (1.0 - 2.0 * nu));
     _shear_modulus = E / (2.0 * (1.0 + nu));
   }
+  else if (isParamValid("bulk_modulus") && isParamValid("poisson_ratio"))
+  {
+    Real nu = getParam<Real>("poisson_ratio");
+
+    _bulk_modulus = getParam<Real>("bulk_modulus");
+    _shear_modulus = 3.0 * _bulk_modulus * (1.0 - 2.0 * nu) / (2.0 * (1.0 + nu));
+  }
   else
     paramError("bulk_modulus",
                "Please provide 'bulk_modulus' and 'shear_modulus' OR 'young_modulus' and "
-               "'poisson_ratio' as elastic parameters!");
+               "'poisson_ratio' OR 'bulk_modulus' and 'poisson_ratio' as elastic parameters!");
 }
 
 void
@@ -210,6 +219,9 @@ BVMechanicalMaterial::computeQpElasticityTensor()
 {
   // Elasticity tensor
   _Cijkl.fillGeneralIsotropic(_bulk_modulus - 2.0 / 3.0 * _shear_modulus, _shear_modulus, 0.0);
+
+  // Bulk modulus
+  _K[_qp] = _bulk_modulus;
 }
 
 void

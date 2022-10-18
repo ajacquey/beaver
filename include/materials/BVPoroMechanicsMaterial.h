@@ -13,23 +13,31 @@
 
 #pragma once
 
-#include "ADKernel.h"
+#include "Material.h"
 
-class BVStressDivergence : public ADKernel
+class BVPoroMechanicsMaterial : public Material
 {
 public:
   static InputParameters validParams();
-  BVStressDivergence(const InputParameters & parameters);
+  BVPoroMechanicsMaterial(const InputParameters & parameters);
 
 protected:
-  virtual ADReal computeQpResidual() override;
+  virtual void computeQpProperties() override;
 
-  const bool _coupled_pf;
-  const VariableValue & _pf;
-  const unsigned int _component;
-//   const Real _rho;
-//   const RealVectorValue _gravity;
+  // Poroelastic parameters
+  const Real _biot_coefficient;
 
-  const ADMaterialProperty<RankTwoTensor> & _stress;
-  const ADMaterialProperty<Real> * _biot;
+  // Strain increment
+  const ADMaterialProperty<RankTwoTensor> & _strain_increment;
+
+  // Bulk modulus
+  const ADMaterialProperty<Real> & _K;
+
+  // Porosity
+  const ADMaterialProperty<Real> & _porosity;
+
+  // Poroelastic properties
+  ADMaterialProperty<Real> & _biot;
+  ADMaterialProperty<Real> & _porous_storage;
+  ADMaterialProperty<Real> & _poromech;
 };

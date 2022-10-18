@@ -18,21 +18,31 @@ registerMooseObject("BeaverApp", BVSinglePhaseTimeDerivative);
 InputParameters
 BVSinglePhaseTimeDerivative::validParams()
 {
-  InputParameters params = ADKernelValue::validParams();
+  InputParameters params = ADTimeKernelValue::validParams();
   params.addClassDescription("Kernel for the transient term for single phase flow.");
   return params;
 }
 
 BVSinglePhaseTimeDerivative::BVSinglePhaseTimeDerivative(const InputParameters & parameters)
-  : ADKernelValue(parameters),
+  : ADTimeKernelValue(parameters),
     _porosity(getADMaterialProperty<Real>("porosity")),
     _density(getADMaterialProperty<Real>("density")),
-    _density_old(getMaterialPropertyOld<Real>("density"))
+    _density_old(getMaterialPropertyOld<Real>("density")),
+    _coupled_mech(hasADMaterialProperty<Real>("poromechanics")),
+    _porous_storage(_coupled_mech ? &getADMaterialProperty<Real>("porous_storage") : nullptr),
+    _poromech(_coupled_mech ? &getADMaterialProperty<Real>("poromechanics") : nullptr)
 {
 }
 
 ADReal
 BVSinglePhaseTimeDerivative::precomputeQpResidual()
 {
-  return _porosity[_qp] / _density[_qp] * (_density[_qp] - _density_old[_qp]) / _dt;
+  // Fluid compressibility
+  ADReal res = _porosity[_qp] / _density[_qp] * (_density[_qp] - _density_old[_qp]) / _dt;
+  
+  // Add poromechanics
+  if (_coupled_mech)
+    res += (*_porous_storage)[_qp] * _u_dot[_qp] + (*_poromech)[_qp];
+  
+  return res;
 }

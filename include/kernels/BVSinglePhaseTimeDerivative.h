@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "ADKernelValue.h"
+#include "ADTimeKernelValue.h"
 
-class BVSinglePhaseTimeDerivative : public ADKernelValue
+class BVSinglePhaseTimeDerivative : public ADTimeKernelValue
 {
 public:
   static InputParameters validParams();
@@ -27,4 +27,7 @@ protected:
   const ADMaterialProperty<Real> & _porosity;
   const ADMaterialProperty<Real> & _density;
   const MaterialProperty<Real> & _density_old;
+  const bool _coupled_mech;
+  const ADMaterialProperty<Real> * _porous_storage;
+  const ADMaterialProperty<Real> * _poromech;
 };
