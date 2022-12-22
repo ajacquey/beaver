@@ -1,0 +1,210 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>Sodium Properties Material | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li class="moose-mega-menu-trigger" data-target="d6ef6e24-4380-4485-a435-aca3b7d3d95b"><a>Examples<i class="material-icons right">arrow_drop_down</i></a></li><li class="moose-mega-menu-trigger" data-target="40e495bc-9999-4cd6-9bcf-4486369558c9"><a>Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="f6e9d818-b2c4-4fab-a34a-5abc3c9802c0"><i class="material-icons">menu</i></a><ul class="sidenav" id="f6e9d818-b2c4-4fab-a34a-5abc3c9802c0"><li><a href="../../examples/examples.menu.html">Examples</a></li><li><a href="../../documentation/documentation.menu.html">Documentation</a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div></nav><div class="moose-mega-menu-content" id="d6ef6e24-4380-4485-a435-aca3b7d3d95b"><div class="moose-mega-menu-wrapper"><div class="row row"><div class="col s12 m6 l4"><h2>Poroelasticity</h2><ul class="browser-default"><li><p><a href="../../examples/terzaghi.html">Terzaghi&#x27;s consolidation problem</a> </p></li><li><p><a href="../../examples/mandel.html">Mandel&#x27;s problem</a> </p></li><li><p><a href="../../examples/cryer.html">Cryer&#x27;s problem</a></p></li></ul><p></p></div></div></div></div><div class="moose-mega-menu-content" id="40e495bc-9999-4cd6-9bcf-4486369558c9"><div class="moose-mega-menu-wrapper"><div class="row row"><div class="col s12 m6 l4"><h2>Syntax</h2><ul class="browser-default"><li><p><a href="../../documentation/beaver.html">Beaver syntax</a> </p></li><li><p><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></p></li></ul></div></div></div></div><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">materials</span><a href="#" class="breadcrumb">SodiumPropertiesMaterial</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="85bd635c-53bd-4e9f-903b-a1127816d8cf" data-section-level="1" data-section-text="Sodium Properties Material"><h1 id="sodium-properties-material">Sodium Properties Material</h1><p>Material properties for liquid sodium sampled from SodiumProperties.</p><p><code>SodiumPropertiesMaterial</code> samples the functions available in <a href="../userobjects/SodiumProperties.html">SodiumProperties</a> and provides them as material properties.</p><p>The following material properties created for liquid sodium are:</p><ul class="browser-default"><li><p>Thermal Conductivity: <code>k(temperature)</code> </p></li><li><p>Enthalpy: <code>h(temperature)</code> </p></li><li><p>Heat capacity: <code>cp(temperature)</code> </p></li><li><p>Temperature from enthalpy: <code>T_from_h(h)</code> </p></li><li><p>Density: <code>rho(temperature)</code> </p></li><li><p>Derivative of Density w.r.t temperature: <code>drho_dT(temperature)</code> </p></li><li><p>Derivative of Density w.r.t enthalpy: <code>drho_dh(h)</code></p></li></ul><p>Properties of liquid sodium are obtained from <a href="#Fink:1995bf">Fink and Leibowitz (1995)</a>.</p><pre class="moose-pre" style="max-height:350px;"><code class="language-text">[Materials]
+  [./fp_mat]
+    type = SodiumPropertiesMaterial
+    temperature = temperature
+    outputs = all
+  [../]
+[]
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#c51b15cf-47a4-4f3b-8e8d-3e11290e507d">(moose/modules/fluid_properties/test/tests/sodium/exact.i)</a><section class="scrollspy" id="6813da79-1740-456e-a791-0fcfe8185dcf" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="512f4294-26ad-4fa7-a004-5fc833809fa2" data-section-level="3" data-section-text="Required Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">temperature</span><span class="moose-parameter-header-description">temperature (K)</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;VariableName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>temperature (K)</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Required Parameters</h3></summary></details></section><section id="294299ec-9dcb-4e39-a90f-a6f1a659c77c" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">block</span><span class="moose-parameter-header-description">The list of blocks (ids or names) that this object will be applied</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;SubdomainName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of blocks (ids or names) that this object will be applied</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">boundary</span><span class="moose-parameter-header-description">The list of boundaries (ids or names) from the mesh where this boundary condition applies</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;BoundaryName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of boundaries (ids or names) from the mesh where this boundary condition applies</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">compute</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">When false, MOOSE will not call compute methods on this material. The user must call computeProperties() after retrieving the MaterialBase via MaterialBasePropertyInterface::getMaterialBase(). Non-computed MaterialBases are not sorted for dependencies.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>When false, MOOSE will not call compute methods on this material. The user must call computeProperties() after retrieving the MaterialBase via MaterialBasePropertyInterface::getMaterialBase(). Non-computed MaterialBases are not sorted for dependencies.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">constant_on</span><span class="moose-parameter-header-default">NONE</span><span class="moose-parameter-header-description">When ELEMENT, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps.When SUBDOMAIN, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps. Evaluations on element qps will be skipped</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>NONE</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MooseEnum</p><p class="moose-parameter-description-options"><span>Options:</span>NONE, ELEMENT, SUBDOMAIN</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>When ELEMENT, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps.When SUBDOMAIN, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps. Evaluations on element qps will be skipped</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">declare_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any declared properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any declared properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">fp</span><span class="moose-parameter-header-default">sodium</span><span class="moose-parameter-header-description">The name of the user object with fluid properties</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>sodium</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>UserObjectName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The name of the user object with fluid properties</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="d9fc7c1c-d0b8-4377-87cd-56acff7effb0" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">implicit</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Determines whether this object is calculated using an implicit or explicit form</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Determines whether this object is calculated using an implicit or explicit form</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">seed</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">The seed for the master random number generator</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The seed for the master random number generator</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section><section id="b8f31f2f-d711-4c1a-a29b-2b94f6cd3052" data-section-level="3" data-section-text="Outputs Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">output_properties</span><span class="moose-parameter-header-description">List of material properties, from this material, to output (outputs must also be defined to an output type)</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>List of material properties, from this material, to output (outputs must also be defined to an output type)</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">outputs</span><span class="moose-parameter-header-default">none </span><span class="moose-parameter-header-description">Vector of output names were you would like to restrict the output of variables(s) associated with this object</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>none </p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;OutputName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Vector of output names were you would like to restrict the output of variables(s) associated with this object</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Outputs Parameters</h3></summary></details></section></section><section class="scrollspy" id="4a688f58-9376-4db1-83b1-06b16ead3617" data-section-level="2" data-section-text="References"><h2 id="references">References</h2><div class="moose-bibliography"><ol><li id="Fink:1995bf">J&nbsp;K Fink and L&nbsp;Leibowitz.
+<span class="bibtex-protected">Thermodynamic and transport properties of sodium liquid and vapor</span>.
+Technical Report, Argonne National Laboratory (ANL), Argonne, IL, January 1995.<a href="#62c09bca-0424-4bf9-b5e7-f574ec1a06c1" class="modal-trigger moose-bibtex-modal" style="padding-left:10px;">[BibTeX]</a><div class="modal" id="62c09bca-0424-4bf9-b5e7-f574ec1a06c1"><div class="modal-content"><pre style="line-height:1.25;"><code class="language-latex">@techreport{Fink:1995bf,
+    author = "Fink, J K and Leibowitz, L",
+    title = "{Thermodynamic and transport properties of sodium liquid and vapor}",
+    institution = "Argonne National Laboratory (ANL), Argonne, IL",
+    year = "1995",
+    month = "January"
+}
+</code></pre></div></div></li></ol></div></section></section><div class="moose-modal modal" id="c51b15cf-47a4-4f3b-8e8d-3e11290e507d"><div class="modal-content"><h4>(moose/modules/fluid_properties/test/tests/sodium/exact.i)</h4><pre class="moose-pre"><code class="language-text"># Test implementation of sodium properties by comparison to analytical functions.
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 1
+[]
+
+[Problem]
+  solve = false
+[]
+
+[AuxVariables]
+  [./temperature]
+  [../]
+[]
+
+[AuxKernels]
+  [./temperature_aux]
+    type = FunctionAux
+    variable = temperature
+    function = &#x27;400 + 200 * t&#x27;
+  [../]
+[]
+
+[Functions]
+  [./k]
+    type = ParsedFunction
+    vars = &#x27;T&#x27;
+    vals = &#x27;temperature&#x27;
+    value = &#x27;124.67 - 0.11381 * T + 5.5226e-5 * T^2 - 1.1842e-8 * T^3&#x27;
+  [../]
+  [./h]
+    type = ParsedFunction
+    vars = &#x27;T&#x27;
+    vals = &#x27;temperature&#x27;
+    value = &#x27;1.0e3 * (-365.77 + 1.6582 * T - 4.2395e-4 * T^2 + 1.4847e-7 * T^3 + 2992.6 / T)&#x27;
+  [../]
+  [./cp]
+    type = ParsedFunction
+    vars = &#x27;T&#x27;
+    vals = &#x27;temperature&#x27;
+    value = &#x27;1.0e3 * (1.6582 - 8.4790e-4 * T + 4.4541e-7 * T^2 - 2992.6 / T^2)&#x27;
+  [../]
+  [./rho]
+    type = ParsedFunction
+    vars = &#x27;T&#x27;
+    vals = &#x27;temperature&#x27;
+    value = &#x27;219.0 + 275.32 * (1.0 - T / 2503.7) + 511.58 * (1.0 - T / 2503.7)^(0.5)&#x27;
+  [../]
+  [./drho_dT]
+    type = ParsedFunction
+    vars = &#x27;T&#x27;
+    vals = &#x27;temperature&#x27;
+    value = &#x27;-(2.0 * 275.32 + 511.58 / (1.0 - T / 2503.7)^(0.5)) / 2.0 / 2503.7&#x27;
+  [../]
+  [./drho_dh]
+    type = ParsedFunction
+    vars = &#x27;drho_dT_exact cp_exact&#x27;
+    vals = &#x27;drho_dT_exact cp_exact&#x27;
+    value = &#x27;drho_dT_exact/cp_exact&#x27;
+  [../]
+[]
+
+[FluidProperties/sodium]
+  type = SodiumProperties
+[]
+
+[Materials]
+  [./fp_mat]
+    type = SodiumPropertiesMaterial
+    temperature = temperature
+    outputs = all
+  [../]
+[]
+
+
+[Executioner]
+  type = Transient
+
+  num_steps = 10
+[]
+
+[Postprocessors]
+  [./temperature]
+    type = ElementAverageValue
+    variable = temperature
+    outputs = none
+  [../]
+  [./k_exact]
+    type = FunctionValuePostprocessor
+    function = k
+    outputs = none
+  [../]
+  [./h_exact]
+    type = FunctionValuePostprocessor
+    function = h
+    outputs = none
+  [../]
+  [./cp_exact]
+    type = FunctionValuePostprocessor
+    function = cp
+    outputs = none
+  [../]
+  [./rho_exact]
+    type = FunctionValuePostprocessor
+    function = rho
+    outputs = none
+  [../]
+  [./drho_dT_exact]
+    type = FunctionValuePostprocessor
+    function = drho_dT
+    outputs = none
+  [../]
+  [./drho_dh_exact]
+    type = FunctionValuePostprocessor
+    function = drho_dh
+    outputs = none
+  [../]
+  [./k_avg]
+    type = ElementAverageValue
+    variable = k
+    outputs = none
+  [../]
+  [./h_avg]
+    type = ElementAverageValue
+    variable = h
+    outputs = none
+  [../]
+  [./cp_avg]
+    type = ElementAverageValue
+    variable = cp
+    outputs = none
+  [../]
+  [./t_from_h_avg]
+    type = ElementAverageValue
+    variable = temperature
+    outputs = none
+  [../]
+  [./rho_avg]
+    type = ElementAverageValue
+    variable = rho
+    outputs = none
+  [../]
+  [./drho_dT_avg]
+    type = ElementAverageValue
+    variable = drho_dT
+    outputs = none
+  [../]
+  [./drho_dh_avg]
+    type = ElementAverageValue
+    variable = drho_dh
+    outputs = none
+  [../]
+  [./k_diff]
+    type = DifferencePostprocessor
+    value1 = k_exact
+    value2 = k_avg
+  [../]
+  [./h_diff]
+    type = DifferencePostprocessor
+    value1 = h_exact
+    value2 = h_avg
+  [../]
+  [./cp_diff]
+    type = DifferencePostprocessor
+    value1 = cp_exact
+    value2 = cp_avg
+  [../]
+  [./t_from_h_diff]
+    type = DifferencePostprocessor
+    value1 = temperature
+    value2 = t_from_h_avg
+  [../]
+  [./rho_avg_diff]
+    type = DifferencePostprocessor
+    value1 = rho_exact
+    value2 = rho_avg
+  [../]
+  [./drho_dT_avg_diff]
+    type = DifferencePostprocessor
+    value1 = drho_dT_exact
+    value2 = drho_dT_avg
+  [../]
+  [./drho_dh_avg_diff]
+    type = DifferencePostprocessor
+    value1 = drho_dh_exact
+    value2 = drho_dh_avg
+  [../]
+[]
+
+[Outputs]
+  csv = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#6813da79-1740-456e-a791-0fcfe8185dcf" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li><li><a href="#4a688f58-9376-4db1-83b1-06b16ead3617" class="tooltipped" data-position="left" data-tooltip="References">References</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>

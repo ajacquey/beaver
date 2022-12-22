@@ -1,0 +1,491 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>TabulatedFluidProperties | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><link href="../../contrib/katex/katex.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/katex_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script><script type="text/javascript" src="../../contrib/katex/katex.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li class="moose-mega-menu-trigger" data-target="641b42cd-a0a0-4efe-9a15-af12934e364e"><a>Examples<i class="material-icons right">arrow_drop_down</i></a></li><li class="moose-mega-menu-trigger" data-target="315ed313-35d1-43e6-8ea0-a27c298f9a70"><a>Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="260382ef-36d9-41df-9d4a-d1aea0b8493e"><i class="material-icons">menu</i></a><ul class="sidenav" id="260382ef-36d9-41df-9d4a-d1aea0b8493e"><li><a href="../../examples/examples.menu.html">Examples</a></li><li><a href="../../documentation/documentation.menu.html">Documentation</a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div></nav><div class="moose-mega-menu-content" id="641b42cd-a0a0-4efe-9a15-af12934e364e"><div class="moose-mega-menu-wrapper"><div class="row row"><div class="col s12 m6 l4"><h2>Poroelasticity</h2><ul class="browser-default"><li><p><a href="../../examples/terzaghi.html">Terzaghi&#x27;s consolidation problem</a> </p></li><li><p><a href="../../examples/mandel.html">Mandel&#x27;s problem</a> </p></li><li><p><a href="../../examples/cryer.html">Cryer&#x27;s problem</a></p></li></ul><p></p></div></div></div></div><div class="moose-mega-menu-content" id="315ed313-35d1-43e6-8ea0-a27c298f9a70"><div class="moose-mega-menu-wrapper"><div class="row row"><div class="col s12 m6 l4"><h2>Syntax</h2><ul class="browser-default"><li><p><a href="../../documentation/beaver.html">Beaver syntax</a> </p></li><li><p><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></p></li></ul></div></div></div></div><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">userobjects</span><a href="#" class="breadcrumb">TabulatedFluidProperties</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="a7fdd4df-48ab-4ffd-84e0-eace7d784587" data-section-level="1" data-section-text="TabulatedFluidProperties"><h1 id="tabulatedfluidproperties">TabulatedFluidProperties</h1><p>Single phase fluid properties computed using bi-dimensional interpolation of tabulated values.</p><p>Property values are read from a CSV file containing property data. Monotonically increasing values of pressure and temperature must be included in the data file, specifying the phase space where tabulated fluid properties will be defined. An error is thrown if either temperature or pressure data is not included or not monotonic, and an error is also thrown if this object is requested to provide a fluid property outside this phase space.</p><p>This class is intended to be used when complicated formulations for fluid properties (such as density or internal energy) are required, which can be computationally expensive.  This is particularly the case when the fluid equation of state is based on a Helmholtz free energy that is a function of density and temperature, like that used in <a href="CO2FluidProperties.html">CO2FluidProperties</a>. In this example, density must be solved iteratively using pressure and temperature, which increases the computational burden.</p><p>Using an interpolation of tabulated fluid properties can significantly reduce the computational time for computing fluid properties defined using complex equations of state, which may reduce the overall computational cost dramatically, especially if fluid properties are calculated a large number of times.</p><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p><code>TabulatedFluidProperties</code> is a base class and may not be used. A derived class, specifying an interpolation method to use to interpolate between the tabulated data, must be used instead. Currently only <a href="TabulatedBicubicFluidProperties.html">bicubic tabular interpolation</a> is implemented. Bilinear interpolation is a work in progress.</p></div></div></div><section class="scrollspy" id="d4bdc3ab-b20c-4f0b-839f-ef1b564b975a" data-section-level="2" data-section-text="File format"><h2 id="file-format">File format</h2><p>The expected file format for the tabulated fluid properties is now described.  The first line must be the header containing the required column names <em>pressure</em> and <em>temperature</em>, and also any number of the fluid properties that <code>TabulatedFluidProperties</code> understands. The exact names used are:</p><ul class="browser-default"><li><p><em>density</em> </p></li><li><p><em>enthalpy</em> </p></li><li><p><em>v</em> (specific_volume) </p></li><li><p><em>internal_energy</em> </p></li><li><p><em>viscosity</em> </p></li><li><p><em>k</em> (the thermal conductivity) </p></li><li><p><em>g</em> (gibbs free energy) </p></li><li><p><em>cp</em> (the isobaric specific heat capacity) </p></li><li><p><em>cv</em> (the isochoric specific heat capacity) </p></li><li><p><em>c</em> (speed of sound in fluid) </p></li><li><p><em>entropy</em></p></li></ul><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p>The order is not important, although having pressure and temperature first makes the data easier for a human to read.</p></div></div></div><p>The data in the pressure and temperature columns <em>must</em> be monotonically increasing. This file format does require duplication of the pressure and temperature data - each pressure value must be included <a href="#a1b5abe9-0cbf-4fc4-a1f3-f6d186148269" class="moose-modal-link modal-trigger">&quot;num_T&quot;</a> times, while each temperature value is repeated <a href="#3980cbfe-71b7-4408-9402-61b0b6fe9f80" class="moose-modal-link modal-trigger">&quot;num_p&quot;</a> times, where <a href="#95ed5b65-5a4d-4212-b2b8-392ca562b30e" class="moose-modal-link modal-trigger">&quot;num_T&quot;</a> and <a href="#f145eb68-a521-4970-bf34-9146ad5f48fa" class="moose-modal-link modal-trigger">&quot;num_p&quot;</a> are the number of temperature and pressure points, respectively. This class will check that the required number of data points have been entered (<a href="#dd43ca8d-8d7e-4431-bab0-42fa269590a0" class="moose-modal-link modal-trigger">&quot;num_T&quot;</a> * <a href="#df41db10-7072-43de-99c7-119618ee4927" class="moose-modal-link modal-trigger">&quot;num_p&quot;</a>).</p><p>An example of a valid fluid properties file, with two pressure points and three temperature points, is provided below:</p><pre class="moose-pre"><code class="language-text">
+pressure, temperature,   density, enthalpy, internal_energy
+  200000,         275,   3.90056,   -21487,        -72761.7
+  200000,         277,   3.86573, -19495.4,        -71232.0
+  200000,         280,   3.83155, -17499.1,        -69697.3
+  300000,         275,   6.07273, -22728.3,        -73626.5
+  300000,         277,   6.01721, -20711.5,        -72079.3
+  300000,         280,   5.96277, -18691.0,        -70527.7
+</code></pre></section><section class="scrollspy" id="23f1df9e-6956-4e4c-bcd2-e55cdc3ebae2" data-section-level="2" data-section-text="Using TabulatedFluidProperties"><h2 id="using-tabulatedfluidproperties">Using TabulatedFluidProperties</h2><section id="69f71c29-db1c-4300-9640-a5d023928068" data-section-level="3" data-section-text="Reading from an existing file"><h3 id="reading-from-an-existing-file">Reading from an existing file</h3><p>Consider the example where a <code>TabulatedFluidProperties</code> object is used to reduce the cost of calculating CO<span class="moose-katex-inline-equation" id="moose-equation-1e5b4d6b-1d1a-45db-89c5-2cfd60e11814"><script>var element = document.getElementById("moose-equation-1e5b4d6b-1d1a-45db-89c5-2cfd60e11814");katex.render("_2", element, {displayMode:false,throwOnError:false});</script></span> fluid properties. In this example, a file containing the tabulated fluid properties, named <code>fluid_properties.csv</code> is provided. All properties listed in this file will be calculated using either Bilinear or Bicubic interpolation (the interpolation type is to be specified in the input file), while all remaining properties provided by the <code>FluidProperties</code> interface will be calculated using a <a href="CO2FluidProperties.html">CO2FluidProperties</a> object.</p><p>The input file syntax necessary to achieve this with a (pressure, temperature) variable set is shown below. A <a href="TabulatedBicubicFluidProperties.html">TabulatedBicubicFluidProperties</a> is used.</p><pre class="moose-pre" style="max-height:350px;"><code class="language-text">[FluidProperties]
+  [./co2]
+    type = CO2FluidProperties
+  [../]
+  [./tabulated]
+    type = TabulatedBicubicFluidProperties
+    fp = co2
+    interpolated_properties = &#x27;density enthalpy viscosity internal_energy k c cv cp entropy&#x27;
+    # fluid_property_file = fluid_properties.csv
+    save_file = true
+    construct_pT_from_ve = false
+    construct_pT_from_vh = false
+    # error_on_out_of_bounds = false
+
+    # Tabulation range
+    temperature_min = 280
+    temperature_max = 600
+    pressure_min = 1e5
+    pressure_max = 3e6
+
+    # Newton parameters
+    tolerance = 1e-8
+    T_initial_guess = 350
+    p_initial_guess = 1.5e5
+  [../]
+[]
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#3c493649-1754-427c-b53a-574592f5b0dc">(moose/modules/fluid_properties/test/tests/tabulated/tabulated.i)</a><p>With a (specific volume, specific energy) variable set, the syntax shown in the example file below may be used:</p><pre class="moose-pre" style="max-height:350px;"><code class="language-text">[FluidProperties]
+  [co2]
+    type = IdealGasFluidProperties
+  []
+  [tabulated]
+    type = TabulatedBicubicFluidProperties
+    interpolated_properties = &#x27;density enthalpy viscosity internal_energy k c cv cp entropy&#x27;
+    # fluid_property_file = fluid_properties.csv
+    save_file = true
+    construct_pT_from_ve = true
+    construct_pT_from_vh = true
+    error_on_out_of_bounds = false
+
+    # Tabulation range
+    temperature_min = 280
+    temperature_max = 600
+    pressure_min = 1e5
+    pressure_max = 7e5
+
+    # Newton parameters
+    tolerance = 1e-8
+    T_initial_guess = 310
+    p_initial_guess = 1.8e5
+  []
+[]
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#f69586c1-b6d5-4759-80b8-e8daed8287b2">(moose/modules/fluid_properties/test/tests/tabulated/tabulated_v_e.i)</a></section><section id="340b915b-1384-4ae5-b0f2-57d1326e930b" data-section-level="3" data-section-text="Writing data file"><h3 id="writing-data-file">Writing data file</h3><p>If no tabulated fluid property data file exists, then data for the properties specified in the input file parameter <em>interpolated_properties</em> will be generated using the pressure and temperature ranges specified in the input file at the beginning of the simulation.</p><p>For example, if we wish to generate a file containing tabulated properties for CO<span class="moose-katex-inline-equation" id="moose-equation-2e5d8b00-9e5a-4924-8d36-868b802c5c1f"><script>var element = document.getElementById("moose-equation-2e5d8b00-9e5a-4924-8d36-868b802c5c1f");katex.render("_2", element, {displayMode:false,throwOnError:false});</script></span> density, enthalpy and viscosity for <span class="moose-katex-inline-equation" id="moose-equation-db8f1228-b1ab-4120-92cb-f517d9a1d780"><script>var element = document.getElementById("moose-equation-db8f1228-b1ab-4120-92cb-f517d9a1d780");katex.render("300 \\mathrm{K} \\le T \\le 400 \\mathrm{K}", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-e08072ae-5198-441a-9a04-908db9431e29"><script>var element = document.getElementById("moose-equation-e08072ae-5198-441a-9a04-908db9431e29");katex.render("1 \\mathrm{MPa} \\le p \\le 10 \\mathrm{MPa}", element, {displayMode:false,throwOnError:false});</script></span>, divided into 50 and 100 equal points, respectively, then the input file syntax necessary is</p><pre class="moose-pre"><code class="language-text">
+[FluidProperties]
+  [co2]
+    type = CO2FluidProperties
+  []
+  [tabulated]
+    type = TabulatedBicubicFluidProperties
+    fp = co2
+    fluid_property_file = fluid_properties.csv
+    interpolated_properties = &#x27;density enthalpy viscosity&#x27;
+
+    # Bounds of interpolation
+    temperature_min = 300
+    temperature_max = 400
+    pressure_min = 1e6
+    pressure_max = 10e6
+
+    # Grid discretization
+    num_T = 50
+    num_p = 100
+  []
+[]
+</code></pre><p>This tabulated data will be written to file in the correct format, enabling suitable data files to be created for future use. There is an upfront computational expense required for this initial data generation, depending on the required number of pressure and temperature points. However, provided that the number of data points required to generate the tabulated data is smaller than the number of times the property members in the FluidProperties object are used, the initial time to generate the data and the subsequent interpolation time can be much less than using the original FluidProperties object.</p><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p>All fluid properties read from a file or specified in the input file (and their derivatives with respect to pressure and temperature) will be calculated through interpolation, while all remaining (or missing) fluid properties will be calculated using the provided <code>FluidProperties</code> object.</p></div></div></div></section></section><section class="scrollspy" id="d9a5c65f-8aa2-4a8a-a49c-c4dedaddb2fd" data-section-level="2" data-section-text="Using alternative variable sets"><h2 id="using-alternative-variable-sets">Using alternative variable sets</h2><p>The (pressure, temperature) variable set is not adequate for all fluid flow applications, and alternative variable sets may be used with <code>TabulatedFluidProperties</code> objects. (specific volume (v), specific internal energy (e)), and (specific volume, specific enthalpy (h)) are supported. The process goes as follows:</p><ul class="browser-default"><li><p>The data is read from a data file tabulated with pressure and temperature, and interpolations based on pressure and temperature are created for each tabulated property.</p><p></p></li><li><p>The pressure and temperature data is converted to the alternative variable set (for example (v,e)) using <a href="../../utils/FluidPropertiesUtils.html">Newton&#x27;s method</a>. The inversion uses the interpolations created from the tabulated data, or if available the <code>FluidProperties</code> object as this reduces the error.</p><p></p></li><li><p>A grid of values for pressure and temperature is computed for the alternative variable set. This is used to create a tabulated interpolation from the alternative variable set to the (pressure, temperature) variable set. This process is described in the next section.</p><p></p></li><li><p>When querying a fluid property using the alternative variable set, the interpolations are first used to convert to the (pressure, temperature) variable set (for example, computing <span class="moose-katex-inline-equation" id="moose-equation-859b2d37-7806-46f2-9f9b-c74feaf29907"><script>var element = document.getElementById("moose-equation-859b2d37-7806-46f2-9f9b-c74feaf29907");katex.render("p(v,e)", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-9ef4ac6f-be92-4618-8ae9-4e757cb57957"><script>var element = document.getElementById("moose-equation-9ef4ac6f-be92-4618-8ae9-4e757cb57957");katex.render("T(v,e)", element, {displayMode:false,throwOnError:false});</script></span>). Then the fluid property desired is queried using this variable set (for example, <span class="moose-katex-inline-equation" id="moose-equation-b854fe64-8283-4aae-a04f-08af2a05ae9f"><script>var element = document.getElementById("moose-equation-b854fe64-8283-4aae-a04f-08af2a05ae9f");katex.render("\\rho(p, T)", element, {displayMode:false,throwOnError:false});</script></span>) and returned. This can be summarized as <span class="moose-katex-inline-equation" id="moose-equation-7eb36cd8-081e-4dd1-8bb0-1f01c62b7f31"><script>var element = document.getElementById("moose-equation-7eb36cd8-081e-4dd1-8bb0-1f01c62b7f31");katex.render("\\rho(v,e) = \\rho_{interpolated}(p_{interpolated}(v,e), T_{interpolated}(v,e))", element, {displayMode:false,throwOnError:false});</script></span></p></li></ul><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p>The additional variable sets supported are <span class="moose-katex-inline-equation" id="moose-equation-e7d5b1cd-cc4e-4b93-ab89-9855d13a4d34"><script>var element = document.getElementById("moose-equation-e7d5b1cd-cc4e-4b93-ab89-9855d13a4d34");katex.render("(v,e)", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-53c357ab-d765-48ed-802c-18da112cf527"><script>var element = document.getElementById("moose-equation-53c357ab-d765-48ed-802c-18da112cf527");katex.render("(v,h)", element, {displayMode:false,throwOnError:false});</script></span>. A few properties may be computed using alternative variable sets: <span class="moose-katex-inline-equation" id="moose-equation-77d7944d-be04-41da-9b02-64a9eaf54b1d"><script>var element = document.getElementById("moose-equation-77d7944d-be04-41da-9b02-64a9eaf54b1d");katex.render("e(p,\\rho), T(p,\\rho), T(p,h)", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-7df9c5f1-b7ba-47d3-94b4-964966317cb4"><script>var element = document.getElementById("moose-equation-7df9c5f1-b7ba-47d3-94b4-964966317cb4");katex.render("s(h,p)", element, {displayMode:false,throwOnError:false});</script></span> for example.</p></div></div></div><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p>File data may only be read and written with the (pressure, temperature) variable set. The alternative variable set must be either contained in the tabulation read or be computable from pressure and temperature in the <code>FluidProperties</code> object.</p></div></div></div><section id="fdabdc64-ee43-4870-bdb0-5da7d9856c3f" data-section-level="3" data-section-text="Creation of interpolations between variable sets"><h3 id="creation-of-interpolations-between-variable-sets">Creation of interpolations between variable sets</h3><p>As fluid properties are much more often tabulated using pressure and temperature than alternative variable sets, the alternative variables are systematically converted to pressure and temperature to perform the fluid property evaluations. This involves the creation of an interpolation of pressure and temperature using the alternative variable sets. This is done in several sets, described for the <span class="moose-katex-inline-equation" id="moose-equation-d9a48d34-4eff-4849-b51e-3c62eb79b3db"><script>var element = document.getElementById("moose-equation-d9a48d34-4eff-4849-b51e-3c62eb79b3db");katex.render("(v,e)", element, {displayMode:false,throwOnError:false});</script></span> set:</p><ul class="browser-default"><li><p>A grid of <span class="moose-katex-inline-equation" id="moose-equation-25927628-4581-4370-a48d-e7e8f4632007"><script>var element = document.getElementById("moose-equation-25927628-4581-4370-a48d-e7e8f4632007");katex.render("(v,e)", element, {displayMode:false,throwOnError:false});</script></span> data is generated. If a fluid property user object is provided, the bounds are based on the specified bounds on pressure and temperature : <span class="moose-katex-inline-equation" id="moose-equation-a42f8dfe-3606-4447-b85c-06a616c0c9ec"><script>var element = document.getElementById("moose-equation-a42f8dfe-3606-4447-b85c-06a616c0c9ec");katex.render("e_{min/max} = e(p_{min/max}, T_{min/max})", element, {displayMode:false,throwOnError:false});</script></span>, else the bounds are chosen from the tabulated data. The number of points in the grid in both dimensions are user-selected parameters. The v grid may be created using base-10 log-spacing by setting <a href="#b543a4d8-48aa-421a-99c4-6e258ee2ee38" class="moose-modal-link modal-trigger">&quot;use_log_grid_v&quot;</a>.</p><p></p></li><li><p>These bounds may not be physically realizable simultaneously. It could be that the fluid may not have both <span class="moose-katex-inline-equation" id="moose-equation-47361d65-ca42-4a61-a22a-f81a3b69ce98"><script>var element = document.getElementById("moose-equation-47361d65-ca42-4a61-a22a-f81a3b69ce98");katex.render("v=v_{min}", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-e5d3c21f-d4f3-4ec8-bad5-581778cc7ef8"><script>var element = document.getElementById("moose-equation-e5d3c21f-d4f3-4ec8-bad5-581778cc7ef8");katex.render("e=e_{min}", element, {displayMode:false,throwOnError:false});</script></span>. Part of the grid may not be physical.</p><p></p></li><li><p>The pressure and temperature are then calculated for every point in the <span class="moose-katex-inline-equation" id="moose-equation-d023f959-67da-4180-80f8-9ee027ea4e72"><script>var element = document.getElementById("moose-equation-d023f959-67da-4180-80f8-9ee027ea4e72");katex.render("(v,e)", element, {displayMode:false,throwOnError:false});</script></span> grid by using the <a href="../../utils/FluidPropertiesUtils.html">Newton method utilities</a>. Note that sometimes pressure and temperature values can be outside the user-defined range during this variable set inversion. when this is the case, the <span class="moose-katex-inline-equation" id="moose-equation-11186106-c318-47c2-a584-f01e2ba0bbf3"><script>var element = document.getElementById("moose-equation-11186106-c318-47c2-a584-f01e2ba0bbf3");katex.render("(p,T)", element, {displayMode:false,throwOnError:false});</script></span> values are replaced with their respective minimum and maximum values. This only means that the interpolations will be constant over part of the <span class="moose-katex-inline-equation" id="moose-equation-789e9553-07eb-4b98-979d-6ad97aed0d0c"><script>var element = document.getElementById("moose-equation-789e9553-07eb-4b98-979d-6ad97aed0d0c");katex.render("(v,e)", element, {displayMode:false,throwOnError:false});</script></span> grid, which should be outside of the range of interest.</p><p></p></li><li><p>An interpolation object, very similar to the ones created for the other fluid properties based on <span class="moose-katex-inline-equation" id="moose-equation-1b07d95b-064c-4a1e-9bd2-b2bc9fcfe9eb"><script>var element = document.getElementById("moose-equation-1b07d95b-064c-4a1e-9bd2-b2bc9fcfe9eb");katex.render("(p,T)", element, {displayMode:false,throwOnError:false});</script></span> data, is created for both variables of the alternative set. This object can then compute: <span class="moose-katex-inline-equation" id="moose-equation-5010ad3b-caef-47c0-ab96-9394e906afdd"><script>var element = document.getElementById("moose-equation-5010ad3b-caef-47c0-ab96-9394e906afdd");katex.render("p_{interpolated}(v,e)", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-3250e490-3ed3-4d76-949a-2e093e240623"><script>var element = document.getElementById("moose-equation-3250e490-3ed3-4d76-949a-2e093e240623");katex.render("T_{interpolated}(v,e)", element, {displayMode:false,throwOnError:false});</script></span>.</p></li></ul><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p>Warnings will be output when a pressure or temperature value is limited to its bound, and when an inversion from the alternative variable set to pressure or temperature fails, often because the grid extends beyond physically reachable values.</p></div></div></div></section></section><section class="scrollspy" id="dcc61c79-2087-4aa1-bcb2-d644add6b9c8" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="08a54d2c-d0c6-4ad9-acc8-d45b541c9186" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">allow_imperfect_jacobians</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">true to allow unimplemented property derivative terms to be set to zero for the AD API</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>true to allow unimplemented property derivative terms to be set to zero for the AD API</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">execute_on</span><span class="moose-parameter-header-default">TIMESTEP_END</span><span class="moose-parameter-header-description">The list of flag(s) indicating when this object should be executed, the available options include NONE, INITIAL, LINEAR, NONLINEAR, TIMESTEP_END, TIMESTEP_BEGIN, FINAL, CUSTOM, ALWAYS.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>TIMESTEP_END</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>ExecFlagEnum</p><p class="moose-parameter-description-options"><span>Options:</span>NONE, INITIAL, LINEAR, NONLINEAR, TIMESTEP_END, TIMESTEP_BEGIN, FINAL, CUSTOM, ALWAYS</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of flag(s) indicating when this object should be executed, the available options include NONE, INITIAL, LINEAR, NONLINEAR, TIMESTEP_END, TIMESTEP_BEGIN, FINAL, CUSTOM, ALWAYS.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">fp</span><span class="moose-parameter-header-description">The name of the FluidProperties UserObject</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>UserObjectName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The name of the FluidProperties UserObject</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">fp_type</span><span class="moose-parameter-header-default">single-phase-fp</span><span class="moose-parameter-header-description">Type of the fluid property object</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>single-phase-fp</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>FPType</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Type of the fluid property object</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">interpolated_properties</span><span class="moose-parameter-header-default">density enthalpy internal_energy viscosity</span><span class="moose-parameter-header-description">Properties to interpolate if no data file is provided</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>density enthalpy internal_energy viscosity</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MultiMooseEnum</p><p class="moose-parameter-description-options"><span>Options:</span>density, enthalpy, internal_energy, viscosity, k, c, cv, cp, entropy</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Properties to interpolate if no data file is provided</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="8bc522f5-056d-43ff-aa88-7a2f62cf4faa" data-section-level="3" data-section-text="Variable Set Conversions Newton Solve Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">T_initial_guess</span><span class="moose-parameter-header-default">400</span><span class="moose-parameter-header-description">Temperature initial guess for Newton Method variable set conversion</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>400</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Temperature initial guess for Newton Method variable set conversion</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">p_initial_guess</span><span class="moose-parameter-header-default">200000</span><span class="moose-parameter-header-description">Pressure initial guess for Newton Method variable set conversion</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>200000</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Pressure initial guess for Newton Method variable set conversion</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">tolerance</span><span class="moose-parameter-header-default">1e-08</span><span class="moose-parameter-header-description">Tolerance for 2D Newton variable set conversion</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1e-08</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Tolerance for 2D Newton variable set conversion</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Variable Set Conversions Newton Solve Parameters</h3></summary></details></section><section id="05f0c5f4-52e6-4761-87b2-1d3ab1d5b428" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">allow_duplicate_execution_on_initial</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">In the case where this UserObject is depended upon by an initial condition, allow it to be executed twice during the initial setup (once before the IC and again after mesh adaptivity (if applicable).</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>In the case where this UserObject is depended upon by an initial condition, allow it to be executed twice during the initial setup (once before the IC and again after mesh adaptivity (if applicable).</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_postaux</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Forces the UserObject to be executed in POSTAUX</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Forces the UserObject to be executed in POSTAUX</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_preaux</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Forces the UserObject to be executed in PREAUX</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Forces the UserObject to be executed in PREAUX</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_preic</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Forces the UserObject to be executed in PREIC during initial setup</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Forces the UserObject to be executed in PREIC during initial setup</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section><section id="53bb909d-72cb-424e-9477-b63150650979" data-section-level="3" data-section-text="Variable Set Conversion Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">construct_pT_from_ve</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">If the lookup table (p, T) as functions of (v, e) should be constructed.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>If the lookup table (p, T) as functions of (v, e) should be constructed.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">construct_pT_from_vh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">If the lookup table (p, T) as functions of (v, h) should be constructed.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>If the lookup table (p, T) as functions of (v, h) should be constructed.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Variable Set Conversion Parameters</h3></summary></details></section><section id="532d3142-4694-4365-8a8c-c411713d6080" data-section-level="3" data-section-text="Tabulation And Interpolation Bounds Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">error_on_out_of_bounds</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Whether pressure or temperature from tabulation exceeding user-specified bounds leads to an error.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether pressure or temperature from tabulation exceeding user-specified bounds leads to an error.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">pressure_max</span><span class="moose-parameter-header-default">5e+07</span><span class="moose-parameter-header-description">Maximum pressure for tabulated data.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>5e+07</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Maximum pressure for tabulated data.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">pressure_min</span><span class="moose-parameter-header-default">100000</span><span class="moose-parameter-header-description">Minimum pressure for tabulated data.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>100000</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Minimum pressure for tabulated data.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">temperature_max</span><span class="moose-parameter-header-default">500</span><span class="moose-parameter-header-description">Maximum temperature for tabulated data.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>500</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Maximum temperature for tabulated data.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">temperature_min</span><span class="moose-parameter-header-default">300</span><span class="moose-parameter-header-description">Minimum temperature for tabulated data.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>300</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Minimum temperature for tabulated data.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Tabulation And Interpolation Bounds Parameters</h3></summary></details></section><section id="b0d41fa8-67a8-4e97-8c65-7f982ad63fd0" data-section-level="3" data-section-text="Tabulation File Read/Write Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">fluid_property_file</span><span class="moose-parameter-header-default">fluid_properties.csv</span><span class="moose-parameter-header-description">Name of the csv file containing the tabulated fluid property data. If no file exists and save_file = true, then one will be written to fluid_properties.csv using the temperature and pressure range specified.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>fluid_properties.csv</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>FileName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Name of the csv file containing the tabulated fluid property data. If no file exists and save_file = true, then one will be written to fluid_properties.csv using the temperature and pressure range specified.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">save_file</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Whether to save the csv fluid properties file</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether to save the csv fluid properties file</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Tabulation File Read/Write Parameters</h3></summary></details></section><section id="3898d4ad-4474-4ecf-ba67-648bc0e5aa51" data-section-level="3" data-section-text="Tabulation And Interpolation Discretization Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">num_T</span><span class="moose-parameter-header-default">100</span><span class="moose-parameter-header-description">Number of points to divide temperature range.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide temperature range.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">num_e</span><span class="moose-parameter-header-default">100</span><span class="moose-parameter-header-description">Number of points to divide specific internal energy range for (v,e) lookups.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide specific internal energy range for (v,e) lookups.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">num_p</span><span class="moose-parameter-header-default">100</span><span class="moose-parameter-header-description">Number of points to divide pressure range.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide pressure range.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">num_v</span><span class="moose-parameter-header-default">100</span><span class="moose-parameter-header-description">Number of points to divide specific volume range for (v,e) lookups.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide specific volume range for (v,e) lookups.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_log_grid_v</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Option to use a base-10 logarithmically-spaced grid for specific volume instead of a linearly-spaced grid.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Option to use a base-10 logarithmically-spaced grid for specific volume instead of a linearly-spaced grid.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Tabulation And Interpolation Discretization Parameters</h3></summary></details></section></section></section><div class="moose-modal modal" id="a1b5abe9-0cbf-4fc4-a1f3-f6d186148269"><div class="modal-content"><h4>num_T</h4><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide temperature range.</p></div></div><div class="moose-modal modal" id="3980cbfe-71b7-4408-9402-61b0b6fe9f80"><div class="modal-content"><h4>num_p</h4><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide pressure range.</p></div></div><div class="moose-modal modal" id="95ed5b65-5a4d-4212-b2b8-392ca562b30e"><div class="modal-content"><h4>num_T</h4><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide temperature range.</p></div></div><div class="moose-modal modal" id="f145eb68-a521-4970-bf34-9146ad5f48fa"><div class="modal-content"><h4>num_p</h4><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide pressure range.</p></div></div><div class="moose-modal modal" id="dd43ca8d-8d7e-4431-bab0-42fa269590a0"><div class="modal-content"><h4>num_T</h4><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide temperature range.</p></div></div><div class="moose-modal modal" id="df41db10-7072-43de-99c7-119618ee4927"><div class="modal-content"><h4>num_p</h4><p class="moose-parameter-description-default"><span>Default:</span>100</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Number of points to divide pressure range.</p></div></div><div class="moose-modal modal" id="3c493649-1754-427c-b53a-574592f5b0dc"><div class="modal-content"><h4>(moose/modules/fluid_properties/test/tests/tabulated/tabulated.i)</h4><pre class="moose-pre"><code class="language-text"># Test thermophysical property calculations using TabulatedBiCubic/LinearFluidProperties.
+# Calculations for density, internal energy and enthalpy using bicubic spline
+# interpolation of data generated using CO2FluidProperties.
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 2
+  # This test uses ElementalVariableValue postprocessors on specific
+  # elements, so element numbering needs to stay unchanged
+  allow_renumbering = false
+[]
+
+[Variables]
+  [./dummy]
+  [../]
+[]
+
+[AuxVariables]
+  [./pressure]
+    initial_condition = 2e6
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./temperature]
+    initial_condition = 350
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./rho]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./mu]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./e]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./h]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./s]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./cv]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./cp]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  [./c]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+[]
+
+[AuxKernels]
+  [./rho]
+    type = MaterialRealAux
+    variable = rho
+    property = density
+  [../]
+  [./my]
+    type = MaterialRealAux
+    variable = mu
+    property = viscosity
+  [../]
+  [./internal_energy]
+    type = MaterialRealAux
+    variable = e
+    property = e
+  [../]
+  [./enthalpy]
+    type = MaterialRealAux
+    variable = h
+    property = h
+  [../]
+  [./entropy]
+    type = MaterialRealAux
+    variable = s
+    property = s
+  [../]
+  [./cv]
+    type = MaterialRealAux
+    variable = cv
+    property = cv
+  [../]
+  [./cp]
+    type = MaterialRealAux
+    variable = cp
+    property = cp
+  [../]
+  [./c]
+    type = MaterialRealAux
+    variable = c
+    property = c
+  [../]
+[]
+
+[FluidProperties]
+  [./co2]
+    type = CO2FluidProperties
+  [../]
+  [./tabulated]
+    type = TabulatedBicubicFluidProperties
+    fp = co2
+    interpolated_properties = &#x27;density enthalpy viscosity internal_energy k c cv cp entropy&#x27;
+    # fluid_property_file = fluid_properties.csv
+    save_file = true
+    construct_pT_from_ve = false
+    construct_pT_from_vh = false
+    # error_on_out_of_bounds = false
+
+    # Tabulation range
+    temperature_min = 280
+    temperature_max = 600
+    pressure_min = 1e5
+    pressure_max = 3e6
+
+    # Newton parameters
+    tolerance = 1e-8
+    T_initial_guess = 350
+    p_initial_guess = 1.5e5
+  [../]
+[]
+
+[Materials]
+  [./fp_mat]
+    type = FluidPropertiesMaterialPT
+    pressure = pressure
+    temperature = temperature
+    fp = tabulated
+  [../]
+[]
+
+[Kernels]
+  [./diff]
+    type = Diffusion
+    variable = dummy
+  [../]
+[]
+
+[Executioner]
+  type = Steady
+  solve_type = NEWTON
+[]
+
+[Problem]
+  solve = false
+[]
+
+[Postprocessors]
+  [./rho]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = rho
+  [../]
+  [./mu]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = mu
+  [../]
+  [./e]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = e
+  [../]
+  [./h]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = h
+  [../]
+  [./s]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = s
+  [../]
+  [./cv]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = cv
+  [../]
+  [./cp]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = cp
+  [../]
+  [./c]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = c
+  [../]
+[]
+
+[Outputs]
+  csv = true
+  file_base = tabulated_out
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  perf_graph = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="f69586c1-b6d5-4759-80b8-e8daed8287b2"><div class="modal-content"><h4>(moose/modules/fluid_properties/test/tests/tabulated/tabulated_v_e.i)</h4><pre class="moose-pre"><code class="language-text"># Test thermophysical property calculations using TabulatedBiCubic/LinearFluidProperties.
+# Calculations for density, internal energy and enthalpy using bicubic or bilinear
+# interpolation of data generated using CO2FluidProperties.
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 2
+  # This test uses ElementalVariableValue postprocessors on specific
+  # elements, so element numbering needs to stay unchanged
+  allow_renumbering = false
+[]
+
+[AuxVariables]
+  [p]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [T]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [rho]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [mu]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [e]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [h]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [s]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [cv]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [cp]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [c]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [k]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+  [g]
+    family = MONOMIAL
+    order = CONSTANT
+  []
+[]
+
+[AuxKernels]
+  [viscosity]
+    type = MaterialRealAux
+    variable = mu
+    property = mu
+  []
+  [thermal_conductivity]
+    type = MaterialRealAux
+    variable = k
+    property = k
+  []
+  [pressure]
+    type = MaterialRealAux
+    variable = p
+    property = pressure
+  []
+  [temperature]
+    type = MaterialRealAux
+    variable = T
+    property = temperature
+  []
+  [cv]
+    type = MaterialRealAux
+    variable = cv
+    property = cv
+  []
+  [cp]
+    type = MaterialRealAux
+    variable = cp
+    property = cp
+  []
+  [c]
+    type = MaterialRealAux
+    variable = c
+    property = c
+  []
+  [g]
+    type = MaterialRealAux
+    variable = g
+    property = g
+  []
+[]
+
+[FluidProperties]
+  [co2]
+    type = IdealGasFluidProperties
+  []
+  [tabulated]
+    type = TabulatedBicubicFluidProperties
+    interpolated_properties = &#x27;density enthalpy viscosity internal_energy k c cv cp entropy&#x27;
+    # fluid_property_file = fluid_properties.csv
+    save_file = true
+    construct_pT_from_ve = true
+    construct_pT_from_vh = true
+    error_on_out_of_bounds = false
+
+    # Tabulation range
+    temperature_min = 280
+    temperature_max = 600
+    pressure_min = 1e5
+    pressure_max = 7e5
+
+    # Newton parameters
+    tolerance = 1e-8
+    T_initial_guess = 310
+    p_initial_guess = 1.8e5
+  []
+[]
+
+[Materials]
+  [fp_mat_ve]
+    type = FluidPropertiesMaterialVE
+    v = 0.03108975251
+    e = -30797.6
+    fp = tabulated
+  []
+[]
+
+[Executioner]
+  type = Steady
+  solve_type = NEWTON
+[]
+
+[Problem]
+  solve = false
+[]
+
+[Postprocessors]
+  [mu]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = mu
+  []
+  [e]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = e
+  []
+  [cv]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = cv
+  []
+  [cp]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = cp
+  []
+  [c]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = c
+  []
+  [p]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = p
+  []
+  [T]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = T
+  []
+  [k]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = k
+  []
+  [g]
+    type = ElementalVariableValue
+    elementid = 0
+    variable = g
+  []
+[]
+
+[Outputs]
+  csv = true
+  file_base = tabulated_v_e_bilinear_out
+  execute_on = &#x27;TIMESTEP_END&#x27;
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="b543a4d8-48aa-421a-99c4-6e258ee2ee38"><div class="modal-content"><h4>use_log_grid_v</h4><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Option to use a base-10 logarithmically-spaced grid for specific volume instead of a linearly-spaced grid.</p></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#d4bdc3ab-b20c-4f0b-839f-ef1b564b975a" class="tooltipped" data-position="left" data-tooltip="File format">File format</a></li><li><a href="#23f1df9e-6956-4e4c-bcd2-e55cdc3ebae2" class="tooltipped" data-position="left" data-tooltip="Using TabulatedFluidProperties">Using TabulatedFluidProperties</a></li><li><a href="#d9a5c65f-8aa2-4a8a-a49c-c4dedaddb2fd" class="tooltipped" data-position="left" data-tooltip="Using alternative variable sets">Using alternative variable sets</a></li><li><a href="#dcc61c79-2087-4aa1-bcb2-d644add6b9c8" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>
