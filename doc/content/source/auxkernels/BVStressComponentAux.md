@@ -6,7 +6,7 @@ documenting the class, which includes the typical automatic documentation associ
 MooseObject; however, what is contained is ultimately determined by what is necessary to make the
 documentation clear for users.
 
-!syntax description /AuxVariables/AuxKernel/BVStressComponentAux
+!syntax description /AuxKernels/BVStressComponentAux
 
 ## Overview
 
@@ -16,8 +16,8 @@ documentation clear for users.
 
 !! Describe and include an example of how to use the BVStressComponentAux object.
 
-!syntax parameters /AuxVariables/AuxKernel/BVStressComponentAux
+!syntax parameters /AuxKernels/BVStressComponentAux
 
-!syntax inputs /AuxVariables/AuxKernel/BVStressComponentAux
+!syntax inputs /AuxKernels/BVStressComponentAux
 
-!syntax children /AuxVariables/AuxKernel/BVStressComponentAux
+!syntax children /AuxKernels/BVStressComponentAux

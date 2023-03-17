@@ -6,7 +6,7 @@ documenting the class, which includes the typical automatic documentation associ
 MooseObject; however, what is contained is ultimately determined by what is necessary to make the
 documentation clear for users.
 
-!syntax description /AuxVariables/AuxKernel/BVPressureAux
+!syntax description /AuxKernels/BVPressureAux
 
 ## Overview
 
@@ -16,8 +16,8 @@ documentation clear for users.
 
 !! Describe and include an example of how to use the BVPressureAux object.
 
-!syntax parameters /AuxVariables/AuxKernel/BVPressureAux
+!syntax parameters /AuxKernels/BVPressureAux
 
-!syntax inputs /AuxVariables/AuxKernel/BVPressureAux
+!syntax inputs /AuxKernels/BVPressureAux
 
-!syntax children /AuxVariables/AuxKernel/BVPressureAux
+!syntax children /AuxKernels/BVPressureAux
