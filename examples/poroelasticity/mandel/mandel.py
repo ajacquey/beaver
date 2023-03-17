@@ -1,7 +1,8 @@
 import os, csv
 import numpy as np
 import matplotlib.pyplot as plt
-plt.rcParams['text.usetex'] = True
+from matplotlib.lines import Line2D
+plt.style.use('../../publication.mplstyle')
 
 # Mandel's problem
 #
@@ -69,7 +70,7 @@ def numericalSolution_x(t):
   elif t==2.0:
     filename = filebase + "0153.csv"
   else:
-    print('Unknown filename!')
+    print("Unknown filename!")
     exit
 
   y, p = np.loadtxt(filename, delimiter=',', skiprows=1, usecols=[2, 1], unpack=True)
@@ -88,7 +89,7 @@ def numericalSolution_t(x):
   elif x==0.75:
     t, p = np.loadtxt(filename, delimiter=',', skiprows=1, usecols=[0, 4], unpack=True)
   else:
-    print('Unknown filename!')
+    print("Unknown filename!")
     exit
 
   p = np.divide(p, p0)
@@ -109,10 +110,14 @@ def plot_pressure_x(ax):
     xn, pn = numericalSolution_x(t)
 
     # Plot analytical
-    ax.plot(xa, pa, lw=1, color="xkcd:blue")
+    ax.plot(xa, pa, color="xkcd:red")
 
     # Plot numerical
-    ax.plot(xn, pn, ls='none', marker='o', ms=2, color='k')
+    ln = ax.scatter(xn, pn, c="k", marker="o", linewidths=0.0)
+
+  # Legend
+  labels = ["Analytical", "Numerical"]
+  ax.legend([Line2D([0], [0], color="xkcd:red"), ln], labels, loc="upper right")
 
   return None
 
@@ -130,10 +135,14 @@ def plot_pressure_t(ax):
     tn, pn = numericalSolution_t(x)
 
     # Plot analytical
-    ax.plot(ta, pa, lw=1, color="xkcd:blue")
+    ax.plot(ta, pa, color="xkcd:red")
 
     # Plot numerical
-    ax.plot(tn, pn, ls='none', marker='o', ms=2, color='k')
+    ln = ax.scatter(tn, pn, c="k", marker="o", linewidths=0.0)
+
+  # Legend
+  labels = ["Analytical", "Numerical"]
+  ax.legend([Line2D([0], [0], color="xkcd:red"), ln], labels, loc="lower left")
 
   return None
 
@@ -145,9 +154,13 @@ def plot_consolidation(ax):
   un = (un - w0) / (wf - w0)
 
   # Plot analytical
-  ax.plot(ta, ua, lw=1, color='xkcd:blue')
+  ax.plot(ta, ua, color="xkcd:red", label="Analytical")
+
   # Plot numerical
-  ax.plot(tn, un, ls='none', marker='o', ms=2, color='k')
+  ax.scatter(tn, un, c="k", marker="o", linewidths=0.0, label="Numerical")
+
+  # Legend
+  ax.legend(loc="best")
 
   return None
 
@@ -181,42 +194,43 @@ if __name__ == "__main__":
   print("Reference pressure dimension: ", p0)
 
   # Figure pressure - x
-  plt.rc('text', usetex=True)
   fig, ax = plt.subplots()
-  fig.set_size_inches(6, 5)
   
   plot_pressure_x(ax)
 
-  ax.set_xlim(0.0, 1.0)
+  ax.text(0.4, 1.1, r"$\frac{c_{v} t}{a^{2}} = 0.01$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.6, 0.8, r"$0.1$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.5, 0.42, r"$0.5$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.4, 0.2, r"$1$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.2, 0.08, r"$2$", horizontalalignment="center", verticalalignment="center")
+
+  ax.set_xlim(0.0, 1.1)
   ax.set_ylim(0.0, 1.2)
-  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16, labelpad=20)
-  ax.set_xlabel(r'$\frac{x}{a}$', fontsize=16)
-  ax.set_title('Mandel\'s problem')
+  ax.set_ylabel(r"$\frac{p}{p_{0}}$", rotation=0, labelpad=10)
+  ax.set_xlabel(r"$\frac{x}{a}$")
 
-  plt.savefig('mandel_pf_x.png', dpi=200, bbox_inches='tight') 
-
+  plt.savefig("../../../doc/content/media/mandel_pf_x.png", format="PNG", dpi=300, bbox_inches="tight")
 
   # Figure pressure - t
-  plt.rc('text', usetex=True)
   fig, ax = plt.subplots()
-  fig.set_size_inches(6, 5)
   
   plot_pressure_t(ax)
 
+  ax.text(0.2, 1.1, r"$\frac{x}{a} = 0$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.1, 0.9, r"$0.25$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.13, 0.6, r"$0.5$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.1, 0.3, r"$0.75$", horizontalalignment="center", verticalalignment="center")
+  
   ax.set_xlim(1.0e-03, 1.0e+01)
   ax.set_ylim(0.0, 1.2)
   ax.set_xscale("log")
-  ax.set_xlabel(r'$\frac{c_{v} t}{a^{2}}$', fontsize=16)
-  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16, labelpad=20)
-  
-  ax.set_title('Mandel\'s problem')
+  ax.set_xlabel(r"$\frac{c_{v} t}{a^{2}}$")
+  ax.set_ylabel(r"$\frac{p}{p_{0}}$", rotation=0, labelpad=10)
 
-  plt.savefig('mandel_pf_t.png', dpi=200, bbox_inches='tight')
+  plt.savefig("../../../doc/content/media/mandel_pf_t.png", format="PNG", dpi=300, bbox_inches="tight")
 
   # Figure consolidation
-  plt.rc('text', usetex=True)
-  fig, ax = plt.subplots()
-  fig.set_size_inches(10, 5)
+  fig, ax = plt.subplots(figsize=(5.0, 2.5))
   
   plot_consolidation(ax)
 
@@ -224,8 +238,7 @@ if __name__ == "__main__":
   ax.set_ylim(0.0, 1.0)
   ax.invert_yaxis()
   ax.set_xscale("log")
-  ax.set_xlabel(r'$\frac{c_{v} t}{a^{2}}$', fontsize=16)
-  ax.set_ylabel(r'$U$', rotation=0, fontsize=16, labelpad=20)
-  ax.set_title('Mandel\'s problem')
+  ax.set_xlabel(r"$\frac{c_{v} t}{a^{2}}$")
+  ax.set_ylabel(r"$U$", rotation=0, labelpad=10)
 
-  plt.savefig('mandel_u.png', dpi=200, bbox_inches='tight')
+  plt.savefig("../../../doc/content/media/mandel_u.png", format="PNG", dpi=300, bbox_inches="tight")

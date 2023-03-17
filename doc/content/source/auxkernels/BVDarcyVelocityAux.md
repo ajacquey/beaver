@@ -6,7 +6,7 @@ documenting the class, which includes the typical automatic documentation associ
 MooseObject; however, what is contained is ultimately determined by what is necessary to make the
 documentation clear for users.
 
-!syntax description /AuxKernels/BVDarcyVelocityAux
+!syntax description /AuxVariables/AuxKernel/BVDarcyVelocityAux
 
 ## Overview
 
@@ -16,8 +16,8 @@ documentation clear for users.
 
 !! Describe and include an example of how to use the BVDarcyVelocityAux object.
 
-!syntax parameters /AuxKernels/BVDarcyVelocityAux
+!syntax parameters /AuxVariables/AuxKernel/BVDarcyVelocityAux
 
-!syntax inputs /AuxKernels/BVDarcyVelocityAux
+!syntax inputs /AuxVariables/AuxKernel/BVDarcyVelocityAux
 
-!syntax children /AuxKernels/BVDarcyVelocityAux
+!syntax children /AuxVariables/AuxKernel/BVDarcyVelocityAux

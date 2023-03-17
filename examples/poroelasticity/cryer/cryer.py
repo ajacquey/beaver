@@ -1,7 +1,7 @@
 import os, csv
 import numpy as np
 import matplotlib.pyplot as plt
-plt.rcParams['text.usetex'] = True
+plt.style.use('../../publication.mplstyle')
 
 # Cryer's problem
 #
@@ -64,11 +64,14 @@ def plot_pressure_center(ax):
   # Numerical solution
   xn, pn = numericalSolution_p()
 
-  # Plot numerical
-  ax.plot(xn, pn, ls='none', marker='o', ms=2, color='k')
-
   # Plot analytical
-  ax.plot(ta, pa, lw=1, color="xkcd:blue")
+  ax.plot(ta, pa, color="xkcd:red", label="Analytical")
+
+  # Plot numerical
+  ax.scatter(xn, pn, c="k", marker="o", linewidths=0.0, label="Numerical")
+  
+  # Legend
+  ax.legend(loc="best")
 
   return None
 
@@ -96,17 +99,14 @@ if __name__ == "__main__":
   print("Reference pressure dimension: ", p0)
 
   # Figure pressure at center
-  plt.rc('text', usetex=True)
-  fig, ax = plt.subplots()
-  fig.set_size_inches(10, 5)
+  fig, ax = plt.subplots(figsize=(5.0, 2.5))
   
   plot_pressure_center(ax)
 
   ax.set_xlim(1.0e-04, 10.0)
   ax.set_ylim(0.0, 1.5)
   ax.set_xscale("log")
-  ax.set_xlabel(r'$\frac{c_{v} t}{r^{2}}$', fontsize=16)
-  ax.set_ylabel(r'$\frac{p_{f}}{p_{0}}$', rotation=0, fontsize=16, labelpad=20)
-  ax.set_title('Cryer\'s problem')
+  ax.set_xlabel(r"$\frac{c_{v} t}{a^{2}}$")
+  ax.set_ylabel(r"$\frac{p_{c}}{p_{0}}$", rotation=0, labelpad=10)
 
-  plt.savefig('cryer_pf.png', dpi=200, bbox_inches='tight')
+  plt.savefig("../../../doc/content/media/cryer_pf.png", format="PNG", dpi=300, bbox_inches="tight")

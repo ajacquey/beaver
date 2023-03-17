@@ -74,13 +74,11 @@
   []
 []
 
-[Modules]
-  [FluidProperties]
-    [simple_fluid]
-      type = SimpleFluidProperties
-      density0 = 1.0
-      viscosity = 1.0e-03
-    []
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.0e-03
   []
 []
 

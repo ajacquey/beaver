@@ -6,7 +6,9 @@ Here we consider the extension of the Mandel's problem in which the fluid and so
 ## Setup
 
 A rectangular soil sample (width $2a$ and height $b$) is subject to a vertical stress $F$ at its top through a rigid and frictionless plate of length $2a$. 
-The lateral boundary of the sample are drained and deformation is in-plane. At $t = 0$ the vertical force of magnitude $F$ is applied and fluid pressure increases due to poroelastic effect. It then drains out of the lateral boundary over time. See a sketch of this setup in Figure x.
+The lateral boundary of the sample are drained and deformation is in-plane. At $t = 0$ the vertical force of magnitude $F$ is applied and fluid pressure increases due to poroelastic effect. It then drains out of the lateral boundary over time. See a sketch of this setup in [!ref](fig_mandel_setup).
+
+!media media/mandel.png style=display:block;margin:auto;width:80%; caption=Setup for the Mandel's problem. id=fig_mandel_setup
 
 ## Parameters
 
@@ -64,6 +66,18 @@ The coefficient $\xi_{j}$ are the roots verifying the following equations:
 !equation id=roots
 \tan \xi_{j} = \frac{1 - \nu}{\nu_{u} - \nu} \xi_{j}.
 
-## Files
+!media media/mandel_pf_t.png style=display:block;margin:auto;width:60%; caption=Fluid pressure solution for the Mandel's problem. id=fig_mandel_pf_t
+
+!media media/mandel_pf_x.png style=display:block;margin:auto;width:60%; caption=Fluid pressure solution for the Mandel's problem. id=fig_mandel_pf_x
+
+!media media/mandel_u.png style=display:block;margin:auto;width:80%; caption=Consolidation solution for the Mandel's problem. id=fig_mandel_u
+
+## Complete Source Files
+
+- [mandel.i](https://github.com/ajacquey/beaver/blob/main/examples/poroelasticity/mandel/mandel.i)
 
 !bibtex bibliography
+
+!content pagination use_title=True
+                    previous=poroelasticity/terzaghi.md
+                    next=poroelasticity/cryer.md

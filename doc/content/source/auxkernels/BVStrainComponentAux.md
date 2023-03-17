@@ -6,7 +6,7 @@ documenting the class, which includes the typical automatic documentation associ
 MooseObject; however, what is contained is ultimately determined by what is necessary to make the
 documentation clear for users.
 
-!syntax description /AuxKernels/BVStrainComponentAux
+!syntax description /AuxVariables/AuxKernel/BVStrainComponentAux
 
 ## Overview
 
@@ -16,8 +16,8 @@ documentation clear for users.
 
 !! Describe and include an example of how to use the BVStrainComponentAux object.
 
-!syntax parameters /AuxKernels/BVStrainComponentAux
+!syntax parameters /AuxVariables/AuxKernel/BVStrainComponentAux
 
-!syntax inputs /AuxKernels/BVStrainComponentAux
+!syntax inputs /AuxVariables/AuxKernel/BVStrainComponentAux
 
-!syntax children /AuxKernels/BVStrainComponentAux
+!syntax children /AuxVariables/AuxKernel/BVStrainComponentAux

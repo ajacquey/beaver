@@ -112,14 +112,12 @@
   [] 
 []
 
-[Modules]
-  [FluidProperties]
-    [simple_fluid]
-      type = SimpleFluidProperties
-      density0 = 1.0
-      viscosity = 0.13953488372093023 # scaled by effective time
-      bulk_modulus = 8.0
-    []
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 0.13953488372093023 # scaled by effective time
+    bulk_modulus = 8.0
   []
 []
 

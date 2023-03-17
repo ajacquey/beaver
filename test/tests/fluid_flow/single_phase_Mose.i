@@ -104,31 +104,14 @@
   []
 []
 
-[Modules]
-  [FluidProperties]
-    [simple_fluid]
-      type = SimpleFluidProperties
-      density0 = 1.0
-      viscosity = 1.0
-    []
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.0
   []
 []
 
-# [Preconditioning]
-#   [hypre]
-#     type = SMP
-#     full = true
-#     petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'
-#     petsc_options_iname = '-pc_type -pc_hypre_type
-#                            -pc_hypre_boomeramg_strong_threshold -pc_hypre_boomeramg_agg_nl -pc_hypre_boomeramg_agg_num_paths -pc_hypre_boomeramg_max_levels
-#                            -pc_hypre_boomeramg_coarsen_type -pc_hypre_boomeramg_interp_type
-#                            -pc_hypre_boomeramg_P_max -pc_hypre_boomeramg_truncfacto -snes_atol'
-#     petsc_options_value = 'hypre boomeramg
-#                            0.7 4 5 25
-#                            HMIS ext+i
-#                            2 0.3 1.0e-14'
-#   []
-# []
 [Preconditioning]
   [hypre]
     type = SMP

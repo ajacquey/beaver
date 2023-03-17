@@ -4,6 +4,10 @@ The classical Terzaghi's consolidation problem analyzes the one-dimensional defo
 
 ## Setup
 
+A confined soil column of height $h$ is loaded vertically at constant stress. The top surface is drained and at $t = 0$, the vertical force of magnitude $F$ is applied. This setup is sketched in [!ref](fig_terzaghi_setup).
+
+!media media/terzaghi.png style=display:block;margin:auto;width:80%; caption=Setup for the Terzaghi's problem. id=fig_terzaghi_setup
+
 ## Parameters
 
 !table id=mandel_properties caption=List of parameters used for the Terzaghi's problem.
@@ -50,4 +54,15 @@ Its expression is given by [!cite](Verruijt2016) as:
 !equation
 U = 1 - \frac{8}{\pi^{2}} \sum_{k = 1}^{+\infty} \frac{1}{{\left(2k - 1\right)}^{2}} \exp\left[-{\left(2k - 1\right)}^{2} \frac{\pi^{2}}{4} \frac{c_{v} t}{h^{2}}\right].
 
-## Files
+!media media/terzaghi_pf.png style=display:block;margin:auto;width:60%; caption=Fluid pressure solution for the Terzaghi's consolidation problem. id=fig_terzaghi_pf
+
+!media media/terzaghi_u.png style=display:block;margin:auto;width:80%; caption=Consolidation solution for the Terzaghi's consolidation problem. id=fig_terzaghi_u
+
+## Complete Source Files
+
+- [terzaghi.i](https://github.com/ajacquey/beaver/blob/main/examples/poroelasticity/terzaghi/terzaghi.i)
+
+!bibtex bibliography
+
+!content pagination use_title=True
+                    next=poroelasticity/mandel.md

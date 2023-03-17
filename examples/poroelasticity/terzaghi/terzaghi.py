@@ -1,7 +1,8 @@
 import os, csv
 import numpy as np
 import matplotlib.pyplot as plt
-plt.rcParams['text.usetex'] = True
+from matplotlib.lines import Line2D
+plt.style.use('../../publication.mplstyle')
 
 # Terzaghi's problem of consolodation of a soil layer
 #
@@ -42,7 +43,7 @@ def numericalSolution(t):
   elif t==1.0:
     filename = filebase + "0186.csv"
   else:
-    print('Unknown filename!')
+    print("Unknown filename!")
     exit
 
   y, p = np.loadtxt(filename, delimiter=',', skiprows=1, usecols=[3, 1], unpack=True)
@@ -63,9 +64,13 @@ def plot_pressure(ax):
     zn, pn = numericalSolution(t)
 
     # Plot analytical
-    ax.plot(pa, za, lw=1, color='xkcd:blue')
+    ax.plot(pa, za, color="xkcd:red")
     # Plot numerical
-    ax.plot(pn, zn, ls='none', marker='o', ms=2, color='k')
+    ln = ax.scatter(pn, zn, c="k", marker="o", linewidths=0.0)
+  
+  # Legend
+  labels = ["Analytical", "Numerical"]
+  ax.legend([Line2D([0], [0], color="xkcd:red"), ln], labels, loc="best")
 
   return None
 
@@ -77,9 +82,12 @@ def plot_consolidation(ax):
   un = (-un*h - w0) / (wf - w0)
 
   # Plot analytical
-  ax.plot(ta, ua, lw=1, color='xkcd:blue')
+  ax.plot(ta, ua, color="xkcd:red", label="Analytical")
   # Plot numerical
-  ax.plot(tn, un, ls='none', marker='o', ms=2, color='k')
+  ax.scatter(tn, un, c="k", marker="o", linewidths=0.0, label="Numerical")
+
+  # Legend
+  ax.legend(loc="best")
 
   return None
 
@@ -107,24 +115,28 @@ if __name__ == "__main__":
   print("Final displacement: ", wf)
 
   # Figure pressure
-  plt.rc('text', usetex=True)
   fig, ax = plt.subplots()
-  fig.set_size_inches(6, 5)
   
   plot_pressure(ax)
 
+  ax.text(0.15, 0.1, r"$1$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.42, 0.15, r"$0.5$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.8, 0.2, r"$0.2$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.85, 0.45, r"$0.1$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.85, 0.65, r"$0.05$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.7, 0.8, r"$0.01$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.65, 0.92, r"$0.005$", horizontalalignment="center", verticalalignment="center")
+  ax.text(0.5, 1.05, r"$\frac{c_{v} t}{h^{2}} = 0.001$", horizontalalignment="center", verticalalignment="center")
+  
   ax.set_xlim(0.0, 1.1)
-  ax.set_ylim(0.0, 1.0)
-  ax.set_xlabel(r'$\frac{p_{f}}{p_{0}}$', fontsize=16)
-  ax.set_ylabel(r'$\frac{z}{h}$', rotation=0, fontsize=16, labelpad=20)
-  ax.set_title('Terzaghi\'s consolidation problem')
+  ax.set_ylim(0.0, 1.2)
+  ax.set_xlabel(r"$\frac{p}{p_{0}}$")
+  ax.set_ylabel(r"$\frac{z}{h}$", rotation=0,  labelpad=10)
 
-  plt.savefig('terzaghi_pf.png', dpi=200, bbox_inches='tight') 
+  plt.savefig("../../../doc/content/media/terzaghi_pf.png", format="PNG", dpi=300, bbox_inches="tight")
 
   # Figure displacement
-  plt.rc('text', usetex=True)
-  fig, ax = plt.subplots()
-  fig.set_size_inches(10, 5)
+  fig, ax = plt.subplots(figsize=(5.0, 2.5))
   
   plot_consolidation(ax)
 
@@ -132,8 +144,7 @@ if __name__ == "__main__":
   ax.set_ylim(0.0, 1.0)
   ax.invert_yaxis()
   ax.set_xscale("log")
-  ax.set_xlabel(r'$\frac{c_{v} t}{h^{2}}$', fontsize=16)
-  ax.set_ylabel(r'$U$', rotation=0, fontsize=16, labelpad=20)
-  ax.set_title('Terzaghi\'s consolidation problem')
+  ax.set_xlabel(r"$\frac{c_{v} t}{h^{2}}$")
+  ax.set_ylabel(r"$U$", rotation=0, labelpad=10)
 
-  plt.savefig('terzaghi_u.png', dpi=200, bbox_inches='tight')
+  plt.savefig("../../../doc/content/media/terzaghi_u.png", format="PNG", dpi=300, bbox_inches="tight")
