@@ -41,6 +41,11 @@ BVMechanicalMaterial::validParams()
   // Initial stress
   params.addParam<std::vector<FunctionName>>(
       "initial_stress", "The initial stress principal components (negative in compression).");
+  // Inelastic models
+  params.addParam<std::vector<MaterialName>>(
+      "inelastic_models",
+      "The material objects to use to calculate stress and inelastic strains. "
+      "Note: specify creep models first and plasticity models second.");
   // Strain and stress update need to be done on the undisplaced mesh
   params.suppressParameter<bool>("use_displaced_mesh");
   return params;
@@ -57,6 +62,9 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
     // Initial stress
     _initial_stress_fct(getParam<std::vector<FunctionName>>("initial_stress")),
     _num_ini_stress(_initial_stress_fct.size()),
+    // Inelastic models
+    _has_inelastic(isParamValid("inelastic_models")),
+    _num_inelastic(getParam<std::vector<MaterialName>>("inelastic_models").size()),
     // Strain properties
     _strain_increment(declareADProperty<RankTwoTensor>("strain_increment")),
     _spin_increment(declareADProperty<RankTwoTensor>("spin_increment")),
@@ -85,6 +93,8 @@ BVMechanicalMaterial::initialSetup()
   elasticModuliInputCheck();
 
   displacementIntegrityCheck();
+
+  initializeInelasticModels();
 
   // Fetch coupled variables and gradients
   for (unsigned int i = 0; i < _ndisp; ++i)
@@ -141,6 +151,26 @@ BVMechanicalMaterial::displacementIntegrityCheck()
     paramError(
         "displacements",
         "The number of variables supplied in 'displacements' must match the mesh dimension.");
+}
+
+void
+BVMechanicalMaterial::initializeInelasticModels()
+{
+  if (_has_inelastic)
+  {
+    std::vector<MaterialName> models = getParam<std::vector<MaterialName>>("inelastic_models");
+
+    for (unsigned int i = 0; i < _num_inelastic; ++i)
+    {
+      BVInelasticUpdateBase * rrr =
+          dynamic_cast<BVInelasticUpdateBase *>(&this->getMaterialByName(models[i]));
+
+      if (rrr)
+        _inelastic_models.push_back(rrr);
+      else
+        mooseError("Model " + models[i] + " is not compatible with BVMechanicalMaterial!");
+    }
+  }
 }
 
 void
