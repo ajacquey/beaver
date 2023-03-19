@@ -21,6 +21,7 @@ Extensions:
         menu:
             Examples:
                 Poroelasticity: examples/poroelasticity/index.md
+                Viscoelasticity: examples/viscoelasticity/index.md
             Documentation:
                 Beaver syntax: documentation/beaver.md
                 Fluid Properties syntax: documentation/fluid_properties.md

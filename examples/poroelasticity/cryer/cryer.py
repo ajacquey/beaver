@@ -109,4 +109,4 @@ if __name__ == "__main__":
   ax.set_xlabel(r"$\frac{c_{v} t}{a^{2}}$")
   ax.set_ylabel(r"$\frac{p_{c}}{p_{0}}$", rotation=0, labelpad=10)
 
-  plt.savefig("../../../doc/content/media/cryer_pf.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/cryer_pf.png", format="PNG", dpi=300, bbox_inches="tight")

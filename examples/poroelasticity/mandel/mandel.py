@@ -209,7 +209,7 @@ if __name__ == "__main__":
   ax.set_ylabel(r"$\frac{p}{p_{0}}$", rotation=0, labelpad=10)
   ax.set_xlabel(r"$\frac{x}{a}$")
 
-  plt.savefig("../../../doc/content/media/mandel_pf_x.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/mandel_pf_x.png", format="PNG", dpi=300, bbox_inches="tight")
 
   # Figure pressure - t
   fig, ax = plt.subplots()
@@ -227,7 +227,7 @@ if __name__ == "__main__":
   ax.set_xlabel(r"$\frac{c_{v} t}{a^{2}}$")
   ax.set_ylabel(r"$\frac{p}{p_{0}}$", rotation=0, labelpad=10)
 
-  plt.savefig("../../../doc/content/media/mandel_pf_t.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/mandel_pf_t.png", format="PNG", dpi=300, bbox_inches="tight")
 
   # Figure consolidation
   fig, ax = plt.subplots(figsize=(5.0, 2.5))
@@ -241,4 +241,4 @@ if __name__ == "__main__":
   ax.set_xlabel(r"$\frac{c_{v} t}{a^{2}}$")
   ax.set_ylabel(r"$U$", rotation=0, labelpad=10)
 
-  plt.savefig("../../../doc/content/media/mandel_u.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/mandel_u.png", format="PNG", dpi=300, bbox_inches="tight")

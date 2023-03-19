@@ -1,0 +1,7 @@
+[Tests]
+  [linear_maxwell]
+    type = 'Exodiff'
+    input = 'linear_maxwell.i'
+    exodiff = 'linear_maxwell_out.e'
+  []
+[]

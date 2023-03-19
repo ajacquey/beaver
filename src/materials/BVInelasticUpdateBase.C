@@ -51,10 +51,3 @@ BVInelasticUpdateBase::setQp(unsigned int qp)
 {
   _qp = qp;
 }
-
-void
-BVInelasticUpdateBase::inelasticUpdate(ADRankTwoTensor & stress,
-                                       const RankFourTensor & Cijkl,
-                                       ADRankTwoTensor & strain_increment)
-{
-}

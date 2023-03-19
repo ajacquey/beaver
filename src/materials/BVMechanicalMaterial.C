@@ -257,7 +257,18 @@ BVMechanicalMaterial::computeQpElasticityTensor()
 void
 BVMechanicalMaterial::computeQpStress()
 {
+  // Elastic guess
   _stress[_qp] = spinRotation(_stress_old[_qp]) + _Cijkl * _strain_increment[_qp];
+
+  // Inelastic models
+  if (_has_inelastic)
+  {
+    for (unsigned int i = 0; i < _num_inelastic; ++i)
+    {
+      _inelastic_models[i]->setQp(_qp);
+      _inelastic_models[i]->inelasticUpdate(_stress[_qp], _Cijkl, _strain_increment[_qp]);
+    }
+  }
 }
 
 ADRankTwoTensor
