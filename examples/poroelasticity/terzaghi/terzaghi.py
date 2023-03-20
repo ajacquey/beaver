@@ -133,7 +133,7 @@ if __name__ == "__main__":
   ax.set_xlabel(r"$\frac{p}{p_{0}}$")
   ax.set_ylabel(r"$\frac{z}{h}$", rotation=0,  labelpad=10)
 
-  plt.savefig("../../../doc/content/media/terzaghi_pf.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/terzaghi_pf.png", format="PNG", dpi=300, bbox_inches="tight")
 
   # Figure displacement
   fig, ax = plt.subplots(figsize=(5.0, 2.5))
@@ -147,4 +147,4 @@ if __name__ == "__main__":
   ax.set_xlabel(r"$\frac{c_{v} t}{h^{2}}$")
   ax.set_ylabel(r"$U$", rotation=0, labelpad=10)
 
-  plt.savefig("../../../doc/content/media/terzaghi_u.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/terzaghi_u.png", format="PNG", dpi=300, bbox_inches="tight")

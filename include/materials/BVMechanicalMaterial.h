@@ -14,6 +14,7 @@
 #pragma once
 
 #include "Material.h"
+#include "BVInelasticUpdateBase.h"
 
 class BVMechanicalMaterial : public Material
 {
@@ -23,6 +24,7 @@ public:
   void initialSetup() override;
   void elasticModuliInputCheck();
   void displacementIntegrityCheck();
+  void initializeInelasticModels();
 
 protected:
   virtual void initQpStatefulProperties() override;
@@ -52,6 +54,10 @@ protected:
   const std::vector<FunctionName> _initial_stress_fct;
   const unsigned int _num_ini_stress;
 
+  // Inelastic models
+  const bool _has_inelastic;
+  const unsigned int _num_inelastic;
+
   // Strain properties
   ADMaterialProperty<RankTwoTensor> & _strain_increment;
   ADMaterialProperty<RankTwoTensor> & _spin_increment;
@@ -68,4 +74,7 @@ protected:
 
   // Elasticity tensor
   RankFourTensor _Cijkl;
+
+  // Inelastic models
+  std::vector<BVInelasticUpdateBase *> _inelastic_models;
 };
