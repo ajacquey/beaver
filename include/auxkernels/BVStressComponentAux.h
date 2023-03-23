@@ -23,7 +23,7 @@ public:
 
 protected:
   virtual Real computeValue();
-  
+
   const unsigned int _i;
   const unsigned int _j;
 };

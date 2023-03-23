@@ -19,13 +19,13 @@ InputParameters
 BVSinglePhaseDarcy::validParams()
 {
   InputParameters params = ADKernelGrad::validParams();
-  params.addClassDescription("Kernel for the divergence of Darcy's velocity for single phase flow.");
+  params.addClassDescription(
+      "Kernel for the divergence of Darcy's velocity for single phase flow.");
   return params;
 }
 
 BVSinglePhaseDarcy::BVSinglePhaseDarcy(const InputParameters & parameters)
-  : ADKernelGrad(parameters),
-    _lambda(getADMaterialProperty<Real>("fluid_mobility"))
+  : ADKernelGrad(parameters), _lambda(getADMaterialProperty<Real>("fluid_mobility"))
 {
 }
 

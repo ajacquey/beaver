@@ -22,6 +22,7 @@ BVStrainAuxBase::validParams()
 }
 
 BVStrainAuxBase::BVStrainAuxBase(const InputParameters & parameters)
-  : AuxKernel(parameters), _strain_increment(getADMaterialProperty<RankTwoTensor>("strain_increment"))
+  : AuxKernel(parameters),
+    _strain_increment(getADMaterialProperty<RankTwoTensor>("strain_increment"))
 {
 }

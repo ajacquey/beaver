@@ -27,8 +27,8 @@ protected:
   const bool _coupled_pf;
   const VariableValue & _pf;
   const unsigned int _component;
-//   const Real _rho;
-//   const RealVectorValue _gravity;
+  //   const Real _rho;
+  //   const RealVectorValue _gravity;
 
   const ADMaterialProperty<RankTwoTensor> & _stress;
   const ADMaterialProperty<Real> * _biot;

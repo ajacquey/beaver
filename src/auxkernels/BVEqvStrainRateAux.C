@@ -1,4 +1,4 @@
- /******************************************************************************/
+/******************************************************************************/
 /*                            This file is part of                            */
 /*                       BEAVER, a MOOSE-based application                    */
 /*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
@@ -11,27 +11,27 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMisesStressAux.h"
+#include "BVEqvStrainRateAux.h"
 #include "metaphysicl/raw_type.h"
 
-registerMooseObject("BeaverApp", BVMisesStressAux);
+registerMooseObject("BeaverApp", BVEqvStrainRateAux);
 
 InputParameters
-BVMisesStressAux::validParams()
+BVEqvStrainRateAux::validParams()
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the pressure or mean stress.");
+  InputParameters params = BVStrainAuxBase::validParams();
+  params.addClassDescription("Class for outputting the equivalent strain rate.");
   return params;
 }
 
-BVMisesStressAux::BVMisesStressAux(const InputParameters & parameters)
-  : BVStressAuxBase(parameters)
+BVEqvStrainRateAux::BVEqvStrainRateAux(const InputParameters & parameters)
+  : BVStrainAuxBase(parameters)
 {
 }
 
 Real
-BVMisesStressAux::computeValue()
+BVEqvStrainRateAux::computeValue()
 {
-  ADRankTwoTensor stress_dev = _stress[_qp].deviatoric();
-  return std::sqrt(1.5) * MetaPhysicL::raw_value(stress_dev.L2norm());
+  ADRankTwoTensor strain_rate_dev = _strain_increment[_qp].deviatoric() / _dt;
+  return std::sqrt(2.0 / 3.0) * MetaPhysicL::raw_value(strain_rate_dev.L2norm());
 }

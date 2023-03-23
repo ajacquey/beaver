@@ -39,10 +39,10 @@ BVSinglePhaseTimeDerivative::precomputeQpResidual()
 {
   // Fluid compressibility
   ADReal res = _porosity[_qp] / _density[_qp] * (_density[_qp] - _density_old[_qp]) / _dt;
-  
+
   // Add poromechanics
   if (_coupled_mech)
     res += (*_porous_storage)[_qp] * _u_dot[_qp] + (*_poromech)[_qp];
-  
+
   return res;
 }

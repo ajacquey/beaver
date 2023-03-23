@@ -11,23 +11,27 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVPressureAux.h"
+#include "BVEqvStrainAux.h"
 #include "metaphysicl/raw_type.h"
 
-registerMooseObject("BeaverApp", BVPressureAux);
+registerMooseObject("BeaverApp", BVEqvStrainAux);
 
 InputParameters
-BVPressureAux::validParams()
+BVEqvStrainAux::validParams()
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the pressure or mean stress.");
+  InputParameters params = BVStrainAuxBase::validParams();
+  params.addClassDescription("Class for outputting the equivalent strain.");
   return params;
 }
 
-BVPressureAux::BVPressureAux(const InputParameters & parameters) : BVStressAuxBase(parameters) {}
+BVEqvStrainAux::BVEqvStrainAux(const InputParameters & parameters)
+  : BVStrainAuxBase(parameters), _u_old(uOld())
+{
+}
 
 Real
-BVPressureAux::computeValue()
+BVEqvStrainAux::computeValue()
 {
-  return -MetaPhysicL::raw_value(_stress[_qp].trace()) / 3.0;
+  ADRankTwoTensor strain_incr_dev = _strain_increment[_qp].deviatoric();
+  return _u_old[_qp] + std::sqrt(2.0 / 3.0) * MetaPhysicL::raw_value(strain_incr_dev.L2norm());
 }

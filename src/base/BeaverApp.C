@@ -32,6 +32,8 @@ BeaverApp::registerAll(Factory & f, ActionFactory & af, Syntax & syntax)
   /* register custom execute flags, action syntax, etc. here */
   registerSyntax("EmptyAction", "BCs/BVPressure");
   registerSyntax("BVPressureAction", "BCs/BVPressure/*");
+  registerSyntax("EmptyAction", "BCs/BVShearTraction");
+  registerSyntax("BVShearTractionAction", "BCs/BVShearTraction/*");
 }
 
 void

@@ -19,10 +19,13 @@ InputParameters
 BVPoroMechanicsMaterial::validParams()
 {
   InputParameters params = Material::validParams();
-  params.addClassDescription("Material for computing the poroelastic properties of a deformable porous medium.");
+  params.addClassDescription(
+      "Material for computing the poroelastic properties of a deformable porous medium.");
   // Poroelastic parameters
-  params.addRangeCheckedParam<Real>(
-      "biot_coefficient", 1.0, "biot_coefficient > 0 & biot_coefficient <= 1.0", "The Biot's poroelastic coefficient.");
+  params.addRangeCheckedParam<Real>("biot_coefficient",
+                                    1.0,
+                                    "biot_coefficient > 0 & biot_coefficient <= 1.0",
+                                    "The Biot's poroelastic coefficient.");
   return params;
 }
 

@@ -19,14 +19,13 @@ InputParameters
 BVMaxwellViscoelasticUpdate::validParams()
 {
   InputParameters params = BVCreepUpdateBase::validParams();
-  params.addClassDescription("Base material for computing a creep stress update.");
+  params.addClassDescription("Material for computing a linear Maxwell viscoelastic update.");
   params.addRequiredRangeCheckedParam<Real>("viscosity", "viscosity > 0.0", "The viscosity.");
   return params;
 }
 
 BVMaxwellViscoelasticUpdate::BVMaxwellViscoelasticUpdate(const InputParameters & parameters)
-  : BVCreepUpdateBase(parameters), 
-    _eta0(getParam<Real>("viscosity"))
+  : BVCreepUpdateBase(parameters), _eta0(getParam<Real>("viscosity"))
 {
 }
 
