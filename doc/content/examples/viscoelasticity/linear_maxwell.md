@@ -39,5 +39,5 @@ where:
 
 !bibtex bibliography
 
-<!-- !content pagination use_title=True
-                    next=viscoelasticity/cryer.md -->
+!content pagination use_title=True
+                    next=viscoelasticity/linear_kelvin.md
