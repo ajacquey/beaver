@@ -35,9 +35,7 @@ BVCreepUpdateBase::BVCreepUpdateBase(const InputParameters & parameters)
 }
 
 void
-BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress,
-                                   const RankFourTensor & Cijkl,
-                                   ADRankTwoTensor & strain_increment)
+BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl)
 {
   // Here we do an iterative update with a single variable being the scalar effective stress
   // We are trying to find the zero of the function F which is defined as:
@@ -45,7 +43,7 @@ BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress,
   // $\dot{\gamma}$: scalar creep strain rate
   // $\sigma_{e}$: scalar effective stress
   // $\eta$: the viscosity
-  // flow rule: $\dot{\gamma} = \frac{\sigma_{e}}{\eta}$
+  // flow rule: $\dot{\gamma} = \frac{\sigma_{e}}{3 \eta}$
 
   // Trial stress
   _stress_tr = stress;
@@ -65,7 +63,6 @@ BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress,
 
   // Update quantities
   _creep_strain_incr[_qp] = reformPlasticStrainTensor(gamma);
-  strain_increment -= _creep_strain_incr[_qp];
   stress -= 2.0 * _G * _creep_strain_incr[_qp];
   postReturnMap(gamma);
 }
@@ -118,14 +115,12 @@ BVCreepUpdateBase::reformPlasticStrainTensor(const ADReal & gamma)
   return 1.5 * gamma * _dt * flow_dir;
 }
 
-void 
+void
 BVCreepUpdateBase::preReturnMap()
 {
-
 }
 
 void
 BVCreepUpdateBase::postReturnMap(const ADReal & /*gamma*/)
 {
-
 }

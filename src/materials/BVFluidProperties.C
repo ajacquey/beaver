@@ -25,9 +25,9 @@ BVFluidProperties::validParams()
   params.addRequiredCoupledVar("temperature", "The temperature (K)");
   params.addRequiredParam<UserObjectName>("fp",
                                           "The name of the user object for fluid properties.");
-//   MooseEnum phase("wetting non_wetting single", "single");
-//   params.addParam<MooseEnum>(
-//       "phase", phase, "The phase of the fluid properties (wetting, non_wetting or single).");
+  //   MooseEnum phase("wetting non_wetting single", "single");
+  //   params.addParam<MooseEnum>(
+  //       "phase", phase, "The phase of the fluid properties (wetting, non_wetting or single).");
   return params;
 }
 

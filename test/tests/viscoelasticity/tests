@@ -4,4 +4,9 @@
     input = 'linear_maxwell.i'
     exodiff = 'linear_maxwell_out.e'
   []
+  [linear_kelvin]
+    type = 'Exodiff'
+    input = 'linear_kelvin.i'
+    exodiff = 'linear_kelvin_out.e'
+  []
 []

@@ -11,23 +11,15 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVPressureAux.h"
-#include "metaphysicl/raw_type.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVPressureAux);
+#include "Action.h"
 
-InputParameters
-BVPressureAux::validParams()
+class BVShearTractionAction : public Action
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the pressure or mean stress.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVShearTractionAction(const InputParameters & params);
 
-BVPressureAux::BVPressureAux(const InputParameters & parameters) : BVStressAuxBase(parameters) {}
-
-Real
-BVPressureAux::computeValue()
-{
-  return -MetaPhysicL::raw_value(_stress[_qp].trace()) / 3.0;
-}
+  virtual void act() override;
+};

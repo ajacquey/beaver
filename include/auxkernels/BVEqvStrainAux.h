@@ -11,23 +11,18 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVPressureAux.h"
-#include "metaphysicl/raw_type.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVPressureAux);
+#include "BVStrainAuxBase.h"
 
-InputParameters
-BVPressureAux::validParams()
+class BVEqvStrainAux : public BVStrainAuxBase
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the pressure or mean stress.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVEqvStrainAux(const InputParameters & parameters);
 
-BVPressureAux::BVPressureAux(const InputParameters & parameters) : BVStressAuxBase(parameters) {}
+protected:
+  virtual Real computeValue();
 
-Real
-BVPressureAux::computeValue()
-{
-  return -MetaPhysicL::raw_value(_stress[_qp].trace()) / 3.0;
-}
+  const VariableValue & _u_old;
+};

@@ -21,7 +21,7 @@ class BVFluidProperties : public Material
 public:
   static InputParameters validParams();
   BVFluidProperties(const InputParameters & parameters);
-//   std::string phase_ext();
+  //   std::string phase_ext();
 
 protected:
   virtual void initQpStatefulProperties() override;
@@ -30,8 +30,8 @@ protected:
   const ADVariableValue & _pf;
   const ADVariableValue & _temp;
 
-//   const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-//   const std::string _ext;
+  //   const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
+  //   const std::string _ext;
 
   const SinglePhaseFluidProperties & _fp;
 

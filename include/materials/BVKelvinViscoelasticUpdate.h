@@ -13,35 +13,32 @@
 
 #pragma once
 
-#include "BVInelasticUpdateBase.h"
+#include "BVCreepUpdateBase.h"
 
-class BVCreepUpdateBase : public BVInelasticUpdateBase
+class BVKelvinViscoelasticUpdate : public BVCreepUpdateBase
 {
 public:
   static InputParameters validParams();
-  BVCreepUpdateBase(const InputParameters & parameters);
-  virtual void inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl) override;
+  BVKelvinViscoelasticUpdate(const InputParameters & parameters);
 
 protected:
-  virtual ADReal returnMap();
-  virtual ADReal residual(const ADReal & eqv_stress);
-  virtual ADReal jacobian(const ADReal & eqv_stress);
-  virtual ADRankTwoTensor reformPlasticStrainTensor(const ADReal & gamma);
-  virtual ADReal creepRate(const ADReal & eqv_stress) = 0;
-  virtual ADReal creepRateDerivative(const ADReal & eqv_stress) = 0;
-  virtual void preReturnMap();
-  virtual void postReturnMap(const ADReal & gamma);
+  virtual void initQpStatefulProperties() override;
+  virtual ADReal creepRate(const ADReal & eqv_stress) override;
+  virtual ADReal creepRateDerivative(const ADReal & eqv_stress) override;
+  virtual ADReal viscosity(const ADReal & eqv_stress);
+  virtual ADReal viscosityDerivative(const ADReal & eqv_stress);
+  virtual ADReal shearModulus(const ADReal & eqv_stress);
+  virtual ADReal shearModulusDerivative(const ADReal & eqv_stress);
+  virtual void preReturnMap() override;
+  virtual void postReturnMap(const ADReal & gamma) override;
 
-  // Name used as a prefix for all material properties related to this creep model
-  const std::string _base_name;
+  // Reference viscosity
+  Real _eta0;
 
-  // Creep strain increment
-  ADMaterialProperty<RankTwoTensor> & _creep_strain_incr;
+  // Reference shear modulus
+  Real _G0;
 
-  // Trial stress tensor and scalar effective stress
-  ADRankTwoTensor _stress_tr;
-  ADReal _eqv_stress_tr;
-
-  // Shear modulus
-  Real _G;
+  // Internal variable for creep strain
+  ADMaterialProperty<Real> & _eqv_creep_strain;
+  const MaterialProperty<Real> & _eqv_creep_strain_old;
 };

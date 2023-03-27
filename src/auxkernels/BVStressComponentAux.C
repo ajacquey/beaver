@@ -22,8 +22,10 @@ BVStressComponentAux::validParams()
   InputParameters params = BVStressAuxBase::validParams();
   params.addClassDescription("Class for outputting components of the stress tensor.");
   MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the stress tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the stress tensor.");
+  params.addRequiredParam<MooseEnum>(
+      "index_i", component, "The index i of ij for the stress tensor.");
+  params.addRequiredParam<MooseEnum>(
+      "index_j", component, "The index j of ij for the stress tensor.");
   return params;
 }
 

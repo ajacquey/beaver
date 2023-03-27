@@ -23,7 +23,8 @@ BVDarcyVelocityAux::validParams()
   InputParameters params = AuxKernel::validParams();
   params.addClassDescription("Class for outputting components of the Darcy's velocity.");
   MooseEnum component("x y z normal");
-  params.addRequiredParam<MooseEnum>("component", component, "The desired component of the Darcy velocity.");
+  params.addRequiredParam<MooseEnum>(
+      "component", component, "The desired component of the Darcy velocity.");
   params.addRequiredCoupledVar("fluid_pressure", "The fluid pressure variable.");
   return params;
 }
@@ -43,7 +44,8 @@ BVDarcyVelocityAux::BVDarcyVelocityAux(const InputParameters & parameters)
 Real
 BVDarcyVelocityAux::computeValue()
 {
-  const Real grad_pf = _use_normal ? MetaPhysicL::raw_value(_grad_pf[_qp] * _normals[_qp]) : MetaPhysicL::raw_value(_grad_pf[_qp](_component));
+  const Real grad_pf = _use_normal ? MetaPhysicL::raw_value(_grad_pf[_qp] * _normals[_qp])
+                                   : MetaPhysicL::raw_value(_grad_pf[_qp](_component));
 
   return -MetaPhysicL::raw_value(_lambda[_qp]) * grad_pf;
 }

@@ -11,23 +11,26 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVPressureAux.h"
+#include "BVMisesStressAux.h"
 #include "metaphysicl/raw_type.h"
 
-registerMooseObject("BeaverApp", BVPressureAux);
+registerMooseObject("BeaverApp", BVMisesStressAux);
 
 InputParameters
-BVPressureAux::validParams()
+BVMisesStressAux::validParams()
 {
   InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the pressure or mean stress.");
+  params.addClassDescription("Class for outputting the Von Mises stress.");
   return params;
 }
 
-BVPressureAux::BVPressureAux(const InputParameters & parameters) : BVStressAuxBase(parameters) {}
+BVMisesStressAux::BVMisesStressAux(const InputParameters & parameters) : BVStressAuxBase(parameters)
+{
+}
 
 Real
-BVPressureAux::computeValue()
+BVMisesStressAux::computeValue()
 {
-  return -MetaPhysicL::raw_value(_stress[_qp].trace()) / 3.0;
+  ADRankTwoTensor stress_dev = _stress[_qp].deviatoric();
+  return std::sqrt(1.5) * MetaPhysicL::raw_value(stress_dev.L2norm());
 }

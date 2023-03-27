@@ -22,8 +22,10 @@ BVStrainComponentAux::validParams()
   InputParameters params = BVStrainAuxBase::validParams();
   params.addClassDescription("Class for outputting components of the strain tensor.");
   MooseEnum component("x y z");
-  params.addRequiredParam<MooseEnum>("index_i", component, "The index i of ij for the strain tensor.");
-  params.addRequiredParam<MooseEnum>("index_j", component, "The index j of ij for the strain tensor.");
+  params.addRequiredParam<MooseEnum>(
+      "index_i", component, "The index i of ij for the strain tensor.");
+  params.addRequiredParam<MooseEnum>(
+      "index_j", component, "The index j of ij for the strain tensor.");
   return params;
 }
 
