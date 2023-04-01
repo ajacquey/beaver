@@ -59,12 +59,12 @@ BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTenso
   preReturnMap();
 
   // Viscoelastic update
-  ADReal gamma = returnMap();
+  ADReal eqv_stress = returnMap();
 
   // Update quantities
-  _creep_strain_incr[_qp] = reformPlasticStrainTensor(gamma);
+  _creep_strain_incr[_qp] = reformPlasticStrainTensor(eqv_stress);
   stress -= 2.0 * _G * _creep_strain_incr[_qp];
-  postReturnMap(gamma);
+  postReturnMap(eqv_stress);
 }
 
 ADReal
@@ -89,7 +89,7 @@ BVCreepUpdateBase::returnMap()
 
     // Convergence check
     if ((std::abs(res) <= _abs_tol) || (std::abs(res / res_ini) <= _rel_tol))
-      return creepRate(eqv_stress);
+      return eqv_stress;
   }
   throw MooseException("BVCreepUpdateBase: maximum number of iterations exceeded in 'returnMap'!");
 }
@@ -107,12 +107,12 @@ BVCreepUpdateBase::jacobian(const ADReal & eqv_stress)
 }
 
 ADRankTwoTensor
-BVCreepUpdateBase::reformPlasticStrainTensor(const ADReal & gamma)
+BVCreepUpdateBase::reformPlasticStrainTensor(const ADReal & eqv_stress)
 {
   ADRankTwoTensor flow_dir =
       (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
 
-  return 1.5 * gamma * _dt * flow_dir;
+  return 1.5 * creepRate(eqv_stress) * _dt * flow_dir;
 }
 
 void
@@ -121,6 +121,6 @@ BVCreepUpdateBase::preReturnMap()
 }
 
 void
-BVCreepUpdateBase::postReturnMap(const ADReal & /*gamma*/)
+BVCreepUpdateBase::postReturnMap(const ADReal & /*eqv_stress*/)
 {
 }
