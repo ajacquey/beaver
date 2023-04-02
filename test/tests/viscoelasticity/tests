@@ -9,4 +9,9 @@
     input = 'linear_kelvin.i'
     exodiff = 'linear_kelvin_out.e'
   []
+  [burger]
+    type = 'Exodiff'
+    input = 'burger.i'
+    exodiff = 'burger_out.e'
+  []
 []

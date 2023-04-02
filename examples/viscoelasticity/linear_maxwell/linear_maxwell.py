@@ -49,8 +49,8 @@ if __name__ == "__main__":
 
   ax.set_xlim(0.0, 10.0)
   ax.set_ylim(0.0, 1.2)
-  ax.set_xlabel(r"$\frac{G t}{\eta}$")
-  ax.set_ylabel(r"$\frac{\tau}{\eta \dot{\gamma}}$", rotation=0,  labelpad=10)
+  ax.set_xlabel(r"$\overline{t} = \frac{G}{\eta} t$")
+  ax.set_ylabel(r"$\overline{\tau} = \frac{\tau}{\eta \dot{\gamma}}$")
 
   # plt.show()
   fig.savefig("../../../doc/content/media/linear_maxwell_tau.png", format="PNG", dpi=300, bbox_inches="tight")

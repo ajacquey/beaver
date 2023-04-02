@@ -27,6 +27,11 @@ where:
 !equation
 \sigma_{e} = \sqrt{3} \sigma_{0}
 
+With the following dimensionless quantities: $\overline{t} = \frac{G_{K}}{\eta_{K}} t$ and $\overline{\epsilon} = \frac{G_{K}}{\sigma_{0}} \epsilon$, the solution can be expressed as:
+
+!equation id=strain
+\overline{\epsilon} = \frac{1}{\sqrt{3}} \left[1 - \exp\left(- \overline{t}\right)\right] 
+
 !media media/linear_kelvin_strain.png style=display:block;margin:auto;width:60%; caption=Creep strain evolution in a linear viscoelastic Kelvin medium. id=fig_linear_kelvin
 
 ## Complete Source Files
@@ -35,3 +40,4 @@ where:
 
 !content pagination use_title=True
                     previous=viscoelasticity/linear_maxwell.md
+                    next=viscoelasticity/burger.md
