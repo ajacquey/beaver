@@ -1,4 +1,4 @@
-# Linear Kelvin viscoelasticity
+# Linear Burger's viscoelastic model
 
 This problem considers a squared medium subject to external stress leading to creep. The material deforms following a Burger's viscoelastic constitutive model.
 
