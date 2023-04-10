@@ -28,5 +28,5 @@ protected:
   virtual ADReal viscosityDerivative(const ADReal & eqv_stress);
 
   // Reference viscosity
-  Real _eta0;
+  const Real _eta0;
 };

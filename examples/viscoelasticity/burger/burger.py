@@ -4,16 +4,17 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 plt.style.use('../../publication.mplstyle')
 
-# Stress build-up in a linear Kelvin viscoelastic medium
+# Stress build-up in a Burger's viscoelastic medium
 #
-# Time dimension is t = G * t / eta
+# Time dimension is t = G * t / etaK
 # Strain dimension is eqv_strain = eqv_strain / (eqv_stress / G)
+etaK_etaM = 0.1
 
 def analyticalSolution(t):
-  return 1.0 / np.sqrt(3.0) * (1.0 - np.exp(-t))
+  return 1.0 / np.sqrt(3.0) * (1.0 - np.exp(-t) + etaK_etaM * t)
   
 def numericalSolution():
-  filename = "linear_kelvin_csv.csv"
+  filename = "burger_csv.csv"
 
   t, e = np.loadtxt(filename, delimiter=',', skiprows=1, usecols=[0, 2], unpack=True)
 
@@ -45,9 +46,9 @@ if __name__ == "__main__":
   plot_stress(ax)
 
   ax.set_xlim(0.0, 10.0)
-  ax.set_ylim(0.0, 0.75)
+  ax.set_ylim(0.0, 1.2)
   ax.set_xlabel(r"$\overline{t} = \frac{G_{K}}{\eta_{K}}t$")
   ax.set_ylabel(r"$\overline{\epsilon} = \frac{G_{K}}{\sigma_{0}} \epsilon$")
 
   # plt.show()
-  fig.savefig("../../../doc/content/media/linear_kelvin_strain.png", format="PNG", dpi=300, bbox_inches="tight")
+  fig.savefig("../../../doc/content/media/burger_strain.png", format="PNG", dpi=300, bbox_inches="tight")

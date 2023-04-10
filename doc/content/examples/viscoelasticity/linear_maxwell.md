@@ -20,7 +20,7 @@ where $\tau_{ij}$ is the deviatoric stress tensor and $e_{ij}$ the deviatoric st
 The solution for this problem is given by [!cite](Gerya2007). 
 The stress solution is given as:
 
-!equation id=stress
+!equation
 \tau = \eta \dot{\gamma} \left(1 - \exp\left(- \frac{G t}{\eta}\right)\right)
 
 where:
@@ -30,6 +30,11 @@ where:
 
 !equation
 \dot{\gamma} = \frac{v}{h}
+
+With the following dimensionless quantities: $\overline{t} = \frac{G}{\eta} t$ and $\overline{\tau} = \frac{\tau}{\eta \dot{\gamma}}$, the solution can be expressed as:
+
+!equation id=stress
+\overline{\tau} = 1 - \exp\left(- t\right)
 
 !media media/linear_maxwell_tau.png style=display:block;margin:auto;width:60%; caption=Stress evolution in a linear viscoelastic Maxwell medium. id=fig_linear_maxwell
 

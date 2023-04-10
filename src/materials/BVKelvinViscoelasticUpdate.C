@@ -22,7 +22,7 @@ BVKelvinViscoelasticUpdate::validParams()
   params.addClassDescription("Material for computing a linear Maxwell viscoelastic update.");
   params.addRequiredRangeCheckedParam<Real>("viscosity", "viscosity > 0.0", "The viscosity.");
   params.addRequiredRangeCheckedParam<Real>(
-      "shear_modulus", "shear_modulus > 0.0", "The Kelin shear modulus.");
+      "shear_modulus", "shear_modulus > 0.0", "The Kelvin shear modulus.");
   return params;
 }
 
@@ -94,7 +94,7 @@ BVKelvinViscoelasticUpdate::preReturnMap()
 }
 
 void
-BVKelvinViscoelasticUpdate::postReturnMap(const ADReal & gamma)
+BVKelvinViscoelasticUpdate::postReturnMap(const ADReal & eqv_stress)
 {
-  _eqv_creep_strain[_qp] = _eqv_creep_strain_old[_qp] + gamma * _dt;
+  _eqv_creep_strain[_qp] = _eqv_creep_strain_old[_qp] + creepRate(eqv_stress) * _dt;
 }
