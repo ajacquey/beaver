@@ -32,7 +32,7 @@ jobs:
     - name: Install MOOSE packages
       shell: bash -l {0}
       run: |
-        mamba install moose-tools moose-libmesh
+        mamba install moose-dev
     - name: Compile BEAVER
       shell: bash -l {0}
       run: |
@@ -59,7 +59,7 @@ jobs:
     - name: Install MOOSE packages
       shell: bash -l {0}
       run: |
-        mamba install moose-tools moose-libmesh lcov
+        mamba install moose-dev lcov
     - name: Compile and test BEAVER (with coverage)
       shell: bash -l {0}
       run: |

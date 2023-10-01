@@ -12,10 +12,10 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/jumbo-dbg",
+            "program": "${workspaceFolder}/beaver-dbg",
             "args": [
                 "-i",
-                "test/tests/simple_diffusion/tsimple_diffusion.i"
+                "test/tests/simple_diffusion/simple_diffusion.i"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
