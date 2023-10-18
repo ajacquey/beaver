@@ -13,7 +13,7 @@ The squared medium is subject to a compressive stress horizontally and tension s
 The scalar equivalent creep strain evolution is governed by the following constitutive model:
 
 !equation
-\dot{\epsilon}^{c} = \frac{1}{3 \eta_{K}} \left(\sigma_{e} - 3G_{K} \epsilon^{c}\right)
+\dot{\epsilon}^{c} = \dot{\epsilon}^{M} + \dot{\epsilon}^{K},
 
 where $\epsilon^{M}$ and $\epsilon^{K}$ are the Maxwell and Kelvin creep strain defined as:
 
