@@ -25,7 +25,7 @@ BeaverApp::~BeaverApp() {}
 void
 BeaverApp::registerAll(Factory & f, ActionFactory & af, Syntax & syntax)
 {
-  ModulesApp::registerAll(f, af, syntax);
+  ModulesApp::registerAllObjects<BeaverApp>(f, af, syntax);
   Registry::registerObjectsTo(f, {"BeaverApp"});
   Registry::registerActionsTo(af, {"BeaverApp"});
 

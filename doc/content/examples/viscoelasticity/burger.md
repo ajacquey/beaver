@@ -48,3 +48,4 @@ With the following dimensionless quantities: $\overline{t} = \frac{G_{K}}{\eta_{
 
 !content pagination use_title=True
                     previous=viscoelasticity/linear_kelvin.md
+                    next=viscoelasticity/lubby2.md

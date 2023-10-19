@@ -39,13 +39,13 @@ BVLubby2ModelUpdate::BVLubby2ModelUpdate(const InputParameters & parameters)
 ADReal
 BVLubby2ModelUpdate::viscosityMaxwell(const ADReal & eqv_stress)
 {
-  return _etaM0 * exp(-_m1 * eqv_stress / _s0);
+  return _etaM0 * std::exp(-_m1 * eqv_stress / _s0);
 }
 
 ADReal
 BVLubby2ModelUpdate::viscosityKelvin(const ADReal & eqv_stress)
 {
-  return _etaK0 * exp(-_m2 * eqv_stress / _s0);
+  return _etaK0 * std::exp(-_m2 * eqv_stress / _s0);
 }
 
 
@@ -64,7 +64,7 @@ BVLubby2ModelUpdate::viscosityKelvinDerivative(const ADReal & eqv_stress)
 ADReal
 BVLubby2ModelUpdate::shearModulusKelvin(const ADReal & eqv_stress)
 {
-  return _GK0 * exp(-_mG * eqv_stress / _s0);
+  return _GK0 * std::exp(-_mG * eqv_stress / _s0);
 }
 
 ADReal
