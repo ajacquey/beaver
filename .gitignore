@@ -255,3 +255,6 @@ modules/reactor/test/tests/meshgenerators/patterned_hex_mesh_generator/positions
 
 # Local github pages
 gh-pages/*
+
+# App Resource file
+beaver.yaml
