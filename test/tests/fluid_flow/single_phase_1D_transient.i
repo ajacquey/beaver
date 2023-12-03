@@ -33,9 +33,9 @@
 [Functions]
   [pf_func]
     type = ParsedFunction
-    value = 'p1*t'
-    vars = 'p1'
-    vals = '23.14814815'
+    expression = 'p1*t'
+    symbol_names = 'p1'
+    symbol_values = '23.14814815'
   []
 []
 
@@ -91,14 +91,12 @@
   []
 []
 
-[Modules]
-  [FluidProperties]
-    [simple_fluid]
-      type = SimpleFluidProperties
-      density0 = 1.0
-      viscosity = 1.728e-03
-      bulk_modulus = 4.0e+09
-    []
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.728e-03
+    bulk_modulus = 4.0e+09
   []
 []
 

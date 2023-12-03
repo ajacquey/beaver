@@ -76,9 +76,9 @@
 [Functions]
   [disp_y_func]
     type = ParsedFunction
-    value = 'm*t*x'
-    vars = 'm'
-    vals = '-0.1'
+    expression = 'm*t*x'
+    symbol_names = 'm'
+    symbol_values = '-0.1'
   []
 []
 

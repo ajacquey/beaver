@@ -40,10 +40,11 @@ BVMechanicalMaterial::validParams()
       "poisson_ratio", "poisson_ratio > 0.0", "The Poisson's ratio of the material.");
   // Initial stress
   params.addParam<std::vector<FunctionName>>(
-      "initial_stress", "The initial stress principal components (negative in compression).");
+      "initial_stress", {}, "The initial stress principal components (negative in compression).");
   // Inelastic models
   params.addParam<std::vector<MaterialName>>(
       "inelastic_models",
+      {},
       "The material objects to use to calculate stress and inelastic strains. "
       "Note: specify creep models first and plasticity models second.");
   // Strain and stress update need to be done on the undisplaced mesh
@@ -59,12 +60,6 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
     _grad_disp_old(3),
     // Strain parameters
     _strain_model(getParam<MooseEnum>("strain_model")),
-    // Initial stress
-    _initial_stress_fct(getParam<std::vector<FunctionName>>("initial_stress")),
-    _num_ini_stress(_initial_stress_fct.size()),
-    // Inelastic models
-    _has_inelastic(isParamValid("inelastic_models")),
-    _num_inelastic(getParam<std::vector<MaterialName>>("inelastic_models").size()),
     // Strain properties
     _strain_increment(declareADProperty<RankTwoTensor>("strain_increment")),
     _spin_increment(declareADProperty<RankTwoTensor>("spin_increment")),
@@ -77,14 +72,6 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
   if (getParam<bool>("use_displaced_mesh"))
     paramError("use_displaced_mesh",
                "The strain and stress calculator needs to run on the undisplaced mesh.");
-
-  if (_num_ini_stress != 3 && _num_ini_stress != 0 && _num_ini_stress != 6)
-    paramError("initial_stress", "You need to provide 3 or 6 components for the initial stress.");
-
-  _initial_stress.resize(_num_ini_stress);
-
-  for (unsigned int i = 0; i < _num_ini_stress; i++)
-    _initial_stress[i] = &getFunctionByName(_initial_stress_fct[i]);
 }
 
 void
@@ -95,6 +82,8 @@ BVMechanicalMaterial::initialSetup()
   displacementIntegrityCheck();
 
   initializeInelasticModels();
+
+  initializeInitialStress();
 
   // Fetch coupled variables and gradients
   for (unsigned int i = 0; i < _ndisp; ++i)
@@ -156,20 +145,38 @@ BVMechanicalMaterial::displacementIntegrityCheck()
 void
 BVMechanicalMaterial::initializeInelasticModels()
 {
+  const std::vector<MaterialName> model_names = getParam<std::vector<MaterialName>>("inelastic_models");
+  _num_inelastic = model_names.size();
+  _has_inelastic = _num_inelastic > 0;
   if (_has_inelastic)
   {
-    std::vector<MaterialName> models = getParam<std::vector<MaterialName>>("inelastic_models");
-
     for (unsigned int i = 0; i < _num_inelastic; ++i)
     {
       BVInelasticUpdateBase * rrr =
-          dynamic_cast<BVInelasticUpdateBase *>(&this->getMaterialByName(models[i]));
+          dynamic_cast<BVInelasticUpdateBase *>(&this->getMaterialByName(model_names[i]));
 
       if (rrr)
         _inelastic_models.push_back(rrr);
       else
-        mooseError("Model " + models[i] + " is not compatible with BVMechanicalMaterial!");
+        mooseError("Model " + model_names[i] + " is not compatible with BVMechanicalMaterial!");
     }
+  }
+}
+
+void
+BVMechanicalMaterial::initializeInitialStress()
+{
+  const std::vector<FunctionName> fcn_names = getParam<std::vector<FunctionName>>("initial_stress");
+  _num_ini_stress = fcn_names.size();
+  if (_num_ini_stress != 0 && _num_ini_stress != 3 && _num_ini_stress != 6)
+    paramError("initial_stress", "You need to provide 3 or 6 components for the initial stress.");
+
+  if (_num_ini_stress > 0)
+  {
+    _initial_stress.resize(_num_ini_stress);
+
+    for (unsigned int i = 0; i < _num_ini_stress; i++)
+      _initial_stress[i] = &getFunctionByName(fcn_names[i]);
   }
 }
 

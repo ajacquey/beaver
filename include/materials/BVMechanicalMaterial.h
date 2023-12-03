@@ -25,6 +25,7 @@ public:
   void elasticModuliInputCheck();
   void displacementIntegrityCheck();
   void initializeInelasticModels();
+  void initializeInitialStress();
 
 protected:
   virtual void initQpStatefulProperties() override;
@@ -50,14 +51,6 @@ protected:
   Real _bulk_modulus;
   Real _shear_modulus;
 
-  // Initial stress
-  const std::vector<FunctionName> _initial_stress_fct;
-  const unsigned int _num_ini_stress;
-
-  // Inelastic models
-  const bool _has_inelastic;
-  const unsigned int _num_inelastic;
-
   // Strain properties
   ADMaterialProperty<RankTwoTensor> & _strain_increment;
   ADMaterialProperty<RankTwoTensor> & _spin_increment;
@@ -69,12 +62,15 @@ protected:
   ADMaterialProperty<RankTwoTensor> & _stress;
   const MaterialProperty<RankTwoTensor> & _stress_old;
 
-  // Initial stresses
-  std::vector<const Function *> _initial_stress;
-
   // Elasticity tensor
   RankFourTensor _Cijkl;
 
   // Inelastic models
+  unsigned int _num_inelastic;
+  bool _has_inelastic;
   std::vector<BVInelasticUpdateBase *> _inelastic_models;
+
+  // Initial stress
+  unsigned int _num_ini_stress;
+  std::vector<const Function *> _initial_stress;
 };
