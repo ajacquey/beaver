@@ -1,0 +1,2437 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>SinglePhaseFluidProperties | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><link href="../../contrib/katex/katex.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/katex_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script><script type="text/javascript" src="../../contrib/katex/katex.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li><a href="#!" class="dropdown-trigger" data-target="e1fbb2f9-ef69-4e85-90d3-cfa568d1fef5" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="f18323de-b8c5-40fc-9b6e-4540fbf37942" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="493e4ea4-570e-4fdd-8b7b-5742bd8b5ae0"><i class="material-icons">menu</i></a><ul class="sidenav" id="493e4ea4-570e-4fdd-8b7b-5742bd8b5ae0"><li><a href="#!" class="dropdown-trigger" data-target="7f293f75-0f2a-4cbf-a739-f36eb5edd9f0" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="1819e70a-537e-4d6e-80be-3046022ee9a7" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div><ul class="dropdown-content" id="e1fbb2f9-ef69-4e85-90d3-cfa568d1fef5"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="f18323de-b8c5-40fc-9b6e-4540fbf37942"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li><li><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></li></ul><ul class="dropdown-content" id="7f293f75-0f2a-4cbf-a739-f36eb5edd9f0"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="1819e70a-537e-4d6e-80be-3046022ee9a7"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li><li><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></li></ul></nav><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">fluidproperties</span><a href="#" class="breadcrumb">SinglePhaseFluidProperties</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="5e72e937-e73d-448d-90fd-c4c292099ffd" data-section-level="1" data-section-text="SinglePhaseFluidProperties"><h1 id="singlephasefluidproperties">SinglePhaseFluidProperties</h1><p><code>SinglePhaseFluidProperties</code> is a base class for all single-phase fluid properties objects. Its main function is to provide interfaces for computing various properties from different combinations of other properties.</p><section class="scrollspy" id="916d16e1-b1af-475c-82e8-23f422bb7e91" data-section-level="2" data-section-text="Properties"><h2 id="properties">Properties</h2><p>The following properties are considered in this class, where the &quot;Name&quot; column gives the identifier for the property used in the available interfaces:</p><div form="['left', 'left', 'left']" recursive class="moose-table-div"><table><thead><tr><th style=";text-align:left">Name</th><th style=";text-align:left">Symbol</th><th style=";text-align:left">Description</th></tr></thead><tbody><tr><td style=";text-align:left"><code>beta</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-08cdac6f-9d51-4f6b-a21b-fea2aa8eb382"><script>var element = document.getElementById("moose-equation-08cdac6f-9d51-4f6b-a21b-fea2aa8eb382");katex.render("\\beta", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Volumetric expansion coefficient</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>c</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-9addd316-1cc2-4d0a-807c-704fc4356bce"><script>var element = document.getElementById("moose-equation-9addd316-1cc2-4d0a-807c-704fc4356bce");katex.render("c", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Speed of sound</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>cp</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-f371d063-7372-4e42-85e1-0a646a4c62ca"><script>var element = document.getElementById("moose-equation-f371d063-7372-4e42-85e1-0a646a4c62ca");katex.render("c_p", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Isobaric specific heat capacity</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>cv</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-3a0437a0-c47c-48e4-9882-f274c5d73493"><script>var element = document.getElementById("moose-equation-3a0437a0-c47c-48e4-9882-f274c5d73493");katex.render("c_v", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Isochoric specific heat capacity</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>e</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-9371340a-94e0-4d45-a388-4996e35d5a90"><script>var element = document.getElementById("moose-equation-9371340a-94e0-4d45-a388-4996e35d5a90");katex.render("e", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Specific internal energy</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>g</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-7eafb366-c5f7-48d3-9326-5e58b1f2d65e"><script>var element = document.getElementById("moose-equation-7eafb366-c5f7-48d3-9326-5e58b1f2d65e");katex.render("g", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Gibbs free energy</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>gamma</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-e1cb40fc-87ff-4bb0-b52f-ee045b0badff"><script>var element = document.getElementById("moose-equation-e1cb40fc-87ff-4bb0-b52f-ee045b0badff");katex.render("\\gamma", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Ratio of specific heats, <span class="moose-katex-inline-equation" id="moose-equation-e37ac52f-2ae3-4a4e-97f2-8b8504bfd187"><script>var element = document.getElementById("moose-equation-e37ac52f-2ae3-4a4e-97f2-8b8504bfd187");katex.render("\\frac{c_p}{c_v}", element, {displayMode:false,throwOnError:false});</script></span></td></tr></tbody><tbody><tr><td style=";text-align:left"><code>h</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-1bb38730-7d1d-434a-b6ec-754c22d599ee"><script>var element = document.getElementById("moose-equation-1bb38730-7d1d-434a-b6ec-754c22d599ee");katex.render("h", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Specific enthalpy</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>k</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-f0de72b2-f030-4761-aedd-ba833c644ab7"><script>var element = document.getElementById("moose-equation-f0de72b2-f030-4761-aedd-ba833c644ab7");katex.render("k", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Thermal conductivity</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>mu</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-024c7dd1-87ea-4bd7-945b-90779b6813a2"><script>var element = document.getElementById("moose-equation-024c7dd1-87ea-4bd7-945b-90779b6813a2");katex.render("\\mu", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Dynamic viscosity</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>p</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-74e20040-5dfd-46b3-a741-8519c200fd3e"><script>var element = document.getElementById("moose-equation-74e20040-5dfd-46b3-a741-8519c200fd3e");katex.render("p", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Pressure</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>rho</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-cbf64787-df23-4f6a-b323-4c2eb01b99b6"><script>var element = document.getElementById("moose-equation-cbf64787-df23-4f6a-b323-4c2eb01b99b6");katex.render("\\rho", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Density</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>s</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-effc2cbe-aa5f-4b2c-b5ca-4adf1ebcca49"><script>var element = document.getElementById("moose-equation-effc2cbe-aa5f-4b2c-b5ca-4adf1ebcca49");katex.render("s", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Specific entropy</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>T</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-8877f04b-5a67-4210-b483-d76929f92be5"><script>var element = document.getElementById("moose-equation-8877f04b-5a67-4210-b483-d76929f92be5");katex.render("T", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Temperature</td></tr></tbody><tbody><tr><td style=";text-align:left"><code>v</code></td><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-5bc87248-a617-4f6e-b0a0-e698d5b97874"><script>var element = document.getElementById("moose-equation-5bc87248-a617-4f6e-b0a0-e698d5b97874");katex.render("v", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:left">Specific volume</td></tr></tbody></table></div><p>Because two independent, intensive thermodynamic properties define a thermodynamic state of a pure fluid, interfaces in these objects are of the form <span class="moose-katex-inline-equation" id="moose-equation-2385461f-2144-41de-a69a-ad582fc20a7d"><script>var element = document.getElementById("moose-equation-2385461f-2144-41de-a69a-ad582fc20a7d");katex.render("f(a,b)", element, {displayMode:false,throwOnError:false});</script></span> where <span class="moose-katex-inline-equation" id="moose-equation-6538bbb0-7ff3-4d96-9f96-35edabc91584"><script>var element = document.getElementById("moose-equation-6538bbb0-7ff3-4d96-9f96-35edabc91584");katex.render("f", element, {displayMode:false,throwOnError:false});</script></span> is the desired thermodynamic property and <span class="moose-katex-inline-equation" id="moose-equation-ba86979c-0aa5-4cda-ab30-074016910a72"><script>var element = document.getElementById("moose-equation-ba86979c-0aa5-4cda-ab30-074016910a72");katex.render("a", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-271ffaef-1ff5-448b-a6b7-36de8055d69f"><script>var element = document.getElementById("moose-equation-271ffaef-1ff5-448b-a6b7-36de8055d69f");katex.render("b", element, {displayMode:false,throwOnError:false});</script></span> are independent, intensive thermodynamic properties that define the thermodynamic state. The corresponding function name is <code>fname_from_aname_bname</code>, where <code>fname</code>, <code>aname</code>, and <code>bname</code> are the names in the table above, corresponding to <span class="moose-katex-inline-equation" id="moose-equation-fd66ab26-9a0b-4d99-b6a6-dfdb5888d7a1"><script>var element = document.getElementById("moose-equation-fd66ab26-9a0b-4d99-b6a6-dfdb5888d7a1");katex.render("f", element, {displayMode:false,throwOnError:false});</script></span>, <span class="moose-katex-inline-equation" id="moose-equation-67e66f23-c670-4460-ae0e-fcc7b29807a9"><script>var element = document.getElementById("moose-equation-67e66f23-c670-4460-ae0e-fcc7b29807a9");katex.render("a", element, {displayMode:false,throwOnError:false});</script></span>, and <span class="moose-katex-inline-equation" id="moose-equation-796e0770-c54f-4c3f-8835-df1f8489bcf1"><script>var element = document.getElementById("moose-equation-796e0770-c54f-4c3f-8835-df1f8489bcf1");katex.render("b", element, {displayMode:false,throwOnError:false});</script></span>, respectively. The following table lists which properties are available from various combinations of properties (e.g., &quot;Yes&quot; in the column <span class="moose-katex-inline-equation" id="moose-equation-f19e3c9d-f964-4c2d-9cb0-7bf50c82f4ab"><script>var element = document.getElementById("moose-equation-f19e3c9d-f964-4c2d-9cb0-7bf50c82f4ab");katex.render("(a,b)", element, {displayMode:false,throwOnError:false});</script></span> for the row <span class="moose-katex-inline-equation" id="moose-equation-2f1971da-432d-4224-bdb3-d7f757cc0d7e"><script>var element = document.getElementById("moose-equation-2f1971da-432d-4224-bdb3-d7f757cc0d7e");katex.render("f", element, {displayMode:false,throwOnError:false});</script></span> denotes that the interface <code>fname_from_aname_bname</code> is available):</p><div form="['left', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'left', 'left']" recursive class="moose-table-div"><table><thead><tr><th style=";text-align:left">Name</th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-690cb9ec-3a8d-4a19-b4ed-39c0b2a49676"><script>var element = document.getElementById("moose-equation-690cb9ec-3a8d-4a19-b4ed-39c0b2a49676");katex.render("(p,T)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-ccfbf78f-2bce-47fe-9dc8-2580e33d8ce9"><script>var element = document.getElementById("moose-equation-ccfbf78f-2bce-47fe-9dc8-2580e33d8ce9");katex.render("(v,e)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-6e3e81b3-359a-4da4-8b23-45cc57aadd4d"><script>var element = document.getElementById("moose-equation-6e3e81b3-359a-4da4-8b23-45cc57aadd4d");katex.render("(p,s)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-ce2e804a-1459-4cf7-b8fb-334afd7ab38b"><script>var element = document.getElementById("moose-equation-ce2e804a-1459-4cf7-b8fb-334afd7ab38b");katex.render("(p,h)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-8ac44cd4-2b23-48d6-b6fe-ee6d9765edf7"><script>var element = document.getElementById("moose-equation-8ac44cd4-2b23-48d6-b6fe-ee6d9765edf7");katex.render("(T,v)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-644a4be2-0bb9-4405-b94a-d2a62609e032"><script>var element = document.getElementById("moose-equation-644a4be2-0bb9-4405-b94a-d2a62609e032");katex.render("(v,h)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:center"><span class="moose-katex-inline-equation" id="moose-equation-5546ce7e-be22-41cf-ab76-0265bd6066e7"><script>var element = document.getElementById("moose-equation-5546ce7e-be22-41cf-ab76-0265bd6066e7");katex.render("(p,\\rho)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-1af17d37-4cdc-4ac1-89dd-f4603cbd2147"><script>var element = document.getElementById("moose-equation-1af17d37-4cdc-4ac1-89dd-f4603cbd2147");katex.render("(\\rho,T)", element, {displayMode:false,throwOnError:false});</script></span></th><th style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-e75c4ba8-226e-4c51-a5d9-bec3fa60f48b"><script>var element = document.getElementById("moose-equation-e75c4ba8-226e-4c51-a5d9-bec3fa60f48b");katex.render("(h,s)", element, {displayMode:false,throwOnError:false});</script></span></th></tr></thead><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-c79d3286-557a-4e58-bcc4-3ef215014231"><script>var element = document.getElementById("moose-equation-c79d3286-557a-4e58-bcc4-3ef215014231");katex.render("\\beta", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-fae6bcfa-af1e-4dae-9ca1-e52ee94c5125"><script>var element = document.getElementById("moose-equation-fae6bcfa-af1e-4dae-9ca1-e52ee94c5125");katex.render("c", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-dd902076-e83b-4888-8851-57a542f53062"><script>var element = document.getElementById("moose-equation-dd902076-e83b-4888-8851-57a542f53062");katex.render("c_p", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-a884c06a-a553-4691-9375-2021706d141c"><script>var element = document.getElementById("moose-equation-a884c06a-a553-4691-9375-2021706d141c");katex.render("c_v", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-e069b7ed-4d35-4f4e-9ec0-24810018f314"><script>var element = document.getElementById("moose-equation-e069b7ed-4d35-4f4e-9ec0-24810018f314");katex.render("e", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-c3d1f236-b26e-47e9-815c-0476b500e6c5"><script>var element = document.getElementById("moose-equation-c3d1f236-b26e-47e9-815c-0476b500e6c5");katex.render("g", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-78df94e4-5c0b-4466-9753-5e9b304a32ca"><script>var element = document.getElementById("moose-equation-78df94e4-5c0b-4466-9753-5e9b304a32ca");katex.render("\\gamma", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-1d9f3f92-0bb7-4fae-a867-7cab3b7f9688"><script>var element = document.getElementById("moose-equation-1d9f3f92-0bb7-4fae-a867-7cab3b7f9688");katex.render("h", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-1073b37a-9b93-4fae-96b8-83c946e17bb4"><script>var element = document.getElementById("moose-equation-1073b37a-9b93-4fae-96b8-83c946e17bb4");katex.render("k", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left">Yes</td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-febc05b3-f6b2-40c5-bb5f-12b19c39c95e"><script>var element = document.getElementById("moose-equation-febc05b3-f6b2-40c5-bb5f-12b19c39c95e");katex.render("\\mu", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left">Yes</td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-3db7f68b-1879-481d-9050-b0f20442a852"><script>var element = document.getElementById("moose-equation-3db7f68b-1879-481d-9050-b0f20442a852");katex.render("p", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left">Yes</td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-9b663976-1b8d-4ab2-bde8-eef7ce19681f"><script>var element = document.getElementById("moose-equation-9b663976-1b8d-4ab2-bde8-eef7ce19681f");katex.render("\\rho", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-f92f76b9-fba6-4fb3-a732-185905c7dac1"><script>var element = document.getElementById("moose-equation-f92f76b9-fba6-4fb3-a732-185905c7dac1");katex.render("s", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-0c68bbdc-8023-42a9-8209-163f91b81a94"><script>var element = document.getElementById("moose-equation-0c68bbdc-8023-42a9-8209-163f91b81a94");katex.render("T", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody><tbody><tr><td style=";text-align:left"><span class="moose-katex-inline-equation" id="moose-equation-527e89a1-7662-44b8-81f4-5e8f8a0d87b9"><script>var element = document.getElementById("moose-equation-527e89a1-7662-44b8-81f4-5e8f8a0d87b9");katex.render("v", element, {displayMode:false,throwOnError:false});</script></span></td><td style=";text-align:center">Yes</td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:center"></td><td style=";text-align:left"></td><td style=";text-align:left"></td></tr></tbody></table></div><p>Interfaces are also provided for getting derivatives of fluid properties with respect to the input arguments. These interfaces are named the same as their non-derivative counterparts, but have no return value but 3 additional (output) arguments, corresponding to the property value and then the derivatives of each of the two input arguments. For example, <span class="moose-katex-inline-equation" id="moose-equation-64bbf4f5-d0fb-4621-9c56-3749323ed90b"><script>var element = document.getElementById("moose-equation-64bbf4f5-d0fb-4621-9c56-3749323ed90b");katex.render("\\rho(p,T)", element, {displayMode:false,throwOnError:false});</script></span> has the interface <code>rho_from_p_T(p, T, rho, drho_dp, drho_dT)</code>, where <code>drho_dp</code> and <code>drho_dT</code> correspond to <span class="moose-katex-inline-equation" id="moose-equation-9fdc5a2f-27e1-46ae-b603-8d1a4531552e"><script>var element = document.getElementById("moose-equation-9fdc5a2f-27e1-46ae-b603-8d1a4531552e");katex.render("(\\partial\\rho/\\partial p)|_T", element, {displayMode:false,throwOnError:false});</script></span> and <span class="moose-katex-inline-equation" id="moose-equation-eb85dee0-3dfb-4924-9a48-9eb53e373674"><script>var element = document.getElementById("moose-equation-eb85dee0-3dfb-4924-9a48-9eb53e373674");katex.render("(\\partial\\rho/\\partial T)|_p", element, {displayMode:false,throwOnError:false});</script></span>, respectively.</p><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note:</span>Automatic Differentiation</div><div class="card-content"><div class="moose-alert-content"><p>Fluid properties objects have interfaces for taking advantage of MOOSE&#x27;s Automatic Differentiation capability. See the example in the next section.</p></div></div></div><p>Additionally, the following interfaces are available:</p><ul class="browser-default"><li><p><code>fluidName()</code>: The fluid name. </p></li><li><p><code>molarMass()</code>: The fluid&#x27;s molar mass (kg/mol).</p></li></ul><p>The full list of available methods can be found in either the source code or the <a href="http://mooseframework.org/docs/doxygen/modules/classes.html">Modules Doxygen</a> page for each FluidProperties class.</p></section><section class="scrollspy" id="d47181c5-6b97-4d39-9725-50c751155c86" data-section-level="2" data-section-text="Default Analytical Fluid Properties Relations"><h2 id="default-analytical-fluid-properties-relations">Default Analytical Fluid Properties Relations</h2><p><code>SinglePhaseFluidProperties</code> provides a number of default implementations for some fluid properties where analytical relations hold for all single phase fluid properties. Some of these fluid properties are also implemented along with their derivatives with regards to the input variables, when these derivatives can also be analytically described. Relevant automatic differentiation (AD) implementations are also provided through a <code>macro</code> to avoid duplicated code.</p><p>The full list of available methods can be found in either the source code or the <a href="https://mooseframework.inl.gov/docs/doxygen/modules/classSinglePhaseFluidProperties.html">Doxygen</a> page.</p></section><section class="scrollspy" id="f00342fc-482e-4d57-8f1c-e091f842b872" data-section-level="2" data-section-text="Variable Set Conversions"><h2 id="variable-set-conversions">Variable Set Conversions</h2><p>Different fluid applications may require different variable sets, such as (pressure, temperature) or (specific volume, specific internal energy), depending on the flow regimes of interest and relatedly the numerical discretization. Fluid properties are not necessarily implemented or known for all variable sets, so conversions from one variable set to another can be helpful.</p><p>For many fluids, analytical closures for these conversions are not known, so <code>SinglePhaseFluidProperties</code> defines several routines for iteratively converting from one variable set to another. This leverages the <a href="../../utils/FluidPropertiesUtils.html">numerical inversion methods utilities</a>. Notably, the following routines are provided:</p><pre class="moose-pre" style="max-height:350px;"><code class="language-cpp">  void p_T_from_v_e(const CppType &amp; v,
+                    const CppType &amp; e,
+                    Real p0,
+                    Real T0,
+                    CppType &amp; p,
+                    CppType &amp; T,
+                    bool &amp; conversion_succeeded) const;
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#d60bd228-f19b-497e-a8d3-f8faa6b74847">(moose/modules/fluid_properties/include/fluidproperties/SinglePhaseFluidProperties.h)</a><pre class="moose-pre" style="max-height:350px;"><code class="language-cpp">  void p_T_from_v_h(const T &amp; v,
+                    const T &amp; h,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#e4acfb28-7451-4628-8689-310ef793dee9">(moose/modules/fluid_properties/include/fluidproperties/SinglePhaseFluidProperties.h)</a><pre class="moose-pre" style="max-height:350px;"><code class="language-cpp">  void p_T_from_h_s(const T &amp; h,
+                    const T &amp; s,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#4403849f-9fbc-459f-9159-3f1057f43414">(moose/modules/fluid_properties/include/fluidproperties/SinglePhaseFluidProperties.h)</a><p>These routines may then be used to convert from one variable set to another before obtaining the desired fluid property. For example, this routine converts (pressure, temperature) to (specific volume, specific energy) to compute entropy.</p><pre class="moose-pre" style="max-height:350px;"><code class="language-cpp">SinglePhaseFluidProperties::s_from_p_T(const Real pressure, const Real temperature) const
+{
+  Real v, e;
+  v_e_from_p_T(pressure, temperature, v, e);
+  return s_from_v_e(v, e);
+}
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#20976d44-396a-4535-8c48-1324b0f17971">(moose/modules/fluid_properties/src/fluidproperties/SinglePhaseFluidProperties.C)</a></section></section><div class="moose-modal modal" id="d60bd228-f19b-497e-a8d3-f8faa6b74847"><div class="modal-content"><h4>(moose/modules/fluid_properties/include/fluidproperties/SinglePhaseFluidProperties.h)</h4><pre class="moose-pre"><code class="language-cpp">// This file is part of the MOOSE framework
+// https://www.mooseframework.org
+//
+// All rights reserved, see COPYRIGHT for full restrictions
+// https://github.com/idaholab/moose/blob/master/COPYRIGHT
+//
+// Licensed under LGPL 2.1, please see LICENSE for details
+// https://www.gnu.org/licenses/lgpl-2.1.html
+
+#pragma once
+
+#include &quot;FluidProperties.h&quot;
+#include &quot;NewtonInversion.h&quot;
+#include &quot;metaphysicl/dualnumberarray.h&quot;
+
+/**
+ * Adds AD versions of each fluid property. These functions use the Real versions of these methods
+ * to compute the AD variables complete with derivatives. Typically, these do not need to be
+ * overriden in derived classes.
+ */
+#define propfuncAD(want, prop1, prop2)                                                             \
+  virtual DualReal want##_from_##prop1##_##prop2(const DualReal &amp; p1, const DualReal &amp; p2) const   \
+  {                                                                                                \
+    Real x = 0;                                                                                    \
+    Real raw1 = p1.value();                                                                        \
+    Real raw2 = p2.value();                                                                        \
+    Real dxd1 = 0;                                                                                 \
+    Real dxd2 = 0;                                                                                 \
+    want##_from_##prop1##_##prop2(raw1, raw2, x, dxd1, dxd2);                                      \
+                                                                                                   \
+    DualReal result = x;                                                                           \
+    result.derivatives() = p1.derivatives() * dxd1 + p2.derivatives() * dxd2;                      \
+    return result;                                                                                 \
+  }                                                                                                \
+                                                                                                   \
+  virtual void want##_from_##prop1##_##prop2(const DualReal &amp; prop1,                               \
+                                             const DualReal &amp; prop2,                               \
+                                             DualReal &amp; val,                                       \
+                                             DualReal &amp; d##want##d1,                               \
+                                             DualReal &amp; d##want##d2) const                         \
+  {                                                                                                \
+    fluidPropError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; derivative derivatives not implemented.&quot;); \
+    Real dummy, tmp1, tmp2;                                                                        \
+    val = want##_from_##prop1##_##prop2(prop1, prop2);                                             \
+    want##_from_##prop1##_##prop2(prop1.value(), prop2.value(), dummy, tmp1, tmp2);                \
+    d##want##d1 = tmp1;                                                                            \
+    d##want##d2 = tmp2;                                                                            \
+  }
+
+/**
+ * Adds function definitions with not implemented error. These functions should be overriden in
+ * derived classes where required. AD versions are constructed automatically using propfuncAD.
+ */
+#define propfunc(want, prop1, prop2)                                                               \
+  virtual Real want##_from_##prop1##_##prop2(Real, Real) const                                     \
+  {                                                                                                \
+    mooseError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; not implemented.&quot;);                            \
+  }                                                                                                \
+                                                                                                   \
+  virtual void want##_from_##prop1##_##prop2(                                                      \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const            \
+  {                                                                                                \
+    fluidPropError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);            \
+    d##want##d1 = 0;                                                                               \
+    d##want##d2 = 0;                                                                               \
+    val = want##_from_##prop1##_##prop2(prop1, prop2);                                             \
+  }                                                                                                \
+                                                                                                   \
+  propfuncAD(want, prop1, prop2)
+
+/**
+ * Adds Real declarations of functions that have a default implementation.
+ * Important: properties declared using this macro must be defined in SinglePhaseFluidProperties.C.
+ * AD versions are constructed automatically using propfuncAD.
+ */
+#define propfuncWithDefault(want, prop1, prop2)                                                    \
+  virtual Real want##_from_##prop1##_##prop2(Real, Real) const;                                    \
+  virtual void want##_from_##prop1##_##prop2(                                                      \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const;           \
+                                                                                                   \
+  propfuncAD(want, prop1, prop2)
+
+/**
+ * Adds Real and ADReal declarations of functions that have an implementation.
+ */
+#define propfuncWithDefinitionOverride(want, prop1, prop2)                                         \
+  Real want##_from_##prop1##_##prop2(Real, Real) const override;                                   \
+  void want##_from_##prop1##_##prop2(                                                              \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const override;  \
+  ADReal want##_from_##prop1##_##prop2(const ADReal &amp;, const ADReal &amp;) const override;             \
+  void want##_from_##prop1##_##prop2(const ADReal &amp; prop1,                                         \
+                                     const ADReal &amp; prop2,                                         \
+                                     ADReal &amp; val,                                                 \
+                                     ADReal &amp; d##want##d1,                                         \
+                                     ADReal &amp; d##want##d2) const override;                         \
+  template &lt;typename CppType&gt;                                                                      \
+  CppType want##_from_##prop1##_##prop2##_template(const CppType &amp; prop1, const CppType &amp; prop2)   \
+      const;                                                                                       \
+  template &lt;typename CppType&gt;                                                                      \
+  void want##_from_##prop1##_##prop2##_template(const CppType &amp; prop1,                             \
+                                                const CppType &amp; prop2,                             \
+                                                CppType &amp; val,                                     \
+                                                CppType &amp; d##want##d1,                             \
+                                                CppType &amp; d##want##d2) const
+
+/**
+ * Common class for single phase fluid properties
+ */
+class SinglePhaseFluidProperties : public FluidProperties
+{
+public:
+  static InputParameters validParams();
+
+  SinglePhaseFluidProperties(const InputParameters &amp; parameters);
+  virtual ~SinglePhaseFluidProperties();
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored &quot;-Woverloaded-virtual&quot;
+  // clang-format off
+
+  /**
+   * @brief Compute a fluid property given for the state defined by two given properties.
+   *
+   * For all functions, the first two arguments are the given properties that define the fluid
+   * state.  For the two-argument variants, the desired property is the return value.
+   * The five-argument variants also provide partial derivatives dx/da and dx/db where x is the
+   * desired property being computed, a is the first given property, and b is the second given
+   * property.  The desired property, dx/da, and dx/db are stored into the 3rd, 4th, and 5th
+   * arguments respectively.
+   *
+   * Properties/parameters used in these function are listed below with their units:
+   *
+   * @begincode
+   * p      pressure [Pa]
+   * T      temperature [K]
+   * e      specific internal energy [J/kg]
+   * v      specific volume [m^3/kg]
+   * rho    density [kg/m^3]
+   * h      specific enthalpy [J/kg]
+   * s      specific entropy [J/(kg*K)]
+   * mu     viscosity [Pa*s]
+   * k      thermal conductivity [W/(m*K)]
+   * c      speed of sound [m/s]
+   * cp     constant-pressure specific heat [J/K]
+   * cv     constant-volume specific heat [J/K]
+   * beta   volumetric thermal expansion coefficient [1/K]
+   * g      Gibbs free energy [J]
+   * pp_sat partial pressure at saturation [Pa]
+   * gamma  Adiabatic ratio (cp/cv) [-]
+   * @endcode
+   *
+   * As an example:
+   *
+   * @begincode
+   * // calculate pressure given specific vol and energy:
+   * auto pressure = your_fluid_properties_object.p_from_v_e(specific_vol, specific_energy);
+   *
+   * // or use the derivative variant:
+   * Real dp_dv = 0; // derivative will be stored into here
+   * Real dp_de = 0; // derivative will be stored into here
+   * your_fluid_properties_object.p_from_v_e(specific_vol, specific_energy, pressure, dp_dv, dp_de);
+   * @endcode
+   *
+   * Automatic differentiation (AD) support is provided through x_from_a_b(DualReal a, DualReal b) and
+   * x_from_a_b(DualReal a, DualReal b, DualReal x, DualReal dx_da, DualReal dx_db) versions of the
+   * functions where a and b must be ADReal/DualNumber&#x27;s calculated using all AD-supporting values:
+   *
+   * @begincode
+   * auto v = 1/rho; // rho must be an AD non-linear variable.
+   * auto e = rhoE/rho - vel_energy; // rhoE and vel_energy must be AD variables/numbers also.
+   * auto pressure = your_fluid_properties_object.p_from_v_e(v, e);
+   * // pressure now contains partial derivatives w.r.t. all degrees of freedom
+   * @endcode
+   */
+  ///@{
+  propfunc(p, v, e)
+  propfunc(T, v, e)
+  propfunc(c, v, e)
+  propfunc(cp, v, e)
+  propfunc(cv, v, e)
+  propfunc(mu, v, e)
+  propfunc(k, v, e)
+  propfuncWithDefault(s, v, e)
+  propfunc(s, h, p)
+  propfunc(rho, p, s)
+  propfunc(e, v, h)
+  propfuncWithDefault(s, p, T)
+  propfunc(pp_sat, p, T)
+  propfunc(mu, rho, T)
+  propfunc(k, rho, T)
+  propfuncWithDefault(c, p, T)
+  propfuncWithDefault(cp, p, T)
+  propfuncWithDefault(cv, p, T)
+  propfuncWithDefault(mu, p, T)
+  propfuncWithDefault(k, p, T)
+  propfunc(rho, p, T)
+  propfunc(e, p, rho)
+  propfunc(e, T, v)
+  propfunc(p, T, v)
+  propfunc(h, T, v)
+  propfunc(s, T, v)
+  propfunc(cv, T, v)
+  propfunc(h, p, T)
+  propfunc(g, v, e)
+  propfuncWithDefault(p, h, s)
+  propfunc(T, h, p)  // temporary, until uniformization
+  propfuncWithDefault(T, p, h)
+  propfuncWithDefault(beta, p, T)
+  propfuncWithDefault(v, p, T)
+  propfuncWithDefault(e, p, T)
+  propfuncWithDefault(gamma, v, e)
+  propfuncWithDefault(gamma, p, T)
+  ///@}
+
+  // clang-format on
+
+#undef propfunc
+#undef propfuncWithDefault
+#undef propfuncAD
+
+      /**
+       * Fluid name
+       * @return string representing fluid name
+       */
+      virtual std::string fluidName() const;
+
+  /**
+   * Molar mass [kg/mol]
+   * @return molar mass
+   */
+  virtual Real molarMass() const;
+
+  /**
+   * Critical pressure
+   * @return critical pressure (Pa)
+   */
+  virtual Real criticalPressure() const;
+
+  /**
+   * Critical temperature
+   * @return critical temperature (K)
+   */
+  virtual Real criticalTemperature() const;
+
+  /**
+   * Critical density
+   * @return critical density (kg/m^3)
+   */
+  virtual Real criticalDensity() const;
+
+  /**
+   * Critical specific internal energy
+   * @return specific internal energy (J/kg)
+   */
+  virtual Real criticalInternalEnergy() const;
+
+  /**
+   * Triple point pressure
+   * @return triple point pressure (Pa)
+   */
+  virtual Real triplePointPressure() const;
+
+  /**
+   * Triple point temperature
+   * @return triple point temperature (K)
+   */
+  virtual Real triplePointTemperature() const;
+
+  /**
+   * Specific internal energy from temperature and specific volume
+   *
+   * @param[in] T     temperature
+   * @param[in] v     specific volume
+   */
+  virtual Real e_spndl_from_v(Real v) const;
+
+  /**
+   * Specific internal energy from temperature and specific volume
+   *
+   * @param[in] T     temperature
+   * @param[in] v     specific volume
+   */
+  virtual void v_e_spndl_from_T(Real T, Real &amp; v, Real &amp; e) const;
+
+  /**
+   * Vapor pressure. Used to delineate liquid and gas phases.
+   * Valid for temperatures between the triple point temperature
+   * and the critical temperature
+   *
+   * @param T fluid temperature (K)
+   * @param[out] saturation pressure (Pa)
+   * @param[out] derivative of saturation pressure wrt temperature (Pa/K)
+   */
+  virtual Real vaporPressure(Real T) const;
+  virtual void vaporPressure(Real T, Real &amp; psat, Real &amp; dpsat_dT) const;
+  DualReal vaporPressure(const DualReal &amp; T) const;
+
+  /**
+   * Vapor temperature. Used to delineate liquid and gas phases.
+   * Valid for pressures between the triple point pressure
+   * and the critical pressure
+   *
+   * @param p fluid pressure (Pa)
+   * @param[out] saturation temperature (K)
+   * @param[out] derivative of saturation temperature wrt pressure
+   */
+  virtual Real vaporTemperature(Real p) const;
+  virtual void vaporTemperature(Real p, Real &amp; Tsat, Real &amp; dTsat_dp) const;
+  DualReal vaporTemperature(const DualReal &amp; p) const;
+
+  /**
+   * Henry&#x27;s law coefficients for dissolution in water
+   * @return Henry&#x27;s constant coefficients
+   */
+  virtual std::vector&lt;Real&gt; henryCoefficients() const;
+
+  template &lt;typename CppType&gt;
+  void v_e_from_p_T(const CppType &amp; p, const CppType &amp; T, CppType &amp; v, CppType &amp; e) const;
+  template &lt;typename CppType&gt;
+  void v_e_from_p_T(const CppType &amp; p,
+                    const CppType &amp; T,
+                    CppType &amp; v,
+                    CppType &amp; dv_dp,
+                    CppType &amp; dv_dT,
+                    CppType &amp; e,
+                    CppType &amp; de_dp,
+                    CppType &amp; de_dT) const;
+
+  /**
+   * Combined methods. These methods are particularly useful for the PorousFlow
+   * module, where density and viscosity are typically both computed everywhere.
+   * The combined methods allow the most efficient means of calculating both
+   * properties, especially where rho(p, T) and mu(rho, T). In this case, an
+   * extra density calculation would be required to calculate mu(p, T). All
+   * property names are described above.
+   */
+  virtual void rho_mu_from_p_T(Real p, Real T, Real &amp; rho, Real &amp; mu) const;
+  virtual void rho_mu_from_p_T(Real p,
+                               Real T,
+                               Real &amp; rho,
+                               Real &amp; drho_dp,
+                               Real &amp; drho_dT,
+                               Real &amp; mu,
+                               Real &amp; dmu_dp,
+                               Real &amp; dmu_dT) const;
+  virtual void
+  rho_mu_from_p_T(const DualReal &amp; p, const DualReal &amp; T, DualReal &amp; rho, DualReal &amp; mu) const;
+
+  virtual void rho_e_from_p_T(Real p,
+                              Real T,
+                              Real &amp; rho,
+                              Real &amp; drho_dp,
+                              Real &amp; drho_dT,
+                              Real &amp; e,
+                              Real &amp; de_dp,
+                              Real &amp; de_dT) const;
+
+  /**
+   * Determines (p,T) from (v,e) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] v specific volume (m^3 / kg)
+   * @param[in] e specific internal energy (J / kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename CppType&gt;
+  void p_T_from_v_e(const CppType &amp; v,
+                    const CppType &amp; e,
+                    Real p0,
+                    Real T0,
+                    CppType &amp; p,
+                    CppType &amp; T,
+                    bool &amp; conversion_succeeded) const;
+
+  /**
+   * Determines (p,T) from (v,h) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] v specific volume (m^3 / kg)
+   * @param[in] h specific enthalpy (J / kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename T&gt;
+  void p_T_from_v_h(const T &amp; v,
+                    const T &amp; h,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+  /**
+   * Determines (p,T) from (h,s) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] h specific enthalpy (J / kg)
+   * @param[in] s specific entropy (J/K*kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename T&gt;
+  void p_T_from_h_s(const T &amp; h,
+                    const T &amp; s,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+
+protected:
+  /**
+   * Computes the dependent variable z and its derivatives with respect to the independent
+   * variables x and y using the simple two parameter \p z_from_x_y functor. The derivatives are
+   * computed using a compound automatic differentiation type
+   */
+  template &lt;typename T, typename Functor&gt;
+  static void
+  xyDerivatives(const T x, const T &amp; y, T &amp; z, T &amp; dz_dx, T &amp; dz_dy, const Functor &amp; z_from_x_y);
+
+  /**
+   * Given a type example, this method returns zero and unity reperesentations of that type (first
+   * and second members of returned pair respectively)
+   */
+  template &lt;typename T&gt;
+  static std::pair&lt;T, T&gt; makeZeroAndOne(const T &amp;);
+
+  /**
+   * Newton&#x27;s method may be used to convert between variable sets
+   * _tolerance, _T_initial_guess, and _p_initial_guess are the parameters for these
+   * iterative solves
+   */
+  const Real _tolerance;
+  const Real _T_initial_guess;
+  const Real _p_initial_guess;
+
+private:
+  template &lt;typename... Args&gt;
+  void fluidPropError(Args... args) const
+  {
+    if (_allow_imperfect_jacobians)
+      mooseDoOnce(mooseWarning(std::forward&lt;Args&gt;(args)...));
+    else
+      mooseError(std::forward&lt;Args&gt;(args)...);
+  }
+};
+
+#pragma GCC diagnostic pop
+
+template &lt;typename T&gt;
+std::pair&lt;T, T&gt;
+SinglePhaseFluidProperties::makeZeroAndOne(const T &amp; /*ex*/)
+{
+  return {T{0, 0}, T{1, 0}};
+}
+
+template &lt;&gt;
+inline std::pair&lt;Real, Real&gt;
+SinglePhaseFluidProperties::makeZeroAndOne(const Real &amp; /*ex*/)
+{
+  return {Real{0}, Real{1}};
+}
+
+template &lt;typename T, typename Functor&gt;
+void
+SinglePhaseFluidProperties::xyDerivatives(
+    const T x, const T &amp; y, T &amp; z, T &amp; dz_dx, T &amp; dz_dy, const Functor &amp; z_from_x_y)
+{
+  typedef MetaPhysicL::DualNumber&lt;T, MetaPhysicL::NumberArray&lt;2, T&gt;&gt; CompoundType;
+  const auto [zero, one] = makeZeroAndOne(x);
+
+  CompoundType x_c(x, zero);
+  auto &amp; x_cd = x_c.derivatives();
+  x_cd[0] = one;
+  CompoundType y_c(y, zero);
+  auto &amp; y_cd = y_c.derivatives();
+  y_cd[1] = one;
+
+  const auto z_c = z_from_x_y(x_c, y_c);
+  z = z_c.value();
+  dz_dx = z_c.derivatives()[0];
+  dz_dy = z_c.derivatives()[1];
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::p_T_from_v_e(const CppType &amp; v, // v value
+                                         const CppType &amp; e, // e value
+                                         const Real p0,     // initial guess
+                                         const Real T0,     // initial guess
+                                         CppType &amp; p,       // returned pressure
+                                         CppType &amp; T,       // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto v_lambda = [&amp;](const CppType &amp; pressure,
+                      const CppType &amp; temperature,
+                      CppType &amp; new_v,
+                      CppType &amp; dv_dp,
+                      CppType &amp; dv_dT) { v_from_p_T(pressure, temperature, new_v, dv_dp, dv_dT); };
+  auto e_lambda = [&amp;](const CppType &amp; pressure,
+                      const CppType &amp; temperature,
+                      CppType &amp; new_e,
+                      CppType &amp; de_dp,
+                      CppType &amp; de_dT) { e_from_p_T(pressure, temperature, new_e, de_dp, de_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        v, e, p0, T0, p, T, _tolerance, _tolerance, v_lambda, e_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (v, e)=(&quot;, v, &quot;, &quot;, e, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename T&gt;
+void
+SinglePhaseFluidProperties::p_T_from_v_h(const T &amp; v,     // v value
+                                         const T &amp; h,     // e value
+                                         const Real p0,   // initial guess
+                                         const Real T0,   // initial guess
+                                         T &amp; pressure,    // returned pressure
+                                         T &amp; temperature, // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto v_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_v, T &amp; dv_dp, T &amp; dv_dT)
+  { v_from_p_T(pressure, temperature, new_v, dv_dp, dv_dT); };
+  auto h_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_h, T &amp; dh_dp, T &amp; dh_dT)
+  { h_from_p_T(pressure, temperature, new_h, dh_dp, dh_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        v, h, p0, T0, pressure, temperature, _tolerance, _tolerance, v_lambda, h_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (v, h)=(&quot;, v, &quot;, &quot;, h, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename T&gt;
+void
+SinglePhaseFluidProperties::p_T_from_h_s(const T &amp; h,     // h value
+                                         const T &amp; s,     // s value
+                                         const Real p0,   // initial guess
+                                         const Real T0,   // initial guess
+                                         T &amp; pressure,    // returned pressure
+                                         T &amp; temperature, // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto h_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_h, T &amp; dh_dp, T &amp; dh_dT)
+  { h_from_p_T(pressure, temperature, new_h, dh_dp, dh_dT); };
+  auto s_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_s, T &amp; ds_dp, T &amp; ds_dT)
+  { s_from_p_T(pressure, temperature, new_s, ds_dp, ds_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        h, s, p0, T0, pressure, temperature, _tolerance, _tolerance, h_lambda, s_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (h, s)=(&quot;, h, &quot;, &quot;, s, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::v_e_from_p_T(const CppType &amp; p,
+                                         const CppType &amp; T,
+                                         CppType &amp; v,
+                                         CppType &amp; e) const
+{
+  const CppType rho = rho_from_p_T(p, T);
+  v = 1.0 / rho;
+  try
+  {
+    // more likely to not involve a Newton search
+    e = e_from_p_T(p, T);
+  }
+  catch (...)
+  {
+    e = e_from_p_rho(p, rho);
+  }
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::v_e_from_p_T(const CppType &amp; p,
+                                         const CppType &amp; T,
+                                         CppType &amp; v,
+                                         CppType &amp; dv_dp,
+                                         CppType &amp; dv_dT,
+                                         CppType &amp; e,
+                                         CppType &amp; de_dp,
+                                         CppType &amp; de_dT) const
+{
+  CppType rho, drho_dp, drho_dT;
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+
+  v = 1.0 / rho;
+  const CppType dv_drho = -1.0 / (rho * rho);
+  dv_dp = dv_drho * drho_dp;
+  dv_dT = dv_drho * drho_dT;
+
+  CppType de_dp_partial, de_drho;
+  e_from_p_rho(p, rho, e, de_dp_partial, de_drho);
+  de_dp = de_dp_partial + de_drho * drho_dp;
+  de_dT = de_drho * drho_dT;
+}
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="e4acfb28-7451-4628-8689-310ef793dee9"><div class="modal-content"><h4>(moose/modules/fluid_properties/include/fluidproperties/SinglePhaseFluidProperties.h)</h4><pre class="moose-pre"><code class="language-cpp">// This file is part of the MOOSE framework
+// https://www.mooseframework.org
+//
+// All rights reserved, see COPYRIGHT for full restrictions
+// https://github.com/idaholab/moose/blob/master/COPYRIGHT
+//
+// Licensed under LGPL 2.1, please see LICENSE for details
+// https://www.gnu.org/licenses/lgpl-2.1.html
+
+#pragma once
+
+#include &quot;FluidProperties.h&quot;
+#include &quot;NewtonInversion.h&quot;
+#include &quot;metaphysicl/dualnumberarray.h&quot;
+
+/**
+ * Adds AD versions of each fluid property. These functions use the Real versions of these methods
+ * to compute the AD variables complete with derivatives. Typically, these do not need to be
+ * overriden in derived classes.
+ */
+#define propfuncAD(want, prop1, prop2)                                                             \
+  virtual DualReal want##_from_##prop1##_##prop2(const DualReal &amp; p1, const DualReal &amp; p2) const   \
+  {                                                                                                \
+    Real x = 0;                                                                                    \
+    Real raw1 = p1.value();                                                                        \
+    Real raw2 = p2.value();                                                                        \
+    Real dxd1 = 0;                                                                                 \
+    Real dxd2 = 0;                                                                                 \
+    want##_from_##prop1##_##prop2(raw1, raw2, x, dxd1, dxd2);                                      \
+                                                                                                   \
+    DualReal result = x;                                                                           \
+    result.derivatives() = p1.derivatives() * dxd1 + p2.derivatives() * dxd2;                      \
+    return result;                                                                                 \
+  }                                                                                                \
+                                                                                                   \
+  virtual void want##_from_##prop1##_##prop2(const DualReal &amp; prop1,                               \
+                                             const DualReal &amp; prop2,                               \
+                                             DualReal &amp; val,                                       \
+                                             DualReal &amp; d##want##d1,                               \
+                                             DualReal &amp; d##want##d2) const                         \
+  {                                                                                                \
+    fluidPropError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; derivative derivatives not implemented.&quot;); \
+    Real dummy, tmp1, tmp2;                                                                        \
+    val = want##_from_##prop1##_##prop2(prop1, prop2);                                             \
+    want##_from_##prop1##_##prop2(prop1.value(), prop2.value(), dummy, tmp1, tmp2);                \
+    d##want##d1 = tmp1;                                                                            \
+    d##want##d2 = tmp2;                                                                            \
+  }
+
+/**
+ * Adds function definitions with not implemented error. These functions should be overriden in
+ * derived classes where required. AD versions are constructed automatically using propfuncAD.
+ */
+#define propfunc(want, prop1, prop2)                                                               \
+  virtual Real want##_from_##prop1##_##prop2(Real, Real) const                                     \
+  {                                                                                                \
+    mooseError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; not implemented.&quot;);                            \
+  }                                                                                                \
+                                                                                                   \
+  virtual void want##_from_##prop1##_##prop2(                                                      \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const            \
+  {                                                                                                \
+    fluidPropError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);            \
+    d##want##d1 = 0;                                                                               \
+    d##want##d2 = 0;                                                                               \
+    val = want##_from_##prop1##_##prop2(prop1, prop2);                                             \
+  }                                                                                                \
+                                                                                                   \
+  propfuncAD(want, prop1, prop2)
+
+/**
+ * Adds Real declarations of functions that have a default implementation.
+ * Important: properties declared using this macro must be defined in SinglePhaseFluidProperties.C.
+ * AD versions are constructed automatically using propfuncAD.
+ */
+#define propfuncWithDefault(want, prop1, prop2)                                                    \
+  virtual Real want##_from_##prop1##_##prop2(Real, Real) const;                                    \
+  virtual void want##_from_##prop1##_##prop2(                                                      \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const;           \
+                                                                                                   \
+  propfuncAD(want, prop1, prop2)
+
+/**
+ * Adds Real and ADReal declarations of functions that have an implementation.
+ */
+#define propfuncWithDefinitionOverride(want, prop1, prop2)                                         \
+  Real want##_from_##prop1##_##prop2(Real, Real) const override;                                   \
+  void want##_from_##prop1##_##prop2(                                                              \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const override;  \
+  ADReal want##_from_##prop1##_##prop2(const ADReal &amp;, const ADReal &amp;) const override;             \
+  void want##_from_##prop1##_##prop2(const ADReal &amp; prop1,                                         \
+                                     const ADReal &amp; prop2,                                         \
+                                     ADReal &amp; val,                                                 \
+                                     ADReal &amp; d##want##d1,                                         \
+                                     ADReal &amp; d##want##d2) const override;                         \
+  template &lt;typename CppType&gt;                                                                      \
+  CppType want##_from_##prop1##_##prop2##_template(const CppType &amp; prop1, const CppType &amp; prop2)   \
+      const;                                                                                       \
+  template &lt;typename CppType&gt;                                                                      \
+  void want##_from_##prop1##_##prop2##_template(const CppType &amp; prop1,                             \
+                                                const CppType &amp; prop2,                             \
+                                                CppType &amp; val,                                     \
+                                                CppType &amp; d##want##d1,                             \
+                                                CppType &amp; d##want##d2) const
+
+/**
+ * Common class for single phase fluid properties
+ */
+class SinglePhaseFluidProperties : public FluidProperties
+{
+public:
+  static InputParameters validParams();
+
+  SinglePhaseFluidProperties(const InputParameters &amp; parameters);
+  virtual ~SinglePhaseFluidProperties();
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored &quot;-Woverloaded-virtual&quot;
+  // clang-format off
+
+  /**
+   * @brief Compute a fluid property given for the state defined by two given properties.
+   *
+   * For all functions, the first two arguments are the given properties that define the fluid
+   * state.  For the two-argument variants, the desired property is the return value.
+   * The five-argument variants also provide partial derivatives dx/da and dx/db where x is the
+   * desired property being computed, a is the first given property, and b is the second given
+   * property.  The desired property, dx/da, and dx/db are stored into the 3rd, 4th, and 5th
+   * arguments respectively.
+   *
+   * Properties/parameters used in these function are listed below with their units:
+   *
+   * @begincode
+   * p      pressure [Pa]
+   * T      temperature [K]
+   * e      specific internal energy [J/kg]
+   * v      specific volume [m^3/kg]
+   * rho    density [kg/m^3]
+   * h      specific enthalpy [J/kg]
+   * s      specific entropy [J/(kg*K)]
+   * mu     viscosity [Pa*s]
+   * k      thermal conductivity [W/(m*K)]
+   * c      speed of sound [m/s]
+   * cp     constant-pressure specific heat [J/K]
+   * cv     constant-volume specific heat [J/K]
+   * beta   volumetric thermal expansion coefficient [1/K]
+   * g      Gibbs free energy [J]
+   * pp_sat partial pressure at saturation [Pa]
+   * gamma  Adiabatic ratio (cp/cv) [-]
+   * @endcode
+   *
+   * As an example:
+   *
+   * @begincode
+   * // calculate pressure given specific vol and energy:
+   * auto pressure = your_fluid_properties_object.p_from_v_e(specific_vol, specific_energy);
+   *
+   * // or use the derivative variant:
+   * Real dp_dv = 0; // derivative will be stored into here
+   * Real dp_de = 0; // derivative will be stored into here
+   * your_fluid_properties_object.p_from_v_e(specific_vol, specific_energy, pressure, dp_dv, dp_de);
+   * @endcode
+   *
+   * Automatic differentiation (AD) support is provided through x_from_a_b(DualReal a, DualReal b) and
+   * x_from_a_b(DualReal a, DualReal b, DualReal x, DualReal dx_da, DualReal dx_db) versions of the
+   * functions where a and b must be ADReal/DualNumber&#x27;s calculated using all AD-supporting values:
+   *
+   * @begincode
+   * auto v = 1/rho; // rho must be an AD non-linear variable.
+   * auto e = rhoE/rho - vel_energy; // rhoE and vel_energy must be AD variables/numbers also.
+   * auto pressure = your_fluid_properties_object.p_from_v_e(v, e);
+   * // pressure now contains partial derivatives w.r.t. all degrees of freedom
+   * @endcode
+   */
+  ///@{
+  propfunc(p, v, e)
+  propfunc(T, v, e)
+  propfunc(c, v, e)
+  propfunc(cp, v, e)
+  propfunc(cv, v, e)
+  propfunc(mu, v, e)
+  propfunc(k, v, e)
+  propfuncWithDefault(s, v, e)
+  propfunc(s, h, p)
+  propfunc(rho, p, s)
+  propfunc(e, v, h)
+  propfuncWithDefault(s, p, T)
+  propfunc(pp_sat, p, T)
+  propfunc(mu, rho, T)
+  propfunc(k, rho, T)
+  propfuncWithDefault(c, p, T)
+  propfuncWithDefault(cp, p, T)
+  propfuncWithDefault(cv, p, T)
+  propfuncWithDefault(mu, p, T)
+  propfuncWithDefault(k, p, T)
+  propfunc(rho, p, T)
+  propfunc(e, p, rho)
+  propfunc(e, T, v)
+  propfunc(p, T, v)
+  propfunc(h, T, v)
+  propfunc(s, T, v)
+  propfunc(cv, T, v)
+  propfunc(h, p, T)
+  propfunc(g, v, e)
+  propfuncWithDefault(p, h, s)
+  propfunc(T, h, p)  // temporary, until uniformization
+  propfuncWithDefault(T, p, h)
+  propfuncWithDefault(beta, p, T)
+  propfuncWithDefault(v, p, T)
+  propfuncWithDefault(e, p, T)
+  propfuncWithDefault(gamma, v, e)
+  propfuncWithDefault(gamma, p, T)
+  ///@}
+
+  // clang-format on
+
+#undef propfunc
+#undef propfuncWithDefault
+#undef propfuncAD
+
+      /**
+       * Fluid name
+       * @return string representing fluid name
+       */
+      virtual std::string fluidName() const;
+
+  /**
+   * Molar mass [kg/mol]
+   * @return molar mass
+   */
+  virtual Real molarMass() const;
+
+  /**
+   * Critical pressure
+   * @return critical pressure (Pa)
+   */
+  virtual Real criticalPressure() const;
+
+  /**
+   * Critical temperature
+   * @return critical temperature (K)
+   */
+  virtual Real criticalTemperature() const;
+
+  /**
+   * Critical density
+   * @return critical density (kg/m^3)
+   */
+  virtual Real criticalDensity() const;
+
+  /**
+   * Critical specific internal energy
+   * @return specific internal energy (J/kg)
+   */
+  virtual Real criticalInternalEnergy() const;
+
+  /**
+   * Triple point pressure
+   * @return triple point pressure (Pa)
+   */
+  virtual Real triplePointPressure() const;
+
+  /**
+   * Triple point temperature
+   * @return triple point temperature (K)
+   */
+  virtual Real triplePointTemperature() const;
+
+  /**
+   * Specific internal energy from temperature and specific volume
+   *
+   * @param[in] T     temperature
+   * @param[in] v     specific volume
+   */
+  virtual Real e_spndl_from_v(Real v) const;
+
+  /**
+   * Specific internal energy from temperature and specific volume
+   *
+   * @param[in] T     temperature
+   * @param[in] v     specific volume
+   */
+  virtual void v_e_spndl_from_T(Real T, Real &amp; v, Real &amp; e) const;
+
+  /**
+   * Vapor pressure. Used to delineate liquid and gas phases.
+   * Valid for temperatures between the triple point temperature
+   * and the critical temperature
+   *
+   * @param T fluid temperature (K)
+   * @param[out] saturation pressure (Pa)
+   * @param[out] derivative of saturation pressure wrt temperature (Pa/K)
+   */
+  virtual Real vaporPressure(Real T) const;
+  virtual void vaporPressure(Real T, Real &amp; psat, Real &amp; dpsat_dT) const;
+  DualReal vaporPressure(const DualReal &amp; T) const;
+
+  /**
+   * Vapor temperature. Used to delineate liquid and gas phases.
+   * Valid for pressures between the triple point pressure
+   * and the critical pressure
+   *
+   * @param p fluid pressure (Pa)
+   * @param[out] saturation temperature (K)
+   * @param[out] derivative of saturation temperature wrt pressure
+   */
+  virtual Real vaporTemperature(Real p) const;
+  virtual void vaporTemperature(Real p, Real &amp; Tsat, Real &amp; dTsat_dp) const;
+  DualReal vaporTemperature(const DualReal &amp; p) const;
+
+  /**
+   * Henry&#x27;s law coefficients for dissolution in water
+   * @return Henry&#x27;s constant coefficients
+   */
+  virtual std::vector&lt;Real&gt; henryCoefficients() const;
+
+  template &lt;typename CppType&gt;
+  void v_e_from_p_T(const CppType &amp; p, const CppType &amp; T, CppType &amp; v, CppType &amp; e) const;
+  template &lt;typename CppType&gt;
+  void v_e_from_p_T(const CppType &amp; p,
+                    const CppType &amp; T,
+                    CppType &amp; v,
+                    CppType &amp; dv_dp,
+                    CppType &amp; dv_dT,
+                    CppType &amp; e,
+                    CppType &amp; de_dp,
+                    CppType &amp; de_dT) const;
+
+  /**
+   * Combined methods. These methods are particularly useful for the PorousFlow
+   * module, where density and viscosity are typically both computed everywhere.
+   * The combined methods allow the most efficient means of calculating both
+   * properties, especially where rho(p, T) and mu(rho, T). In this case, an
+   * extra density calculation would be required to calculate mu(p, T). All
+   * property names are described above.
+   */
+  virtual void rho_mu_from_p_T(Real p, Real T, Real &amp; rho, Real &amp; mu) const;
+  virtual void rho_mu_from_p_T(Real p,
+                               Real T,
+                               Real &amp; rho,
+                               Real &amp; drho_dp,
+                               Real &amp; drho_dT,
+                               Real &amp; mu,
+                               Real &amp; dmu_dp,
+                               Real &amp; dmu_dT) const;
+  virtual void
+  rho_mu_from_p_T(const DualReal &amp; p, const DualReal &amp; T, DualReal &amp; rho, DualReal &amp; mu) const;
+
+  virtual void rho_e_from_p_T(Real p,
+                              Real T,
+                              Real &amp; rho,
+                              Real &amp; drho_dp,
+                              Real &amp; drho_dT,
+                              Real &amp; e,
+                              Real &amp; de_dp,
+                              Real &amp; de_dT) const;
+
+  /**
+   * Determines (p,T) from (v,e) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] v specific volume (m^3 / kg)
+   * @param[in] e specific internal energy (J / kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename CppType&gt;
+  void p_T_from_v_e(const CppType &amp; v,
+                    const CppType &amp; e,
+                    Real p0,
+                    Real T0,
+                    CppType &amp; p,
+                    CppType &amp; T,
+                    bool &amp; conversion_succeeded) const;
+
+  /**
+   * Determines (p,T) from (v,h) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] v specific volume (m^3 / kg)
+   * @param[in] h specific enthalpy (J / kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename T&gt;
+  void p_T_from_v_h(const T &amp; v,
+                    const T &amp; h,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+  /**
+   * Determines (p,T) from (h,s) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] h specific enthalpy (J / kg)
+   * @param[in] s specific entropy (J/K*kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename T&gt;
+  void p_T_from_h_s(const T &amp; h,
+                    const T &amp; s,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+
+protected:
+  /**
+   * Computes the dependent variable z and its derivatives with respect to the independent
+   * variables x and y using the simple two parameter \p z_from_x_y functor. The derivatives are
+   * computed using a compound automatic differentiation type
+   */
+  template &lt;typename T, typename Functor&gt;
+  static void
+  xyDerivatives(const T x, const T &amp; y, T &amp; z, T &amp; dz_dx, T &amp; dz_dy, const Functor &amp; z_from_x_y);
+
+  /**
+   * Given a type example, this method returns zero and unity reperesentations of that type (first
+   * and second members of returned pair respectively)
+   */
+  template &lt;typename T&gt;
+  static std::pair&lt;T, T&gt; makeZeroAndOne(const T &amp;);
+
+  /**
+   * Newton&#x27;s method may be used to convert between variable sets
+   * _tolerance, _T_initial_guess, and _p_initial_guess are the parameters for these
+   * iterative solves
+   */
+  const Real _tolerance;
+  const Real _T_initial_guess;
+  const Real _p_initial_guess;
+
+private:
+  template &lt;typename... Args&gt;
+  void fluidPropError(Args... args) const
+  {
+    if (_allow_imperfect_jacobians)
+      mooseDoOnce(mooseWarning(std::forward&lt;Args&gt;(args)...));
+    else
+      mooseError(std::forward&lt;Args&gt;(args)...);
+  }
+};
+
+#pragma GCC diagnostic pop
+
+template &lt;typename T&gt;
+std::pair&lt;T, T&gt;
+SinglePhaseFluidProperties::makeZeroAndOne(const T &amp; /*ex*/)
+{
+  return {T{0, 0}, T{1, 0}};
+}
+
+template &lt;&gt;
+inline std::pair&lt;Real, Real&gt;
+SinglePhaseFluidProperties::makeZeroAndOne(const Real &amp; /*ex*/)
+{
+  return {Real{0}, Real{1}};
+}
+
+template &lt;typename T, typename Functor&gt;
+void
+SinglePhaseFluidProperties::xyDerivatives(
+    const T x, const T &amp; y, T &amp; z, T &amp; dz_dx, T &amp; dz_dy, const Functor &amp; z_from_x_y)
+{
+  typedef MetaPhysicL::DualNumber&lt;T, MetaPhysicL::NumberArray&lt;2, T&gt;&gt; CompoundType;
+  const auto [zero, one] = makeZeroAndOne(x);
+
+  CompoundType x_c(x, zero);
+  auto &amp; x_cd = x_c.derivatives();
+  x_cd[0] = one;
+  CompoundType y_c(y, zero);
+  auto &amp; y_cd = y_c.derivatives();
+  y_cd[1] = one;
+
+  const auto z_c = z_from_x_y(x_c, y_c);
+  z = z_c.value();
+  dz_dx = z_c.derivatives()[0];
+  dz_dy = z_c.derivatives()[1];
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::p_T_from_v_e(const CppType &amp; v, // v value
+                                         const CppType &amp; e, // e value
+                                         const Real p0,     // initial guess
+                                         const Real T0,     // initial guess
+                                         CppType &amp; p,       // returned pressure
+                                         CppType &amp; T,       // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto v_lambda = [&amp;](const CppType &amp; pressure,
+                      const CppType &amp; temperature,
+                      CppType &amp; new_v,
+                      CppType &amp; dv_dp,
+                      CppType &amp; dv_dT) { v_from_p_T(pressure, temperature, new_v, dv_dp, dv_dT); };
+  auto e_lambda = [&amp;](const CppType &amp; pressure,
+                      const CppType &amp; temperature,
+                      CppType &amp; new_e,
+                      CppType &amp; de_dp,
+                      CppType &amp; de_dT) { e_from_p_T(pressure, temperature, new_e, de_dp, de_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        v, e, p0, T0, p, T, _tolerance, _tolerance, v_lambda, e_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (v, e)=(&quot;, v, &quot;, &quot;, e, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename T&gt;
+void
+SinglePhaseFluidProperties::p_T_from_v_h(const T &amp; v,     // v value
+                                         const T &amp; h,     // e value
+                                         const Real p0,   // initial guess
+                                         const Real T0,   // initial guess
+                                         T &amp; pressure,    // returned pressure
+                                         T &amp; temperature, // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto v_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_v, T &amp; dv_dp, T &amp; dv_dT)
+  { v_from_p_T(pressure, temperature, new_v, dv_dp, dv_dT); };
+  auto h_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_h, T &amp; dh_dp, T &amp; dh_dT)
+  { h_from_p_T(pressure, temperature, new_h, dh_dp, dh_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        v, h, p0, T0, pressure, temperature, _tolerance, _tolerance, v_lambda, h_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (v, h)=(&quot;, v, &quot;, &quot;, h, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename T&gt;
+void
+SinglePhaseFluidProperties::p_T_from_h_s(const T &amp; h,     // h value
+                                         const T &amp; s,     // s value
+                                         const Real p0,   // initial guess
+                                         const Real T0,   // initial guess
+                                         T &amp; pressure,    // returned pressure
+                                         T &amp; temperature, // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto h_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_h, T &amp; dh_dp, T &amp; dh_dT)
+  { h_from_p_T(pressure, temperature, new_h, dh_dp, dh_dT); };
+  auto s_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_s, T &amp; ds_dp, T &amp; ds_dT)
+  { s_from_p_T(pressure, temperature, new_s, ds_dp, ds_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        h, s, p0, T0, pressure, temperature, _tolerance, _tolerance, h_lambda, s_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (h, s)=(&quot;, h, &quot;, &quot;, s, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::v_e_from_p_T(const CppType &amp; p,
+                                         const CppType &amp; T,
+                                         CppType &amp; v,
+                                         CppType &amp; e) const
+{
+  const CppType rho = rho_from_p_T(p, T);
+  v = 1.0 / rho;
+  try
+  {
+    // more likely to not involve a Newton search
+    e = e_from_p_T(p, T);
+  }
+  catch (...)
+  {
+    e = e_from_p_rho(p, rho);
+  }
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::v_e_from_p_T(const CppType &amp; p,
+                                         const CppType &amp; T,
+                                         CppType &amp; v,
+                                         CppType &amp; dv_dp,
+                                         CppType &amp; dv_dT,
+                                         CppType &amp; e,
+                                         CppType &amp; de_dp,
+                                         CppType &amp; de_dT) const
+{
+  CppType rho, drho_dp, drho_dT;
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+
+  v = 1.0 / rho;
+  const CppType dv_drho = -1.0 / (rho * rho);
+  dv_dp = dv_drho * drho_dp;
+  dv_dT = dv_drho * drho_dT;
+
+  CppType de_dp_partial, de_drho;
+  e_from_p_rho(p, rho, e, de_dp_partial, de_drho);
+  de_dp = de_dp_partial + de_drho * drho_dp;
+  de_dT = de_drho * drho_dT;
+}
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="4403849f-9fbc-459f-9159-3f1057f43414"><div class="modal-content"><h4>(moose/modules/fluid_properties/include/fluidproperties/SinglePhaseFluidProperties.h)</h4><pre class="moose-pre"><code class="language-cpp">// This file is part of the MOOSE framework
+// https://www.mooseframework.org
+//
+// All rights reserved, see COPYRIGHT for full restrictions
+// https://github.com/idaholab/moose/blob/master/COPYRIGHT
+//
+// Licensed under LGPL 2.1, please see LICENSE for details
+// https://www.gnu.org/licenses/lgpl-2.1.html
+
+#pragma once
+
+#include &quot;FluidProperties.h&quot;
+#include &quot;NewtonInversion.h&quot;
+#include &quot;metaphysicl/dualnumberarray.h&quot;
+
+/**
+ * Adds AD versions of each fluid property. These functions use the Real versions of these methods
+ * to compute the AD variables complete with derivatives. Typically, these do not need to be
+ * overriden in derived classes.
+ */
+#define propfuncAD(want, prop1, prop2)                                                             \
+  virtual DualReal want##_from_##prop1##_##prop2(const DualReal &amp; p1, const DualReal &amp; p2) const   \
+  {                                                                                                \
+    Real x = 0;                                                                                    \
+    Real raw1 = p1.value();                                                                        \
+    Real raw2 = p2.value();                                                                        \
+    Real dxd1 = 0;                                                                                 \
+    Real dxd2 = 0;                                                                                 \
+    want##_from_##prop1##_##prop2(raw1, raw2, x, dxd1, dxd2);                                      \
+                                                                                                   \
+    DualReal result = x;                                                                           \
+    result.derivatives() = p1.derivatives() * dxd1 + p2.derivatives() * dxd2;                      \
+    return result;                                                                                 \
+  }                                                                                                \
+                                                                                                   \
+  virtual void want##_from_##prop1##_##prop2(const DualReal &amp; prop1,                               \
+                                             const DualReal &amp; prop2,                               \
+                                             DualReal &amp; val,                                       \
+                                             DualReal &amp; d##want##d1,                               \
+                                             DualReal &amp; d##want##d2) const                         \
+  {                                                                                                \
+    fluidPropError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; derivative derivatives not implemented.&quot;); \
+    Real dummy, tmp1, tmp2;                                                                        \
+    val = want##_from_##prop1##_##prop2(prop1, prop2);                                             \
+    want##_from_##prop1##_##prop2(prop1.value(), prop2.value(), dummy, tmp1, tmp2);                \
+    d##want##d1 = tmp1;                                                                            \
+    d##want##d2 = tmp2;                                                                            \
+  }
+
+/**
+ * Adds function definitions with not implemented error. These functions should be overriden in
+ * derived classes where required. AD versions are constructed automatically using propfuncAD.
+ */
+#define propfunc(want, prop1, prop2)                                                               \
+  virtual Real want##_from_##prop1##_##prop2(Real, Real) const                                     \
+  {                                                                                                \
+    mooseError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; not implemented.&quot;);                            \
+  }                                                                                                \
+                                                                                                   \
+  virtual void want##_from_##prop1##_##prop2(                                                      \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const            \
+  {                                                                                                \
+    fluidPropError(name(), &quot;: &quot;, __PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);            \
+    d##want##d1 = 0;                                                                               \
+    d##want##d2 = 0;                                                                               \
+    val = want##_from_##prop1##_##prop2(prop1, prop2);                                             \
+  }                                                                                                \
+                                                                                                   \
+  propfuncAD(want, prop1, prop2)
+
+/**
+ * Adds Real declarations of functions that have a default implementation.
+ * Important: properties declared using this macro must be defined in SinglePhaseFluidProperties.C.
+ * AD versions are constructed automatically using propfuncAD.
+ */
+#define propfuncWithDefault(want, prop1, prop2)                                                    \
+  virtual Real want##_from_##prop1##_##prop2(Real, Real) const;                                    \
+  virtual void want##_from_##prop1##_##prop2(                                                      \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const;           \
+                                                                                                   \
+  propfuncAD(want, prop1, prop2)
+
+/**
+ * Adds Real and ADReal declarations of functions that have an implementation.
+ */
+#define propfuncWithDefinitionOverride(want, prop1, prop2)                                         \
+  Real want##_from_##prop1##_##prop2(Real, Real) const override;                                   \
+  void want##_from_##prop1##_##prop2(                                                              \
+      Real prop1, Real prop2, Real &amp; val, Real &amp; d##want##d1, Real &amp; d##want##d2) const override;  \
+  ADReal want##_from_##prop1##_##prop2(const ADReal &amp;, const ADReal &amp;) const override;             \
+  void want##_from_##prop1##_##prop2(const ADReal &amp; prop1,                                         \
+                                     const ADReal &amp; prop2,                                         \
+                                     ADReal &amp; val,                                                 \
+                                     ADReal &amp; d##want##d1,                                         \
+                                     ADReal &amp; d##want##d2) const override;                         \
+  template &lt;typename CppType&gt;                                                                      \
+  CppType want##_from_##prop1##_##prop2##_template(const CppType &amp; prop1, const CppType &amp; prop2)   \
+      const;                                                                                       \
+  template &lt;typename CppType&gt;                                                                      \
+  void want##_from_##prop1##_##prop2##_template(const CppType &amp; prop1,                             \
+                                                const CppType &amp; prop2,                             \
+                                                CppType &amp; val,                                     \
+                                                CppType &amp; d##want##d1,                             \
+                                                CppType &amp; d##want##d2) const
+
+/**
+ * Common class for single phase fluid properties
+ */
+class SinglePhaseFluidProperties : public FluidProperties
+{
+public:
+  static InputParameters validParams();
+
+  SinglePhaseFluidProperties(const InputParameters &amp; parameters);
+  virtual ~SinglePhaseFluidProperties();
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored &quot;-Woverloaded-virtual&quot;
+  // clang-format off
+
+  /**
+   * @brief Compute a fluid property given for the state defined by two given properties.
+   *
+   * For all functions, the first two arguments are the given properties that define the fluid
+   * state.  For the two-argument variants, the desired property is the return value.
+   * The five-argument variants also provide partial derivatives dx/da and dx/db where x is the
+   * desired property being computed, a is the first given property, and b is the second given
+   * property.  The desired property, dx/da, and dx/db are stored into the 3rd, 4th, and 5th
+   * arguments respectively.
+   *
+   * Properties/parameters used in these function are listed below with their units:
+   *
+   * @begincode
+   * p      pressure [Pa]
+   * T      temperature [K]
+   * e      specific internal energy [J/kg]
+   * v      specific volume [m^3/kg]
+   * rho    density [kg/m^3]
+   * h      specific enthalpy [J/kg]
+   * s      specific entropy [J/(kg*K)]
+   * mu     viscosity [Pa*s]
+   * k      thermal conductivity [W/(m*K)]
+   * c      speed of sound [m/s]
+   * cp     constant-pressure specific heat [J/K]
+   * cv     constant-volume specific heat [J/K]
+   * beta   volumetric thermal expansion coefficient [1/K]
+   * g      Gibbs free energy [J]
+   * pp_sat partial pressure at saturation [Pa]
+   * gamma  Adiabatic ratio (cp/cv) [-]
+   * @endcode
+   *
+   * As an example:
+   *
+   * @begincode
+   * // calculate pressure given specific vol and energy:
+   * auto pressure = your_fluid_properties_object.p_from_v_e(specific_vol, specific_energy);
+   *
+   * // or use the derivative variant:
+   * Real dp_dv = 0; // derivative will be stored into here
+   * Real dp_de = 0; // derivative will be stored into here
+   * your_fluid_properties_object.p_from_v_e(specific_vol, specific_energy, pressure, dp_dv, dp_de);
+   * @endcode
+   *
+   * Automatic differentiation (AD) support is provided through x_from_a_b(DualReal a, DualReal b) and
+   * x_from_a_b(DualReal a, DualReal b, DualReal x, DualReal dx_da, DualReal dx_db) versions of the
+   * functions where a and b must be ADReal/DualNumber&#x27;s calculated using all AD-supporting values:
+   *
+   * @begincode
+   * auto v = 1/rho; // rho must be an AD non-linear variable.
+   * auto e = rhoE/rho - vel_energy; // rhoE and vel_energy must be AD variables/numbers also.
+   * auto pressure = your_fluid_properties_object.p_from_v_e(v, e);
+   * // pressure now contains partial derivatives w.r.t. all degrees of freedom
+   * @endcode
+   */
+  ///@{
+  propfunc(p, v, e)
+  propfunc(T, v, e)
+  propfunc(c, v, e)
+  propfunc(cp, v, e)
+  propfunc(cv, v, e)
+  propfunc(mu, v, e)
+  propfunc(k, v, e)
+  propfuncWithDefault(s, v, e)
+  propfunc(s, h, p)
+  propfunc(rho, p, s)
+  propfunc(e, v, h)
+  propfuncWithDefault(s, p, T)
+  propfunc(pp_sat, p, T)
+  propfunc(mu, rho, T)
+  propfunc(k, rho, T)
+  propfuncWithDefault(c, p, T)
+  propfuncWithDefault(cp, p, T)
+  propfuncWithDefault(cv, p, T)
+  propfuncWithDefault(mu, p, T)
+  propfuncWithDefault(k, p, T)
+  propfunc(rho, p, T)
+  propfunc(e, p, rho)
+  propfunc(e, T, v)
+  propfunc(p, T, v)
+  propfunc(h, T, v)
+  propfunc(s, T, v)
+  propfunc(cv, T, v)
+  propfunc(h, p, T)
+  propfunc(g, v, e)
+  propfuncWithDefault(p, h, s)
+  propfunc(T, h, p)  // temporary, until uniformization
+  propfuncWithDefault(T, p, h)
+  propfuncWithDefault(beta, p, T)
+  propfuncWithDefault(v, p, T)
+  propfuncWithDefault(e, p, T)
+  propfuncWithDefault(gamma, v, e)
+  propfuncWithDefault(gamma, p, T)
+  ///@}
+
+  // clang-format on
+
+#undef propfunc
+#undef propfuncWithDefault
+#undef propfuncAD
+
+      /**
+       * Fluid name
+       * @return string representing fluid name
+       */
+      virtual std::string fluidName() const;
+
+  /**
+   * Molar mass [kg/mol]
+   * @return molar mass
+   */
+  virtual Real molarMass() const;
+
+  /**
+   * Critical pressure
+   * @return critical pressure (Pa)
+   */
+  virtual Real criticalPressure() const;
+
+  /**
+   * Critical temperature
+   * @return critical temperature (K)
+   */
+  virtual Real criticalTemperature() const;
+
+  /**
+   * Critical density
+   * @return critical density (kg/m^3)
+   */
+  virtual Real criticalDensity() const;
+
+  /**
+   * Critical specific internal energy
+   * @return specific internal energy (J/kg)
+   */
+  virtual Real criticalInternalEnergy() const;
+
+  /**
+   * Triple point pressure
+   * @return triple point pressure (Pa)
+   */
+  virtual Real triplePointPressure() const;
+
+  /**
+   * Triple point temperature
+   * @return triple point temperature (K)
+   */
+  virtual Real triplePointTemperature() const;
+
+  /**
+   * Specific internal energy from temperature and specific volume
+   *
+   * @param[in] T     temperature
+   * @param[in] v     specific volume
+   */
+  virtual Real e_spndl_from_v(Real v) const;
+
+  /**
+   * Specific internal energy from temperature and specific volume
+   *
+   * @param[in] T     temperature
+   * @param[in] v     specific volume
+   */
+  virtual void v_e_spndl_from_T(Real T, Real &amp; v, Real &amp; e) const;
+
+  /**
+   * Vapor pressure. Used to delineate liquid and gas phases.
+   * Valid for temperatures between the triple point temperature
+   * and the critical temperature
+   *
+   * @param T fluid temperature (K)
+   * @param[out] saturation pressure (Pa)
+   * @param[out] derivative of saturation pressure wrt temperature (Pa/K)
+   */
+  virtual Real vaporPressure(Real T) const;
+  virtual void vaporPressure(Real T, Real &amp; psat, Real &amp; dpsat_dT) const;
+  DualReal vaporPressure(const DualReal &amp; T) const;
+
+  /**
+   * Vapor temperature. Used to delineate liquid and gas phases.
+   * Valid for pressures between the triple point pressure
+   * and the critical pressure
+   *
+   * @param p fluid pressure (Pa)
+   * @param[out] saturation temperature (K)
+   * @param[out] derivative of saturation temperature wrt pressure
+   */
+  virtual Real vaporTemperature(Real p) const;
+  virtual void vaporTemperature(Real p, Real &amp; Tsat, Real &amp; dTsat_dp) const;
+  DualReal vaporTemperature(const DualReal &amp; p) const;
+
+  /**
+   * Henry&#x27;s law coefficients for dissolution in water
+   * @return Henry&#x27;s constant coefficients
+   */
+  virtual std::vector&lt;Real&gt; henryCoefficients() const;
+
+  template &lt;typename CppType&gt;
+  void v_e_from_p_T(const CppType &amp; p, const CppType &amp; T, CppType &amp; v, CppType &amp; e) const;
+  template &lt;typename CppType&gt;
+  void v_e_from_p_T(const CppType &amp; p,
+                    const CppType &amp; T,
+                    CppType &amp; v,
+                    CppType &amp; dv_dp,
+                    CppType &amp; dv_dT,
+                    CppType &amp; e,
+                    CppType &amp; de_dp,
+                    CppType &amp; de_dT) const;
+
+  /**
+   * Combined methods. These methods are particularly useful for the PorousFlow
+   * module, where density and viscosity are typically both computed everywhere.
+   * The combined methods allow the most efficient means of calculating both
+   * properties, especially where rho(p, T) and mu(rho, T). In this case, an
+   * extra density calculation would be required to calculate mu(p, T). All
+   * property names are described above.
+   */
+  virtual void rho_mu_from_p_T(Real p, Real T, Real &amp; rho, Real &amp; mu) const;
+  virtual void rho_mu_from_p_T(Real p,
+                               Real T,
+                               Real &amp; rho,
+                               Real &amp; drho_dp,
+                               Real &amp; drho_dT,
+                               Real &amp; mu,
+                               Real &amp; dmu_dp,
+                               Real &amp; dmu_dT) const;
+  virtual void
+  rho_mu_from_p_T(const DualReal &amp; p, const DualReal &amp; T, DualReal &amp; rho, DualReal &amp; mu) const;
+
+  virtual void rho_e_from_p_T(Real p,
+                              Real T,
+                              Real &amp; rho,
+                              Real &amp; drho_dp,
+                              Real &amp; drho_dT,
+                              Real &amp; e,
+                              Real &amp; de_dp,
+                              Real &amp; de_dT) const;
+
+  /**
+   * Determines (p,T) from (v,e) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] v specific volume (m^3 / kg)
+   * @param[in] e specific internal energy (J / kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename CppType&gt;
+  void p_T_from_v_e(const CppType &amp; v,
+                    const CppType &amp; e,
+                    Real p0,
+                    Real T0,
+                    CppType &amp; p,
+                    CppType &amp; T,
+                    bool &amp; conversion_succeeded) const;
+
+  /**
+   * Determines (p,T) from (v,h) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] v specific volume (m^3 / kg)
+   * @param[in] h specific enthalpy (J / kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename T&gt;
+  void p_T_from_v_h(const T &amp; v,
+                    const T &amp; h,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+  /**
+   * Determines (p,T) from (h,s) using Newton Solve in 2D
+   * Useful for conversion between different sets of state variables
+   *
+   * @param[in] h specific enthalpy (J / kg)
+   * @param[in] s specific entropy (J/K*kg)
+   * @param[in] p0 initial guess for pressure (Pa / kg)
+   * @param[in] T0 initial guess for temperature (K)
+   * @param[out] fluid pressure (Pa / kg)
+   * @param[out] Temperature (K)
+   */
+  template &lt;typename T&gt;
+  void p_T_from_h_s(const T &amp; h,
+                    const T &amp; s,
+                    Real p0,
+                    Real T0,
+                    T &amp; pressure,
+                    T &amp; temperature,
+                    bool &amp; conversion_succeeded) const;
+
+protected:
+  /**
+   * Computes the dependent variable z and its derivatives with respect to the independent
+   * variables x and y using the simple two parameter \p z_from_x_y functor. The derivatives are
+   * computed using a compound automatic differentiation type
+   */
+  template &lt;typename T, typename Functor&gt;
+  static void
+  xyDerivatives(const T x, const T &amp; y, T &amp; z, T &amp; dz_dx, T &amp; dz_dy, const Functor &amp; z_from_x_y);
+
+  /**
+   * Given a type example, this method returns zero and unity reperesentations of that type (first
+   * and second members of returned pair respectively)
+   */
+  template &lt;typename T&gt;
+  static std::pair&lt;T, T&gt; makeZeroAndOne(const T &amp;);
+
+  /**
+   * Newton&#x27;s method may be used to convert between variable sets
+   * _tolerance, _T_initial_guess, and _p_initial_guess are the parameters for these
+   * iterative solves
+   */
+  const Real _tolerance;
+  const Real _T_initial_guess;
+  const Real _p_initial_guess;
+
+private:
+  template &lt;typename... Args&gt;
+  void fluidPropError(Args... args) const
+  {
+    if (_allow_imperfect_jacobians)
+      mooseDoOnce(mooseWarning(std::forward&lt;Args&gt;(args)...));
+    else
+      mooseError(std::forward&lt;Args&gt;(args)...);
+  }
+};
+
+#pragma GCC diagnostic pop
+
+template &lt;typename T&gt;
+std::pair&lt;T, T&gt;
+SinglePhaseFluidProperties::makeZeroAndOne(const T &amp; /*ex*/)
+{
+  return {T{0, 0}, T{1, 0}};
+}
+
+template &lt;&gt;
+inline std::pair&lt;Real, Real&gt;
+SinglePhaseFluidProperties::makeZeroAndOne(const Real &amp; /*ex*/)
+{
+  return {Real{0}, Real{1}};
+}
+
+template &lt;typename T, typename Functor&gt;
+void
+SinglePhaseFluidProperties::xyDerivatives(
+    const T x, const T &amp; y, T &amp; z, T &amp; dz_dx, T &amp; dz_dy, const Functor &amp; z_from_x_y)
+{
+  typedef MetaPhysicL::DualNumber&lt;T, MetaPhysicL::NumberArray&lt;2, T&gt;&gt; CompoundType;
+  const auto [zero, one] = makeZeroAndOne(x);
+
+  CompoundType x_c(x, zero);
+  auto &amp; x_cd = x_c.derivatives();
+  x_cd[0] = one;
+  CompoundType y_c(y, zero);
+  auto &amp; y_cd = y_c.derivatives();
+  y_cd[1] = one;
+
+  const auto z_c = z_from_x_y(x_c, y_c);
+  z = z_c.value();
+  dz_dx = z_c.derivatives()[0];
+  dz_dy = z_c.derivatives()[1];
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::p_T_from_v_e(const CppType &amp; v, // v value
+                                         const CppType &amp; e, // e value
+                                         const Real p0,     // initial guess
+                                         const Real T0,     // initial guess
+                                         CppType &amp; p,       // returned pressure
+                                         CppType &amp; T,       // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto v_lambda = [&amp;](const CppType &amp; pressure,
+                      const CppType &amp; temperature,
+                      CppType &amp; new_v,
+                      CppType &amp; dv_dp,
+                      CppType &amp; dv_dT) { v_from_p_T(pressure, temperature, new_v, dv_dp, dv_dT); };
+  auto e_lambda = [&amp;](const CppType &amp; pressure,
+                      const CppType &amp; temperature,
+                      CppType &amp; new_e,
+                      CppType &amp; de_dp,
+                      CppType &amp; de_dT) { e_from_p_T(pressure, temperature, new_e, de_dp, de_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        v, e, p0, T0, p, T, _tolerance, _tolerance, v_lambda, e_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (v, e)=(&quot;, v, &quot;, &quot;, e, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename T&gt;
+void
+SinglePhaseFluidProperties::p_T_from_v_h(const T &amp; v,     // v value
+                                         const T &amp; h,     // e value
+                                         const Real p0,   // initial guess
+                                         const Real T0,   // initial guess
+                                         T &amp; pressure,    // returned pressure
+                                         T &amp; temperature, // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto v_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_v, T &amp; dv_dp, T &amp; dv_dT)
+  { v_from_p_T(pressure, temperature, new_v, dv_dp, dv_dT); };
+  auto h_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_h, T &amp; dh_dp, T &amp; dh_dT)
+  { h_from_p_T(pressure, temperature, new_h, dh_dp, dh_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        v, h, p0, T0, pressure, temperature, _tolerance, _tolerance, v_lambda, h_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (v, h)=(&quot;, v, &quot;, &quot;, h, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename T&gt;
+void
+SinglePhaseFluidProperties::p_T_from_h_s(const T &amp; h,     // h value
+                                         const T &amp; s,     // s value
+                                         const Real p0,   // initial guess
+                                         const Real T0,   // initial guess
+                                         T &amp; pressure,    // returned pressure
+                                         T &amp; temperature, // returned temperature
+                                         bool &amp; conversion_succeeded) const
+{
+  auto h_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_h, T &amp; dh_dp, T &amp; dh_dT)
+  { h_from_p_T(pressure, temperature, new_h, dh_dp, dh_dT); };
+  auto s_lambda = [&amp;](const T &amp; pressure, const T &amp; temperature, T &amp; new_s, T &amp; ds_dp, T &amp; ds_dT)
+  { s_from_p_T(pressure, temperature, new_s, ds_dp, ds_dT); };
+  try
+  {
+    FluidPropertiesUtils::NewtonSolve2D(
+        h, s, p0, T0, pressure, temperature, _tolerance, _tolerance, h_lambda, s_lambda);
+    conversion_succeeded = true;
+  }
+  catch (MooseException &amp;)
+  {
+    conversion_succeeded = false;
+  }
+
+  if (!conversion_succeeded)
+    mooseDoOnce(mooseWarning(&quot;Conversion from (h, s)=(&quot;, h, &quot;, &quot;, s, &quot;) to (p, T) failed&quot;));
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::v_e_from_p_T(const CppType &amp; p,
+                                         const CppType &amp; T,
+                                         CppType &amp; v,
+                                         CppType &amp; e) const
+{
+  const CppType rho = rho_from_p_T(p, T);
+  v = 1.0 / rho;
+  try
+  {
+    // more likely to not involve a Newton search
+    e = e_from_p_T(p, T);
+  }
+  catch (...)
+  {
+    e = e_from_p_rho(p, rho);
+  }
+}
+
+template &lt;typename CppType&gt;
+void
+SinglePhaseFluidProperties::v_e_from_p_T(const CppType &amp; p,
+                                         const CppType &amp; T,
+                                         CppType &amp; v,
+                                         CppType &amp; dv_dp,
+                                         CppType &amp; dv_dT,
+                                         CppType &amp; e,
+                                         CppType &amp; de_dp,
+                                         CppType &amp; de_dT) const
+{
+  CppType rho, drho_dp, drho_dT;
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+
+  v = 1.0 / rho;
+  const CppType dv_drho = -1.0 / (rho * rho);
+  dv_dp = dv_drho * drho_dp;
+  dv_dT = dv_drho * drho_dT;
+
+  CppType de_dp_partial, de_drho;
+  e_from_p_rho(p, rho, e, de_dp_partial, de_drho);
+  de_dp = de_dp_partial + de_drho * drho_dp;
+  de_dT = de_drho * drho_dT;
+}
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="20976d44-396a-4535-8c48-1324b0f17971"><div class="modal-content"><h4>(moose/modules/fluid_properties/src/fluidproperties/SinglePhaseFluidProperties.C)</h4><pre class="moose-pre"><code class="language-cpp">// This file is part of the MOOSE framework
+// https://www.mooseframework.org
+//
+// All rights reserved, see COPYRIGHT for full restrictions
+// https://github.com/idaholab/moose/blob/master/COPYRIGHT
+//
+// Licensed under LGPL 2.1, please see LICENSE for details
+// https://www.gnu.org/licenses/lgpl-2.1.html
+
+#include &quot;SinglePhaseFluidProperties.h&quot;
+
+InputParameters
+SinglePhaseFluidProperties::validParams()
+{
+  InputParameters params = FluidProperties::validParams();
+  params.set&lt;std::string&gt;(&quot;fp_type&quot;) = &quot;single-phase-fp&quot;;
+
+  // Variable set conversion parameters
+  params.addRangeCheckedParam&lt;Real&gt;(
+      &quot;tolerance&quot;, 1e-8, &quot;tolerance &gt; 0&quot;, &quot;Tolerance for 2D Newton variable set conversion&quot;);
+  params.addRangeCheckedParam&lt;Real&gt;(
+      &quot;T_initial_guess&quot;,
+      400,
+      &quot;T_initial_guess &gt; 0&quot;,
+      &quot;Temperature initial guess for Newton Method variable set conversion&quot;);
+  params.addRangeCheckedParam&lt;Real&gt;(
+      &quot;p_initial_guess&quot;,
+      2e5,
+      &quot;p_initial_guess &gt; 0&quot;,
+      &quot;Pressure initial guess for Newton Method variable set conversion&quot;);
+  params.addParamNamesToGroup(&quot;tolerance T_initial_guess p_initial_guess&quot;,
+                              &quot;Variable set conversions Newton solve&quot;);
+
+  return params;
+}
+
+SinglePhaseFluidProperties::SinglePhaseFluidProperties(const InputParameters &amp; parameters)
+  : FluidProperties(parameters),
+    // downstream apps are creating fluid properties without their parameters, hence the workaround
+    _tolerance(isParamValid(&quot;tolerance&quot;) ? getParam&lt;Real&gt;(&quot;tolerance&quot;) : 1e-8),
+    _T_initial_guess(isParamValid(&quot;T_initial_guess&quot;) ? getParam&lt;Real&gt;(&quot;T_initial_guess&quot;) : 400),
+    _p_initial_guess(isParamValid(&quot;p_initial_guess&quot;) ? getParam&lt;Real&gt;(&quot;p_initial_guess&quot;) : 2e5)
+{
+}
+
+SinglePhaseFluidProperties::~SinglePhaseFluidProperties() {}
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored &quot;-Woverloaded-virtual&quot;
+
+Real
+SinglePhaseFluidProperties::s_from_p_T(const Real pressure, const Real temperature) const
+{
+  Real v, e;
+  v_e_from_p_T(pressure, temperature, v, e);
+  return s_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::s_from_p_T(
+    const Real pressure, const Real temperature, Real &amp; s, Real &amp; ds_dp, Real &amp; ds_dT) const
+{
+  Real v, e, dv_dp, dv_dT, de_dp, de_dT;
+  v_e_from_p_T(pressure, temperature, v, dv_dp, dv_dT, e, de_dp, de_dT);
+
+  Real ds_dv, ds_de;
+  s_from_v_e(v, e, s, ds_dv, ds_de);
+  ds_dp = ds_dv * dv_dp + ds_de * de_dp;
+  ds_dT = ds_dv * dv_dT + ds_de * de_dT;
+}
+
+Real
+SinglePhaseFluidProperties::s_from_v_e(const Real v, const Real e) const
+{
+  const Real p0 = _p_initial_guess;
+  const Real T0 = _T_initial_guess;
+  Real p, T;
+  bool conversion_succeeded = true;
+  p_T_from_v_e(v, e, p0, T0, p, T, conversion_succeeded);
+  const Real s = s_from_p_T(p, T);
+  return s;
+}
+
+void
+SinglePhaseFluidProperties::s_from_v_e(
+    const Real v, const Real e, Real &amp; s, Real &amp; ds_dv, Real &amp; ds_de) const
+{
+  const Real p0 = _p_initial_guess;
+  const Real T0 = _T_initial_guess;
+  Real p, T;
+  bool conversion_succeeded = true;
+  p_T_from_v_e(v, e, p0, T0, p, T, conversion_succeeded);
+  s = s_from_p_T(p, T);
+  ds_dv = p / T;
+  ds_de = 1 / T;
+}
+
+Real
+SinglePhaseFluidProperties::c_from_p_T(Real p, Real T) const
+{
+  Real v, e;
+  v_e_from_p_T(p, T, v, e);
+  return c_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::c_from_p_T(Real p, Real T, Real &amp; c, Real &amp; dc_dp, Real &amp; dc_dT) const
+{
+  Real v, e, dv_dp, dv_dT, de_dp, de_dT;
+  v_e_from_p_T(p, T, v, dv_dp, dv_dT, e, de_dp, de_dT);
+
+  Real dc_dv, dc_de;
+  c_from_v_e(v, e, c, dc_dv, dc_de);
+  dc_dp = dc_dv * dv_dp + dc_de * de_dp;
+  dc_dT = dc_dv * dv_dT + dc_de * de_dT;
+}
+
+Real
+SinglePhaseFluidProperties::mu_from_p_T(Real p, Real T) const
+{
+  Real v, e;
+  v_e_from_p_T(p, T, v, e);
+  return mu_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::mu_from_p_T(
+    Real p, Real T, Real &amp; mu, Real &amp; dmu_dp, Real &amp; dmu_dT) const
+{
+  Real v, e, dv_dp, dv_dT, de_dp, de_dT;
+  v_e_from_p_T(p, T, v, dv_dp, dv_dT, e, de_dp, de_dT);
+
+  Real dmu_dv, dmu_de;
+  mu_from_v_e(v, e, mu, dmu_dv, dmu_de);
+  dmu_dp = dmu_dv * dv_dp + dmu_de * de_dp;
+  dmu_dT = dmu_dv * dv_dT + dmu_de * de_dT;
+}
+
+Real
+SinglePhaseFluidProperties::cv_from_p_T(Real p, Real T) const
+{
+  Real v, e;
+  v_e_from_p_T(p, T, v, e);
+  return cv_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::cv_from_p_T(
+    Real p, Real T, Real &amp; cv, Real &amp; dcv_dp, Real &amp; dcv_dT) const
+{
+  Real v, e, dv_dp, dv_dT, de_dp, de_dT;
+  v_e_from_p_T(p, T, v, dv_dp, dv_dT, e, de_dp, de_dT);
+
+  Real dcv_dv, dcv_de;
+  cv_from_v_e(v, e, cv, dcv_dv, dcv_de);
+  dcv_dp = dcv_dv * dv_dp + dcv_de * de_dp;
+  dcv_dT = dcv_dv * dv_dT + dcv_de * de_dT;
+}
+
+Real
+SinglePhaseFluidProperties::cp_from_p_T(Real p, Real T) const
+{
+  Real v, e;
+  v_e_from_p_T(p, T, v, e);
+  return cp_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::cp_from_p_T(
+    Real p, Real T, Real &amp; cp, Real &amp; dcp_dp, Real &amp; dcp_dT) const
+{
+  Real v, e, dv_dp, dv_dT, de_dp, de_dT;
+  v_e_from_p_T(p, T, v, dv_dp, dv_dT, e, de_dp, de_dT);
+
+  Real dcp_dv, dcp_de;
+  cp_from_v_e(v, e, cp, dcp_dv, dcp_de);
+  dcp_dp = dcp_dv * dv_dp + dcp_de * de_dp;
+  dcp_dT = dcp_dv * dv_dT + dcp_de * de_dT;
+}
+
+Real
+SinglePhaseFluidProperties::k_from_p_T(Real p, Real T) const
+{
+  Real v, e;
+  v_e_from_p_T(p, T, v, e);
+  return k_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::k_from_p_T(Real p, Real T, Real &amp; k, Real &amp; dk_dp, Real &amp; dk_dT) const
+{
+  Real v, e, dv_dp, dv_dT, de_dp, de_dT;
+  v_e_from_p_T(p, T, v, dv_dp, dv_dT, e, de_dp, de_dT);
+
+  Real dk_dv, dk_de;
+  k_from_v_e(v, e, k, dk_dv, dk_de);
+  dk_dp = dk_dv * dv_dp + dk_de * de_dp;
+  dk_dT = dk_dv * dv_dT + dk_de * de_dT;
+}
+
+Real
+SinglePhaseFluidProperties::e_from_p_T(Real p, Real T) const
+{
+  const Real rho = rho_from_p_T(p, T);
+  return e_from_p_rho(p, rho);
+}
+
+void
+SinglePhaseFluidProperties::e_from_p_T(Real p, Real T, Real &amp; e, Real &amp; de_dp, Real &amp; de_dT) const
+{
+  // From rho(p,T), compute: drho(p,T)/dp, drho(p,T)/dT
+  Real rho = 0., drho_dp = 0., drho_dT = 0.;
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+
+  // From e(p, rho), compute: de(p,rho)/dp, de(p,rho)/drho
+  Real depr_dp = 0., depr_drho = 0.;
+  e_from_p_rho(p, rho, e, depr_dp, depr_drho);
+  // Using partial derivative rules, we have:
+  // de(p,T)/dp = de(p,rho)/dp * dp/dp + de(p,rho)/drho * drho(p,T)/dp, (dp/dp == 1)
+  // de(p,T)/dT = de(p,rho)/dp * dp/dT + de(p,rho)/drho * drho(p,T)/dT, (dp/dT == 0)
+  de_dp = depr_dp + depr_drho * drho_dp;
+  de_dT = depr_drho * drho_dT;
+}
+
+Real
+SinglePhaseFluidProperties::v_from_p_T(Real p, Real T) const
+{
+  const Real rho = rho_from_p_T(p, T);
+  return 1.0 / rho;
+}
+
+void
+SinglePhaseFluidProperties::v_from_p_T(Real p, Real T, Real &amp; v, Real &amp; dv_dp, Real &amp; dv_dT) const
+{
+  Real rho, drho_dp, drho_dT;
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+
+  v = 1.0 / rho;
+  const Real dv_drho = -1.0 / (rho * rho);
+
+  dv_dp = dv_drho * drho_dp;
+  dv_dT = dv_drho * drho_dT;
+}
+
+void
+SinglePhaseFluidProperties::beta_from_p_T(Real, Real, Real &amp;, Real &amp;, Real &amp;) const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; is not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::beta_from_p_T(Real p, Real T) const
+{
+  // The volumetric thermal expansion coefficient is defined as
+  //   1/v dv/dT)_p
+  // It is the fractional change rate of volume with respect to temperature change
+  // at constant pressure. Here it is coded as
+  //   - 1/rho drho/dT)_p
+  // using chain rule with v = v(rho)
+
+  Real rho, drho_dp, drho_dT;
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+  return -drho_dT / rho;
+}
+
+Real
+SinglePhaseFluidProperties::molarMass() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+std::string
+SinglePhaseFluidProperties::fluidName() const
+{
+  return std::string(&quot;&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::criticalPressure() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::criticalTemperature() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::criticalDensity() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::criticalInternalEnergy() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::triplePointPressure() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::triplePointTemperature() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::gamma_from_v_e(Real v, Real e) const
+{
+  return cp_from_v_e(v, e) / cv_from_v_e(v, e);
+}
+
+void
+SinglePhaseFluidProperties::gamma_from_v_e(
+    Real v, Real e, Real &amp; gamma, Real &amp; dgamma_dv, Real &amp; dgamma_de) const
+{
+  fluidPropError(__PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);
+
+  dgamma_dv = 0.0;
+  dgamma_de = 0.0;
+  gamma = gamma_from_v_e(v, e);
+}
+
+Real
+SinglePhaseFluidProperties::gamma_from_p_T(Real p, Real T) const
+{
+  return cp_from_p_T(p, T) / cv_from_p_T(p, T);
+}
+
+void
+SinglePhaseFluidProperties::gamma_from_p_T(
+    Real p, Real T, Real &amp; gamma, Real &amp; dgamma_dp, Real &amp; dgamma_dT) const
+{
+  fluidPropError(__PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);
+
+  dgamma_dp = 0.0;
+  dgamma_dT = 0.0;
+  gamma = gamma_from_p_T(p, T);
+}
+
+Real SinglePhaseFluidProperties::vaporPressure(Real) const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+std::vector&lt;Real&gt;
+SinglePhaseFluidProperties::henryCoefficients() const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+void
+SinglePhaseFluidProperties::vaporPressure(Real T, Real &amp; p, Real &amp; dp_dT) const
+{
+  fluidPropError(__PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);
+
+  dp_dT = 0.0;
+  p = vaporPressure(T);
+}
+
+DualReal
+SinglePhaseFluidProperties::vaporPressure(const DualReal &amp; T) const
+{
+  Real p = 0.0;
+  Real temperature = T.value();
+  Real dpdT = 0.0;
+
+  vaporPressure(temperature, p, dpdT);
+
+  DualReal result = p;
+  result.derivatives() = T.derivatives() * dpdT;
+
+  return result;
+}
+
+Real SinglePhaseFluidProperties::vaporTemperature(Real) const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+void
+SinglePhaseFluidProperties::vaporTemperature(Real p, Real &amp; T, Real &amp; dT_dp) const
+{
+  fluidPropError(__PRETTY_FUNCTION__, &quot; derivatives not implemented.&quot;);
+
+  dT_dp = 0.0;
+  T = vaporTemperature(p);
+}
+
+DualReal
+SinglePhaseFluidProperties::vaporTemperature(const DualReal &amp; p) const
+{
+  Real T = 0.0;
+  Real pressure = p.value();
+  Real dTdp = 0.0;
+
+  vaporTemperature(pressure, T, dTdp);
+
+  DualReal result = T;
+  result.derivatives() = p.derivatives() * dTdp;
+
+  return result;
+}
+
+void
+SinglePhaseFluidProperties::rho_e_from_p_T(Real p,
+                                           Real T,
+                                           Real &amp; rho,
+                                           Real &amp; drho_dp,
+                                           Real &amp; drho_dT,
+                                           Real &amp; e,
+                                           Real &amp; de_dp,
+                                           Real &amp; de_dT) const
+{
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+  e_from_p_T(p, T, e, de_dp, de_dT);
+}
+
+void
+SinglePhaseFluidProperties::rho_mu_from_p_T(Real p, Real T, Real &amp; rho, Real &amp; mu) const
+{
+  rho = rho_from_p_T(p, T);
+  mu = mu_from_p_T(p, T);
+}
+
+void
+SinglePhaseFluidProperties::rho_mu_from_p_T(Real p,
+                                            Real T,
+                                            Real &amp; rho,
+                                            Real &amp; drho_dp,
+                                            Real &amp; drho_dT,
+                                            Real &amp; mu,
+                                            Real &amp; dmu_dp,
+                                            Real &amp; dmu_dT) const
+{
+  rho_from_p_T(p, T, rho, drho_dp, drho_dT);
+  mu_from_p_T(p, T, mu, dmu_dp, dmu_dT);
+}
+
+void
+SinglePhaseFluidProperties::rho_mu_from_p_T(const DualReal &amp; p,
+                                            const DualReal &amp; T,
+                                            DualReal &amp; rho,
+                                            DualReal &amp; mu) const
+{
+  rho = rho_from_p_T(p, T);
+  mu = mu_from_p_T(p, T);
+}
+
+Real SinglePhaseFluidProperties::e_spndl_from_v(Real) const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+void
+SinglePhaseFluidProperties::v_e_spndl_from_T(Real, Real &amp;, Real &amp;) const
+{
+  mooseError(__PRETTY_FUNCTION__, &quot; not implemented.&quot;);
+}
+
+Real
+SinglePhaseFluidProperties::T_from_p_h(Real p, Real h) const
+{
+  const Real s = s_from_h_p(h, p);
+  const Real rho = rho_from_p_s(p, s);
+  const Real v = 1. / rho;
+  const Real e = e_from_v_h(v, h);
+  return T_from_v_e(v, e);
+}
+
+Real
+SinglePhaseFluidProperties::p_from_h_s(Real h, Real s) const
+{
+  Real p0 = _p_initial_guess;
+  Real T0 = _T_initial_guess;
+  Real p, T;
+  bool conversion_succeeded = true;
+  p_T_from_h_s(h, s, p0, T0, p, T, conversion_succeeded);
+  return p;
+}
+
+void
+SinglePhaseFluidProperties::p_from_h_s(Real h, Real s, Real &amp; p, Real &amp; dp_dh, Real &amp; dp_ds) const
+{
+  Real p0 = _p_initial_guess;
+  Real T0 = _T_initial_guess;
+  Real T;
+  bool conversion_succeeded = true;
+  p_T_from_h_s(h, s, p0, T0, p, T, conversion_succeeded);
+  dp_dh = rho_from_p_T(p, T);
+  dp_ds = -T * rho_from_p_T(p, T);
+}
+
+void
+SinglePhaseFluidProperties::T_from_p_h(Real p, Real h, Real &amp; T, Real &amp; dT_dp, Real &amp; dT_dh) const
+{
+  Real s, ds_dh, ds_dp;
+  s_from_h_p(h, p, s, ds_dh, ds_dp);
+
+  Real rho, drho_dp_partial, drho_ds;
+  rho_from_p_s(p, s, rho, drho_dp_partial, drho_ds);
+  const Real drho_dp = drho_dp_partial + drho_ds * ds_dp;
+  const Real drho_dh = drho_ds * ds_dh;
+
+  const Real v = 1.0 / rho;
+  const Real dv_drho = -1.0 / (rho * rho);
+  const Real dv_dp = dv_drho * drho_dp;
+  const Real dv_dh = dv_drho * drho_dh;
+
+  Real e, de_dv, de_dh_partial;
+  e_from_v_h(v, h, e, de_dv, de_dh_partial);
+  const Real de_dp = de_dv * dv_dp;
+  const Real de_dh = de_dh_partial + de_dv * dv_dh;
+
+  Real dT_dv, dT_de;
+  T_from_v_e(v, e, T, dT_dv, dT_de);
+  dT_dp = dT_dv * dv_dp + dT_de * de_dp;
+  dT_dh = dT_dv * dv_dh + dT_de * de_dh;
+}
+
+#pragma GCC diagnostic pop
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#916d16e1-b1af-475c-82e8-23f422bb7e91" class="tooltipped" data-position="left" data-tooltip="Properties">Properties</a></li><li><a href="#d47181c5-6b97-4d39-9725-50c751155c86" class="tooltipped" data-position="left" data-tooltip="Default Analytical Fluid Properties Relations">Default Analytical Fluid Properties Relations</a></li><li><a href="#f00342fc-482e-4d57-8f1c-e091f842b872" class="tooltipped" data-position="left" data-tooltip="Variable Set Conversions">Variable Set Conversions</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>

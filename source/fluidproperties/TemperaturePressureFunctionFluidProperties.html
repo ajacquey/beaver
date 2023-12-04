@@ -1,0 +1,211 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>TemperaturePressureFunctionFluidProperties | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><link href="../../contrib/katex/katex.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/katex_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script><script type="text/javascript" src="../../contrib/katex/katex.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li><a href="#!" class="dropdown-trigger" data-target="ea838f1b-99f8-459a-b871-336af4183351" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="bf6d3f70-82e8-46c1-b38a-e73567100aab" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="998d4eaf-6c9a-4c46-863a-e2ea1a4ce5ef"><i class="material-icons">menu</i></a><ul class="sidenav" id="998d4eaf-6c9a-4c46-863a-e2ea1a4ce5ef"><li><a href="#!" class="dropdown-trigger" data-target="aeb39f29-bbe3-4250-8c23-e43c29dd78b5" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="5f9644a1-685a-439a-8677-c307937c6af1" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div><ul class="dropdown-content" id="ea838f1b-99f8-459a-b871-336af4183351"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="bf6d3f70-82e8-46c1-b38a-e73567100aab"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li><li><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></li></ul><ul class="dropdown-content" id="aeb39f29-bbe3-4250-8c23-e43c29dd78b5"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="5f9644a1-685a-439a-8677-c307937c6af1"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li><li><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></li></ul></nav><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">fluidproperties</span><a href="#" class="breadcrumb">TemperaturePressureFunctionFluidProperties</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="e7a6a6b6-4d2b-4327-bebd-ef82427d1ab7" data-section-level="1" data-section-text="TemperaturePressureFunctionFluidProperties"><h1 id="temperaturepressurefunctionfluidproperties">TemperaturePressureFunctionFluidProperties</h1><p>Single-phase fluid properties that allows to provide thermal conductivity, density, and viscosity as functions of temperature and pressure.</p><p>The temperature and pressure will be passed as respectively the x and y spatial arguments of the functions. The following relations hold true:</p><p><span class="moose-katex-block-equation"><span class="moose-katex-equation table-cell" id="moose-equation-38409aca-f25f-4bb1-9e1b-731ad745303b"></span><script>var element = document.getElementById("moose-equation-38409aca-f25f-4bb1-9e1b-731ad745303b");katex.render("\\begin{aligned}   x = T \\\\   y = P \\\\   \\rho = \\rho^{user}(time=0, (x=T, y=P, z=0)) \\\\   \\mu = \\mu^{user}(time=0, (x=T, y=P, z=0)) \\\\   k = k^{user}(time=0, (x=T, y=P, z=0)) \\\\   c_v = c_v^{user} \\\\   e = c_v * T \\end{aligned}", element, {displayMode:true,throwOnError:false});</script></span></p><p>with <span class="moose-katex-inline-equation" id="moose-equation-6d69e4e3-52d9-422f-bfa0-45e24cf84e9e"><script>var element = document.getElementById("moose-equation-6d69e4e3-52d9-422f-bfa0-45e24cf84e9e");katex.render("T", element, {displayMode:false,throwOnError:false});</script></span> the temperature, <span class="moose-katex-inline-equation" id="moose-equation-7ec86add-7b0a-445e-a645-66112a6e5af3"><script>var element = document.getElementById("moose-equation-7ec86add-7b0a-445e-a645-66112a6e5af3");katex.render("P", element, {displayMode:false,throwOnError:false});</script></span> the pressure, <span class="moose-katex-inline-equation" id="moose-equation-519d4ebb-6bd9-4093-b098-5945b2d685cc"><script>var element = document.getElementById("moose-equation-519d4ebb-6bd9-4093-b098-5945b2d685cc");katex.render("\\rho", element, {displayMode:false,throwOnError:false});</script></span> the density, <span class="moose-katex-inline-equation" id="moose-equation-3591b340-b701-46c9-ad2a-7395e8e56f6c"><script>var element = document.getElementById("moose-equation-3591b340-b701-46c9-ad2a-7395e8e56f6c");katex.render("\\mu", element, {displayMode:false,throwOnError:false});</script></span> the dynamic viscosity, <span class="moose-katex-inline-equation" id="moose-equation-86c88bef-0248-44ee-9066-7653bed25154"><script>var element = document.getElementById("moose-equation-86c88bef-0248-44ee-9066-7653bed25154");katex.render("k", element, {displayMode:false,throwOnError:false});</script></span> the thermal conductivity, <span class="moose-katex-inline-equation" id="moose-equation-0af458c4-d3cc-4b4d-ad4c-fe388659dfe8"><script>var element = document.getElementById("moose-equation-0af458c4-d3cc-4b4d-ad4c-fe388659dfe8");katex.render("c_v", element, {displayMode:false,throwOnError:false});</script></span> the specific isochoric heat capacity, <span class="moose-katex-inline-equation" id="moose-equation-81c263c8-19cb-4de3-bd06-f3dbcb95aab2"><script>var element = document.getElementById("moose-equation-81c263c8-19cb-4de3-bd06-f3dbcb95aab2");katex.render("e", element, {displayMode:false,throwOnError:false});</script></span> the specific energy and the <span class="moose-katex-inline-equation" id="moose-equation-335df342-5772-4ae7-a2f7-8bb474c80ebd"><script>var element = document.getElementById("moose-equation-335df342-5772-4ae7-a2f7-8bb474c80ebd");katex.render("user", element, {displayMode:false,throwOnError:false});</script></span> exponent indicating a user-passed parameter.</p><p>The derivatives of the fluid properties are obtained using the <code>Function</code>(s) gradient components and the appropriate derivative chaining for derived properties.</p><div class="card moose-alert moose-alert-warning"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">warning</i><span class="moose-alert-title-brand">warning</span></div><div class="card-content"><div class="moose-alert-content"><p>The range of validity of the property is based off of the validity of the functions that are input, and is not checked by this <code>FluidProperties</code> object.</p></div></div></div><div class="card moose-alert moose-alert-note"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">comment</i><span class="moose-alert-title-brand">note</span></div><div class="card-content"><div class="moose-alert-content"><p>Support for the conservative (specific volume, internal energy) variable set is only partial. Notable missing implementations are routines for entropy, the speed of sound, and some conversions between specific enthalpy and specific energy.</p></div></div></div><div class="card moose-alert moose-alert-warning"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">warning</i><span class="moose-alert-title-brand">warning</span></div><div class="card-content"><div class="moose-alert-content"><p>Due to the approximations made when computing the isobaric heat capacity from the constant isochoric heat capacity, this material should only be used for nearly-incompressible fluids.</p></div></div></div><section class="scrollspy" id="3e4d3310-f2f3-4604-9753-03f5f7cca19f" data-section-level="2" data-section-text="Example Input File Syntax"><h2 id="example-input-file-syntax">Example Input File Syntax</h2><p>In this example, temperature and pressure dependent density, dynamic viscosity and thermal conductivity of a fluid are being set using three <code>ParsedFunctions</code>. The functions are specified with the <code>x</code> and <code>y</code> coordinates, and are evaluated with respectively the temperature and pressure variables.</p><pre class="moose-pre" style="max-height:350px;"><code class="language-text">[Functions]
+  [k]
+    type = ParsedFunction
+    symbol_names = &#x27;T p&#x27;
+    symbol_values = &#x27;temperature pressure&#x27;
+    expression = &#x27;14 + 1e-2 * T + 1e-5 * p&#x27;
+  []
+  [rho]
+    type = ParsedFunction
+    symbol_names = &#x27;T p&#x27;
+    symbol_values = &#x27;temperature pressure&#x27;
+    expression = &#x27;1.5e3 + 0.13 * T - 1.5e-4 * p&#x27;
+  []
+  [mu]
+    type = ParsedFunction
+    symbol_names = &#x27;T p&#x27;
+    symbol_values = &#x27;temperature pressure&#x27;
+    expression = &#x27;1e-3 + 2e-6 * T - 3e-9 * p&#x27;
+  []
+[]
+
+[FluidProperties]
+  [fp]
+    type = TemperaturePressureFunctionFluidProperties
+    cv = ${cv}
+    k = k
+    rho = rho
+    mu = mu
+  []
+[]
+</code></pre><a class="moose-source-filename tooltipped modal-trigger" href="#2483a616-1ea9-4e85-a634-de595ed6f1bf">(moose/modules/fluid_properties/test/tests/temperature_pressure_function/exact.i)</a></section><section class="scrollspy" id="1fa4d5f8-b923-4756-8226-e7aaa57968f4" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="b19421a7-4ee3-4fb7-ac27-9f0e8d9e4069" data-section-level="3" data-section-text="Required Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">cv</span><span class="moose-parameter-header-description">Constant isochoric specific heat [J/(kg-K)]</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Constant isochoric specific heat [J/(kg-K)]</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">k</span><span class="moose-parameter-header-description">Thermal conductivity function of temperature and pressure [W/(m-K)]</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>FunctionName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Thermal conductivity function of temperature and pressure [W/(m-K)]</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">mu</span><span class="moose-parameter-header-description">Dynamic viscosity function of temperature and pressure [Pa-s]</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>FunctionName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Dynamic viscosity function of temperature and pressure [Pa-s]</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">rho</span><span class="moose-parameter-header-description">Density function of temperature and pressure [kg/m^3]</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>FunctionName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Density function of temperature and pressure [kg/m^3]</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Required Parameters</h3></summary></details></section><section id="68250fad-3b4a-49d6-9b1b-15c634199721" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">execute_on</span><span class="moose-parameter-header-default">TIMESTEP_END</span><span class="moose-parameter-header-description">The list of flag(s) indicating when this object should be executed, the available options include NONE, INITIAL, LINEAR, NONLINEAR, TIMESTEP_END, TIMESTEP_BEGIN, MULTIAPP_FIXED_POINT_END, MULTIAPP_FIXED_POINT_BEGIN, FINAL, CUSTOM.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>TIMESTEP_END</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>ExecFlagEnum</p><p class="moose-parameter-description-options"><span>Options:</span>NONE, INITIAL, LINEAR, NONLINEAR, TIMESTEP_END, TIMESTEP_BEGIN, MULTIAPP_FIXED_POINT_END, MULTIAPP_FIXED_POINT_BEGIN, FINAL, CUSTOM</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of flag(s) indicating when this object should be executed, the available options include NONE, INITIAL, LINEAR, NONLINEAR, TIMESTEP_END, TIMESTEP_BEGIN, MULTIAPP_FIXED_POINT_END, MULTIAPP_FIXED_POINT_BEGIN, FINAL, CUSTOM.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="b38e26d2-44cf-4719-8681-298e165beb7c" data-section-level="3" data-section-text="Variable Set Conversions Newton Solve Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">T_initial_guess</span><span class="moose-parameter-header-default">400</span><span class="moose-parameter-header-description">Temperature initial guess for Newton Method variable set conversion</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>400</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Temperature initial guess for Newton Method variable set conversion</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">p_initial_guess</span><span class="moose-parameter-header-default">200000</span><span class="moose-parameter-header-description">Pressure initial guess for Newton Method variable set conversion</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>200000</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Pressure initial guess for Newton Method variable set conversion</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">tolerance</span><span class="moose-parameter-header-default">1e-08</span><span class="moose-parameter-header-description">Tolerance for 2D Newton variable set conversion</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1e-08</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Tolerance for 2D Newton variable set conversion</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Variable Set Conversions Newton Solve Parameters</h3></summary></details></section><section id="10cec3c8-2df3-4929-945f-84ebe66a04ae" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">allow_duplicate_execution_on_initial</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">In the case where this UserObject is depended upon by an initial condition, allow it to be executed twice during the initial setup (once before the IC and again after mesh adaptivity (if applicable).</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>In the case where this UserObject is depended upon by an initial condition, allow it to be executed twice during the initial setup (once before the IC and again after mesh adaptivity (if applicable).</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">allow_imperfect_jacobians</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">true to allow unimplemented property derivative terms to be set to zero for the AD API</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>true to allow unimplemented property derivative terms to be set to zero for the AD API</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">execution_order_group</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">Execution order groups are executed in increasing order (e.g., the lowest number is executed first). Note that negative group numbers may be used to execute groups before the default (0) group. Please refer to the user object documentation for ordering of user object execution within a group.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Execution order groups are executed in increasing order (e.g., the lowest number is executed first). Note that negative group numbers may be used to execute groups before the default (0) group. Please refer to the user object documentation for ordering of user object execution within a group.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_postaux</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Forces the UserObject to be executed in POSTAUX</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Forces the UserObject to be executed in POSTAUX</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_preaux</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Forces the UserObject to be executed in PREAUX</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Forces the UserObject to be executed in PREAUX</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_preic</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Forces the UserObject to be executed in PREIC during initial setup</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Forces the UserObject to be executed in PREIC during initial setup</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">fp_type</span><span class="moose-parameter-header-default">single-phase-fp</span><span class="moose-parameter-header-description">Type of the fluid property object</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>single-phase-fp</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>FPType</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Type of the fluid property object</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section></section></section><div class="moose-modal modal" id="2483a616-1ea9-4e85-a634-de595ed6f1bf"><div class="modal-content"><h4>(moose/modules/fluid_properties/test/tests/temperature_pressure_function/exact.i)</h4><pre class="moose-pre"><code class="language-text"># Test implementation of TemperaturePressureFunctionFluidProperties properties by comparison to analytical functions.
+
+cv = 4000
+T_initial = 400
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 1
+[]
+
+[Problem]
+  solve = false
+[]
+
+[AuxVariables]
+  [temperature]
+    initial_condition = ${T_initial}
+  []
+  [pressure]
+    initial_condition = 1e5
+  []
+[]
+
+[Functions]
+  [k]
+    type = ParsedFunction
+    symbol_names = &#x27;T p&#x27;
+    symbol_values = &#x27;temperature pressure&#x27;
+    expression = &#x27;14 + 1e-2 * T + 1e-5 * p&#x27;
+  []
+  [rho]
+    type = ParsedFunction
+    symbol_names = &#x27;T p&#x27;
+    symbol_values = &#x27;temperature pressure&#x27;
+    expression = &#x27;1.5e3 + 0.13 * T - 1.5e-4 * p&#x27;
+  []
+  [mu]
+    type = ParsedFunction
+    symbol_names = &#x27;T p&#x27;
+    symbol_values = &#x27;temperature pressure&#x27;
+    expression = &#x27;1e-3 + 2e-6 * T - 3e-9 * p&#x27;
+  []
+[]
+
+[FluidProperties]
+  [fp]
+    type = TemperaturePressureFunctionFluidProperties
+    cv = ${cv}
+    k = k
+    rho = rho
+    mu = mu
+  []
+[]
+
+[Materials]
+  [to_vars]
+    type = FluidPropertiesMaterialPT
+    fp = fp
+    outputs = &#x27;all&#x27;
+    output_properties = &#x27;density k cp cv viscosity e h&#x27;
+    pressure = pressure
+    temperature = temperature
+
+    compute_entropy = false
+    compute_sound_speed = false
+  []
+[]
+
+[Executioner]
+  type = Transient
+  num_steps = 2
+[]
+
+[Postprocessors]
+  # Postprocessors to get from the functions used as fluid properties
+  [temperature]
+    type = ElementAverageValue
+    variable = temperature
+    outputs = none
+  []
+  [pressure]
+    type = ElementAverageValue
+    variable = pressure
+    outputs = none
+  []
+  [k_exact]
+    type = FunctionValuePostprocessor
+    function = k
+    outputs = none
+  []
+  [rho_exact]
+    type = FunctionValuePostprocessor
+    function = rho
+    outputs = none
+  []
+  [mu_exact]
+    type = FunctionValuePostprocessor
+    function = mu
+    outputs = none
+  []
+  [e_exact]
+    type = Receiver
+    default = ${fparse cv * T_initial}
+    outputs = none
+  []
+  [cv_exact]
+    type = Receiver
+    default = ${fparse cv}
+    outputs = none
+  []
+
+  # Postprocessors to get from the fluid property object
+  [k_avg]
+    type = ElementAverageValue
+    variable = k
+    outputs = none
+  []
+  [rho_avg]
+    type = ElementAverageValue
+    variable = density
+    outputs = none
+  []
+  [mu_avg]
+    type = ElementAverageValue
+    variable = viscosity
+    outputs = none
+  []
+  [cv_avg]
+    type = ElementAverageValue
+    variable = cv
+    outputs = none
+  []
+  [e_avg]
+    type = ElementAverageValue
+    variable = e
+    outputs = none
+  []
+
+  # We output these directly, cant compare to anything analytical though
+  [cp_avg]
+    type = ElementAverageValue
+    variable = cp
+  []
+  [h_avg]
+    type = ElementAverageValue
+    variable = h
+  []
+
+  # Postprocessors to compare the two
+  [k_diff]
+    type = DifferencePostprocessor
+    value1 = k_exact
+    value2 = k_avg
+  []
+  [mu_diff]
+    type = DifferencePostprocessor
+    value1 = mu_exact
+    value2 = mu_avg
+  []
+  [rho_avg_diff]
+    type = DifferencePostprocessor
+    value1 = rho_exact
+    value2 = rho_avg
+  []
+  [e_diff]
+    type = DifferencePostprocessor
+    value1 = e_exact
+    value2 = e_avg
+  []
+  [cv_diff]
+    type = DifferencePostprocessor
+    value1 = cv_exact
+    value2 = cv_avg
+  []
+[]
+
+[Outputs]
+  # Note that diffs wont be settled until timestep 2 because of order of execution
+  csv = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#3e4d3310-f2f3-4604-9753-03f5f7cca19f" class="tooltipped" data-position="left" data-tooltip="Example Input File Syntax">Example Input File Syntax</a></li><li><a href="#1fa4d5f8-b923-4756-8226-e7aaa57968f4" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>

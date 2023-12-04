@@ -1,0 +1,410 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>BVBurgerModelUpdate | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li><a href="#!" class="dropdown-trigger" data-target="772c2558-b11b-4ef3-a010-36587c572960" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="cd571965-08be-4b3f-908b-e9ade37ee6c1" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="1d7d88c9-5952-4ad9-8cfc-97a88e745a70"><i class="material-icons">menu</i></a><ul class="sidenav" id="1d7d88c9-5952-4ad9-8cfc-97a88e745a70"><li><a href="#!" class="dropdown-trigger" data-target="22873351-a744-4172-bc3c-35b9914f0e96" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="95c492f3-e701-421f-9a4b-07eb117d564d" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div><ul class="dropdown-content" id="772c2558-b11b-4ef3-a010-36587c572960"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="cd571965-08be-4b3f-908b-e9ade37ee6c1"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li><li><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></li></ul><ul class="dropdown-content" id="22873351-a744-4172-bc3c-35b9914f0e96"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="95c492f3-e701-421f-9a4b-07eb117d564d"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li><li><a href="../../documentation/fluid_properties.html">Fluid Properties syntax</a></li></ul></nav><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">materials</span><a href="#" class="breadcrumb">BVBurgerModelUpdate</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="e9cf16ae-d05a-4bd2-b530-5a958a0738cf" data-section-level="1" data-section-text="BVBurgerModelUpdate"><h1 id="bvburgermodelupdate">BVBurgerModelUpdate</h1><div class="card moose-alert moose-alert-construction"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">build</i><span class="moose-alert-title-brand">construction:</span>Undocumented Class</div><div class="card-content"><div class="moose-alert-content"><p>The BVBurgerModelUpdate has not been documented. The content listed below should be used as a starting point for documenting the class, which includes the typical automatic documentation associated with a MooseObject; however, what is contained is ultimately determined by what is necessary to make the documentation clear for users.</p></div></div></div><p>Material for computing a Burger&#x27;s model viscoelastic update.</p><section class="scrollspy" id="0235bea9-dbb2-4250-b503-74bbbf427984" data-section-level="2" data-section-text="Overview"><h2 id="overview">Overview</h2><p></p></section><section class="scrollspy" id="f0f526f1-c26a-484f-bc58-8e8286e2b554" data-section-level="2" data-section-text="Example Input File Syntax"><h2 id="example-input-file-syntax">Example Input File Syntax</h2><p></p></section><section class="scrollspy" id="b9671eb6-f7ed-4d82-8fb4-e4d76750a473" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="be619ea2-0136-4f60-bab7-2421e35b2301" data-section-level="3" data-section-text="Required Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">shear_modulus_kelvin</span><span class="moose-parameter-header-description">The Kelvin shear modulus.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The Kelvin shear modulus.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">viscosity_kelvin</span><span class="moose-parameter-header-description">The Kelvin viscosity.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The Kelvin viscosity.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">viscosity_maxwell</span><span class="moose-parameter-header-description">The Maxwell viscosity.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The Maxwell viscosity.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Required Parameters</h3></summary></details></section><section id="572466df-98a8-49d6-8172-c0d33b8ac9ea" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">abs_tolerance</span><span class="moose-parameter-header-default">1e-10</span><span class="moose-parameter-header-description">The absolute tolerance for the iterative update.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1e-10</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The absolute tolerance for the iterative update.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">base_name</span><span class="moose-parameter-header-description">Optional parameter that defines a prefix for all material properties related to this stress update model. This allows for multiple models of the same type to be used without naming conflicts.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::string</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Optional parameter that defines a prefix for all material properties related to this stress update model. This allows for multiple models of the same type to be used without naming conflicts.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">block</span><span class="moose-parameter-header-description">The list of blocks (ids or names) that this object will be applied</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;SubdomainName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of blocks (ids or names) that this object will be applied</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">boundary</span><span class="moose-parameter-header-description">The list of boundaries (ids or names) from the mesh where this object applies</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;BoundaryName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of boundaries (ids or names) from the mesh where this object applies</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">constant_on</span><span class="moose-parameter-header-default">NONE</span><span class="moose-parameter-header-description">When ELEMENT, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps.When SUBDOMAIN, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps. Evaluations on element qps will be skipped</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>NONE</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MooseEnum</p><p class="moose-parameter-description-options"><span>Options:</span>NONE, ELEMENT, SUBDOMAIN</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>When ELEMENT, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps.When SUBDOMAIN, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps. Evaluations on element qps will be skipped</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">declare_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any declared properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any declared properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">max_iterations</span><span class="moose-parameter-header-default">200</span><span class="moose-parameter-header-description">The maximum number of iterations for the iterative update</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>200</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The maximum number of iterations for the iterative update</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">rel_tolerance</span><span class="moose-parameter-header-default">1e-10</span><span class="moose-parameter-header-description">The relative tolerance for the iterative update.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1e-10</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The relative tolerance for the iterative update.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="ee793a83-3409-46a3-909a-7591fe2ac44f" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">implicit</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Determines whether this object is calculated using an implicit or explicit form</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Determines whether this object is calculated using an implicit or explicit form</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">seed</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">The seed for the master random number generator</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The seed for the master random number generator</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section><section id="ae176680-06a1-496c-a1de-8b2b31a8ebcf" data-section-level="3" data-section-text="Outputs Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">output_properties</span><span class="moose-parameter-header-description">List of material properties, from this material, to output (outputs must also be defined to an output type)</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>List of material properties, from this material, to output (outputs must also be defined to an output type)</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">outputs</span><span class="moose-parameter-header-default">none </span><span class="moose-parameter-header-description">Vector of output names where you would like to restrict the output of variables(s) associated with this object</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>none </p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;OutputName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Vector of output names where you would like to restrict the output of variables(s) associated with this object</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Outputs Parameters</h3></summary></details></section></section><section class="scrollspy" id="f1b6613e-6180-49cd-8c10-40177c121976" data-section-level="2" data-section-text="Input Files"><h2 id="input-files">Input Files</h2><ul class="moose-list-inputs browser-default"><li><a class="moose-source-filename tooltipped modal-trigger" href="#f86bebcd-751c-4efe-813b-1ea2a1754446">(test/tests/viscoelasticity/burger.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#7a3f6851-9825-4f65-ac86-054137b9b856">(examples/viscoelasticity/burger/burger.i)</a></li></ul></section><section class="scrollspy" id="cf3eac62-3530-45c6-a8fe-9ecada159642" data-section-level="2" data-section-text="Child Objects"><h2 id="child-objects">Child Objects</h2><ul class="moose-list-children browser-default"><li><a class="moose-source-filename tooltipped modal-trigger" href="#70e18f9d-92f2-498d-a387-c5890e9c6d9e">(include/materials/BVLubby2ModelUpdate.h)</a></li></ul></section></section><div class="moose-modal modal" id="f86bebcd-751c-4efe-813b-1ea2a1754446"><div class="modal-content"><h4>(test/tests/viscoelasticity/burger.i)</h4><pre class="moose-pre"><code class="language-text">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 8
+  ny = 8
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [Kelvin_creep_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [Kelvin_creep_strain_aux]
+    type = ADMaterialRealAux
+    variable = Kelvin_creep_strain
+    property = eqv_Kelvin_creep_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_yy_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = 1.0
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = -1.0
+    []
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1.0
+    shear_modulus = 1.0
+    initial_stress = &#x27;-1.0 1.0 0.0&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVBurgerModelUpdate
+    viscosity_maxwell = 10.0
+    viscosity_kelvin = 1.0
+    shear_modulus_kelvin = 1.0
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 1.0
+  dt = 0.1
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="7a3f6851-9825-4f65-ac86-054137b9b856"><div class="modal-content"><h4>(examples/viscoelasticity/burger/burger.i)</h4><pre class="moose-pre"><code class="language-text">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 20
+  ny = 20
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [Kelvin_creep_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [Kelvin_creep_strain_aux]
+    type = ADMaterialRealAux
+    variable = Kelvin_creep_strain
+    property = eqv_Kelvin_creep_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_yy_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = 1.0
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = -1.0
+    []
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1.0
+    shear_modulus = 1.0
+    initial_stress = &#x27;-1.0 1.0 0.0&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVBurgerModelUpdate
+    viscosity_maxwell = 10.0
+    viscosity_kelvin = 1.0
+    shear_modulus_kelvin = 1.0
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason  -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+[]
+
+[Postprocessors]
+  [e]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [e_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [Kelvin_creep]
+    type = ElementAverageValue
+    variable = Kelvin_creep_strain
+    outputs = csv
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 10.0
+  dt = 0.05
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="70e18f9d-92f2-498d-a387-c5890e9c6d9e"><div class="modal-content"><h4>(include/materials/BVLubby2ModelUpdate.h)</h4><pre class="moose-pre"><code class="language-cpp">/******************************************************************************/
+/*                            This file is part of                            */
+/*                       BEAVER, a MOOSE-based application                    */
+/*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
+/*                                                                            */
+/*                  Copyright (C) 2022 by Antoine B. Jacquey                  */
+/*                  Tufts University / Polytechnique Montreal                 */
+/*                                                                            */
+/*            Licensed under GNU Lesser General Public License v2.1           */
+/*                       please see LICENSE for details                       */
+/*                 or http://www.gnu.org/licenses/lgpl.html                   */
+/******************************************************************************/
+
+#pragma once
+
+#include &quot;BVBurgerModelUpdate.h&quot;
+
+class BVLubby2ModelUpdate : public BVBurgerModelUpdate
+{
+public:
+  static InputParameters validParams();
+  BVLubby2ModelUpdate(const InputParameters &amp; parameters);
+
+protected:
+  virtual ADReal viscosityMaxwell(const ADReal &amp; eqv_stress) override;
+  virtual ADReal viscosityKelvin(const ADReal &amp; eqv_stress) override;
+  virtual ADReal viscosityMaxwellDerivative(const ADReal &amp; eqv_stress) override;
+  virtual ADReal viscosityKelvinDerivative(const ADReal &amp; eqv_stress) override;
+  virtual ADReal shearModulusKelvin(const ADReal &amp; eqv_stress) override;
+  virtual ADReal shearModulusKelvinDerivative(const ADReal &amp; eqv_stress) override;
+
+  // Reference stress
+  Real _s0;
+  // Stress-dependence parameters
+  Real _m1;
+  Real _m2;
+  Real _mG;
+};
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#0235bea9-dbb2-4250-b503-74bbbf427984" class="tooltipped" data-position="left" data-tooltip="Overview">Overview</a></li><li><a href="#f0f526f1-c26a-484f-bc58-8e8286e2b554" class="tooltipped" data-position="left" data-tooltip="Example Input File Syntax">Example Input File Syntax</a></li><li><a href="#b9671eb6-f7ed-4d82-8fb4-e4d76750a473" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li><li><a href="#f1b6613e-6180-49cd-8c10-40177c121976" class="tooltipped" data-position="left" data-tooltip="Input Files">Input Files</a></li><li><a href="#cf3eac62-3530-45c6-a8fe-9ecada159642" class="tooltipped" data-position="left" data-tooltip="Child Objects">Child Objects</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>
