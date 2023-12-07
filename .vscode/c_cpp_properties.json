@@ -12,6 +12,7 @@
                 "${workspaceFolder}/moose/framework/contrib/hit",
                 "${HOME}/mambaforge3/envs/moose/include",
                 "${HOME}/mambaforge3/envs/moose/libmesh/include",
+                "${HOME}/mambaforge3/envs/moose/wasp/include",
                 "${workspaceFolder}/moose/framework/contrib/json/include"
             ],
             "defines": [],
@@ -30,7 +31,8 @@
                     "${workspaceFolder}/moose/framework/contrib/boost/include",
                     "${workspaceFolder}/moose/framework/contrib/hit",
                     "${HOME}/mambaforge3/envs/moose/include",
-                    "${HOME}/mambaforge3/envs/moose/libmesh/include"
+                    "${HOME}/mambaforge3/envs/moose/libmesh/include",
+                    "${HOME}/mambaforge3/envs/moose/wasp/include"
                 ]
             }
         },
@@ -46,6 +48,7 @@
                 "${workspaceFolder}/moose/framework/contrib/hit",
                 "${HOME}/mambaforge3/envs/moose/include",
                 "${HOME}/mambaforge3/envs/moose/libmesh/include",
+                "${HOME}/mambaforge3/envs/moose/wasp/include",
                 "${workspaceFolder}/moose/framework/contrib/json/include"
             ],
             "defines": [],
@@ -68,7 +71,8 @@
                     "${workspaceFolder}/moose/framework/contrib/boost/include",
                     "${workspaceFolder}/moose/framework/contrib/hit",
                     "${HOME}/mambaforge3/envs/moose/include",
-                    "${HOME}/mambaforge3/envs/moose/libmesh/include"
+                    "${HOME}/mambaforge3/envs/moose/libmesh/include",
+                    "${HOME}/mambaforge3/envs/moose/wasp/include"
                 ]
             }
         }

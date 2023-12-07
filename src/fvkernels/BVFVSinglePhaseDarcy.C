@@ -11,30 +11,30 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#pragma once
+#include "BVFVSinglePhaseDarcy.h"
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
+registerADMooseObject("BeaverApp", BVFVSinglePhaseDarcy);
 
-class BVFluidProperties : public Material
+InputParameters
+BVFVSinglePhaseDarcy::validParams()
 {
-public:
-  static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  InputParameters params = BVTwoPointFluxApproximationBase::validParams();
+  params.addClassDescription(
+    "Kernel for the divergence of Darcy's velocity for single phase flow.");
+  return params;
+}
 
-protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
+BVFVSinglePhaseDarcy::BVFVSinglePhaseDarcy(const InputParameters & parameters)
+  : BVTwoPointFluxApproximationBase(parameters),
+    _lambda(getADMaterialProperty<Real>("fluid_mobility")),
+    _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility"))
+{
+}
 
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
-};
+ADReal
+BVFVSinglePhaseDarcy::computeQpResidual()
+{
+  // Harmonic average flux
+  ADRealVectorValue u = diffusiveFlux(_lambda[_qp], _lambda_neighbor[_qp], _var);
+  return u * (*_face_info).normal();
+}

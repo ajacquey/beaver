@@ -14,4 +14,19 @@
     input = 'single_phase_Mose.i'
     exodiff = 'single_phase_Mose_out.e'
   []
+  [fv_single_phase_1D]
+    type = 'Exodiff'
+    input = 'fv_single_phase_1D.i'
+    exodiff = 'fv_single_phase_1D_out.e'
+  []
+  [fv_single_phase_1D_transient]
+    type = 'Exodiff'
+    input = 'fv_single_phase_1D_transient.i'
+    exodiff = 'fv_single_phase_1D_transient_out.e'
+  []
+  [fv_single_phase_Mose]
+    type = 'Exodiff'
+    input = 'fv_single_phase_Mose.i'
+    exodiff = 'fv_single_phase_Mose_out.e'
+  []
 []

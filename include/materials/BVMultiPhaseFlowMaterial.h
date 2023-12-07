@@ -14,27 +14,21 @@
 #pragma once
 
 #include "Material.h"
-#include "SinglePhaseFluidProperties.h"
 
-class BVFluidProperties : public Material
+class BVMultiPhaseFlowMaterial : public Material
 {
 public:
   static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  BVMultiPhaseFlowMaterial(const InputParameters & parameters);
 
 protected:
-  virtual void initQpStatefulProperties() override;
   virtual void computeQpProperties() override;
 
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
+  const ADMaterialProperty<Real> & _permeability;
+  const ADMaterialProperty<Real> & _kr_w;
+  const ADMaterialProperty<Real> & _kr_n;
+  const ADMaterialProperty<Real> & _viscosity_w;
+  const ADMaterialProperty<Real> & _viscosity_n;
+  ADMaterialProperty<Real> & _lambda_w;
+  ADMaterialProperty<Real> & _lambda_n;
 };

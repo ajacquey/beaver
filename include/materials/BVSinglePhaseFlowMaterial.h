@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "ADMaterial.h"
+#include "Material.h"
 
-class BVSinglePhaseFlowMaterial : public ADMaterial
+class BVSinglePhaseFlowMaterial : public Material
 {
 public:
   static InputParameters validParams();

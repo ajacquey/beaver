@@ -18,14 +18,14 @@ registerMooseObject("BeaverApp", BVSinglePhaseFlowMaterial);
 InputParameters
 BVSinglePhaseFlowMaterial::validParams()
 {
-  InputParameters params = ADMaterial::validParams();
+  InputParameters params = Material::validParams();
   params.addClassDescription(
       "Computes properties for single phase fluid flow in a porous material.");
   return params;
 }
 
 BVSinglePhaseFlowMaterial::BVSinglePhaseFlowMaterial(const InputParameters & parameters)
-  : ADMaterial(parameters),
+  : Material(parameters),
     _permeability(getADMaterialProperty<Real>("permeability")),
     _viscosity(getADMaterialProperty<Real>("viscosity")),
     _lambda(declareADProperty<Real>("fluid_mobility"))

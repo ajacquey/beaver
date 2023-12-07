@@ -11,30 +11,23 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#pragma once
+#include "BVRelativePermeabilityBase.h"
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
-
-class BVFluidProperties : public Material
+InputParameters
+BVRelativePermeabilityBase::validParams()
 {
-public:
-  static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  InputParameters params = Material::validParams();
+  params.addClassDescription("Base class for computing relative permeabilities and their derivatives of a porous material for two-phase flow.");
+  params.addRequiredCoupledVar("saturation_w", "The wetting phase saturation variable.");
+  return params;
+}
 
-protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
-
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
-};
+BVRelativePermeabilityBase::BVRelativePermeabilityBase(const InputParameters & parameters)
+  : Material(parameters),
+    _sw(adCoupledValue("saturation_w")),
+    _kr_w(declareADProperty<Real>("relative_permeability_w")),
+    _kr_n(declareADProperty<Real>("relative_permeability_n"))
+    // _dkr_w(declareADProperty<Real>("relative_permeability_w_derivative")),
+    // _dkr_n(declareADProperty<Real>("relative_permeability_n_derivative"))
+{
+}

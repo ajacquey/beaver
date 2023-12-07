@@ -11,30 +11,21 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#pragma once
+#include "BVCapillaryPressureBase.h"
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
-
-class BVFluidProperties : public Material
+InputParameters
+BVCapillaryPressureBase::validParams()
 {
-public:
-  static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  InputParameters params = Material::validParams();
+  params.addClassDescription("Base class for computing the capillary pressure and its derivatives for two-phase flow.");
+  params.addRequiredCoupledVar("saturation_w", "The wetting phase saturation variable.");
+  return params;
+}
 
-protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
-
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
-};
+BVCapillaryPressureBase::BVCapillaryPressureBase(const InputParameters & parameters)
+  : Material(parameters),
+    _sw(adCoupledValue("saturation_w")),
+    _pc(declareADProperty<Real>("capillary_pressure")),
+    _dpc(declareADProperty<Real>("capillary_pressure_derivative"))
+{
+}
