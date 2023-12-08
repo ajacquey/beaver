@@ -49,6 +49,7 @@ BVFVMultiPhaseSaturationTimeDerivative::phase_ext()
       mooseError("Unknow phase!");
   }
 }
+
 ADReal
 BVFVMultiPhaseSaturationTimeDerivative::computeQpResidual()
 {

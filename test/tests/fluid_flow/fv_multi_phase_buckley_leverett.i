@@ -1,9 +1,15 @@
 [Mesh]
   type = GeneratedMesh
-  dim = 1
+  dim = 3
   xmin = 0
   xmax = 1
-  nx = 1000
+  nx = 100
+  ymin = -0.01
+  ymax = 0.01
+  zmin = -0.01
+  zmax = 0.01
+  ny = 1
+  nz = 1
 []
   
 [Variables]
@@ -18,12 +24,12 @@
     fv = true
     initial_condition = 0.001
   []
-  # [sn]
-  #   order = CONSTANT
-  #   family = MONOMIAL
-  #   fv = true
-  #   initial_condition = 0.999
-  # []
+  [sn]
+    order = CONSTANT
+    family = MONOMIAL
+    fv = true
+    initial_condition = 0.999
+  []
 []
 
 [FVKernels]
@@ -38,34 +44,25 @@
     variable = sw
     phase = 'wetting'
   []
-  # [darcy_w]
-  #   type = BVFVMultiPhaseSaturationDarcy
-  #   variable = sw
-  #   total_pressure = p
-  #   phase = 'wetting'
-  # []
+  [darcy_w]
+    type = BVFVMultiPhaseSaturationDarcy
+    variable = sw
+    total_pressure = p
+    phase = 'wetting'
+  []
   # Non-wetting phase
-  # [time_nw]
-  #   type = BVFVMultiPhaseSaturationTimeDerivative
-  #   variable = sn
-  #   phase = 'non_wetting'
-  # []
-  # [darcy_nw]
-  #   type = BVFVMultiPhaseSaturationDarcy
-  #   variable = sn
-  #   total_pressure = p
-  #   phase = 'non_wetting'
-  # []
+  [time_nw]
+    type = BVFVMultiPhaseSaturationTimeDerivative
+    variable = sn
+    phase = 'non_wetting'
+  []
+  [darcy_nw]
+    type = BVFVMultiPhaseSaturationDarcy
+    variable = sn
+    total_pressure = p
+    phase = 'non_wetting'
+  []
 []
-
-# [DiracKernels]
-#   [sw]
-#     type = ConstantPointSource
-#     point = '0 0 0'
-#     variable = sw
-#     value = 1.0
-#   []
-# []
 
 [FVBCs]
   [leftinflux_pw]
@@ -86,17 +83,31 @@
     value = 1.0
     boundary = 'left'
   []
-  [right_sw]
+  # [right_sw]
+  #   type = FVDirichletBC
+  #   variable = sw
+  #   value = 0.001
+  #   boundary = 'right'
+  # []
+  [leftinflux_sn]
     type = FVDirichletBC
-    variable = sw
-    value = 0.001
-    boundary = 'right'
+    variable = sn
+    value = 0.0
+    boundary = 'left'
   []
+  # [right_sn]
+  #   type = FVDirichletBC
+  #   variable = sn
+  #   value = 0.999
+  #   boundary = 'right'
+  # []
 []
 
 [Materials]
   [fluid_flow_mat]
     type = BVMultiPhaseFlowMaterial
+    output_properties = 'fluid_mobility_w fluid_mobility_n'
+    outputs = exodus
   []
   [porosity]
     type = BVConstantPorosity
@@ -123,16 +134,16 @@
   [capillary_pressure]
     type = BVCapillaryPressurePowerLaw
     saturation_w = sw
-    exponent = 2.0
-    reference_capillary_pressure = 1.0e-05
-    # output_properties = 'capillary_pressure'
+    exponent = 2
+    reference_capillary_pressure = 1.0e-04
+    output_properties = 'capillary_pressure'
     outputs = exodus
   []
   [rel_perm]
     type = BVRelativePermeabilityPowerLaw
     saturation_w = sw
-    exponent = 2.0
-    # output_properties = 'relative_permeability_w relative_permeability_n'
+    exponent = 2
+    output_properties = 'relative_permeability_w relative_permeability_n'
     outputs = exodus
   []
 []
@@ -141,12 +152,12 @@
   [simple_fluid_w]
     type = SimpleFluidProperties
     density0 = 1.0
-    viscosity = 1.0
+    viscosity = 0.5
   []
   [simple_fluid_nw]
     type = SimpleFluidProperties
     density0 = 1.0
-    viscosity = 0.5
+    viscosity = 1.0
   []
 []
 
@@ -158,7 +169,7 @@
     petsc_options_iname = '-pc_type -pc_hypre_type
                            -snes_atol -snes_max_it -snes_linesearch_type'
     petsc_options_value = 'hypre boomeramg
-                           1.0e-04 1000 basic'
+                           1.0e-10 1000 basic'
   []
 []
 
@@ -170,6 +181,7 @@
   num_steps = 50
   timestep_tolerance = 1.0e-05
   automatic_scaling = true
+  residual_and_jacobian_together = true
 []
 
 [Outputs]
