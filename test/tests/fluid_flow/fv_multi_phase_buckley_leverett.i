@@ -83,24 +83,24 @@
     value = 1.0
     boundary = 'left'
   []
-  # [right_sw]
-  #   type = FVDirichletBC
-  #   variable = sw
-  #   value = 0.001
-  #   boundary = 'right'
-  # []
+  [right_sw]
+    type = FVDirichletBC
+    variable = sw
+    value = 0.001
+    boundary = 'right'
+  []
   [leftinflux_sn]
     type = FVDirichletBC
     variable = sn
     value = 0.0
     boundary = 'left'
   []
-  # [right_sn]
-  #   type = FVDirichletBC
-  #   variable = sn
-  #   value = 0.999
-  #   boundary = 'right'
-  # []
+  [right_sn]
+    type = FVDirichletBC
+    variable = sn
+    value = 0.999
+    boundary = 'right'
+  []
 []
 
 [Materials]
