@@ -20,28 +20,26 @@ BVFVMultiPhasePressureDarcy::validParams()
 {
   InputParameters params = BVTwoPointFluxApproximationBase::validParams();
   params.addClassDescription(
-    "Kernel for the divergence of the total velocity for multi phase flow.");
+      "Kernel for the divergence of the total velocity for multi phase flow.");
+  params.set<unsigned short>("ghost_layers") = 2;
   return params;
 }
 
 BVFVMultiPhasePressureDarcy::BVFVMultiPhasePressureDarcy(const InputParameters & parameters)
   : BVTwoPointFluxApproximationBase(parameters),
-    _lambda_w(getADMaterialProperty<Real>("fluid_mobility_w")),
-    _lambda_w_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility_w")),
-    _lambda_n(getADMaterialProperty<Real>("fluid_mobility_n")),
-    _lambda_n_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility_n"))
+    _lambda(getADMaterialProperty<Real>("fluid_mobility")),
+    _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility"))
 {
+  if ((_var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage) &&
+      (_tid == 0))
+    adjustRMGhostLayers(std::max((unsigned short)(3), _pars.get<unsigned short>("ghost_layers")));
 }
 
 ADReal
 BVFVMultiPhasePressureDarcy::computeQpResidual()
 {
-  // Total mobility
-  ADReal lambda_T = _lambda_w[_qp] + _lambda_n[_qp];
-  ADReal lambda_T_neighbor = _lambda_w_neighbor[_qp] + _lambda_n_neighbor[_qp];
-
-  // Total velocity
-  ADRealVectorValue u = diffusiveFlux(lambda_T, lambda_T_neighbor, _var);
+  // Diffusive flux
+  ADRealVectorValue u = diffusiveFlux(_lambda[_qp], _lambda_neighbor[_qp], _var);
 
   return u * (*_face_info).normal();
 }

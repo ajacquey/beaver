@@ -27,10 +27,12 @@ protected:
   const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
 
   const MooseVariableFV<Real> * _p_var;
-  const ADMaterialProperty<Real> & _lambda_w;
-  const ADMaterialProperty<Real> & _lambda_w_neighbor;
-  const ADMaterialProperty<Real> & _lambda_n;
-  const ADMaterialProperty<Real> & _lambda_n_neighbor;
-  const ADMaterialProperty<Real> & _dpc;
-  const ADMaterialProperty<Real> & _dpc_neighbor;
+  const ADMaterialProperty<Real> & _lambda;
+  const ADMaterialProperty<Real> & _lambda_neighbor;
+  const ADMaterialProperty<Real> & _f_w;
+  const ADMaterialProperty<Real> & _f_w_neighbor;
+  const ADMaterialProperty<Real> & _f_n;
+  const ADMaterialProperty<Real> & _f_n_neighbor;
+  const ADMaterialProperty<Real> & _D;
+  const ADMaterialProperty<Real> & _D_neighbor;
 };

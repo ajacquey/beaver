@@ -24,8 +24,6 @@ public:
 protected:
   virtual ADReal computeQpResidual() override;
 
-  const ADMaterialProperty<Real> & _lambda_w;
-  const ADMaterialProperty<Real> & _lambda_w_neighbor;
-  const ADMaterialProperty<Real> & _lambda_n;
-  const ADMaterialProperty<Real> & _lambda_n_neighbor;
+  const ADMaterialProperty<Real> & _lambda;
+  const ADMaterialProperty<Real> & _lambda_neighbor;
 };

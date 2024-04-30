@@ -20,7 +20,8 @@ BVFVSinglePhaseDarcy::validParams()
 {
   InputParameters params = BVTwoPointFluxApproximationBase::validParams();
   params.addClassDescription(
-    "Kernel for the divergence of Darcy's velocity for single phase flow.");
+      "Kernel for the divergence of Darcy's velocity for single phase flow.");
+  params.set<unsigned short>("ghost_layers") = 2;
   return params;
 }
 
@@ -29,12 +30,15 @@ BVFVSinglePhaseDarcy::BVFVSinglePhaseDarcy(const InputParameters & parameters)
     _lambda(getADMaterialProperty<Real>("fluid_mobility")),
     _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility"))
 {
+  if ((_var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage) &&
+      (_tid == 0))
+    adjustRMGhostLayers(std::max((unsigned short)(3), _pars.get<unsigned short>("ghost_layers")));
 }
 
 ADReal
 BVFVSinglePhaseDarcy::computeQpResidual()
 {
-  // Harmonic average flux
+  // Diffusive flux
   ADRealVectorValue u = diffusiveFlux(_lambda[_qp], _lambda_neighbor[_qp], _var);
   return u * (*_face_info).normal();
 }

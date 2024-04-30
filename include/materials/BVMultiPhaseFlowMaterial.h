@@ -29,6 +29,10 @@ protected:
   const ADMaterialProperty<Real> & _kr_n;
   const ADMaterialProperty<Real> & _viscosity_w;
   const ADMaterialProperty<Real> & _viscosity_n;
-  ADMaterialProperty<Real> & _lambda_w;
-  ADMaterialProperty<Real> & _lambda_n;
+  const ADMaterialProperty<Real> & _dpc;
+
+  ADMaterialProperty<Real> & _lambda;
+  ADMaterialProperty<Real> & _f_w;
+  ADMaterialProperty<Real> & _f_n;
+  ADMaterialProperty<Real> & _D;
 };

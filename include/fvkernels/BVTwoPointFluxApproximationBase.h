@@ -22,11 +22,12 @@ public:
   BVTwoPointFluxApproximationBase(const InputParameters & params);
 
 protected:
-  virtual ADReal transmissibility(const ADReal & mobility, const ADReal & mobility_neighbor) const;
-  virtual ADRealVectorValue diffusiveFlux(const ADReal & mobility,
+  virtual ADReal transmissibility(const ADReal & coeff_elem, const ADReal & coeff_neighbor) const;
+  virtual ADRealVectorValue diffusiveFlux(const ADReal & mobility_elem,
                                           const ADReal & mobility_neighbor,
                                           const MooseVariableFV<Real> & fv_var) const;
-  virtual ADRealVectorValue advectiveFlux(const ADReal & qty,
-                                          const ADReal & qty_neighbor,
-                                          const ADRealVectorValue & vel) const;
+  virtual ADRealVectorValue advectiveFluxVariable(const ADRealVectorValue & vel) const;
+  virtual ADRealVectorValue advectiveFluxMaterial(const ADReal & qty_elem,
+                                                  const ADReal & qty_neighbor,
+                                                  const ADRealVectorValue & vel) const;
 };
