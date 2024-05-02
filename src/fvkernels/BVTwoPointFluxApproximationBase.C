@@ -61,22 +61,17 @@ BVTwoPointFluxApproximationBase::diffusiveFlux(const ADReal & mobility_elem,
 {
   auto T = transmissibility(mobility_elem, mobility_neighbor);
 
-  return -T * fv_var.adGradSln(*_face_info,
-                               determineState(),
-                               _var.faceInterpolationMethod() ==
-                                   Moose::FV::InterpMethod::SkewCorrectedAverage);
+  return -T * fv_var.adGradSln(*_face_info, determineState(), true);
 }
 
 ADRealVectorValue
 BVTwoPointFluxApproximationBase::advectiveFluxVariable(const ADRealVectorValue & vel) const
 {
   const bool elem_is_upwind = vel * (*_face_info).normal() >= 0;
-  const auto face =
-      makeFace(*_face_info,
-               Moose::FV::limiterType(Moose::FV::InterpMethod::Upwind),
-               elem_is_upwind,
-               _var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage);
+  const auto face = makeFace(
+      *_face_info, Moose::FV::limiterType(Moose::FV::InterpMethod::Upwind), elem_is_upwind, true);
   ADReal u_interface = _var(face, determineState());
+
   return vel * u_interface;
 }
 

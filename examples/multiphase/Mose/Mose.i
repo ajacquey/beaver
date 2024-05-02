@@ -35,13 +35,13 @@
     order = CONSTANT
     family = MONOMIAL
     fv = true
-    initial_condition = 0.001
+    initial_condition = 0.01
   []
   [sn]
     order = CONSTANT
     family = MONOMIAL
     fv = true
-    initial_condition = 0.999
+    initial_condition = 0.99
   []
 []
 
@@ -99,7 +99,7 @@
   [bottom_sw]
     type = FVDirichletBC
     variable = sw
-    value = 0.001
+    value = 0.01
     boundary = 'bottom'
   []
   [topinflux_sn]
@@ -111,7 +111,7 @@
   [bottom_sn]
     type = FVDirichletBC
     variable = sn
-    value = 0.999
+    value = 0.99
     boundary = 'bottom'
   []
 []
@@ -174,45 +174,45 @@
   []
 []
 
-# [Preconditioning]
-#   active = 'superlu'
-#   [hypre]
-#     type = SMP
-#     full = true
-#     petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'
-#     petsc_options_iname = '-pc_type -pc_hypre_type
-#                            -pc_hypre_boomeramg_strong_threshold -pc_hypre_boomeramg_agg_nl -pc_hypre_boomeramg_agg_num_paths -pc_hypre_boomeramg_max_levels
-#                            -pc_hypre_boomeramg_coarsen_type -pc_hypre_boomeramg_interp_type
-#                            -pc_hypre_boomeramg_P_max -pc_hypre_boomeramg_truncfacto -snes_atol'
-#     petsc_options_value = 'hypre boomeramg
-#                            0.7 4 5 25
-#                            HMIS ext+i
-#                            2 0.3 1.0e-14'
-#   []
-#   [superlu]
-#     type = SMP
-#     full = true
-#     petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'# -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix'
-#     petsc_options_iname = '-snes_type
-#                            -snes_atol -snes_rtol -snes_max_it
-#                            -pc_type -pc_factor_mat_solver_package'
-#     petsc_options_value = 'newtonls
-#                            1e-10 1e-08 50
-#                            lu superlu_dist'
-#   []
-# []
-
 [Preconditioning]
+  active = 'superlu'
   [hypre]
     type = SMP
     full = true
     petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'
     petsc_options_iname = '-pc_type -pc_hypre_type
-                           -snes_atol -snes_max_it -snes_linesearch_type'
+                           -pc_hypre_boomeramg_strong_threshold -pc_hypre_boomeramg_agg_nl -pc_hypre_boomeramg_agg_num_paths -pc_hypre_boomeramg_max_levels
+                           -pc_hypre_boomeramg_coarsen_type -pc_hypre_boomeramg_interp_type
+                           -pc_hypre_boomeramg_P_max -pc_hypre_boomeramg_truncfacto -snes_atol'
     petsc_options_value = 'hypre boomeramg
-                           1.0e-10 1000 basic'
+                           0.7 4 5 25
+                           HMIS ext+i
+                           2 0.3 1.0e-14'
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'# -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix'
+    petsc_options_iname = '-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package'
+    petsc_options_value = 'newtonls
+                           1e-10 1e-08 50
+                           lu superlu_dist'
   []
 []
+
+# [Preconditioning]
+#   [hypre]
+#     type = SMP
+#     full = true
+#     petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'
+#     petsc_options_iname = '-pc_type -pc_hypre_type
+#                            -snes_atol -snes_max_it -snes_linesearch_type'
+#     petsc_options_value = 'hypre boomeramg
+#                            1.0e-10 1000 basic'
+#   []
+# []
 
 [Executioner]
   type = Transient

@@ -3,7 +3,7 @@
   dim = 3
   xmin = 0
   xmax = 1
-  nx = 100
+  nx = 10
   ymin = -0.01
   ymax = 0.01
   zmin = -0.01
@@ -11,7 +11,7 @@
   ny = 1
   nz = 1
 []
-  
+
 [Variables]
   [p]
     order = CONSTANT
@@ -22,13 +22,13 @@
     order = CONSTANT
     family = MONOMIAL
     fv = true
-    initial_condition = 0.001
+    initial_condition = 0.05
   []
   [sn]
     order = CONSTANT
     family = MONOMIAL
     fv = true
-    initial_condition = 0.999
+    initial_condition = 0.95
   []
 []
 
@@ -80,25 +80,25 @@
   [leftinflux_sw]
     type = FVDirichletBC
     variable = sw
-    value = 1.0
+    value = 0.95
     boundary = 'left'
   []
   [right_sw]
     type = FVDirichletBC
     variable = sw
-    value = 0.001
+    value = 0.05
     boundary = 'right'
   []
   [leftinflux_sn]
     type = FVDirichletBC
     variable = sn
-    value = 0.0
+    value = 0.05
     boundary = 'left'
   []
   [right_sn]
     type = FVDirichletBC
     variable = sn
-    value = 0.999
+    value = 0.95
     boundary = 'right'
   []
 []
@@ -152,7 +152,7 @@
   [simple_fluid_w]
     type = SimpleFluidProperties
     density0 = 1.0
-    viscosity = 0.5
+    viscosity = 1.0
   []
   [simple_fluid_nw]
     type = SimpleFluidProperties
@@ -178,7 +178,7 @@
   solve_type = 'NEWTON'
   start_time = 0
   end_time = 0.3
-  num_steps = 50
+  num_steps = 3
   timestep_tolerance = 1.0e-05
   automatic_scaling = true
   residual_and_jacobian_together = true
