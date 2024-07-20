@@ -13,28 +13,20 @@
 
 #pragma once
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
+#include "BVTwoPointFluxApproximationBase.h"
 
-class BVFluidProperties : public Material
+class BVFVSinglePhaseSoluteDarcy : public BVTwoPointFluxApproximationBase
 {
 public:
   static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  BVFVSinglePhaseSoluteDarcy(const InputParameters & parameters);
 
 protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
+  virtual ADReal computeQpResidual() override;
 
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
+  const MooseVariableFV<Real> * _p_var;
+  const ADMaterialProperty<Real> & _lambda;
+  const ADMaterialProperty<Real> & _lambda_neighbor;
+  const ADMaterialProperty<Real> & _lambda_c;
+  const ADMaterialProperty<Real> & _lambda_c_neighbor;
 };

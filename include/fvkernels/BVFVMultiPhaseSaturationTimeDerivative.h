@@ -13,28 +13,22 @@
 
 #pragma once
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
+#include "FVTimeKernel.h"
 
-class BVFluidProperties : public Material
+class BVFVMultiPhaseSaturationTimeDerivative : public FVTimeKernel
 {
 public:
   static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
+  BVFVMultiPhaseSaturationTimeDerivative(const InputParameters & parameters);
   std::string phase_ext();
 
 protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
-
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
+  virtual ADReal computeQpResidual() override;
 
   const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
   const std::string _ext;
 
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
+  const ADMaterialProperty<Real> & _porosity;
+  const ADMaterialProperty<Real> & _density;
+  const MaterialProperty<Real> & _density_old;
 };

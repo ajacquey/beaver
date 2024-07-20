@@ -13,28 +13,16 @@
 
 #pragma once
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
+#include "BVDispersionBase.h"
 
-class BVFluidProperties : public Material
+class BVConstantDispersion : public BVDispersionBase
 {
 public:
   static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  BVConstantDispersion(const InputParameters & parameters);
 
 protected:
-  virtual void initQpStatefulProperties() override;
   virtual void computeQpProperties() override;
 
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
+  const Real _dispersion0;
 };

@@ -25,9 +25,9 @@ BVFluidProperties::validParams()
   params.addRequiredCoupledVar("temperature", "The temperature (K)");
   params.addRequiredParam<UserObjectName>("fp",
                                           "The name of the user object for fluid properties.");
-  //   MooseEnum phase("wetting non_wetting single", "single");
-  //   params.addParam<MooseEnum>(
-  //       "phase", phase, "The phase of the fluid properties (wetting, non_wetting or single).");
+  MooseEnum phase("wetting non_wetting single", "single");
+  params.addParam<MooseEnum>(
+      "phase", phase, "The phase of the fluid properties (wetting, non_wetting or single).");
   return params;
 }
 
@@ -35,31 +35,29 @@ BVFluidProperties::BVFluidProperties(const InputParameters & parameters)
   : Material(parameters),
     _pf(adCoupledValue("fluid_pressure")),
     _temp(adCoupledValue("temperature")),
-    // _phase(getParam<MooseEnum>("phase").getEnum<PhaseEnum>()),
-    // _ext(phase_ext()),
+    _phase(getParam<MooseEnum>("phase").getEnum<PhaseEnum>()),
+    _ext(phase_ext()),
     _fp(getUserObject<SinglePhaseFluidProperties>("fp")),
-    // _density(declareADProperty<Real>("density" + _ext)),
-    // _viscosity(declareADProperty<Real>("viscosity" + _ext))
-    _density(declareADProperty<Real>("density")),
-    _viscosity(declareADProperty<Real>("viscosity"))
+    _density(declareADProperty<Real>("density" + _ext)),
+    _viscosity(declareADProperty<Real>("viscosity" + _ext))
 {
 }
 
-// std::string
-// BVFluidProperties::phase_ext()
-// {
-//   switch (_phase)
-//   {
-//     case PhaseEnum::WETTING:
-//       return "_w";
-//     case PhaseEnum::NON_WETTING:
-//       return "_n";
-//     case PhaseEnum::SINGLE:
-//       return "";
-//     default:
-//       mooseError("Unknow phase!");
-//   }
-// }
+std::string
+BVFluidProperties::phase_ext()
+{
+  switch (_phase)
+  {
+    case PhaseEnum::WETTING:
+      return "_w";
+    case PhaseEnum::NON_WETTING:
+      return "_n";
+    case PhaseEnum::SINGLE:
+      return "";
+    default:
+      mooseError("Unknow phase!");
+  }
+}
 
 void
 BVFluidProperties::initQpStatefulProperties()

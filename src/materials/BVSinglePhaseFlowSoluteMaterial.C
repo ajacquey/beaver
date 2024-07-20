@@ -11,30 +11,30 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVSinglePhaseFlowMaterial.h"
+#include "BVSinglePhaseFlowSoluteMaterial.h"
 
-registerMooseObject("BeaverApp", BVSinglePhaseFlowMaterial);
+registerMooseObject("BeaverApp", BVSinglePhaseFlowSoluteMaterial);
 
 InputParameters
-BVSinglePhaseFlowMaterial::validParams()
+BVSinglePhaseFlowSoluteMaterial::validParams()
 {
   InputParameters params = Material::validParams();
   params.addClassDescription(
-      "Computes properties for single phase fluid flow in a porous material.");
+      "Computes properties for single phase fluid flow and solute transport in a porous material.");
   return params;
 }
 
-BVSinglePhaseFlowMaterial::BVSinglePhaseFlowMaterial(const InputParameters & parameters)
+BVSinglePhaseFlowSoluteMaterial::BVSinglePhaseFlowSoluteMaterial(const InputParameters & parameters)
   : Material(parameters),
-    _permeability(getADMaterialProperty<Real>("permeability")),
-    _viscosity(getADMaterialProperty<Real>("viscosity")),
-    _lambda(declareADProperty<Real>("fluid_mobility"))
+    _porosity(getADMaterialProperty<Real>("porosity")),
+    _dispersion(getADMaterialProperty<Real>("dispersion")),
+    _lambda_c(declareADProperty<Real>("solute_mobility"))
 {
 }
 
 void
-BVSinglePhaseFlowMaterial::computeQpProperties()
+BVSinglePhaseFlowSoluteMaterial::computeQpProperties()
 {
-  // Fluid mobility
-  _lambda[_qp] = _permeability[_qp] / _viscosity[_qp];
+  // Solute mobility
+  _lambda_c[_qp] = _porosity[_qp] * _dispersion[_qp];
 }

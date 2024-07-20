@@ -3,38 +3,29 @@
 /*                       BEAVER, a MOOSE-based application                    */
 /*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
 /*                                                                            */
-/*                  Copyright (C) 2020 by Antoine B. Jacquey                  */
-/*                    Massachusetts Institute of Technology                   */
+/*                  Copyright (C) 2022 by Antoine B. Jacquey                  */
+/*                  Tufts University / Polytechnique Montreal                 */
 /*                                                                            */
 /*            Licensed under GNU Lesser General Public License v2.1           */
 /*                       please see LICENSE for details                       */
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVSinglePhaseFlowMaterial.h"
-
-registerMooseObject("BeaverApp", BVSinglePhaseFlowMaterial);
+#include "BVCapillaryPressureBase.h"
 
 InputParameters
-BVSinglePhaseFlowMaterial::validParams()
+BVCapillaryPressureBase::validParams()
 {
   InputParameters params = Material::validParams();
-  params.addClassDescription(
-      "Computes properties for single phase fluid flow in a porous material.");
+  params.addClassDescription("Base class for computing the capillary pressure and its derivatives for two-phase flow.");
+  params.addRequiredCoupledVar("saturation_w", "The wetting phase saturation variable.");
   return params;
 }
 
-BVSinglePhaseFlowMaterial::BVSinglePhaseFlowMaterial(const InputParameters & parameters)
+BVCapillaryPressureBase::BVCapillaryPressureBase(const InputParameters & parameters)
   : Material(parameters),
-    _permeability(getADMaterialProperty<Real>("permeability")),
-    _viscosity(getADMaterialProperty<Real>("viscosity")),
-    _lambda(declareADProperty<Real>("fluid_mobility"))
+    _sw(adCoupledValue("saturation_w")),
+    _pc(declareADProperty<Real>("capillary_pressure")),
+    _dpc(declareADProperty<Real>("capillary_pressure_derivative"))
 {
-}
-
-void
-BVSinglePhaseFlowMaterial::computeQpProperties()
-{
-  // Fluid mobility
-  _lambda[_qp] = _permeability[_qp] / _viscosity[_qp];
 }

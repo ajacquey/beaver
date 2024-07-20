@@ -3,38 +3,35 @@
 /*                       BEAVER, a MOOSE-based application                    */
 /*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
 /*                                                                            */
-/*                  Copyright (C) 2020 by Antoine B. Jacquey                  */
-/*                    Massachusetts Institute of Technology                   */
+/*                  Copyright (C) 2022 by Antoine B. Jacquey                  */
+/*                  Tufts University / Polytechnique Montreal                 */
 /*                                                                            */
 /*            Licensed under GNU Lesser General Public License v2.1           */
 /*                       please see LICENSE for details                       */
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVSinglePhaseFlowMaterial.h"
+#include "BVFVSinglePhaseSoluteTimeDerivative.h"
 
-registerMooseObject("BeaverApp", BVSinglePhaseFlowMaterial);
+registerADMooseObject("BeaverApp", BVFVSinglePhaseSoluteTimeDerivative);
 
 InputParameters
-BVSinglePhaseFlowMaterial::validParams()
+BVFVSinglePhaseSoluteTimeDerivative::validParams()
 {
-  InputParameters params = Material::validParams();
+  InputParameters params = FVTimeKernel::validParams();
   params.addClassDescription(
-      "Computes properties for single phase fluid flow in a porous material.");
+      "Kernel for the transient term for single phase flow solute transport.");
   return params;
 }
 
-BVSinglePhaseFlowMaterial::BVSinglePhaseFlowMaterial(const InputParameters & parameters)
-  : Material(parameters),
-    _permeability(getADMaterialProperty<Real>("permeability")),
-    _viscosity(getADMaterialProperty<Real>("viscosity")),
-    _lambda(declareADProperty<Real>("fluid_mobility"))
+BVFVSinglePhaseSoluteTimeDerivative::BVFVSinglePhaseSoluteTimeDerivative(
+    const InputParameters & parameters)
+  : FVTimeKernel(parameters), _porosity(getADMaterialProperty<Real>("porosity"))
 {
 }
 
-void
-BVSinglePhaseFlowMaterial::computeQpProperties()
+ADReal
+BVFVSinglePhaseSoluteTimeDerivative::computeQpResidual()
 {
-  // Fluid mobility
-  _lambda[_qp] = _permeability[_qp] / _viscosity[_qp];
+  return _porosity[_qp] * _u_dot[_qp];
 }

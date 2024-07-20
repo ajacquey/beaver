@@ -13,28 +13,21 @@
 
 #pragma once
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
+#include "FVFluxKernel.h"
 
-class BVFluidProperties : public Material
+class BVTwoPointFluxApproximationBase : public FVFluxKernel
 {
 public:
   static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  BVTwoPointFluxApproximationBase(const InputParameters & params);
 
 protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
-
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
+  virtual ADReal transmissibility(const ADReal & coeff_elem, const ADReal & coeff_neighbor) const;
+  virtual ADRealVectorValue diffusiveFlux(const ADReal & mobility_elem,
+                                          const ADReal & mobility_neighbor,
+                                          const MooseVariableFV<Real> & fv_var) const;
+  virtual ADRealVectorValue advectiveFluxVariable(const ADRealVectorValue & vel) const;
+  virtual ADRealVectorValue advectiveFluxMaterial(const ADReal & qty_elem,
+                                                  const ADReal & qty_neighbor,
+                                                  const ADRealVectorValue & vel) const;
 };

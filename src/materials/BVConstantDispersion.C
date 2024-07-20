@@ -11,30 +11,27 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#pragma once
+#include "BVConstantDispersion.h"
 
-#include "Material.h"
-#include "SinglePhaseFluidProperties.h"
+registerMooseObject("BeaverApp", BVConstantDispersion);
 
-class BVFluidProperties : public Material
+InputParameters
+BVConstantDispersion::validParams()
 {
-public:
-  static InputParameters validParams();
-  BVFluidProperties(const InputParameters & parameters);
-  std::string phase_ext();
+  InputParameters params = BVDispersionBase::validParams();
+  params.addClassDescription("Computes a constant dispersion value for the porous medium.");
+  params.addRequiredRangeCheckedParam<Real>(
+      "dispersion", "dispersion>=0", "The effective diffusion coefficient.");
+  return params;
+}
 
-protected:
-  virtual void initQpStatefulProperties() override;
-  virtual void computeQpProperties() override;
+BVConstantDispersion::BVConstantDispersion(const InputParameters & parameters)
+  : BVDispersionBase(parameters), _dispersion0(getParam<Real>("dispersion"))
+{
+}
 
-  const ADVariableValue & _pf;
-  const ADVariableValue & _temp;
-
-  const enum class PhaseEnum { WETTING, NON_WETTING, SINGLE } _phase;
-  const std::string _ext;
-
-  const SinglePhaseFluidProperties & _fp;
-
-  ADMaterialProperty<Real> & _density;
-  ADMaterialProperty<Real> & _viscosity;
-};
+void
+BVConstantDispersion::computeQpProperties()
+{
+  _dispersion[_qp] = _dispersion0;
+}

@@ -25,7 +25,7 @@ def analyticalSolution_u(t):
   return res
   
 def numericalSolution(t):
-  filebase = "terzaghi_csv_p_line_pf_"
+  filebase = "terzaghi_fv_csv_p_line_pf_"
   if t==0.001:
     filename = filebase + "0047.csv"
   elif t==0.005:
@@ -78,7 +78,7 @@ def plot_consolidation(ax):
   ta = np.logspace(-4, 1, 100)
 
   ua = analyticalSolution_u(ta)
-  tn, un = np.loadtxt("terzaghi_csv_u.csv", delimiter=',', skiprows=1, usecols=[0, 1], unpack=True)
+  tn, un = np.loadtxt("terzaghi_fv_csv_u.csv", delimiter=',', skiprows=1, usecols=[0, 1], unpack=True)
   un = (-un*h - w0) / (wf - w0)
 
   # Plot analytical
