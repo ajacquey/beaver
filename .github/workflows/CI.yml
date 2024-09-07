@@ -34,7 +34,7 @@ jobs:
     - name: Install MOOSE packages
       shell: bash -l {0}
       run: |
-        mamba install moose-dev=2023.11.30
+        mamba install moose-dev=2024.08.30 mpich
     - name: Compile BEAVER
       shell: bash -l {0}
       run: |
