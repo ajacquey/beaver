@@ -9,14 +9,16 @@
                 "${workspaceFolder}/moose/modules/module_loader/build/header_symlinks",
                 "${workspaceFolder}/moose/modules/fluid_properties/build/header_symlinks",
                 "${workspaceFolder}/moose/framework/contrib/boost/include",
-                "${workspaceFolder}/moose/framework/contrib/hit",
-                "${HOME}/mambaforge3/envs/moose/include",
-                "${HOME}/mambaforge3/envs/moose/libmesh/include",
-                "${HOME}/mambaforge3/envs/moose/wasp/include",
-                "${workspaceFolder}/moose/framework/contrib/json/include"
+                "${workspaceFolder}/moose/framework/contrib/hit/include",
+                "${HOME}/miniforge/envs/moose/include",
+                "${HOME}/miniforge/envs/moose/libmesh/include",
+                "${HOME}/miniforge/envs/moose/petsc/include",
+                "${HOME}/miniforge/envs/moose/wasp/include",
+                "${workspaceFolder}/moose/framework/contrib/json/include",
+                "${workspaceFolder}/moose/framework/contrib/gtest"
             ],
             "defines": [],
-            "compilerPath": "${HOME}/mambaforge3/envs/moose/bin/x86_64-conda-linux-gnu-gcc",
+            "compilerPath": "${HOME}/miniforge/envs/moose/bin/x86_64-conda-linux-gnu-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64",
@@ -29,10 +31,13 @@
                     "${workspaceFolder}/moose/modules/module_loader/build/header_symlinks",
                     "${workspaceFolder}/moose/modules/fluid_properties/build/header_symlinks",
                     "${workspaceFolder}/moose/framework/contrib/boost/include",
-                    "${workspaceFolder}/moose/framework/contrib/hit",
-                    "${HOME}/mambaforge3/envs/moose/include",
-                    "${HOME}/mambaforge3/envs/moose/libmesh/include",
-                    "${HOME}/mambaforge3/envs/moose/wasp/include"
+                    "${workspaceFolder}/moose/framework/contrib/hit/include",
+                    "${HOME}/miniforge/envs/moose/include",
+                    "${HOME}/miniforge/envs/moose/libmesh/include",
+                    "${HOME}/miniforge/envs/moose/petsc/include",
+                    "${HOME}/miniforge/envs/moose/wasp/include",
+                    "${workspaceFolder}/moose/framework/contrib/json/include",
+                    "${workspaceFolder}/moose/framework/contrib/gtest"
                 ]
             }
         },
@@ -45,18 +50,20 @@
                 "${workspaceFolder}/moose/modules/module_loader/build/header_symlinks",
                 "${workspaceFolder}/moose/modules/fluid_properties/build/header_symlinks",
                 "${workspaceFolder}/moose/framework/contrib/boost/include",
-                "${workspaceFolder}/moose/framework/contrib/hit",
-                "${HOME}/mambaforge3/envs/moose/include",
-                "${HOME}/mambaforge3/envs/moose/libmesh/include",
-                "${HOME}/mambaforge3/envs/moose/wasp/include",
-                "${workspaceFolder}/moose/framework/contrib/json/include"
+                "${workspaceFolder}/moose/framework/contrib/hit/include",
+                "${HOME}/miniforge/envs/moose/include",
+                "${HOME}/miniforge/envs/moose/libmesh/include",
+                "${HOME}/miniforge/envs/moose/petsc/include",
+                "${HOME}/miniforge/envs/moose/wasp/include",
+                "${workspaceFolder}/moose/framework/contrib/json/include",
+                "${workspaceFolder}/moose/framework/contrib/gtest"
             ],
             "defines": [],
             "macFrameworkPath": [
                 "/System/Library/Frameworks",
                 "/Library/Frameworks"
             ],
-            "compilerPath": "${HOME}/mambaforge3/envs/moose/bin/clang",
+            "compilerPath": "${HOME}/miniforge/envs/moose/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64",
@@ -69,10 +76,13 @@
                     "${workspaceFolder}/moose/modules/module_loader/build/header_symlinks",
                     "${workspaceFolder}/moose/modules/fluid_properties/build/header_symlinks",
                     "${workspaceFolder}/moose/framework/contrib/boost/include",
-                    "${workspaceFolder}/moose/framework/contrib/hit",
-                    "${HOME}/mambaforge3/envs/moose/include",
-                    "${HOME}/mambaforge3/envs/moose/libmesh/include",
-                    "${HOME}/mambaforge3/envs/moose/wasp/include"
+                    "${workspaceFolder}/moose/framework/contrib/hit/include",
+                    "${HOME}/miniforge/envs/moose/include",
+                    "${HOME}/miniforge/envs/moose/libmesh/include",
+                    "${HOME}/miniforge/envs/moose/petsc/include",
+                    "${HOME}/miniforge/envs/moose/wasp/include",
+                    "${workspaceFolder}/moose/framework/contrib/json/include",
+                    "${workspaceFolder}/moose/framework/contrib/gtest"
                 ]
             }
         }
