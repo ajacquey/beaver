@@ -31,8 +31,12 @@ BVTwoPointFluxApproximationBase::transmissibility(const ADReal & coeff_elem,
                                                   const ADReal & coeff_neighbor) const
 {
   ADReal coeff;
+  // If we are on the boundary, we just use the boundary values (which depend on how the diffusion
+  // coefficient is constructed)
+  if (onBoundary(*_face_info))
+    coeff = coeff_elem;
   // If we are on internal faces, we interpolate the diffusivity as usual
-  if (_var.isInternalFace(*_face_info))
+  else
   {
     // If the diffusivities are zero, then we can early return 0 (and avoid warnings if we
     // have a harmonic interpolation)
@@ -46,10 +50,6 @@ BVTwoPointFluxApproximationBase::transmissibility(const ADReal & coeff_elem,
                 *_face_info,
                 true);
   }
-  // Else we just use the boundary values (which depend on how the diffusion
-  // coefficient is constructed)
-  else
-    coeff = coeff_elem;
 
   return coeff;
 }
@@ -82,11 +82,11 @@ BVTwoPointFluxApproximationBase::advectiveFluxMaterial(const ADReal & mat_elem,
 {
   // If we are on internal faces, we interpolate the advected material as usual
   ADReal mat_adv;
-  if (_var.isInternalFace(*_face_info))
+  if (onBoundary(*_face_info))
+    mat_adv = mat_elem;
+  else
     interpolate(
         Moose::FV::InterpMethod::Upwind, mat_adv, mat_elem, mat_neighbor, vel, *_face_info, true);
-  else
-    mat_adv = mat_elem;
 
   return mat_adv * vel;
 }
