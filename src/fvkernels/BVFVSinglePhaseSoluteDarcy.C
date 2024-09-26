@@ -18,7 +18,7 @@ registerADMooseObject("BeaverApp", BVFVSinglePhaseSoluteDarcy);
 InputParameters
 BVFVSinglePhaseSoluteDarcy::validParams()
 {
-  InputParameters params = BVTwoPointFluxApproximationBase::validParams();
+  InputParameters params = BVFVFluxKernelBase::validParams();
   params.addClassDescription(
       "Kernel for the divergence of Darcy's velocity for single pahse flow and solute transport.");
   params.addRequiredCoupledVar("fluid_pressure", "The fluid pressure variable.");
@@ -26,7 +26,7 @@ BVFVSinglePhaseSoluteDarcy::validParams()
 }
 
 BVFVSinglePhaseSoluteDarcy::BVFVSinglePhaseSoluteDarcy(const InputParameters & parameters)
-  : BVTwoPointFluxApproximationBase(parameters),
+  : BVFVFluxKernelBase(parameters),
     _p_var(dynamic_cast<const MooseVariableFV<Real> *>(getFieldVar("fluid_pressure", 0))),
     _lambda(getADMaterialProperty<Real>("fluid_mobility")),
     _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility")),

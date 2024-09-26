@@ -18,7 +18,7 @@ registerADMooseObject("BeaverApp", BVFVMultiPhasePressureDarcy);
 InputParameters
 BVFVMultiPhasePressureDarcy::validParams()
 {
-  InputParameters params = BVTwoPointFluxApproximationBase::validParams();
+  InputParameters params = BVFVFluxKernelBase::validParams();
   params.addClassDescription(
       "Kernel for the divergence of the total velocity for multi phase flow.");
   params.set<unsigned short>("ghost_layers") = 2;
@@ -26,7 +26,7 @@ BVFVMultiPhasePressureDarcy::validParams()
 }
 
 BVFVMultiPhasePressureDarcy::BVFVMultiPhasePressureDarcy(const InputParameters & parameters)
-  : BVTwoPointFluxApproximationBase(parameters),
+  : BVFVFluxKernelBase(parameters),
     _lambda(getADMaterialProperty<Real>("fluid_mobility")),
     _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility"))
 {

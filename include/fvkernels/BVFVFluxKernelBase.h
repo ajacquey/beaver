@@ -15,11 +15,11 @@
 
 #include "FVFluxKernel.h"
 
-class BVTwoPointFluxApproximationBase : public FVFluxKernel
+class BVFVFluxKernelBase : public FVFluxKernel
 {
 public:
   static InputParameters validParams();
-  BVTwoPointFluxApproximationBase(const InputParameters & params);
+  BVFVFluxKernelBase(const InputParameters & params);
 
 protected:
   virtual ADReal transmissibility(const ADReal & coeff_elem, const ADReal & coeff_neighbor) const;

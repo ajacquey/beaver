@@ -18,7 +18,7 @@ registerADMooseObject("BeaverApp", BVFVMultiPhaseSaturationDarcy);
 InputParameters
 BVFVMultiPhaseSaturationDarcy::validParams()
 {
-  InputParameters params = BVTwoPointFluxApproximationBase::validParams();
+  InputParameters params = BVFVFluxKernelBase::validParams();
   params.addClassDescription("Kernel for the divergence of Darcy's velocity for multi phase flow.");
   MooseEnum phase("wetting non_wetting single");
   params.addRequiredParam<MooseEnum>(
@@ -28,7 +28,7 @@ BVFVMultiPhaseSaturationDarcy::validParams()
 }
 
 BVFVMultiPhaseSaturationDarcy::BVFVMultiPhaseSaturationDarcy(const InputParameters & parameters)
-  : BVTwoPointFluxApproximationBase(parameters),
+  : BVFVFluxKernelBase(parameters),
     _phase(getParam<MooseEnum>("phase").getEnum<PhaseEnum>()),
     _p_var(dynamic_cast<const MooseVariableFV<Real> *>(getFieldVar("total_pressure", 0))),
     _lambda(getADMaterialProperty<Real>("fluid_mobility")),
