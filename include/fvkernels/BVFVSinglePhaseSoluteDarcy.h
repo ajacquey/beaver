@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "BVTwoPointFluxApproximationBase.h"
+#include "BVFVFluxKernelBase.h"
 
-class BVFVSinglePhaseSoluteDarcy : public BVTwoPointFluxApproximationBase
+class BVFVSinglePhaseSoluteDarcy : public BVFVFluxKernelBase
 {
 public:
   static InputParameters validParams();

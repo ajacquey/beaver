@@ -14,9 +14,7 @@
 
 [Variables]
   [pf]
-    order = CONSTANT
-    family = MONOMIAL
-    fv = true
+    type = MooseVariableFVReal
   []
 []
 
@@ -102,11 +100,19 @@
 []
 
 [Preconditioning]
-  [hypre]
+  [asm]
     type = SMP
-    full = true
-    petsc_options_iname = '-pc_type -pc_hypre_type'
-    petsc_options_value = 'hypre boomeramg'
+    petsc_options = '-snes_ksp_ew'
+    petsc_options_iname = '-ksp_type -ksp_rtol -ksp_max_it
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart'
+    petsc_options_value = 'fgmres 1e-10 100
+                           asm
+                           ilu
+                           newtonls 1e-12 1e-08 100 basic
+                           201'
   []
 []
 

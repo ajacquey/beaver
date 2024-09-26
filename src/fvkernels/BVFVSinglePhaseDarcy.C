@@ -18,7 +18,7 @@ registerADMooseObject("BeaverApp", BVFVSinglePhaseDarcy);
 InputParameters
 BVFVSinglePhaseDarcy::validParams()
 {
-  InputParameters params = BVTwoPointFluxApproximationBase::validParams();
+  InputParameters params = BVFVFluxKernelBase::validParams();
   params.addClassDescription(
       "Kernel for the divergence of Darcy's velocity for single phase flow.");
   params.set<unsigned short>("ghost_layers") = 2;
@@ -26,7 +26,7 @@ BVFVSinglePhaseDarcy::validParams()
 }
 
 BVFVSinglePhaseDarcy::BVFVSinglePhaseDarcy(const InputParameters & parameters)
-  : BVTwoPointFluxApproximationBase(parameters),
+  : BVFVFluxKernelBase(parameters),
     _lambda(getADMaterialProperty<Real>("fluid_mobility")),
     _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility"))
 {
