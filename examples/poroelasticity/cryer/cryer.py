@@ -24,7 +24,7 @@ def analyticalSolution_p(t):
   return res
 
 def numericalSolution_p():
-  filename = "cryer_csv_t.csv"
+  filename = "cryer_fv_csv_t.csv"
   
   t, p = np.loadtxt(filename, delimiter=',', skiprows=1, usecols=[0, 1], unpack=True)
   p = np.divide(p, p0)
