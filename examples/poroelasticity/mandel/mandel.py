@@ -58,7 +58,7 @@ def findRoot():
   return res
 
 def numericalSolution_x(t):
-  filebase = "mandel_csv_p_line_pf_"
+  filebase = "mandel_fv_csv_p_line_pf_"
   if t==0.01:
     filename = filebase + "0047.csv"
   elif t==0.1:
@@ -79,7 +79,7 @@ def numericalSolution_x(t):
   return (y, p)
 
 def numericalSolution_t(x):
-  filename = "mandel_csv_t.csv"
+  filename = "mandel_fv_csv_t.csv"
   if x==0.0:
     t, p = np.loadtxt(filename, delimiter=',', skiprows=1, usecols=[0, 1], unpack=True)
   elif x==0.25:
@@ -150,7 +150,7 @@ def plot_consolidation(ax):
   ta = np.logspace(-3, 1, 500)
 
   ua = analyticalSolution_u(ta)
-  tn, un = np.loadtxt("mandel_csv_t.csv", delimiter=',', skiprows=1, usecols=[0, 5], unpack=True)
+  tn, un = np.loadtxt("mandel_fv_csv_t.csv", delimiter=',', skiprows=1, usecols=[0, 5], unpack=True)
   un = (un - w0) / (wf - w0)
 
   # Plot analytical

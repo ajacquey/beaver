@@ -149,7 +149,7 @@
     petsc_options_value = 'fgmres
                            asm
                            ilu
-                           newtonls 1e-10 1e-10 200 basic
+                           newtonls 1e-08 1e-10 200 basic
                            201'
   []
 []

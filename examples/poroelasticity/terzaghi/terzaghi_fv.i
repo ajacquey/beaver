@@ -8,13 +8,16 @@
 
 [Mesh]
   type = GeneratedMesh
-  dim = 2
-  nx = 2
+  dim = 3
+  nx = 5
   ny = 100
-  xmin = -1.0
-  xmax = 1.0
+  nz = 5
+  xmin = -0.05
+  xmax = 0.05
   ymin = 0
   ymax = 1
+  zmin = -0.05
+  zmax = 0.05
 []
 
 [Variables]
@@ -26,6 +29,10 @@
     family = LAGRANGE
   []
   [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
     order = FIRST
     family = LAGRANGE
   []
@@ -42,6 +49,12 @@
     type = BVStressDivergence
     component = y
     variable = disp_y
+    fluid_pressure = pf
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
     fluid_pressure = pf
   []
 []
@@ -63,6 +76,12 @@
     variable = disp_x
     value = 0
     boundary = 'left right'
+  []
+  [confine_z]
+    type = DirichletBC
+    variable = disp_z
+    value = 0
+    boundary = 'front back'
   []
   [base_fixed]
     type = DirichletBC
@@ -90,7 +109,7 @@
 [Materials]
   [mechanical]
     type = BVMechanicalMaterial
-    displacements = 'disp_x disp_y'
+    displacements = 'disp_x disp_y disp_z'
     bulk_modulus = 4
     shear_modulus = 3
   []
@@ -131,7 +150,7 @@
     type = SMP
     full = true
     petsc_options_iname = '-ksp_type -pc_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type'
-    petsc_options_value = 'bcgs bjacobi 1E-10 1E-10 100 bt'
+    petsc_options_value = 'bcgs bjacobi 1e-08 1e-10 100 basic'
   []
 []
 
