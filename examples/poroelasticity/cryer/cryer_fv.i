@@ -13,8 +13,7 @@
 
 [Variables]
   [pf]
-    order = FIRST
-    family = LAGRANGE
+    type = MooseVariableFVReal
   []
   [disp_x]
     order = FIRST
@@ -25,20 +24,12 @@
     family = LAGRANGE
   []
   [disp_z]
-      order = FIRST
-      family = LAGRANGE
+    order = FIRST
+    family = LAGRANGE
   []
 []
 
 [Kernels]
-  [fluid_time_derivative]
-    type = BVSinglePhaseTimeDerivative
-    variable = pf
-  []
-  [darcy]
-    type = BVSinglePhaseDarcy
-    variable = pf
-  []
   [stress_x]
     type = BVStressDivergence
     component = x
@@ -56,6 +47,17 @@
     component = z
     variable = disp_z
     fluid_pressure = pf
+  []
+[]
+
+[FVKernels]
+  [fluid_time_derivative]
+    type = BVFVSinglePhaseTimeDerivative
+    variable = pf
+  []
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
   []
 []
 
@@ -85,8 +87,11 @@
       value = 1.0
     []
   []
+[]
+
+[FVBCs]
   [out_drained]
-    type = DirichletBC
+    type = FVDirichletBC
     variable = pf
     value = 0
     boundary = 'out'

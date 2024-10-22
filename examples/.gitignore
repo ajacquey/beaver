@@ -1,0 +1,7 @@
+# Checkpoint files
+poroelasticity/terzaghi/terzaghi_out_cp/*
+poroelasticity/terzaghi/terzaghi_fv_out_cp/*
+poroelasticity/mandel/mandel_out_cp/*
+poroelasticity/mandel/mandel_fv_out_cp/*
+poroelasticity/cryer/cryer_out_cp/*
+poroelasticity/cryer/cryer_fv_out_cp/*

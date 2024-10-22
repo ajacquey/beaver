@@ -9,13 +9,16 @@
 
 [Mesh]
   type = GeneratedMesh
-  dim = 2
-  nx = 40
-  ny = 40
+  dim = 3
+  nx = 20
+  ny = 20
+  nz = 20
   xmin = 0.0
   xmax = 1.0
   ymin = 0.0
   ymax = 1.0
+  zmin = 0.0
+  zmax = 1.0
 []
 
 [Variables]
@@ -28,6 +31,10 @@
     family = LAGRANGE
   []
   [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
     order = FIRST
     family = LAGRANGE
   []
@@ -54,6 +61,12 @@
     variable = disp_y
     fluid_pressure = pf
   []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+    fluid_pressure = pf
+  []
 []
 
 [BCs]
@@ -75,6 +88,12 @@
     value = -1
     boundary = 'top'
   []
+  [confine_z]
+    type = DirichletBC
+    variable = disp_z
+    value = 0
+    boundary = 'front back'
+  []
   [sides_drained]
     type = DirichletBC
     variable = pf
@@ -86,7 +105,7 @@
 [Materials]
   [mechanical]
     type = BVMechanicalMaterial
-    displacements = 'disp_x disp_y'
+    displacements = 'disp_x disp_y disp_z'
     bulk_modulus = 1
     poisson_ratio = 0.25
   []
@@ -134,7 +153,7 @@
     petsc_options_value = 'fgmres
                            asm
                            ilu
-                           newtonls 1e-10 1e-10 120 basic
+                           newtonls 1e-08 1e-10 120 bt
                            201'
   []
 []
@@ -178,7 +197,7 @@
     variable = pf
     start_point = '0.0 0.0 0.0'
     end_point = '1.0 0.0 0.0'
-    num_points = 40
+    num_points = 20
     sort_by = 'x'
     outputs = 'csv_p'
   []
