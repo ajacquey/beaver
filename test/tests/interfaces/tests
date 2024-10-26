@@ -1,0 +1,12 @@
+[Tests]
+  [stick_2D]
+    type = 'Exodiff'
+    input = 'stick_2D.i'
+    exodiff = 'stick_2D_out.e'
+  []
+  [stick_3D]
+    type = 'Exodiff'
+    input = 'stick_3D.i'
+    exodiff = 'stick_3D_out.e'
+  []
+[]
