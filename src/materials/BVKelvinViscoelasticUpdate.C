@@ -43,48 +43,35 @@ BVKelvinViscoelasticUpdate::initQpStatefulProperties()
 }
 
 ADReal
-BVKelvinViscoelasticUpdate::creepRate(const ADReal & eqv_stress)
+BVKelvinViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
 {
-  return (eqv_stress / (3.0 * viscosity(eqv_stress)) -
-          shearModulus(eqv_stress) / viscosity(eqv_stress) * _eqv_creep_strain_old[_qp]) /
-         (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress));
+  return (_eqv_stress_tr - 3.0 * _G * eqv_strain_incr - 3.0 * _G0 * kelvinCreepStrain(eqv_strain_incr)) / (3.0 * _eta0);
 }
 
 ADReal
-BVKelvinViscoelasticUpdate::creepRateDerivative(const ADReal & eqv_stress)
+BVKelvinViscoelasticUpdate::creepRateDerivative(const ADReal & eqv_strain_incr)
 {
-  return (1.0 / 3.0 -
-          (shearModulusDerivative(eqv_stress) -
-           shearModulus(eqv_stress) / viscosity(eqv_stress) * viscosityDerivative(eqv_stress)) *
-              (_eqv_creep_strain_old[_qp] +
-               (eqv_stress - shearModulus(eqv_stress) * _eqv_creep_strain_old[_qp]) * _dt /
-                   (viscosity(eqv_stress) *
-                    (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress))))) /
-         (viscosity(eqv_stress) * (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress)));
+  return - (_G + _G0 * kelvinCreepStrainDerivative(eqv_strain_incr)) / _eta0;
+  // return (1.0 / 3.0 -
+  //         (shearModulusDerivative(eqv_stress) -
+  //          shearModulus(eqv_stress) / viscosity(eqv_stress) * viscosityDerivative(eqv_stress)) *
+  //             (_eqv_creep_strain_old[_qp] +
+  //              (eqv_stress - shearModulus(eqv_stress) * _eqv_creep_strain_old[_qp]) * _dt /
+  //                  (viscosity(eqv_stress) *
+  //                   (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress))))) /
+  //        (viscosity(eqv_stress) * (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress)));
 }
 
 ADReal
-BVKelvinViscoelasticUpdate::viscosity(const ADReal & eqv_stress)
+BVKelvinViscoelasticUpdate::kelvinCreepStrain(const ADReal & eqv_strain_incr)
 {
-  return _eta0;
+  return _eqv_creep_strain_old[_qp] + eqv_strain_incr;
 }
 
 ADReal
-BVKelvinViscoelasticUpdate::viscosityDerivative(const ADReal & eqv_stress)
+BVKelvinViscoelasticUpdate::kelvinCreepStrainDerivative(const ADReal & /*eqv_strain_incr*/)
 {
-  return 0.0;
-}
-
-ADReal
-BVKelvinViscoelasticUpdate::shearModulus(const ADReal & eqv_stress)
-{
-  return _G0;
-}
-
-ADReal
-BVKelvinViscoelasticUpdate::shearModulusDerivative(const ADReal & eqv_stress)
-{
-  return 0.0;
+  return 1.0;
 }
 
 void
@@ -94,7 +81,7 @@ BVKelvinViscoelasticUpdate::preReturnMap()
 }
 
 void
-BVKelvinViscoelasticUpdate::postReturnMap(const ADReal & eqv_stress)
+BVKelvinViscoelasticUpdate::postReturnMap(const ADReal & eqv_strain_incr)
 {
-  _eqv_creep_strain[_qp] = _eqv_creep_strain_old[_qp] + creepRate(eqv_stress) * _dt;
+  _eqv_creep_strain[_qp] = kelvinCreepStrain(eqv_strain_incr);
 }

@@ -24,13 +24,13 @@ public:
 
 protected:
   virtual ADReal returnMap();
-  virtual ADReal residual(const ADReal & eqv_stress);
-  virtual ADReal jacobian(const ADReal & eqv_stress);
-  virtual ADRankTwoTensor reformPlasticStrainTensor(const ADReal & eqv_stress);
-  virtual ADReal creepRate(const ADReal & eqv_stress) = 0;
-  virtual ADReal creepRateDerivative(const ADReal & eqv_stress) = 0;
+  virtual ADReal residual(const ADReal & eqv_strain_incr);
+  virtual ADReal jacobian(const ADReal & eqv_strain_incr);
+  virtual ADRankTwoTensor reformPlasticStrainTensor(const ADReal & eqv_strain_incr);
+  virtual ADReal creepRate(const ADReal & eqv_strain_incr) = 0;
+  virtual ADReal creepRateDerivative(const ADReal & eqv_strain_incr) = 0;
   virtual void preReturnMap();
-  virtual void postReturnMap(const ADReal & eqv_stress);
+  virtual void postReturnMap(const ADReal & eqv_strain_incr);
 
   // Name used as a prefix for all material properties related to this creep model
   const std::string _base_name;

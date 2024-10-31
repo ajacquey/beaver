@@ -22,10 +22,8 @@ public:
   BVMaxwellViscoelasticUpdate(const InputParameters & parameters);
 
 protected:
-  virtual ADReal creepRate(const ADReal & eqv_stress) override;
-  virtual ADReal creepRateDerivative(const ADReal & eqv_stress) override;
-  virtual ADReal viscosity(const ADReal & eqv_stress);
-  virtual ADReal viscosityDerivative(const ADReal & eqv_stress);
+  virtual ADReal creepRate(const ADReal & eqv_strain_incr) override;
+  virtual ADReal creepRateDerivative(const ADReal & eqv_strain_incr) override;
 
   // Reference viscosity
   const Real _eta0;

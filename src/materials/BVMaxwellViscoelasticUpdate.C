@@ -30,26 +30,13 @@ BVMaxwellViscoelasticUpdate::BVMaxwellViscoelasticUpdate(const InputParameters &
 }
 
 ADReal
-BVMaxwellViscoelasticUpdate::creepRate(const ADReal & eqv_stress)
+BVMaxwellViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
 {
-  return eqv_stress / (3.0 * viscosity(eqv_stress));
+  return (_eqv_stress_tr - 3.0 * _G * eqv_strain_incr) / (3.0 * _eta0);
 }
 
 ADReal
-BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & eqv_stress)
+BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & eqv_strain_incr)
 {
-  return 1.0 / (3.0 * viscosity(eqv_stress)) *
-         (1.0 - eqv_stress / viscosity(eqv_stress) * viscosityDerivative(eqv_stress));
-}
-
-ADReal
-BVMaxwellViscoelasticUpdate::viscosity(const ADReal & eqv_stress)
-{
-  return _eta0;
-}
-
-ADReal
-BVMaxwellViscoelasticUpdate::viscosityDerivative(const ADReal & eqv_stress)
-{
-  return 0.0;
+  return - _G / _eta0;
 }
