@@ -51,15 +51,7 @@ BVKelvinViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
 ADReal
 BVKelvinViscoelasticUpdate::creepRateDerivative(const ADReal & eqv_strain_incr)
 {
-  return - (_G + _G0 * kelvinCreepStrainDerivative(eqv_strain_incr)) / _eta0;
-  // return (1.0 / 3.0 -
-  //         (shearModulusDerivative(eqv_stress) -
-  //          shearModulus(eqv_stress) / viscosity(eqv_stress) * viscosityDerivative(eqv_stress)) *
-  //             (_eqv_creep_strain_old[_qp] +
-  //              (eqv_stress - shearModulus(eqv_stress) * _eqv_creep_strain_old[_qp]) * _dt /
-  //                  (viscosity(eqv_stress) *
-  //                   (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress))))) /
-  //        (viscosity(eqv_stress) * (1.0 + shearModulus(eqv_stress) * _dt / viscosity(eqv_stress)));
+  return -(_G + _G0 * kelvinCreepStrainDerivative(eqv_strain_incr)) / _eta0;
 }
 
 ADReal

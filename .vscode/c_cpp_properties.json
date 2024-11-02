@@ -10,6 +10,7 @@
                 "${workspaceFolder}/moose/modules/fluid_properties/build/header_symlinks",
                 "${workspaceFolder}/moose/framework/contrib/boost/include",
                 "${workspaceFolder}/moose/framework/contrib/hit/include",
+                "${HOME}/miniforge/envs/moose/x86_64-conda-linux-gnu/include/c++/12.3.0",
                 "${HOME}/miniforge/envs/moose/include",
                 "${HOME}/miniforge/envs/moose/libmesh/include",
                 "${HOME}/miniforge/envs/moose/petsc/include",

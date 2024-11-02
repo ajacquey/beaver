@@ -37,13 +37,10 @@ BVCreepUpdateBase::BVCreepUpdateBase(const InputParameters & parameters)
 void
 BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl)
 {
-  // Here we do an iterative update with a single variable being the scalar effective stress
+  // Here we do an iterative update with a single variable being the scalar creep strain increment
   // We are trying to find the zero of the function F which is defined as:
-  // $F\left(\sigma_{e}\right) = \sigma_{e}^{tr} - \sigme_{e} - 3 * \eta * \dot{gamma}$
+  // $F\left(\Delta \\gamma\right) = \dot{gamma} \Delta t - \Delta \gamma$
   // $\dot{\gamma}$: scalar creep strain rate
-  // $\sigma_{e}$: scalar effective stress
-  // $\eta$: the viscosity
-  // flow rule: $\dot{\gamma} = \frac{\sigma_{e}}{3 \eta}$
 
   // Trial stress
   _stress_tr = stress;

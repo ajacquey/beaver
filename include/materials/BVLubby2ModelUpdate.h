@@ -22,12 +22,15 @@ public:
   BVLubby2ModelUpdate(const InputParameters & parameters);
 
 protected:
-  virtual ADReal viscosityMaxwell(const ADReal & eqv_stress) override;
-  virtual ADReal viscosityKelvin(const ADReal & eqv_stress) override;
-  virtual ADReal viscosityMaxwellDerivative(const ADReal & eqv_stress) override;
-  virtual ADReal viscosityKelvinDerivative(const ADReal & eqv_stress) override;
-  virtual ADReal shearModulusKelvin(const ADReal & eqv_stress) override;
-  virtual ADReal shearModulusKelvinDerivative(const ADReal & eqv_stress) override;
+  virtual ADReal viscosityMaxwell(const std::vector<ADReal> & eqv_strain_incr) override;
+  virtual ADReal viscosityKelvin(const std::vector<ADReal> & eqv_strain_incr) override;
+  virtual ADReal viscosityMaxwellDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                            const unsigned int j) override;
+  virtual ADReal viscosityKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                           const unsigned int j) override;
+  virtual ADReal shearModulusKelvin(const std::vector<ADReal> & eqv_strain_incr) override;
+  virtual ADReal shearModulusKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                              const unsigned int j) override;
 
   // Reference stress
   Real _s0;

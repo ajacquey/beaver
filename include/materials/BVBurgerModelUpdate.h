@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "BVCreepUpdateBase.h"
+#include "BVTwoCreepUpdateBase.h"
 
-class BVBurgerModelUpdate : public BVCreepUpdateBase
+class BVBurgerModelUpdate : public BVTwoCreepUpdateBase
 {
 public:
   static InputParameters validParams();
@@ -23,20 +23,29 @@ public:
 
 protected:
   virtual void initQpStatefulProperties() override;
-  virtual ADReal creepRate(const ADReal & eqv_stress) override;
-  virtual ADReal creepRateMaxwell(const ADReal & eqv_stress);
-  virtual ADReal creepRateKelvin(const ADReal & eqv_stress);
-  virtual ADReal creepRateDerivative(const ADReal & eqv_stress) override;
-  virtual ADReal creepRateMaxwellDerivative(const ADReal & eqv_stress);
-  virtual ADReal creepRateKelvinDerivative(const ADReal & eqv_stress);
-  virtual ADReal viscosityMaxwell(const ADReal & eqv_stress);
-  virtual ADReal viscosityKelvin(const ADReal & eqv_stress);
-  virtual ADReal viscosityMaxwellDerivative(const ADReal & eqv_stress);
-  virtual ADReal viscosityKelvinDerivative(const ADReal & eqv_stress);
-  virtual ADReal shearModulusKelvin(const ADReal & eqv_stress);
-  virtual ADReal shearModulusKelvinDerivative(const ADReal & eqv_stress);
+  virtual ADReal creepRate(const std::vector<ADReal> & eqv_strain_incr,
+                           const unsigned int i) override;
+  virtual ADReal creepRateMaxwell(const std::vector<ADReal> & eqv_strain_incr);
+  virtual ADReal creepRateKelvin(const std::vector<ADReal> & eqv_strain_incr);
+  virtual ADReal creepRateDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                     const unsigned int i,
+                                     const unsigned int j) override;
+  virtual ADReal creepRateMaxwellDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                            const unsigned int /*j*/);
+  virtual ADReal creepRateKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                           const unsigned int j);
+  virtual ADReal viscosityMaxwell(const std::vector<ADReal> & eqv_strain_incr);
+  virtual ADReal viscosityKelvin(const std::vector<ADReal> & eqv_strain_incr);
+  virtual ADReal viscosityMaxwellDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                            const unsigned int j);
+  virtual ADReal viscosityKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                           const unsigned int j);
+  virtual ADReal shearModulusKelvin(const std::vector<ADReal> & eqv_strain_incr);
+  virtual ADReal shearModulusKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                              const unsigned int j);
+  virtual ADReal kelvinCreepStrain(const std::vector<ADReal> & eqv_strain_incr);
   virtual void preReturnMap() override;
-  virtual void postReturnMap(const ADReal & eqv_stress) override;
+  virtual void postReturnMap(const std::vector<ADReal> & eqv_strain_incr) override;
 
   // Maxwell viscosity
   const Real _etaM0;

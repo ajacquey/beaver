@@ -37,38 +37,46 @@ BVLubby2ModelUpdate::BVLubby2ModelUpdate(const InputParameters & parameters)
 }
 
 ADReal
-BVLubby2ModelUpdate::viscosityMaxwell(const ADReal & eqv_stress)
+BVLubby2ModelUpdate::viscosityMaxwell(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return _etaM0 * std::exp(-_m1 * eqv_stress / _s0);
+  return _etaM0 *
+         std::exp(-_m1 * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+                  _s0);
 }
 
 ADReal
-BVLubby2ModelUpdate::viscosityKelvin(const ADReal & eqv_stress)
+BVLubby2ModelUpdate::viscosityKelvin(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return _etaK0 * std::exp(-_m2 * eqv_stress / _s0);
-}
-
-
-ADReal
-BVLubby2ModelUpdate::viscosityMaxwellDerivative(const ADReal & eqv_stress)
-{
-  return -_m1 /_s0 * viscosityMaxwell(eqv_stress);
+  return _etaK0 *
+         std::exp(-_m2 * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+                  _s0);
 }
 
 ADReal
-BVLubby2ModelUpdate::viscosityKelvinDerivative(const ADReal & eqv_stress)
+BVLubby2ModelUpdate::viscosityMaxwellDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                                const unsigned int /*j*/)
 {
-  return -_m2 /_s0 * viscosityKelvin(eqv_stress);
+  return 3.0 * _G * _m1 * viscosityMaxwell(eqv_strain_incr) / _s0;
 }
 
 ADReal
-BVLubby2ModelUpdate::shearModulusKelvin(const ADReal & eqv_stress)
+BVLubby2ModelUpdate::viscosityKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                               const unsigned int /*j*/)
 {
-  return _GK0 * std::exp(-_mG * eqv_stress / _s0);
+  return 3.0 * _G * _m2 * viscosityKelvin(eqv_strain_incr) / _s0;
 }
 
 ADReal
-BVLubby2ModelUpdate::shearModulusKelvinDerivative(const ADReal & eqv_stress)
+BVLubby2ModelUpdate::shearModulusKelvin(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return -_mG / _s0 * shearModulusKelvin(eqv_stress);
+  return _GK0 *
+         std::exp(-_mG * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+                  _s0);
+}
+
+ADReal
+BVLubby2ModelUpdate::shearModulusKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                                  const unsigned int /*j*/)
+{
+  return 3.0 * _G * _mG * shearModulusKelvin(eqv_strain_incr) / _s0;
 }

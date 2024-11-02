@@ -15,25 +15,34 @@
 
 #include "BVInelasticUpdateBase.h"
 
-class BVCreepUpdateBase : public BVInelasticUpdateBase
+class BVTwoCreepUpdateBase : public BVInelasticUpdateBase
 {
 public:
   static InputParameters validParams();
-  BVCreepUpdateBase(const InputParameters & parameters);
+  BVTwoCreepUpdateBase(const InputParameters & parameters);
   virtual void inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl) override;
 
 protected:
-  virtual ADReal returnMap();
-  virtual ADReal residual(const ADReal & creep_strain_incr);
-  virtual ADReal jacobian(const ADReal & creep_strain_incr);
-  virtual ADRankTwoTensor reformPlasticStrainTensor(const ADReal & creep_strain_incr);
-  virtual ADReal creepRate(const ADReal & creep_strain_incr) = 0;
-  virtual ADReal creepRateDerivative(const ADReal & creep_strain_incr) = 0;
+  virtual std::vector<ADReal> returnMap();
+  virtual void nrStep(const std::vector<ADReal> & res,
+                      const std::vector<std::vector<ADReal>> & jac,
+                      std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal norm(const std::vector<ADReal> & vec);
+  virtual std::vector<ADReal> residual(const std::vector<ADReal> & creep_strain_incr);
+  virtual std::vector<std::vector<ADReal>> jacobian(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADRankTwoTensor reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal creepRate(const std::vector<ADReal> & creep_strain_incr, const unsigned int i) = 0;
+  virtual ADReal creepRateDerivative(const std::vector<ADReal> & creep_strain_incr,
+                                     const unsigned int i,
+                                     const unsigned int j) = 0;
   virtual void preReturnMap();
-  virtual void postReturnMap(const ADReal & creep_strain_incr);
+  virtual void postReturnMap(const std::vector<ADReal> & creep_strain_incr);
 
   // Name used as a prefix for all material properties related to this creep model
   const std::string _base_name;
+
+  // Number of creep models
+  const unsigned int _num_cm;
 
   // Creep strain increment
   ADMaterialProperty<RankTwoTensor> & _creep_strain_incr;
@@ -41,7 +50,9 @@ protected:
   // Trial stress tensor and scalar effective stress
   ADRankTwoTensor _stress_tr;
   ADReal _eqv_stress_tr;
+  ADReal _avg_stress_tr;
 
-  // Shear modulus
+  // Shear and bulk modulus
   Real _G;
+  Real _K;
 };
