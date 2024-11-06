@@ -22,13 +22,13 @@ BVRTL2020ModelUpdate::validParams()
   params.addClassDescription(
       "Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt "
       "behavior: From laboratory experiments to pertinent long-term predictions.");
-  params.addRequiredRangeCheckedParam<Real>("alpha", "0.0 < alpha < 1.0", "The alpha parameter.");
+  params.addRequiredRangeCheckedParam<Real>("alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
   params.addRequiredRangeCheckedParam<Real>("A2", "A2 > 0.0", "The A2 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n2", "n2 > 0.0", "The n2 parameter.");
   params.addRequiredRangeCheckedParam<Real>("A1", "A1 > 0.0", "The A1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n1", "n1 > 0.0", "The n1 parameter.");
-  params.addRequiredRangeCheckedParam<Real>("A", "A > 0.0", "The A parameter.");
-  params.addRequiredRangeCheckedParam<Real>("B", "B > 0.0", "The B parameter.");
+  params.addRequiredRangeCheckedParam<Real>("A", "A >= 0.0", "The A parameter.");
+  params.addRequiredRangeCheckedParam<Real>("B", "B >= 0.0", "The B parameter.");
   params.addRequiredRangeCheckedParam<Real>("m", "m > 1.0", "The m parameter.");
   params.addRequiredRangeCheckedParam<Real>("n", "n > 1.0", "The n parameter.");
   return params;
@@ -76,10 +76,15 @@ BVRTL2020ModelUpdate::creepRate(const std::vector<ADReal> & eqv_strain_incr, con
 ADReal
 BVRTL2020ModelUpdate::creepRateLemaitre(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return _alpha *
-         std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                  _n2) *
-         std::pow(lemaitreCreepStrain(eqv_strain_incr), 1.0 - 1.0 / _alpha);
+  if (lemaitreCreepStrain(eqv_strain_incr) == 0.0)
+    return _alpha *
+           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
+                    _n2);
+  else
+    return _alpha *
+           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
+                    _n2) *
+           std::pow(lemaitreCreepStrain(eqv_strain_incr), 1.0 - 1.0 / _alpha);
 }
 
 ADReal
@@ -119,18 +124,28 @@ BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & eq
                                                   const unsigned int j)
 {
   if (j == 0) // Lemaitre wrt Lemaitre
-    return _alpha *
-           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                    _n2 - 1.0) *
-           std::pow(lemaitreCreepStrain(eqv_strain_incr), -1.0 / _alpha) *
-           (-3.0 * _G / _A2 * _n2 * lemaitreCreepStrain(eqv_strain_incr) +
-            (1.0 - 1.0 / _alpha) *
-                (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2);
+    if (lemaitreCreepStrain(eqv_strain_incr) == 0.0)
+      return -3.0 * _G / _A2 * _n2 * _alpha *
+             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
+                      _n2 - 1.0);
+    else
+      return _alpha *
+             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
+                      _n2 - 1.0) *
+             std::pow(lemaitreCreepStrain(eqv_strain_incr), -1.0 / _alpha) *
+             (-3.0 * _G / _A2 * _n2 * lemaitreCreepStrain(eqv_strain_incr) +
+              (1.0 - 1.0 / _alpha) *
+                  (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2);
   else if (j == 1) // Lemaitre wrt Munson-Dawson
-    return -3.0 * _G / _A2 * _n2 * _alpha *
-           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                    _n2 - 1.0) *
-           std::pow(lemaitreCreepStrain(eqv_strain_incr), 1.0 - 1.0 / _alpha);
+    if (lemaitreCreepStrain(eqv_strain_incr) == 0.0)
+      return -3.0 * _G / _A2 * _n2 * _alpha *
+             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
+                      _n2 - 1.0);
+    else
+      return -3.0 * _G / _A2 * _n2 * _alpha *
+             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
+                      _n2 - 1.0) *
+             std::pow(lemaitreCreepStrain(eqv_strain_incr), 1.0 - 1.0 / _alpha);
   else
     throw MooseException(
         "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
