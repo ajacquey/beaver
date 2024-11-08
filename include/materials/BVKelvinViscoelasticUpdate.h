@@ -27,12 +27,8 @@ protected:
   virtual ADReal creepRateDerivative(const ADReal & eqv_strain_incr) override;
   virtual ADReal kelvinCreepStrain(const ADReal & eqv_strain_incr);
   virtual ADReal kelvinCreepStrainDerivative(const ADReal & /*eqv_strain_incr*/);
-  // virtual ADReal viscosity(const ADReal & eqv_stress);
-  // virtual ADReal viscosityDerivative(const ADReal & eqv_stress);
-  // virtual ADReal shearModulus(const ADReal & eqv_stress);
-  // virtual ADReal shearModulusDerivative(const ADReal & eqv_stress);
   virtual void preReturnMap() override;
-  virtual void postReturnMap(const ADReal & eqv_stress) override;
+  virtual void postReturnMap(const ADReal & eqv_strain_incr) override;
 
   // Reference viscosity
   const Real _eta0;

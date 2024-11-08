@@ -18,7 +18,7 @@ registerMooseObject("BeaverApp", BVBurgerModelUpdate);
 InputParameters
 BVBurgerModelUpdate::validParams()
 {
-  InputParameters params = BVCreepUpdateBase::validParams();
+  InputParameters params = BVTwoCreepUpdateBase::validParams();
   params.addClassDescription("Material for computing a Burger's model viscoelastic update.");
   params.addRequiredRangeCheckedParam<Real>("viscosity_maxwell", "viscosity_maxwell > 0.0", "The Maxwell viscosity.");
   params.addRequiredRangeCheckedParam<Real>("viscosity_kelvin", "viscosity_kelvin > 0.0", "The Kelvin viscosity.");
@@ -28,7 +28,7 @@ BVBurgerModelUpdate::validParams()
 }
 
 BVBurgerModelUpdate::BVBurgerModelUpdate(const InputParameters & parameters)
-  : BVCreepUpdateBase(parameters),
+  : BVTwoCreepUpdateBase(parameters),
     _etaM0(getParam<Real>("viscosity_maxwell")),
     _etaK0(getParam<Real>("viscosity_kelvin")),
     _GK0(getParam<Real>("shear_modulus_kelvin")),
@@ -45,86 +45,120 @@ BVBurgerModelUpdate::initQpStatefulProperties()
 }
 
 ADReal
-BVBurgerModelUpdate::creepRate(const ADReal & eqv_stress)
+BVBurgerModelUpdate::creepRate(const std::vector<ADReal> & eqv_strain_incr, const unsigned int i)
 {
-  return creepRateMaxwell(eqv_stress) + creepRateKelvin(eqv_stress);
+  if (i == 0) // Maxwell
+    return creepRateMaxwell(eqv_strain_incr);
+  else if (i == 1) // Kelvin
+    return creepRateKelvin(eqv_strain_incr);
+  else
+    throw MooseException("BVBurgerModelUpdate: error, unknow creep model called in `creepRate`!");
 }
 
 ADReal
-BVBurgerModelUpdate::creepRateMaxwell(const ADReal & eqv_stress)
+BVBurgerModelUpdate::creepRateMaxwell(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return eqv_stress / (3.0 * viscosityMaxwell(eqv_stress));
+
+  return (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+         (3.0 * viscosityMaxwell(eqv_strain_incr));
 }
 
 ADReal
-BVBurgerModelUpdate::creepRateKelvin(const ADReal & eqv_stress)
+BVBurgerModelUpdate::creepRateKelvin(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return (eqv_stress / (3.0 * viscosityKelvin(eqv_stress)) -
-          shearModulusKelvin(eqv_stress) / viscosityKelvin(eqv_stress) * _eqv_creep_strainK_old[_qp]) /
-         (1.0 + shearModulusKelvin(eqv_stress) * _dt / viscosityKelvin(eqv_stress));
+  return (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]) -
+          3.0 * shearModulusKelvin(eqv_strain_incr) * kelvinCreepStrain(eqv_strain_incr)) /
+         (3.0 * viscosityKelvin(eqv_strain_incr));
 }
 
 ADReal
-BVBurgerModelUpdate::creepRateDerivative(const ADReal & eqv_stress)
+BVBurgerModelUpdate::creepRateDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                         const unsigned int i,
+                                         const unsigned int j)
 {
-  return creepRateMaxwellDerivative(eqv_stress) + creepRateKelvinDerivative(eqv_stress);
+  if (i == 0) // Maxwell
+    return creepRateMaxwellDerivative(eqv_strain_incr, j);
+  else if (i == 1) // Kelvin
+    return creepRateKelvinDerivative(eqv_strain_incr, j);
+  else
+    throw MooseException(
+        "BVBurgerModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
 }
 
 ADReal
-BVBurgerModelUpdate::creepRateMaxwellDerivative(const ADReal & eqv_stress)
+BVBurgerModelUpdate::creepRateMaxwellDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                                const unsigned int j)
 {
-  return 1.0 / (3.0 * viscosityMaxwell(eqv_stress)) *
-         (1.0 - eqv_stress / viscosityMaxwell(eqv_stress) * viscosityMaxwellDerivative(eqv_stress));
+  return -_G / viscosityMaxwell(eqv_strain_incr) -
+         (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) *
+             viscosityMaxwellDerivative(eqv_strain_incr, j) / viscosityMaxwell(eqv_strain_incr);
 }
 
 ADReal
-BVBurgerModelUpdate::creepRateKelvinDerivative(const ADReal & eqv_stress)
+BVBurgerModelUpdate::creepRateKelvinDerivative(const std::vector<ADReal> & eqv_strain_incr,
+                                               const unsigned int j)
 {
-  return (1.0 / 3.0 -
-          (shearModulusKelvinDerivative(eqv_stress) -
-           shearModulusKelvin(eqv_stress) / viscosityKelvin(eqv_stress) * viscosityKelvinDerivative(eqv_stress)) *
-              (_eqv_creep_strainK_old[_qp] +
-               (eqv_stress - shearModulusKelvin(eqv_stress) * _eqv_creep_strainK_old[_qp]) * _dt /
-                   (viscosityKelvin(eqv_stress) *
-                    (1.0 + shearModulusKelvin(eqv_stress) * _dt / viscosityKelvin(eqv_stress))))) /
-         (viscosityKelvin(eqv_stress) * (1.0 + shearModulusKelvin(eqv_stress) * _dt / viscosityKelvin(eqv_stress)));
+  if (j == 0) // Kelvin wrt Maxwell
+    return -(_G + shearModulusKelvinDerivative(eqv_strain_incr, 0) *
+                      kelvinCreepStrain(eqv_strain_incr)) /
+               viscosityKelvin(eqv_strain_incr) -
+           (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) *
+               viscosityKelvinDerivative(eqv_strain_incr, 0) / viscosityKelvin(eqv_strain_incr);
+  else if (j == 1) // Kelvin wrt Kelvin
+    return -(_G + shearModulusKelvin(eqv_strain_incr) +
+             shearModulusKelvinDerivative(eqv_strain_incr, 0) *
+                 kelvinCreepStrain(eqv_strain_incr)) /
+               viscosityKelvin(eqv_strain_incr) -
+           (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) *
+               viscosityKelvinDerivative(eqv_strain_incr, 0) / viscosityKelvin(eqv_strain_incr);
+  else
+    throw MooseException(
+        "BVBurgerModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
 }
 
 ADReal
-BVBurgerModelUpdate::viscosityMaxwell(const ADReal & eqv_stress)
+BVBurgerModelUpdate::viscosityMaxwell(const std::vector<ADReal> & /*eqv_strain_incr*/)
 {
   return _etaM0;
 }
 
 ADReal
-BVBurgerModelUpdate::viscosityKelvin(const ADReal & eqv_stress)
+BVBurgerModelUpdate::viscosityKelvin(const std::vector<ADReal> & /*eqv_strain_incr*/)
 {
   return _etaK0;
 }
 
-
 ADReal
-BVBurgerModelUpdate::viscosityMaxwellDerivative(const ADReal & eqv_stress)
+BVBurgerModelUpdate::viscosityMaxwellDerivative(const std::vector<ADReal> & /*eqv_strain_incr*/,
+                                                const unsigned int /*j*/)
 {
   return 0.0;
 }
 
 ADReal
-BVBurgerModelUpdate::viscosityKelvinDerivative(const ADReal & eqv_stress)
+BVBurgerModelUpdate::viscosityKelvinDerivative(const std::vector<ADReal> & /*eqv_strain_incr*/,
+                                               const unsigned int /*j*/)
 {
   return 0.0;
 }
 
 ADReal
-BVBurgerModelUpdate::shearModulusKelvin(const ADReal & eqv_stress)
+BVBurgerModelUpdate::shearModulusKelvin(const std::vector<ADReal> & /*eqv_strain_incr*/)
 {
   return _GK0;
 }
 
 ADReal
-BVBurgerModelUpdate::shearModulusKelvinDerivative(const ADReal & eqv_stress)
+BVBurgerModelUpdate::shearModulusKelvinDerivative(const std::vector<ADReal> & /*eqv_strain_incr*/,
+                                                  const unsigned int /*j*/)
 {
   return 0.0;
+}
+
+ADReal
+BVBurgerModelUpdate::kelvinCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
+{
+  return _eqv_creep_strainK_old[_qp] + eqv_strain_incr[1];
 }
 
 void
@@ -134,7 +168,7 @@ BVBurgerModelUpdate::preReturnMap()
 }
 
 void
-BVBurgerModelUpdate::postReturnMap(const ADReal & eqv_stress)
+BVBurgerModelUpdate::postReturnMap(const std::vector<ADReal> & eqv_strain_incr)
 {
-  _eqv_creep_strainK[_qp] = _eqv_creep_strainK_old[_qp] + creepRateKelvin(eqv_stress) * _dt;
+  _eqv_creep_strainK[_qp] = kelvinCreepStrain(eqv_strain_incr);
 }
