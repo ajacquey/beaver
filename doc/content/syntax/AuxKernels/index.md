@@ -1,3 +1,3 @@
 # AuxKernels
 
-!syntax list /AuxKernels groups=BeaverApp FluidPropertiesApp
+!syntax list /AuxKernels groups=BeaverApp

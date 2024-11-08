@@ -1,3 +1,3 @@
 # Variables
 
-!syntax list /Variables groups=BeaverApp FluidPropertiesApp
+!syntax list /Variables groups=BeaverApp

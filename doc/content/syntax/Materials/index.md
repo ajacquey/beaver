@@ -1,3 +1,3 @@
 # Materials
 
-!syntax list /Materials groups=BeaverApp FluidPropertiesApp
+!syntax list /Materials groups=BeaverApp

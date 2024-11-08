@@ -1,3 +1,3 @@
 # AuxVariables
 
-!syntax list /AuxVariables groups=BeaverApp FluidPropertiesApp
+!syntax list /AuxVariables groups=BeaverApp

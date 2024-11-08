@@ -1,3 +1,3 @@
 # Kernels
 
-!syntax list /Kernels groups=BeaverApp FluidPropertiesApp
+!syntax list /Kernels groups=BeaverApp

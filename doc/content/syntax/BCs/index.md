@@ -1,3 +1,3 @@
 # BCs
 
-!syntax list /BCs groups=BeaverApp FluidPropertiesApp
+!syntax list /BCs groups=BeaverApp

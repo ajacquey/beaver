@@ -1,3 +1,3 @@
 # Mesh
 
-!syntax list /Mesh groups=BeaverApp FluidPropertiesApp
+!syntax list /Mesh groups=BeaverApp

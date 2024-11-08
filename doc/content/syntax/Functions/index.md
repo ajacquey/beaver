@@ -1,3 +1,3 @@
 # Functions
 
-!syntax list /Functions groups=BeaverApp FluidPropertiesApp
+!syntax list /Functions groups=BeaverApp
