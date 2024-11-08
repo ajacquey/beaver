@@ -70,9 +70,6 @@ BVFrictionUpdateBase::frictionUpdate(ADRealVectorValue & traction, const RankTwo
   if ((_tau_tr - frictionalStrength(0.0)) <= 0.0) // No slip
     return;
 
-  // mooseError(_traction_tr(0).value(), "\n", _traction_tr(1).value(), "\n",
-  // _traction_tr(2).value()); mooseError("Normal stress: ", _sigma_tr.value(), "\nShear stress: ",
-  // _tau_tr.value()); Friction update to compute slip rate
   ADReal delta_dot = returnMap();
 
   // Update quantities

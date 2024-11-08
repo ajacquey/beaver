@@ -12,7 +12,6 @@
 /******************************************************************************/
 
 #include "BVStressComponentAux.h"
-#include "metaphysicl/raw_type.h"
 
 registerMooseObject("BeaverApp", BVStressComponentAux);
 

@@ -12,7 +12,6 @@
 /******************************************************************************/
 
 #include "BVPressureAux.h"
-#include "metaphysicl/raw_type.h"
 
 registerMooseObject("BeaverApp", BVPressureAux);
 

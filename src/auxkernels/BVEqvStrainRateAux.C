@@ -12,7 +12,6 @@
 /******************************************************************************/
 
 #include "BVEqvStrainRateAux.h"
-#include "metaphysicl/raw_type.h"
 
 registerMooseObject("BeaverApp", BVEqvStrainRateAux);
 

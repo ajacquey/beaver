@@ -12,7 +12,6 @@
 /******************************************************************************/
 
 #include "BVStrainComponentAux.h"
-#include "metaphysicl/raw_type.h"
 
 registerMooseObject("BeaverApp", BVStrainComponentAux);
 

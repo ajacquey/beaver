@@ -13,7 +13,6 @@
 
 #include "BVDarcyVelocityAux.h"
 #include "Assembly.h"
-#include "metaphysicl/raw_type.h"
 
 registerMooseObject("BeaverApp", BVDarcyVelocityAux);
 

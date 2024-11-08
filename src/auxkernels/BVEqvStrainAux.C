@@ -12,7 +12,6 @@
 /******************************************************************************/
 
 #include "BVEqvStrainAux.h"
-#include "metaphysicl/raw_type.h"
 
 registerMooseObject("BeaverApp", BVEqvStrainAux);
 
