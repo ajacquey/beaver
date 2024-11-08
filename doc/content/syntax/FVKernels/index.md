@@ -1,3 +1,3 @@
 # FVKernels
 
-!syntax list /FVKernels groups=BeaverApp FluidPropertiesApp
+!syntax list /FVKernels groups=BeaverApp

@@ -1,3 +1,3 @@
 # FunctorMaterials
 
-!syntax list /FunctorMaterials groups=BeaverApp FluidPropertiesApp
+!syntax list /FunctorMaterials groups=BeaverApp

@@ -1,3 +1,3 @@
 # Bounds
 
-!syntax list /Bounds groups=BeaverApp FluidPropertiesApp
+!syntax list /Bounds groups=BeaverApp

@@ -1,3 +1,3 @@
 # ICs
 
-!syntax list /ICs groups=BeaverApp FluidPropertiesApp
+!syntax list /ICs groups=BeaverApp

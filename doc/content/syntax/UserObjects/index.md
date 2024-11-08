@@ -1,3 +1,3 @@
 # UserObjects
 
-!syntax list /UserObjects groups=BeaverApp FluidPropertiesApp
+!syntax list /UserObjects groups=BeaverApp
