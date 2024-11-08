@@ -1,0 +1,28 @@
+[Tests]
+  [fault_generator]
+    type = 'Exodiff'
+    input = 'fault_interface_generator.i'
+    exodiff = 'fault_interface_generator_in.e'
+    cli_args = '--mesh-only'
+  []
+  [stick_2D]
+    type = 'Exodiff'
+    input = 'stick_2D.i'
+    exodiff = 'stick_2D_out.e'
+  []
+  [stick_3D]
+    type = 'Exodiff'
+    input = 'stick_3D.i'
+    exodiff = 'stick_3D_out.e'
+  []
+  [constant_friction_2D]
+    type = 'Exodiff'
+    input = 'constant_friction_2D.i'
+    exodiff = 'constant_friction_2D_out.e'
+  []
+  [constant_friction_3D]
+    type = 'Exodiff'
+    input = 'constant_friction_3D.i'
+    exodiff = 'constant_friction_3D_out.e'
+  []
+[]

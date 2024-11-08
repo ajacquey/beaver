@@ -11,25 +11,33 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMisesStressAux.h"
+#include "BVConstantFrictionUpdate.h"
 
-registerMooseObject("BeaverApp", BVMisesStressAux);
+registerMooseObject("BeaverApp", BVConstantFrictionUpdate);
 
 InputParameters
-BVMisesStressAux::validParams()
+BVConstantFrictionUpdate::validParams()
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the Von Mises stress.");
+  InputParameters params = BVFrictionUpdateBase::validParams();
+  params.addClassDescription("Fault slip update with a constant Mohr-Coulomb friction.");
+  params.addRequiredRangeCheckedParam<Real>(
+      "friction", "friction > 0.0", "The Mohr-Coulomb friction coefficient.");
   return params;
 }
 
-BVMisesStressAux::BVMisesStressAux(const InputParameters & parameters) : BVStressAuxBase(parameters)
+BVConstantFrictionUpdate::BVConstantFrictionUpdate(const InputParameters & parameters)
+  : BVFrictionUpdateBase(parameters), _f(getParam<Real>("friction"))
 {
 }
 
-Real
-BVMisesStressAux::computeValue()
+ADReal
+BVConstantFrictionUpdate::frictionalStrength(const ADReal & /*delta_dot*/)
 {
-  ADRankTwoTensor stress_dev = _stress[_qp].deviatoric();
-  return std::sqrt(1.5) * MetaPhysicL::raw_value(stress_dev.L2norm());
+  return _f * _sigma_tr;
+}
+
+ADReal
+BVConstantFrictionUpdate::frictionalStrengthDeriv(const ADReal & /*delta_dot*/)
+{
+  return 0.0;
 }

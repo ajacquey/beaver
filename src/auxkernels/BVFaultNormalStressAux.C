@@ -3,33 +3,36 @@
 /*                       BEAVER, a MOOSE-based application                    */
 /*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
 /*                                                                            */
-/*                  Copyright (C) 2022 by Antoine B. Jacquey                  */
-/*                  Tufts University / Polytechnique Montreal                 */
+/*                  Copyright (C) 2024 by Antoine B. Jacquey                  */
+/*                           Polytechnique Montréal                           */
 /*                                                                            */
 /*            Licensed under GNU Lesser General Public License v2.1           */
 /*                       please see LICENSE for details                       */
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMisesStressAux.h"
+#include "BVFaultNormalStressAux.h"
 
-registerMooseObject("BeaverApp", BVMisesStressAux);
+registerMooseObject("BeaverApp", BVFaultNormalStressAux);
 
 InputParameters
-BVMisesStressAux::validParams()
+BVFaultNormalStressAux::validParams()
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the Von Mises stress.");
+  InputParameters params = BVFaultStressAuxBase::validParams();
+  params.addClassDescription("Calculates the effective normal stress.");
   return params;
 }
 
-BVMisesStressAux::BVMisesStressAux(const InputParameters & parameters) : BVStressAuxBase(parameters)
+BVFaultNormalStressAux::BVFaultNormalStressAux(const InputParameters & parameters)
+  : BVFaultStressAuxBase(parameters)
 {
 }
 
 Real
-BVMisesStressAux::computeValue()
+BVFaultNormalStressAux::computeValue()
 {
-  ADRankTwoTensor stress_dev = _stress[_qp].deviatoric();
-  return std::sqrt(1.5) * MetaPhysicL::raw_value(stress_dev.L2norm());
+  RealVectorValue normal = computeNormalVector();
+  ADRealVectorValue fault_traction = computeFaultTraction();
+
+  return -MetaPhysicL::raw_value(fault_traction * normal);
 }

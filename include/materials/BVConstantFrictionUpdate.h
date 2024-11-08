@@ -11,25 +11,20 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMisesStressAux.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVMisesStressAux);
+#include "BVFrictionUpdateBase.h"
 
-InputParameters
-BVMisesStressAux::validParams()
+class BVConstantFrictionUpdate : public BVFrictionUpdateBase
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the Von Mises stress.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVConstantFrictionUpdate(const InputParameters & parameters);
 
-BVMisesStressAux::BVMisesStressAux(const InputParameters & parameters) : BVStressAuxBase(parameters)
-{
-}
+protected:
+  virtual ADReal frictionalStrength(const ADReal & delta_dot) override;
+  virtual ADReal frictionalStrengthDeriv(const ADReal & delta_dot) override;
 
-Real
-BVMisesStressAux::computeValue()
-{
-  ADRankTwoTensor stress_dev = _stress[_qp].deviatoric();
-  return std::sqrt(1.5) * MetaPhysicL::raw_value(stress_dev.L2norm());
-}
+  // Friction parameters
+  const Real _f;
+};

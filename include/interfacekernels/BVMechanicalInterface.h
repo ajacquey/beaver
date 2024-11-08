@@ -3,7 +3,7 @@
 /*                       BEAVER, a MOOSE-based application                    */
 /*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
 /*                                                                            */
-/*                  Copyright (C) 2022 by Antoine B. Jacquey                  */
+/*                  Copyright (C) 2024 by Antoine B. Jacquey                  */
 /*                  Tufts University / Polytechnique Montreal                 */
 /*                                                                            */
 /*            Licensed under GNU Lesser General Public License v2.1           */
@@ -11,25 +11,19 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMisesStressAux.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVMisesStressAux);
+#include "ADInterfaceKernel.h"
 
-InputParameters
-BVMisesStressAux::validParams()
+class BVMechanicalInterface : public ADInterfaceKernel
 {
-  InputParameters params = BVStressAuxBase::validParams();
-  params.addClassDescription("Class for outputting the Von Mises stress.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVMechanicalInterface(const InputParameters & parameters);
 
-BVMisesStressAux::BVMisesStressAux(const InputParameters & parameters) : BVStressAuxBase(parameters)
-{
-}
+protected:
+  virtual ADReal computeQpResidual(Moose::DGResidualType type) override;
 
-Real
-BVMisesStressAux::computeValue()
-{
-  ADRankTwoTensor stress_dev = _stress[_qp].deviatoric();
-  return std::sqrt(1.5) * MetaPhysicL::raw_value(stress_dev.L2norm());
-}
+  const unsigned int _component;
+  const ADMaterialProperty<RealVectorValue> & _traction_global;
+};

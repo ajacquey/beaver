@@ -24,4 +24,9 @@
     input = error_moduli.i
     expect_err = "Please provide 'bulk_modulus' and 'shear_modulus' OR 'young_modulus' and 'poisson_ratio' OR 'bulk_modulus' and 'poisson_ratio' as elastic parameters!"
   []
+  [stress_state]
+    type = 'Exodiff'
+    input = 'stress_state.i'
+    exodiff = 'stress_state_out.e'
+  []
 []
