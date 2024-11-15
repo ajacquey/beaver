@@ -45,14 +45,6 @@
     order = CONSTANT
     family = MONOMIAL
   []
-  [normal_stress]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [shear_stress]
-    order = CONSTANT
-    family = MONOMIAL
-  []
 []
 
 [AuxKernels]
@@ -65,18 +57,6 @@
   [dev_stress_aux]
     type = BVMisesStressAux
     variable = dev_stress
-    execute_on = 'TIMESTEP_END'
-  []
-  [normal_stress_aux]
-    type = BVFaultNormalStressAux
-    variable = normal_stress
-    normal = '0 1 0'
-    execute_on = 'TIMESTEP_END'
-  []
-  [shear_stress_aux]
-    type = BVFaultShearStressAux
-    variable = shear_stress
-    normal = '0 1 0'
     execute_on = 'TIMESTEP_END'
   []
 []
