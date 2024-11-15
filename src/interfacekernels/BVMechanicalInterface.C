@@ -20,6 +20,7 @@ BVMechanicalInterface::validParams()
 {
   InputParameters params = ADInterfaceKernel::validParams();
   params.addClassDescription("Kernel for stress equilibrium at an inferface.");
+  params.addCoupledVar("fluid_pressure", 0, "The fluid pressure variable.");
   params.set<bool>("use_displaced_mesh") = false;
   MooseEnum component("x y z");
   params.addRequiredParam<MooseEnum>("component",
@@ -31,6 +32,7 @@ BVMechanicalInterface::validParams()
 
 BVMechanicalInterface::BVMechanicalInterface(const InputParameters & parameters)
   : ADInterfaceKernel(parameters),
+    _pf(adCoupledValue("fluid_pressure")),
     _component(getParam<MooseEnum>("component")),
     _traction_global(getADMaterialProperty<RealVectorValue>("traction_global"))
 {
@@ -39,7 +41,7 @@ BVMechanicalInterface::BVMechanicalInterface(const InputParameters & parameters)
 ADReal
 BVMechanicalInterface::computeQpResidual(Moose::DGResidualType type)
 {
-  ADReal r = _traction_global[_qp](_component);
+  ADReal r = _traction_global[_qp](_component) - _pf[_qp] * _normals[_qp](_component);
 
   switch (type)
   {

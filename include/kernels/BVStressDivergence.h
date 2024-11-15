@@ -25,7 +25,7 @@ protected:
   virtual ADReal computeQpResidual() override;
 
   const bool _coupled_pf;
-  const VariableValue & _pf;
+  const ADVariableValue & _pf;
   const unsigned int _component;
   //   const Real _rho;
   //   const RealVectorValue _gravity;
