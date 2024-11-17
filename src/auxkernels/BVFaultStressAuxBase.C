@@ -17,38 +17,17 @@
 InputParameters
 BVFaultStressAuxBase::validParams()
 {
-  InputParameters params = BVStressAuxBase::validParams();
+  InputParameters params = AuxKernel::validParams();
   params.addClassDescription("Base class for outputting fault stress.");
   params.addParam<RealVectorValue>("normal", "The vector normal to the fault plane.");
   return params;
 }
 
 BVFaultStressAuxBase::BVFaultStressAuxBase(const InputParameters & parameters)
-  : BVStressAuxBase(parameters), _normals(_assembly.normals())
-{
-  if (isParamValid("normal") && (!_bnd))
-  {
-    _normal = getParam<RealVectorValue>("normal");
-    if (_normal.norm() != 1.0)
-      _normal /= _normal.norm();
-  }
-  else if (!isParamValid("normal") && (!_bnd))
-    mooseError("You need to provide either a boundary or a normal vector for this AuxKernel!\n");
-}
-
-RealVectorValue
-BVFaultStressAuxBase::computeNormalVector()
+  : AuxKernel(parameters),
+    _normals(_assembly.normals()),
+    _traction(getADMaterialProperty<RealVectorValue>("traction_global"))
 {
   if (!_bnd)
-    return _normal;
-  else
-    return _normals[_qp];
-}
-
-ADRealVectorValue
-BVFaultStressAuxBase::computeFaultTraction()
-{
-  RealVectorValue normal = computeNormalVector();
-
-  return _stress[_qp] * normal;
+    mooseError("You need to provide a boundary for this AuxKernel!\n");
 }

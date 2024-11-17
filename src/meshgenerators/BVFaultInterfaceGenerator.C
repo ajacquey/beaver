@@ -182,7 +182,11 @@ BVFaultInterfaceGenerator::stitchNodesToElems(
     const std::vector<BndElement *> & bnd_elems,
     std::unique_ptr<MeshBase> & mesh)
 {
+  // Boundary info
+  auto & boundary_info = mesh->get_boundary_info();
+  // Normal vector (to identify which side we are on)
   RealVectorValue normal = RealVectorValue(0.0, 0.0, 0.0);
+  // Loop over nodes
   for (auto it = split_nodes_map.begin(); it != split_nodes_map.end(); ++it)
   {
     const boundary_id_type bnd_id = (*it).first;
@@ -223,6 +227,8 @@ BVFaultInterfaceGenerator::stitchNodesToElems(
                 unsigned int local_node_id = elem->local_node(node_ref_id);
                 Node * new_node = mesh->node_ptr((*itn)[1]);
                 elem->set_node(local_node_id) = new_node;
+                // Remove element from sideset (we do not need to double the sideset)
+                boundary_info.remove_side(elem, s, bnd_id);
               }
             }
           }
