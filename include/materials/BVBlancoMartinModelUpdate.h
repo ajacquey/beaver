@@ -25,11 +25,13 @@ protected:
   virtual void initQpStatefulProperties() override;
   virtual ADReal creepRate(const std::vector<ADReal> & eqv_strain_incr,
                            const unsigned int i) override;
+  virtual ADReal creepRateR(const std::vector<ADReal> & eqv_strain_incr);
   virtual ADReal creepRateLemaitre(const std::vector<ADReal> & eqv_strain_incr);
   virtual ADReal creepRateMunsonDawson(const std::vector<ADReal> & eqv_strain_incr);
   virtual ADReal creepRateDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                      const unsigned int i,
                                      const unsigned int j) override;
+  virtual ADReal creepRateRDerivative(const std::vector<ADReal> & eqv_strain_incr);
   virtual ADReal creepRateLemaitreDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                              const unsigned int /*j*/);
   virtual ADReal creepRateMunsonDawsonDerivative(const std::vector<ADReal> & eqv_strain_incr,
