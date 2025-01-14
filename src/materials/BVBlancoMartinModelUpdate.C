@@ -22,11 +22,13 @@ BVBlancoMartinModelUpdate::validParams()
   params.addClassDescription(
       "Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt "
       "behavior: From laboratory experiments to pertinent long-term predictions.");
+  // Modified Lemaitre creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>("alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
   params.addRequiredRangeCheckedParam<Real>("kr1", "kr1 > 0.0", "The kr1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("kr2", "kr2 > 0.0", "The kr2 parameter.");
   params.addRequiredRangeCheckedParam<Real>("beta1", "beta1 > 0.0", "The beta1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("beta2", "beta2 > 0.0", "The beta2 parameter.");
+  // Munson-Dawson creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>("A1", "A1 > 0.0", "The A1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n1", "n1 > 0.0", "The n1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("A", "A >= 0.0", "The A parameter.");
@@ -162,6 +164,7 @@ BVBlancoMartinModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal>
       return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
       return _alpha * creepRateRDerivative(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+  
   else
     throw MooseException(
         "BVBlancoMartinModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
@@ -193,6 +196,7 @@ BVBlancoMartinModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADR
       return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
              ((gamma_ms / saturation_strain - 1.0) * creepRateRDerivative(eqv_strain_incr) +
               1.0e+06 * _m / saturation_strain * creepRateR(eqv_strain_incr));
+  
   else
     throw MooseException(
         "BVBlancoMartinModelUpdate: error, unknow creep model called in `creepRateDerivative`!");

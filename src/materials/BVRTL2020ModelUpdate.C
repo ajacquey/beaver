@@ -22,9 +22,11 @@ BVRTL2020ModelUpdate::validParams()
   params.addClassDescription(
       "Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt "
       "behavior: From laboratory experiments to pertinent long-term predictions.");
+  // Lemaitre creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>("alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
   params.addRequiredRangeCheckedParam<Real>("A2", "A2 > 0.0", "The A2 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n2", "n2 > 0.0", "The n2 parameter.");
+  // Munson-Dawson creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>("A1", "A1 > 0.0", "The A1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n1", "n1 > 0.0", "The n1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("A", "A >= 0.0", "The A parameter.");
@@ -74,35 +76,41 @@ BVRTL2020ModelUpdate::creepRate(const std::vector<ADReal> & eqv_strain_incr, con
 }
 
 ADReal
+BVRTL2020ModelUpdate::creepRateR(const std::vector<ADReal> & eqv_strain_incr)
+{
+  ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
+
+  if (q == 0.0)
+    return 0.0;
+  else
+    return 1.0e-06 * std::pow(q / _A2, _n2);
+}
+
+ADReal
 BVRTL2020ModelUpdate::creepRateLemaitre(const std::vector<ADReal> & eqv_strain_incr)
 {
-  if (lemaitreCreepStrain(eqv_strain_incr) == 0.0)
-    return _alpha *
-           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                    _n2);
+  ADReal gamma_l = 1.0e+06 * lemaitreCreepStrain(eqv_strain_incr);
+
+  if (gamma_l == 0.0)
+    return _alpha * creepRateR(eqv_strain_incr);
   else
-    return _alpha *
-           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                    _n2) *
-           std::pow(lemaitreCreepStrain(eqv_strain_incr), 1.0 - 1.0 / _alpha);
+    return _alpha * creepRateR(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
 }
 
 ADReal
 BVRTL2020ModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & eqv_strain_incr)
 {
-  ADReal saturation_strain =
-      std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A1, _n1);
+  ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
+  ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
 
-  ADReal gamma_ms = munsondawsonCreepStrain(eqv_strain_incr);
+  ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(eqv_strain_incr);
 
   if (gamma_ms < saturation_strain)
     return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
-           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                    _n2);
+           creepRateR(eqv_strain_incr);
   else
-    return -_B * std::pow(gamma_ms / saturation_strain, _m) *
-           std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                    _n2);
+    return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
+           creepRateR(eqv_strain_incr);
 }
 
 ADReal
@@ -120,32 +128,36 @@ BVRTL2020ModelUpdate::creepRateDerivative(const std::vector<ADReal> & eqv_strain
 }
 
 ADReal
+BVRTL2020ModelUpdate::creepRateRDerivative(const std::vector<ADReal> & eqv_strain_incr)
+{
+  ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
+
+  if (q == 0.0)
+    return 1.0;
+  else
+    return -1.0e-06 * 3.0 * _G * _n2 / _A2 * std::pow(q / _A2, _n2 - 1.0);
+}
+
+ADReal
 BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                                   const unsigned int j)
 {
+  ADReal gamma_l = 1.0e+06 * lemaitreCreepStrain(eqv_strain_incr);
+
   if (j == 0) // Lemaitre wrt Lemaitre
-    if (lemaitreCreepStrain(eqv_strain_incr) == 0.0)
-      return -3.0 * _G / _A2 * _n2 * _alpha *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0);
+    if (gamma_l == 0.0)
+      return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
-      return _alpha *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0) *
-             std::pow(lemaitreCreepStrain(eqv_strain_incr), -1.0 / _alpha) *
-             (-3.0 * _G / _A2 * _n2 * lemaitreCreepStrain(eqv_strain_incr) +
-              (1.0 - 1.0 / _alpha) *
-                  (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2);
+      return std::pow(gamma_l, -1.0 / _alpha) *
+             (_alpha * gamma_l * creepRateRDerivative(eqv_strain_incr) +
+              1.0e+06 * (_alpha - 1.0) * creepRateR(eqv_strain_incr));
+
   else if (j == 1) // Lemaitre wrt Munson-Dawson
-    if (lemaitreCreepStrain(eqv_strain_incr) == 0.0)
-      return -3.0 * _G / _A2 * _n2 * _alpha *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0);
+    if (gamma_l == 0.0)
+      return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
-      return -3.0 * _G / _A2 * _n2 * _alpha *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0) *
-             std::pow(lemaitreCreepStrain(eqv_strain_incr), 1.0 - 1.0 / _alpha);
+      return _alpha * creepRateRDerivative(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+
   else
     throw MooseException(
         "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
@@ -155,34 +167,29 @@ ADReal
 BVRTL2020ModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                                       const unsigned int j)
 {
-  ADReal saturation_strain =
-      std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A1, _n1);
+  ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
+  ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
 
-  ADReal gamma_ms = munsondawsonCreepStrain(eqv_strain_incr);
+  ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(eqv_strain_incr);
 
   if (j == 0) // Munson-Dawson wrt Lemaitre
     if (gamma_ms < saturation_strain)
-      return -3.0 * _G / _A2 * _n2 * _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0);
+      return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
+             creepRateRDerivative(eqv_strain_incr);
     else
-      return 3.0 * _G / _A2 * _n2 * _B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0);
+      return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
+             creepRateRDerivative(eqv_strain_incr);
+             
   else if (j == 1) // Munson-Dawson wrt Munson-Dawson
     if (gamma_ms < saturation_strain)
-      return -_A * std::pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0) *
-             (_n / saturation_strain *
-                  (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2 +
-              3.0 * _G / _A2 * _n2 * (1.0 - gamma_ms / saturation_strain));
+      return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
+             ((1.0 - gamma_ms / saturation_strain) * creepRateRDerivative(eqv_strain_incr) -
+              1.0e+06 * _n / saturation_strain * creepRateR(eqv_strain_incr));
     else
       return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
-             std::pow((_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2,
-                      _n2 - 1.0) *
-             (_m * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) / _A2 -
-              3.0 * _G / _A2 * _n2 * (gamma_ms / saturation_strain - 1.0));
+             ((gamma_ms / saturation_strain - 1.0) * creepRateRDerivative(eqv_strain_incr) +
+              1.0e+06 * _m / saturation_strain * creepRateR(eqv_strain_incr));
+  
   else
     throw MooseException(
         "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
