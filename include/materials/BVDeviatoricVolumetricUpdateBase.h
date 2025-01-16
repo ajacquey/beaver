@@ -23,13 +23,14 @@ public:
   virtual void inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl) override;
 
 protected:
-//  virtual std::vector<ADReal> returnMap() override;
+  virtual std::vector<ADReal> returnMap() override;
   virtual void nrStep(const std::vector<ADReal> & res,
                       const std::vector<std::vector<ADReal>> & jac,
                       std::vector<ADReal> & creep_strain_incr) override;
   virtual ADReal norm(const std::vector<ADReal> & vec) override;
   virtual std::vector<ADReal> residual(const std::vector<ADReal> & creep_strain_incr) override;
   virtual std::vector<std::vector<ADReal>> jacobian(const std::vector<ADReal> & creep_strain_incr) override;
+  virtual ADRankTwoTensor reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr) override;
   virtual ADReal creepRate(const std::vector<ADReal> & creep_strain_incr, const unsigned int i) override = 0;
   virtual ADReal creepRateDerivative(const std::vector<ADReal> & creep_strain_incr,
                                      const unsigned int i,
