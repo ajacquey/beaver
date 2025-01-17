@@ -241,38 +241,68 @@ BVBlancoMartinRTL2020ModelUpdate::VcreepRate(const std::vector<ADReal> & creep_s
                                              const ADReal & Vcreep_strain_incr)
 {   
   ADReal p = _mean_stress_tr - (_K * Vcreep_strain_incr);
+      if (p == 0.0)
+    return 0.0; // No contribution since p is zero
 
-  // Parameters to compute the volumetric creep strain rate easily
-  ADReal k = 0;       // Proportionality constant
-  ADReal numer = 0;   // Numerator of proportionality constant k
-  ADReal denom = 0;   // Denominator of proportionality constant k
+  // Calculate numerator and denomenator for proportionality constant k
   ADReal gamma_vp = 1.0e+06 * (lemaitreCreepStrain(creep_strain_incr) + munsondawsonCreepStrain(creep_strain_incr));
-
-  // Calculate numer and denom for k
-  numer = std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz) - gamma_vp;
-  denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) + gamma_vp;
+  ADReal numer = std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz) - gamma_vp;
+  ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) + gamma_vp;
 
   // Safeguard against division by zero
   if (denom != 0.0) 
     {
-      k = _z * (numer) / denom;
+      ADReal k = _z * (numer) / denom; // proportionality constant
+      ADReal res = 0.0; // Initialize res to zero before aggregation
+      for (unsigned int i = 0; i < creep_strain_incr.size(); ++i) 
+        {
+            res += k * creep_strain_incr[i];
+        }
+      return res;
     } 
-  else // Handle the case where denom is zero (potentially set k to 0 or a defined value)
+  else // Handle the case where denom is zero 
     {
-      k = 0.0; // Or another appropriate default value
+     return 0.0; // No contribution since k is not defined
     }
-
-  ADReal res = 0; // Initialize res to zero before aggregation
-  for (unsigned int i = 0; i < creep_strain_incr.size(); ++i) 
-    {
-        res += k * creep_strain_incr[i];
-    }
-    return res;
 }
 
-ADReal
-BVBlancoMartinRTL2020ModelUpdate::VcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
-                                                       const ADReal & Vcreep_strain_incr)
-{ 
-  return 0.0;
+ADReal BVBlancoMartinRTL2020ModelUpdate::VcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
+                                                              const ADReal & Vcreep_strain_incr)
+{
+    ADReal p = _mean_stress_tr - (_K * Vcreep_strain_incr);
+      if (p == 0.0)
+    return 0.0; // No contribution since p is zero
+
+    ADReal gamma_vp = 1.0e+06 * (lemaitreCreepStrain(creep_strain_incr) + munsondawsonCreepStrain(creep_strain_incr));
+    ADReal numer = std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz) - gamma_vp;
+    ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) + gamma_vp;
+
+    // Derivative contributions
+    ADReal dp_dVcreep_strain_incr = -_K; // derivative of p with respect to Vcreep_strain_incr
+
+    // Computing the derivatives of numerator and denomenator
+    ADReal dnumer_dVcreep_strain_incr = _nz * std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz - 1) * (dp_dVcreep_strain_incr / _Nz);
+    ADReal ddenom_dVcreep_strain_incr = _nz * std::pow((p / _Mz) > 0.0 ? (p / _Mz) : 0.0, _nz - 1) * (dp_dVcreep_strain_incr / _Mz);
+
+    // Safeguard situation for denominator
+    if (denom != 0.0) 
+    {
+        // Using the quotient rule to differentiate k
+        ADReal k = _z * (numer) / denom;
+        ADReal dk_dVcreep_strain_incr = _z * (ddenom_dVcreep_strain_incr * numer - dnumer_dVcreep_strain_incr * denom) / (denom * denom);
+        
+        // Initialize res to zero before aggregation
+        ADReal res = 0; 
+        for (unsigned int i = 0; i < creep_strain_incr.size(); ++i) 
+        {
+            res += dk_dVcreep_strain_incr * creep_strain_incr[i]; // Use the derivative of k
+        }
+        return res;
+    } 
+    else 
+    {
+        // If denom is zero, then k is set to a default value (0.0 in this case)
+        return 0.0; // No contribution since k is not defined
+    }
 }
+
