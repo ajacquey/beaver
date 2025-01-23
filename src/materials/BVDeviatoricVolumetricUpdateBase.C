@@ -26,9 +26,7 @@ BVDeviatoricVolumetricUpdateBase::validParams()
       "properties related to this stress update model. This allows for "
       "multiple models of the same type to be used without naming conflicts.");
   params.addRequiredParam<Real>("num_cm", "number of creep models");
-  params.addParam<bool>("dev_vol",
-                      true,
-                    "Whether to perform deviatoric and volumetric calculations or only deviatoric calculations");
+  params.addRequiredParam<bool>("dev_vol", "Whether to perform deviatoric and volumetric calculations or only deviatoric calculations");
   return params;
 }
 
@@ -37,7 +35,6 @@ BVDeviatoricVolumetricUpdateBase::BVDeviatoricVolumetricUpdateBase(const InputPa
     _identity_two(RankTwoTensor::initIdentity),
     _num_cm(getParam<Real>("num_cm")),
     _dev_vol(parameters.get<bool>("dev_vol"))
-//    _creep_strain_incr(declareADProperty<RankTwoTensor>(_base_name + "creep_strain_increment"))
 {
 }
 
@@ -72,121 +69,17 @@ BVDeviatoricVolumetricUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, cons
   std::vector<ADReal> eqv_strain_incr(_num_cm, 0.0);
   ADReal Vol_eqv_strain_incr = 0.0;
   // Viscoelastic update
-  DVreturnMap(eqv_strain_incr, Vol_eqv_strain_incr);
+  dvreturnMap(eqv_strain_incr, Vol_eqv_strain_incr);
 
-  _creep_strain_incr[_qp] = DVreformPlasticStrainTensor(eqv_strain_incr, Vol_eqv_strain_incr);
+  _creep_strain_incr[_qp] = dvreformPlasticStrainTensor(eqv_strain_incr, Vol_eqv_strain_incr);
   stress -= 2.0 * _G * _creep_strain_incr[_qp];
   postReturnMap(eqv_strain_incr);
 }
 
-std::vector<ADReal>
-BVDeviatoricVolumetricUpdateBase::returnMap()
-{
-  // Initialize scalar creep strain incr
-  std::vector<ADReal> creep_strain_incr(_num_cm, 0.0);
-
-  // Initial residual
-  std::vector<ADReal> res_ini = residual(creep_strain_incr); // residual function to initialize the res to prevent non-singularity in the return map
-
-  std::vector<ADReal> res = res_ini;
-  std::vector<std::vector<ADReal>> jac = jacobian(creep_strain_incr); // jacobian function to initialize the jac to prevent non-singularity in the return map
-
-  // Newton loop
-  for (unsigned int iter = 0; iter < _max_its; ++iter)
-  {
-    nrStep(res, jac, creep_strain_incr);
-
-    res = residual(creep_strain_incr);
-    jac = jacobian(creep_strain_incr);
-
-    // Convergence check
-    if ((norm(res) <= _abs_tol) || (norm(res) / norm(res_ini) <= _rel_tol))
-      return creep_strain_incr;
-  }
-  throw MooseException(
-      "BVTwoCreepUpdateBase: maximum number of iterations exceeded in 'returnMap'!");
-}
-
-void
-BVDeviatoricVolumetricUpdateBase::nrStep(const std::vector<ADReal> & res,
-                             const std::vector<std::vector<ADReal>> & jac,
-                             std::vector<ADReal> & creep_strain_incr)
-{
-  std::vector<ADReal> dx(_num_cm, 0.0);
-
-  // Check determinant
-  ADReal det = jac[0][0] * jac[1][1] - jac[0][1] * jac[1][0];
-
-  if (det == 0.0)
-    throw MooseException("BVDeviatoricVolumetricUpdateBase: matrix is singular in 'returnMap!");
-
-  creep_strain_incr[0] -= (jac[1][1] * res[0] - jac[0][1] * res[1]) / det;
-  creep_strain_incr[1] -= (jac[0][0] * res[1] - jac[1][0] * res[0]) / det;
-
-  return;
-}
-
-ADReal
-BVDeviatoricVolumetricUpdateBase::norm(const std::vector<ADReal> & vec)
-{
-  ADReal res = 0.0;
-  for (const auto & r : vec)
-    res += r * r;
-
-  return std::sqrt(res);
-}
-
-std::vector<ADReal>
-BVDeviatoricVolumetricUpdateBase::residual(const std::vector<ADReal> & creep_strain_incr)
-{
-  std::vector<ADReal> res(_num_cm);
-  for (unsigned int i = 0; i < _num_cm; ++i)
-    res[i] = creepRate(creep_strain_incr, i) * _dt - creep_strain_incr[i];
-
-  return res;
-}
-
-std::vector<std::vector<ADReal>>
-BVDeviatoricVolumetricUpdateBase::jacobian(const std::vector<ADReal> & creep_strain_incr)
-{
-  std::vector<std::vector<ADReal>> jac(_num_cm, std::vector<ADReal>(_num_cm));
-
-  for (unsigned int i = 0; i < _num_cm; ++i)
-    for (unsigned int j = 0; j < _num_cm; ++j)
-      jac[i][j] = creepRateDerivative(creep_strain_incr, i, j) * _dt - ((i == j) ? 1.0 : 0.0);
-
-  return jac;
-}
-
-
-ADRankTwoTensor
-BVDeviatoricVolumetricUpdateBase::reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr)
-{
-  ADRankTwoTensor res;
-  res.zero();
-
-  ADRankTwoTensor flow_dir =
-      (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
-
-  for (unsigned int i = 0; i < _num_cm; ++i)
-    res += 1.5 * creep_strain_incr[i] * flow_dir;
-
-  return res;
-}
-
-void
-BVDeviatoricVolumetricUpdateBase::preReturnMap()
-{
-}
-
-void
-BVDeviatoricVolumetricUpdateBase::postReturnMap(const std::vector<ADReal> & /*creep_strain_incr*/)
-{
-}
 
 //Deviatoric-Volumetric updates
 void
-BVDeviatoricVolumetricUpdateBase::DVreturnMap(std::vector<ADReal>& creep_strain_incr_out, 
+BVDeviatoricVolumetricUpdateBase::dvreturnMap(std::vector<ADReal>& creep_strain_incr_out, 
                                               ADReal & Vcreep_strain_incr_out)
 {
     if (_dev_vol)
@@ -203,11 +96,11 @@ BVDeviatoricVolumetricUpdateBase::DVreturnMap(std::vector<ADReal>& creep_strain_
         ADReal Vcreep_strain_incr = 0.0; 
 
         // Initial volumetric residual
-        ADReal Vres_ini = Vresidual(creep_strain_incr, Vcreep_strain_incr); // initialize volumetric residual
+        ADReal Vres_ini = vresidual(creep_strain_incr, Vcreep_strain_incr); // initialize volumetric residual
         ADReal Vres = Vres_ini;
 
         // Initial volumetric jacobian
-        ADReal Vjac = Vjacobian(creep_strain_incr,Vcreep_strain_incr); // initialize volumetric Jacobian
+        ADReal Vjac = vjacobian(creep_strain_incr,Vcreep_strain_incr); // initialize volumetric Jacobian
 
         // Newton loop
         for (unsigned int iter = 0; iter < _max_its; ++iter)
@@ -221,8 +114,8 @@ BVDeviatoricVolumetricUpdateBase::DVreturnMap(std::vector<ADReal>& creep_strain_
 
             // compute and update the scalar volumetric strain increment
             Vcreep_strain_incr -= Vres / Vjac;  
-            Vres = Vresidual(creep_strain_incr, Vcreep_strain_incr);
-            Vjac = Vjacobian(creep_strain_incr, Vcreep_strain_incr);
+            Vres = vresidual(creep_strain_incr, Vcreep_strain_incr);
+            Vjac = vjacobian(creep_strain_incr, Vcreep_strain_incr);
             
             // Convergence check
             bool D_converge = (norm(res) <= _abs_tol) || (norm(res) / norm(res_ini) <= _rel_tol);
@@ -250,19 +143,19 @@ BVDeviatoricVolumetricUpdateBase::DVreturnMap(std::vector<ADReal>& creep_strain_
 }
 
 ADReal
-BVDeviatoricVolumetricUpdateBase::Vresidual(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr)
+BVDeviatoricVolumetricUpdateBase::vresidual(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr)
 {
-   return VcreepRate(creep_strain_incr, Vcreep_strain_incr) * _dt - Vcreep_strain_incr;
+   return vcreepRate(creep_strain_incr, Vcreep_strain_incr) * _dt - Vcreep_strain_incr;
 }
 
 ADReal
-BVDeviatoricVolumetricUpdateBase::Vjacobian(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr)
+BVDeviatoricVolumetricUpdateBase::vjacobian(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr)
 {
-   return  VcreepRateDerivative(creep_strain_incr,Vcreep_strain_incr) * _dt - 1.0;
+   return  vcreepRateDerivative(creep_strain_incr,Vcreep_strain_incr) * _dt - 1.0;
 }
 
 ADRankTwoTensor
-BVDeviatoricVolumetricUpdateBase::DVreformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr)
+BVDeviatoricVolumetricUpdateBase::dvreformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr)
 {
     if (_dev_vol)
     {

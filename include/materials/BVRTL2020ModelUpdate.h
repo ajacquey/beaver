@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "BVTwoCreepUpdateBase.h"
+#include "BVDeviatoricVolumetricUpdateBase.h"
 
-class BVRTL2020ModelUpdate : public BVTwoCreepUpdateBase
+class BVRTL2020ModelUpdate : public BVDeviatoricVolumetricUpdateBase
 {
 public:
   static InputParameters validParams();
@@ -41,6 +41,11 @@ protected:
   virtual void preReturnMap() override;
   virtual void postReturnMap(const std::vector<ADReal> & eqv_strain_incr) override;
 
+  virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
+                                  const ADReal & Vcreep_strain_incr) override;
+  virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
+                                     const ADReal & Vcreep_strain_incr) override;
+
   // Lemaitre creep strain rate parameters
   const Real _alpha;
   const Real _A2;
@@ -52,11 +57,19 @@ protected:
   const Real _A;
   const Real _B;
   const Real _m;
-  const Real _n;
+  const Real _n;  
+  
+  // Volumetric creep strain rate parameters
+  const Real _z;
+  const Real _Nz;
+  const Real _nz;
+  const Real _Mz;
+  const Real _mz;
 
   // Internal variable for Lemaitre and Munson-Dawson creep strain
   ADMaterialProperty<Real> & _eqv_creep_strain_L;
   const MaterialProperty<Real> & _eqv_creep_strain_L_old;
   ADMaterialProperty<Real> & _eqv_creep_strain_R;
   const MaterialProperty<Real> & _eqv_creep_strain_R_old;
+
 };
