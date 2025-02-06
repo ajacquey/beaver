@@ -53,8 +53,7 @@ BVDeviatoricVolumetricUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, cons
   _stress_tr = stress;
   // Trial effective stress
   _eqv_stress_tr = std::sqrt(1.5) * _stress_tr.deviatoric().L2norm();
-  _avg_stress_tr = _stress_tr.trace();
-  _mean_stress_tr = _avg_stress_tr / 3.0;    // my modification: mean stress
+  _avg_stress_tr = -_stress_tr.trace() / 3.0;
   // Shear and bulk modulus
   _G = BVElasticityTensorTools::getIsotropicShearModulus(Cijkl);
   _K = BVElasticityTensorTools::getIsotropicBulkModulus(Cijkl);
