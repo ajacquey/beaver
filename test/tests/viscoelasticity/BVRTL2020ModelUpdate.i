@@ -218,8 +218,7 @@ z = 0.4523
   #[]
   [viscoelastic]
     type = BVRTL2020ModelUpdate
-    num_cm = 2
-   dev_vol = true
+   volumetric = true
     alpha = ${alpha}
     A1 = ${A1}
     n1 = ${n1}

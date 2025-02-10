@@ -65,7 +65,10 @@ BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
     _eqv_creep_strain_L(declareADProperty<Real>(_base_name + "eqv_creep_strain_L")),
     _eqv_creep_strain_L_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_L")),
     _eqv_creep_strain_R(declareADProperty<Real>(_base_name + "eqv_creep_strain_R")),
-    _eqv_creep_strain_R_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_R"))
+    _eqv_creep_strain_R_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_R")),
+    // Internal variable for volumetric creep strain
+    _v_eqv_creep_strain(declareADProperty<Real>(_base_name + "_v_eqv_creep_strain")),
+    _v_eqv_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "_v_eqv_creep_strain"))
 {
 }
 
@@ -74,6 +77,7 @@ BVRTL2020ModelUpdate::initQpStatefulProperties()
 {
   _eqv_creep_strain_L[_qp] = 0.0;
   _eqv_creep_strain_R[_qp] = 0.0;
+  _v_eqv_creep_strain[_qp] = 0.0;
 }
 
 ADReal
@@ -219,11 +223,18 @@ BVRTL2020ModelUpdate::munsondawsonCreepStrain(const std::vector<ADReal> & eqv_st
   return _eqv_creep_strain_R_old[_qp] + eqv_strain_incr[1];
 }
 
+ADReal
+BVRTL2020ModelUpdate::volumetricCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
+{
+  return _v_eqv_creep_strain_old[_qp] + eqv_strain_incr[2];
+}
+
 void
 BVRTL2020ModelUpdate::preReturnMap()
 {
   _eqv_creep_strain_L[_qp] = _eqv_creep_strain_L_old[_qp];
   _eqv_creep_strain_R[_qp] = _eqv_creep_strain_R_old[_qp];
+  _v_eqv_creep_strain[_qp] = _v_eqv_creep_strain_old[_qp];
 }
 
 void
@@ -231,13 +242,14 @@ BVRTL2020ModelUpdate::postReturnMap(const std::vector<ADReal> & eqv_strain_incr)
 {
   _eqv_creep_strain_L[_qp] = lemaitreCreepStrain(eqv_strain_incr);
   _eqv_creep_strain_R[_qp] = munsondawsonCreepStrain(eqv_strain_incr);
+  _v_eqv_creep_strain[_qp] = volumetricCreepStrain(eqv_strain_incr);
 }
 
 ADReal
 BVRTL2020ModelUpdate::vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
-                                             const ADReal & Vcreep_strain_incr)
+                                 const std::vector<ADReal> & vcreep_strain_incr)
 {   
-  ADReal p = _mean_stress_tr - (_K * Vcreep_strain_incr);
+  ADReal p = _avg_stress_tr - (_K * vcreep_strain_incr[0]);
       if (p == 0.0)
     return 0.0; // No contribution since p is zero
 
@@ -264,9 +276,9 @@ BVRTL2020ModelUpdate::vcreepRate(const std::vector<ADReal> & creep_strain_incr,
 }
 
 ADReal BVRTL2020ModelUpdate::vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
-                                                              const ADReal & Vcreep_strain_incr)
+                                                  const std::vector<ADReal> & vcreep_strain_incr)
 {
-    ADReal p = _mean_stress_tr - (_K * Vcreep_strain_incr);
+    ADReal p = _avg_stress_tr - (_K * vcreep_strain_incr[0]);
       if (p == 0.0)
     return 0.0; // No contribution since p is zero
 
@@ -275,24 +287,24 @@ ADReal BVRTL2020ModelUpdate::vcreepRateDerivative(const std::vector<ADReal> & cr
     ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) + gamma_vp;
 
     // Derivative contributions
-    ADReal dp_dVcreep_strain_incr = -_K; // derivative of p with respect to Vcreep_strain_incr
+    ADReal dp_dvcreep_strain_incr = -_K; // derivative of p with respect to vcreep_strain_incr
 
     // Computing the derivatives of numerator and denomenator
-    ADReal dnumer_dVcreep_strain_incr = _nz * std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz - 1) * (dp_dVcreep_strain_incr / _Nz);
-    ADReal ddenom_dVcreep_strain_incr = _nz * std::pow((p / _Mz) > 0.0 ? (p / _Mz) : 0.0, _nz - 1) * (dp_dVcreep_strain_incr / _Mz);
+    ADReal dnumer_dvcreep_strain_incr = _nz * std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz - 1) * (dp_dvcreep_strain_incr / _Nz);
+    ADReal ddenom_dvcreep_strain_incr = _nz * std::pow((p / _Mz) > 0.0 ? (p / _Mz) : 0.0, _nz - 1) * (dp_dvcreep_strain_incr / _Mz);
 
     // Safeguard situation for denominator
     if (denom != 0.0) 
     {
         // Using the quotient rule to differentiate k
         ADReal k = _z * (numer) / denom;
-        ADReal dk_dVcreep_strain_incr = _z * (ddenom_dVcreep_strain_incr * numer - dnumer_dVcreep_strain_incr * denom) / (denom * denom);
+        ADReal dk_dvcreep_strain_incr = _z * (ddenom_dvcreep_strain_incr * numer - dnumer_dvcreep_strain_incr * denom) / (denom * denom);
         
         // Initialize res to zero before aggregation
         ADReal res = 0; 
         for (unsigned int i = 0; i < creep_strain_incr.size(); ++i) 
         {
-            res += dk_dVcreep_strain_incr * creep_strain_incr[i]; // Use the derivative of k
+            res += dk_dvcreep_strain_incr * creep_strain_incr[i]; // Use the derivative of k
         }
         return res;
     } 

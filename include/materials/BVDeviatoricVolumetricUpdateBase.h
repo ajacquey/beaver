@@ -24,17 +24,19 @@ public:
 
 protected:
 // newly added methods
-  virtual void dvreturnMap(std::vector<ADReal>& creep_strain_incr_out, 
-                           ADReal & Vcreep_strain_incr_out);
-  virtual ADReal vresidual(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr);
-  virtual ADReal vjacobian(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr);
-  virtual ADRankTwoTensor dvreformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr);
-  virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, const ADReal & Vcreep_strain_incr) = 0;
-  virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr,const ADReal & Vcreep_strain_incr) = 0;
+  virtual std::vector<ADReal> returnMap() override;
+  virtual std::vector<ADReal> vresidual(const std::vector<ADReal> & creep_strain_incr, 
+                                        const std::vector<ADReal> & vcreep_strain_incr);
+  virtual std::vector<std::vector<ADReal>> vjacobian(const std::vector<ADReal> & creep_strain_incr, 
+                                                     const std::vector<ADReal> & vcreep_strain_incr);
+  virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
+                            const std::vector<ADReal> & vcreep_strain_incr) = 0;
+  virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
+                                      const std::vector<ADReal> & vcreep_strain_incr) = 0;
+  virtual ADRankTwoTensor reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr) override;
 
-  const unsigned int _num_cm;
-  const RankTwoTensor _identity_two;
-  ADReal _mean_stress_tr; // mean stress to compute the equivalent volumetric creep strain
-  bool _dev_vol;
+  bool _volumetric;
+// volumetric creep strain increment
+  ADMaterialProperty<RankTwoTensor> & _vcreep_strain_incr;
   
 };
