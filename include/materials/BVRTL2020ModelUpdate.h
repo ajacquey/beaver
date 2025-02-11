@@ -42,10 +42,10 @@ protected:
   virtual void preReturnMap() override;
   virtual void postReturnMap(const std::vector<ADReal> & eqv_strain_incr) override;
 
-  virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
-                            const std::vector<ADReal> & vcreep_strain_incr) override;
-  virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
-                            const std::vector<ADReal> & vcreep_strain_incr) override;
+  // virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
+  //                           const std::vector<ADReal> & vcreep_strain_incr) override;
+  // virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
+  //                           const std::vector<ADReal> & vcreep_strain_incr) override;
 
   // Lemaitre creep strain rate parameters
   const Real _alpha;

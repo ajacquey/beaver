@@ -20,23 +20,13 @@ class BVDeviatoricVolumetricUpdateBase : public BVTwoCreepUpdateBase
 public:
   static InputParameters validParams();
   BVDeviatoricVolumetricUpdateBase(const InputParameters & parameters);
-  virtual void inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl) override;
 
 protected:
-// newly added methods
   virtual std::vector<ADReal> returnMap() override;
-  virtual std::vector<ADReal> vresidual(const std::vector<ADReal> & creep_strain_incr, 
-                                        const std::vector<ADReal> & vcreep_strain_incr);
-  virtual std::vector<std::vector<ADReal>> vjacobian(const std::vector<ADReal> & creep_strain_incr, 
-                                                     const std::vector<ADReal> & vcreep_strain_incr);
-  virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
-                            const std::vector<ADReal> & vcreep_strain_incr) = 0;
-  virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
-                                      const std::vector<ADReal> & vcreep_strain_incr) = 0;
+  virtual ADReal residualVol(const ADReal & vol_strain_incr);
+  virtual ADReal jacobianVol(const ADReal & vol_strain_incr);
+  virtual ADReal creepRateVol(const ADReal & vol_strain_incr);
+  virtual ADReal creepRateVolDerivative(const ADReal & vol_strain_incr);
   virtual ADRankTwoTensor reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr) override;
-
   bool _volumetric;
-// volumetric creep strain increment
-  ADMaterialProperty<RankTwoTensor> & _vcreep_strain_incr;
-  
 };
