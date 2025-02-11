@@ -67,8 +67,8 @@ BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
     _eqv_creep_strain_R(declareADProperty<Real>(_base_name + "eqv_creep_strain_R")),
     _eqv_creep_strain_R_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_R")),
     // Internal variable for volumetric creep strain
-    _v_eqv_creep_strain(declareADProperty<Real>(_base_name + "_v_eqv_creep_strain")),
-    _v_eqv_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "_v_eqv_creep_strain"))
+    _vol_creep_strain(declareADProperty<Real>(_base_name + "_vol_creep_strain")),
+    _vol_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "_vol_creep_strain"))
 {
 }
 
@@ -77,7 +77,7 @@ BVRTL2020ModelUpdate::initQpStatefulProperties()
 {
   _eqv_creep_strain_L[_qp] = 0.0;
   _eqv_creep_strain_R[_qp] = 0.0;
-  _v_eqv_creep_strain[_qp] = 0.0;
+  _vol_creep_strain[_qp] = 0.0;
 }
 
 ADReal
@@ -226,7 +226,7 @@ BVRTL2020ModelUpdate::munsondawsonCreepStrain(const std::vector<ADReal> & eqv_st
 ADReal
 BVRTL2020ModelUpdate::volumetricCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
 {
-  return _v_eqv_creep_strain_old[_qp] + eqv_strain_incr[2];
+  return _vol_creep_strain_old[_qp] + eqv_strain_incr[2];
 }
 
 void
@@ -234,7 +234,7 @@ BVRTL2020ModelUpdate::preReturnMap()
 {
   _eqv_creep_strain_L[_qp] = _eqv_creep_strain_L_old[_qp];
   _eqv_creep_strain_R[_qp] = _eqv_creep_strain_R_old[_qp];
-  _v_eqv_creep_strain[_qp] = _v_eqv_creep_strain_old[_qp];
+  _vol_creep_strain[_qp] = _vol_creep_strain_old[_qp];
 }
 
 void
@@ -242,7 +242,19 @@ BVRTL2020ModelUpdate::postReturnMap(const std::vector<ADReal> & eqv_strain_incr)
 {
   _eqv_creep_strain_L[_qp] = lemaitreCreepStrain(eqv_strain_incr);
   _eqv_creep_strain_R[_qp] = munsondawsonCreepStrain(eqv_strain_incr);
-  _v_eqv_creep_strain[_qp] = volumetricCreepStrain(eqv_strain_incr);
+  _vol_creep_strain[_qp] = volumetricCreepStrain(eqv_strain_incr);
+}
+
+ADReal
+BVRTL2020ModelUpdate::creepRateVol(const ADReal & vol_strain_incr)
+{
+  return 0.0;
+}
+
+ADReal
+BVRTL2020ModelUpdate::creepRateVolDerivative(const ADReal & vol_strain_incr)
+{
+  return 0.0;
 }
 
 // ADReal

@@ -42,10 +42,8 @@ protected:
   virtual void preReturnMap() override;
   virtual void postReturnMap(const std::vector<ADReal> & eqv_strain_incr) override;
 
-  // virtual ADReal vcreepRate(const std::vector<ADReal> & creep_strain_incr, 
-  //                           const std::vector<ADReal> & vcreep_strain_incr) override;
-  // virtual ADReal vcreepRateDerivative(const std::vector<ADReal> & creep_strain_incr, 
-  //                           const std::vector<ADReal> & vcreep_strain_incr) override;
+  virtual ADReal creepRateVol(const ADReal & vol_strain_incr) override;
+  virtual ADReal creepRateVolDerivative(const ADReal & vol_strain_incr) override;
 
   // Lemaitre creep strain rate parameters
   const Real _alpha;
@@ -74,6 +72,6 @@ protected:
   const MaterialProperty<Real> & _eqv_creep_strain_R_old;
 
   // Internal variable for volumetric creep strain
-  ADMaterialProperty<Real> & _v_eqv_creep_strain;
-  const MaterialProperty<Real> & _v_eqv_creep_strain_old;
+  ADMaterialProperty<Real> & _vol_creep_strain;
+  const MaterialProperty<Real> & _vol_creep_strain_old;
 };
