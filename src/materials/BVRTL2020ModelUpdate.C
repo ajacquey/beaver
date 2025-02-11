@@ -23,7 +23,8 @@ BVRTL2020ModelUpdate::validParams()
       "Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt "
       "behavior: From laboratory experiments to pertinent long-term predictions.");
   // Lemaitre creep strain rate parameters
-  params.addRequiredRangeCheckedParam<Real>("alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
+  params.addRequiredRangeCheckedParam<Real>(
+      "alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
   params.addRequiredRangeCheckedParam<Real>("A2", "A2 > 0.0", "The A2 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n2", "n2 > 0.0", "The n2 parameter.");
   // Munson-Dawson creep strain rate parameters
@@ -34,11 +35,11 @@ BVRTL2020ModelUpdate::validParams()
   params.addRequiredRangeCheckedParam<Real>("m", "m > 1.0", "The m parameter.");
   params.addRequiredRangeCheckedParam<Real>("n", "n > 1.0", "The n parameter.");
   // volume creep parameters
-  params.addRequiredParam<Real>("z","volumetric creep parameter z");
-  params.addRequiredParam<Real>("Nz", "volumetric creep parameter Nz");
-  params.addRequiredParam<Real>("nz","volumetric creep parameter nz");
-  params.addRequiredParam<Real>("Mz",  "volumetric creep parameter Mz");
-  params.addRequiredParam<Real>("mz", "volumetric creep parameter mz");
+  params.addParam<Real>("z", 0.0, "volumetric creep parameter z");
+  params.addParam<Real>("Nz", 1.0, "volumetric creep parameter Nz");
+  params.addParam<Real>("nz", 1.0, "volumetric creep parameter nz");
+  params.addParam<Real>("Mz", 1.0, "volumetric creep parameter Mz");
+  params.addParam<Real>("mz", 1.0, "volumetric creep parameter mz");
   return params;
 }
 
@@ -99,7 +100,8 @@ BVRTL2020ModelUpdate::creepRateR(const std::vector<ADReal> & creep_strain_incr)
   if (q == 0.0)
     return 0.0;
   else
-    return 1.0e-06 * std::pow((q / _A2 >= 0.0 ? q / _A2 : 0.0), _n2);  //macaulay brackets to guide against negative values
+    return 1.0e-06 * std::pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
+                              _n2); // macaulay brackets to guide against negative values
 }
 
 ADReal
@@ -122,11 +124,9 @@ BVRTL2020ModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & creep_st
   ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(creep_strain_incr);
 
   if (gamma_ms < saturation_strain)
-    return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
-           creepRateR(creep_strain_incr);
+    return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) * creepRateR(creep_strain_incr);
   else
-    return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
-           creepRateR(creep_strain_incr);
+    return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) * creepRateR(creep_strain_incr);
 }
 
 ADReal
@@ -172,7 +172,8 @@ BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & cr
     if (gamma_l == 0.0)
       return _alpha * creepRateRDerivative(creep_strain_incr);
     else
-      return _alpha * creepRateRDerivative(creep_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+      return _alpha * creepRateRDerivative(creep_strain_incr) *
+             std::pow(gamma_l, 1.0 - 1.0 / _alpha);
 
   else
     throw MooseException(
@@ -195,7 +196,7 @@ BVRTL2020ModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> 
     else
       return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
              creepRateRDerivative(creep_strain_incr);
-             
+
   else if (j == 1) // Munson-Dawson wrt Munson-Dawson
     if (gamma_ms < saturation_strain)
       return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
@@ -205,7 +206,7 @@ BVRTL2020ModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> 
       return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
              ((gamma_ms / saturation_strain - 1.0) * creepRateRDerivative(creep_strain_incr) +
               1.0e+06 * _m / saturation_strain * creepRateR(creep_strain_incr));
-  
+
   else
     throw MooseException(
         "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
@@ -242,92 +243,110 @@ BVRTL2020ModelUpdate::postReturnMap(const std::vector<ADReal> & creep_strain_inc
 {
   _eqv_creep_strain_L[_qp] = lemaitreCreepStrain(creep_strain_incr);
   _eqv_creep_strain_R[_qp] = munsondawsonCreepStrain(creep_strain_incr);
-  _vol_creep_strain[_qp] = volumetricCreepStrain(creep_strain_incr);
+  // _vol_creep_strain[_qp] = volumetricCreepStrain(creep_strain_incr);
 }
 
 void
 BVRTL2020ModelUpdate::preReturnMapVol(const std::vector<ADReal> & creep_strain_incr)
 {
   // Save some information from the deviatoric update
-  _gamma_vp = _eqv_creep_strain_L[_qp] + _eqv_creep_strain_R[_qp];
-  _gamma_incr_vp = creep_strain_incr[0] + creep_strain_incr[1];
+  _gamma_vp = 1.0e+06 * (_eqv_creep_strain_L[_qp] + _eqv_creep_strain_R[_qp]);
+  _gamma_dot_vp = (creep_strain_incr[0] + creep_strain_incr[1]) / _dt;
 }
 
 ADReal
 BVRTL2020ModelUpdate::creepRateVol(const ADReal & vol_strain_incr)
 {
-  return 0.0;
- 
- // // initialize the deviatoric creep strain
- // std::vector<ADReal> creep_strain_incr = BVTwoCreepUpdateBase::returnMap();
+  ADReal p = _avg_stress_tr - _K * vol_strain_incr;
+  if (p == 0.0)
+    return 0.0; // No contribution since p is zero
+  else
+    return _z * (std::pow(std::abs(p / _Nz), _nz) - _gamma_vp) /
+           (std::pow(std::abs(p / _Mz), _mz) + _gamma_vp) * _gamma_dot_vp;
 
- // ADReal p = _avg_stress_tr - (_K * vol_strain_incr);
- //     if (p == 0.0)
- //   return 0.0; // No contribution since p is zero
-//
-//  // Calculate numerator and denomenator for proportionality constant k
-//  ADReal gamma_vp = 1.0e+06 * (lemaitreCreepStrain(creep_strain_incr) + munsondawsonCreepStrain(creep_strain_incr));
-//  ADReal numer = std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz) - gamma_vp; 
-//  ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) + gamma_vp;
-//
-//  // Safeguard against division by zero
-//  if (denom != 0.0) 
-//    {
-//      ADReal k = _z * (numer) / denom; // proportionality constant
-//      ADReal res = 0.0; // Initialize res to zero before aggregation
- //     for (unsigned int i = 0; i < creep_strain_incr.size(); ++i) 
- //       {
- //           res += k * creep_strain_incr[i];
- //       }
- //     return res;
- //   } 
- // else // Handle the case where denom is zero 
- //   {
- //    return 0.0; // No contribution since k is not defined
- //   }
+  // // initialize the deviatoric creep strain
+  // std::vector<ADReal> creep_strain_incr = BVTwoCreepUpdateBase::returnMap();
+
+  // ADReal p = _avg_stress_tr - (_K * vol_strain_incr);
+  //     if (p == 0.0)
+  //   return 0.0; // No contribution since p is zero
+  //
+  //  // Calculate numerator and denomenator for proportionality constant k
+  //  ADReal gamma_vp = 1.0e+06 * (lemaitreCreepStrain(creep_strain_incr) +
+  //  munsondawsonCreepStrain(creep_strain_incr)); ADReal numer = std::pow((p / _Nz) > 0.0 ? (p /
+  //  _Nz) : 0.0, _nz) - gamma_vp; ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) +
+  //  gamma_vp;
+  //
+  //  // Safeguard against division by zero
+  //  if (denom != 0.0)
+  //    {
+  //      ADReal k = _z * (numer) / denom; // proportionality constant
+  //      ADReal res = 0.0; // Initialize res to zero before aggregation
+  //     for (unsigned int i = 0; i < creep_strain_incr.size(); ++i)
+  //       {
+  //           res += k * creep_strain_incr[i];
+  //       }
+  //     return res;
+  //   }
+  // else // Handle the case where denom is zero
+  //   {
+  //    return 0.0; // No contribution since k is not defined
+  //   }
 }
 
 ADReal
 BVRTL2020ModelUpdate::creepRateVolDerivative(const ADReal & vol_strain_incr)
 {
-  return 0.0;
+  ADReal p = _avg_stress_tr - _K * vol_strain_incr;
+  if (p == 0.0)
+    return 1.0; // No contribution since p is zero
+  else
+    return -_K * _z * p / std::abs(p) *
+           (_nz * std::pow(std::abs(p / _Nz), _nz - 1.0) *
+                (std::pow(std::abs(p / _Mz), _mz) + _gamma_vp) -
+            _mz * std::pow(std::abs(p / _Mz), _mz - 1.0) *
+                (std::pow(std::abs(p / _Nz), _nz) - _gamma_vp)) /
+           std::pow(std::pow(std::abs(p / _Mz), _mz) + _gamma_vp, 2.0) * _gamma_dot_vp;
 
-//  // initialize the deviatoric creep strain
-//  std::vector<ADReal> creep_strain_incr = BVTwoCreepUpdateBase::returnMap();
+  //  // initialize the deviatoric creep strain
+  //  std::vector<ADReal> creep_strain_incr = BVTwoCreepUpdateBase::returnMap();
 
-// ADReal p = _avg_stress_tr - (_K * vol_strain_incr);
-//   if (p == 0.0)
-// return 0.0; // No contribution since p is zero
+  // ADReal p = _avg_stress_tr - (_K * vol_strain_incr);
+  //   if (p == 0.0)
+  // return 0.0; // No contribution since p is zero
 
-// ADReal gamma_vp = 1.0e+06 * (lemaitreCreepStrain(creep_strain_incr) + munsondawsonCreepStrain(creep_strain_incr));
-// ADReal numer = std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz) - gamma_vp;
-// ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) + gamma_vp;
+  // ADReal gamma_vp = 1.0e+06 * (lemaitreCreepStrain(creep_strain_incr) +
+  // munsondawsonCreepStrain(creep_strain_incr)); ADReal numer = std::pow((p / _Nz) > 0.0 ? (p /
+  // _Nz) : 0.0, _nz) - gamma_vp; ADReal denom = std::pow((p / _Mz) > 0.0 ? (p / _mz) : 0.0, _nz) +
+  // gamma_vp;
 
- // Derivative contributions
-// ADReal dp_dvol_strain_incr = -_K; // derivative of p with respect to vol_strain_incr
+  // Derivative contributions
+  // ADReal dp_dvol_strain_incr = -_K; // derivative of p with respect to vol_strain_incr
 
- // Computing the derivatives of numerator and denomenator
- //ADReal dnumer_dvol_strain_incr = _nz * std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz - 1) * (dp_dvol_strain_incr / _Nz);
- //ADReal ddenom_dvol_strain_incr = _nz * std::pow((p / _Mz) > 0.0 ? (p / _Mz) : 0.0, _nz - 1) * (dp_dvol_strain_incr / _Mz);
+  // Computing the derivatives of numerator and denomenator
+  // ADReal dnumer_dvol_strain_incr = _nz * std::pow((p / _Nz) > 0.0 ? (p / _Nz) : 0.0, _nz - 1) *
+  // (dp_dvol_strain_incr / _Nz); ADReal ddenom_dvol_strain_incr = _nz * std::pow((p / _Mz) > 0.0 ?
+  // (p / _Mz) : 0.0, _nz - 1) * (dp_dvol_strain_incr / _Mz);
 
- // Safeguard situation for denominator
- //if (denom != 0.0) 
- //{
- //    // Using the quotient rule to differentiate k
- //    ADReal k = _z * (numer) / denom;
- //    ADReal dk_dvol_strain_incr = _z * (ddenom_dvol_strain_incr * numer - dnumer_dvol_strain_incr * denom) / (denom * denom);
-    
-     // Initialize res to zero before aggregation
- //    ADReal res = 0; 
-//     for (unsigned int i = 0; i < creep_strain_incr.size(); ++i) 
- //    {
- //        res += dk_dvol_strain_incr * creep_strain_incr[i]; // Use the derivative of k
- //    }
- //    return res;
- //} 
- //else 
- //{
- //    // If denom is zero, then k is set to a default value (0.0 in this case)
- //    return 0.0; // No contribution since k is not defined
-// }
+  // Safeguard situation for denominator
+  // if (denom != 0.0)
+  //{
+  //    // Using the quotient rule to differentiate k
+  //    ADReal k = _z * (numer) / denom;
+  //    ADReal dk_dvol_strain_incr = _z * (ddenom_dvol_strain_incr * numer - dnumer_dvol_strain_incr
+  //    * denom) / (denom * denom);
+
+  // Initialize res to zero before aggregation
+  //    ADReal res = 0;
+  //     for (unsigned int i = 0; i < creep_strain_incr.size(); ++i)
+  //    {
+  //        res += dk_dvol_strain_incr * creep_strain_incr[i]; // Use the derivative of k
+  //    }
+  //    return res;
+  //}
+  // else
+  //{
+  //    // If denom is zero, then k is set to a default value (0.0 in this case)
+  //    return 0.0; // No contribution since k is not defined
+  // }
 }

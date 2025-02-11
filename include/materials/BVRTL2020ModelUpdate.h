@@ -56,8 +56,8 @@ protected:
   const Real _A;
   const Real _B;
   const Real _m;
-  const Real _n;  
-  
+  const Real _n;
+
   // Volumetric creep strain rate parameters
   const Real _z;
   const Real _Nz;
@@ -77,5 +77,5 @@ protected:
 
   // Scalar equivalent creep strain
   ADReal _gamma_vp;
-  ADReal _gamma_incr_vp;
+  ADReal _gamma_dot_vp;
 };
