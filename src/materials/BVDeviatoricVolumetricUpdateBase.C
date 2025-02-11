@@ -43,6 +43,8 @@ BVDeviatoricVolumetricUpdateBase::returnMap()
   // Volumetric update
   if (_volumetric)
   {
+    preReturnMapVol(creep_strain_incr);
+
     // Initialize volumetric strain incr
     ADReal vol_strain_incr = 0.0;
 
@@ -73,6 +75,12 @@ BVDeviatoricVolumetricUpdateBase::returnMap()
   {
     return creep_strain_incr;
   }
+}
+
+void
+BVDeviatoricVolumetricUpdateBase::preReturnMapVol(const std::vector<ADReal> & creep_strain_incr)
+{
+
 }
 
 ADReal

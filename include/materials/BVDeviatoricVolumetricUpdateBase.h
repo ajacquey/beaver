@@ -23,10 +23,12 @@ public:
 
 protected:
   virtual std::vector<ADReal> returnMap() override;
+  virtual void preReturnMapVol(const std::vector<ADReal> & creep_strain_incr);
   virtual ADReal residualVol(const ADReal & vol_strain_incr);
   virtual ADReal jacobianVol(const ADReal & vol_strain_incr);
   virtual ADReal creepRateVol(const ADReal & vol_strain_incr);
   virtual ADReal creepRateVolDerivative(const ADReal & vol_strain_incr);
   virtual ADRankTwoTensor reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr) override;
+  
   bool _volumetric;
 };

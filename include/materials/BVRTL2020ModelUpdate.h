@@ -23,25 +23,25 @@ public:
 
 protected:
   virtual void initQpStatefulProperties() override;
-  virtual ADReal creepRate(const std::vector<ADReal> & eqv_strain_incr,
+  virtual ADReal creepRate(const std::vector<ADReal> & creep_strain_incr,
                            const unsigned int i) override;
-  virtual ADReal creepRateR(const std::vector<ADReal> & eqv_strain_incr);
-  virtual ADReal creepRateLemaitre(const std::vector<ADReal> & eqv_strain_incr);
-  virtual ADReal creepRateMunsonDawson(const std::vector<ADReal> & eqv_strain_incr);
-  virtual ADReal creepRateDerivative(const std::vector<ADReal> & eqv_strain_incr,
+  virtual ADReal creepRateR(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal creepRateLemaitre(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal creepRateMunsonDawson(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal creepRateDerivative(const std::vector<ADReal> & creep_strain_incr,
                                      const unsigned int i,
                                      const unsigned int j) override;
-  virtual ADReal creepRateRDerivative(const std::vector<ADReal> & eqv_strain_incr);
-  virtual ADReal creepRateLemaitreDerivative(const std::vector<ADReal> & eqv_strain_incr,
+  virtual ADReal creepRateRDerivative(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal creepRateLemaitreDerivative(const std::vector<ADReal> & creep_strain_incr,
                                              const unsigned int /*j*/);
-  virtual ADReal creepRateMunsonDawsonDerivative(const std::vector<ADReal> & eqv_strain_incr,
+  virtual ADReal creepRateMunsonDawsonDerivative(const std::vector<ADReal> & creep_strain_incr,
                                                  const unsigned int j);
-  virtual ADReal lemaitreCreepStrain(const std::vector<ADReal> & eqv_strain_incr);
-  virtual ADReal munsondawsonCreepStrain(const std::vector<ADReal> & eqv_strain_incr);
-  virtual ADReal volumetricCreepStrain(const std::vector<ADReal> & v_eqv_strain_incr);
+  virtual ADReal lemaitreCreepStrain(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal munsondawsonCreepStrain(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal volumetricCreepStrain(const std::vector<ADReal> & v_creep_strain_incr);
   virtual void preReturnMap() override;
-  virtual void postReturnMap(const std::vector<ADReal> & eqv_strain_incr) override;
-
+  virtual void postReturnMap(const std::vector<ADReal> & creep_strain_incr) override;
+  virtual void preReturnMapVol(const std::vector<ADReal> & creep_strain_incr) override;
   virtual ADReal creepRateVol(const ADReal & vol_strain_incr) override;
   virtual ADReal creepRateVolDerivative(const ADReal & vol_strain_incr) override;
 
@@ -74,4 +74,8 @@ protected:
   // Internal variable for volumetric creep strain
   ADMaterialProperty<Real> & _vol_creep_strain;
   const MaterialProperty<Real> & _vol_creep_strain_old;
+
+  // Scalar equivalent creep strain
+  ADReal _gamma_vp;
+  ADReal _gamma_incr_vp;
 };
