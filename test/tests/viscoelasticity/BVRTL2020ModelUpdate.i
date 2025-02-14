@@ -4,22 +4,26 @@
 # Units: stress in MPa, time in days, strain in m / m
 E = 28567
 nu = 0.30
-alpha = 0.2601
+alpha = 0.2601 
+# alpha = 0.4483 # * 1.72345 to account for T
 A1 = 0.0181
 n1 = 1.162
 A2 = 0.3986
 n2 = 9.6768
 A = 0.01
+# A = 0.0172 # * 1.72345 to account for T
 n = 13.5
 B = 0.0
 m = 2.0
+Tr = 289
+Ar = 1725
 P = 10.0
 Q = 5.0
-Nz = 0.0241
-nz = 1.2644
-Mz = 0.024
-mz = 1.028
-z = 0.4523
+# Nz = 0.0241
+# nz = 1.2644
+# Mz = 0.024
+# mz = 1.028
+# z = 0.4523
 
 [Mesh]
   type = GeneratedMesh
@@ -72,6 +76,11 @@ z = 0.4523
 []
   
 [AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313
+  []
   [eqv_stress]
     order = CONSTANT
     family = MONOMIAL
@@ -99,6 +108,12 @@ z = 0.4523
 []
   
 [AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = 'TIMESTEP_END'
+  []
   [eqv_stress_aux]
     type = BVMisesStressAux
     variable = eqv_stress
@@ -143,7 +158,7 @@ z = 0.4523
   []
   [salt3loading]
     type = ParsedFunction 
-    expression = 'if(t<=15,14.4,if(t<=29,20,24.4))' 
+    expression = 'if(t<=15,15,if(t<=28,20,25))' 
   []
 []
 
@@ -218,7 +233,10 @@ z = 0.4523
   #[]
   [viscoelastic]
     type = BVRTL2020ModelUpdate
-   volumetric = true
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
     alpha = ${alpha}
     A1 = ${A1}
     n1 = ${n1}
@@ -228,11 +246,11 @@ z = 0.4523
     n = ${n}
     B = ${B}
     m = ${m}
-    Nz = ${Nz}
-    nz = ${nz}
-    Mz = ${Mz}
-    mz = ${mz}
-    z = ${z}
+    # Nz = ${Nz}
+    # nz = ${nz}
+    # Mz = ${Mz}
+    # mz = ${mz}
+    # z = ${z}
   []
 []
 

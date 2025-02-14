@@ -45,6 +45,12 @@ protected:
   virtual ADReal creepRateVol(const ADReal & vol_strain_incr) override;
   virtual ADReal creepRateVolDerivative(const ADReal & vol_strain_incr) override;
 
+  // Temperature coupling
+  const ADVariableValue * const _temp;
+  const Real _temp_ref;
+  const Real _Ar;
+  ADReal _exponential;
+
   // Lemaitre creep strain rate parameters
   const Real _alpha;
   const Real _A2;

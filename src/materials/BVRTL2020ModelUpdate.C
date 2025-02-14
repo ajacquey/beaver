@@ -22,6 +22,10 @@ BVRTL2020ModelUpdate::validParams()
   params.addClassDescription(
       "Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt "
       "behavior: From laboratory experiments to pertinent long-term predictions.");
+  // Temperature coupling
+  params.addCoupledVar("temperature", "The temperature variable in Kelvin.");
+  params.addRangeCheckedParam<Real>("Tr", 289.0, "Tr > 0.0", "The reference temperature in Kelvin.");
+  params.addRangeCheckedParam<Real>("Ar", 0.0, "Ar >= 0.0", "The activation temperature in Kelvin.");  
   // Lemaitre creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>(
       "alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
@@ -45,6 +49,11 @@ BVRTL2020ModelUpdate::validParams()
 
 BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
   : BVDeviatoricVolumetricUpdateBase(parameters),
+    // Temperature coupling
+    _temp(isParamValid("temperature") ? &adCoupledValue("temperature") : nullptr),
+    _temp_ref(getParam<Real>("Tr")),
+    _Ar(getParam<Real>("Ar")),
+    _exponential(1.0),
     // Lemaitre creep strain rate parameters
     _alpha(getParam<Real>("alpha")),
     _A2(getParam<Real>("A2")),
@@ -71,6 +80,12 @@ BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
     _vol_creep_strain(declareADProperty<Real>(_base_name + "_vol_creep_strain")),
     _vol_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "_vol_creep_strain"))
 {
+  // Check temperature coupling
+  if (_temp && !isParamSetByUser("Ar"))
+    paramWarning("Ar", "Coupled temperature is set but Ar is not. Temperature coupling is not set properly!");
+
+  if (isParamSetByUser("Ar") && !_temp)
+    paramWarning("temperature", "Ar is set but coupled temperature is not. Temperature coupling is not set properly!");
 }
 
 void
@@ -100,8 +115,14 @@ BVRTL2020ModelUpdate::creepRateR(const std::vector<ADReal> & creep_strain_incr)
   if (q == 0.0)
     return 0.0;
   else
-    return 1.0e-06 * std::pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
-                              _n2); // macaulay brackets to guide against negative values
+  {
+    if (_temp)
+      _exponential = std::exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
+      
+    return 1.0e-06 * _exponential *
+                  std::pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
+                           _n2); // macaulay brackets to guide against negative values
+  }
 }
 
 ADReal
@@ -151,7 +172,12 @@ BVRTL2020ModelUpdate::creepRateRDerivative(const std::vector<ADReal> & creep_str
   if (q == 0.0)
     return 1.0;
   else
-    return -1.0e-06 * 3.0 * _G * _n2 / _A2 * std::pow(q / _A2, _n2 - 1.0);
+  {
+    if (_temp)
+      _exponential = std::exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
+
+    return -1.0e-06 * _exponential * 3.0 * _G * _n2 / _A2 * std::pow(q / _A2, _n2 - 1.0);
+  }
 }
 
 ADReal
