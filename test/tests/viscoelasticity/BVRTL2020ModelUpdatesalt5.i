@@ -1,35 +1,27 @@
-# RTL2020 creep model
-# See Figures 3,4,5 and 6 of Azabou et al. (2021)
+# Modified Lemaitre creep model
+# See Fig. 7 and the first multistage creep test on Fig.8 of Azabou et al. (2021)
 # Parameters
 # Units: stress in MPa, time in days, strain in m / m
-E = 28567
-nu = 0.30
-alpha = 0.2601 
-# alpha = 0.4483 # * 1.72345 to account for T
-A1 = 0.0181
-n1 = 1.162
-A2 = 0.3986
-n2 = 9.6768
-A = 0.01
-# A = 0.0172 # * 1.72345 to account for T
-n = 13.5
-B = 0.0
-m = 2.0
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
 Tr = 289
 Ar = 1725
-#Psalt1 = 8
-#Psalt2 = 8
-Psalt3 = 10.0
-#Psalt4 = 15
-#Qsalt1 = 12.0
-#Qsalt2 = 12.0
-Qsalt3 = 12.0
-#Qsalt4 = 19.4
-# Nz = 0.0241
-# nz = 1.2644
-# Mz = 0.024
-# mz = 1.028
-# z = 0.4523
+P = 8.7
+Q = 12.7
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
 
 [Mesh]
   type = GeneratedMesh
@@ -85,7 +77,7 @@ Qsalt3 = 12.0
   [temp]
     order = FIRST
     family = LAGRANGE
-    initial_condition = 313.15 #note: temperature for salt2 is 313.15K
+    initial_condition = 313
   []
   [eqv_stress]
     order = CONSTANT
@@ -158,21 +150,13 @@ Qsalt3 = 12.0
 []
   
 [Functions]
-  [salt1loading]
+  [Q_loading]
     type = ParsedFunction 
-    expression = 'if(t<=14,12,if(t<=28,16,20))' 
+    expression = 'if(t<=10,12.7,if(t<=40,15,if(t<=90,20,if(t<=140,22,24))))' 
   []
-  [salt2loading]
+  [P_loading]
     type = ParsedFunction 
-    expression = 'if(t<=15,12,if(t<=29,16,if(t<=32,20,20.2)))' 
-  []
-  [salt3loading]
-    type = ParsedFunction 
-    expression = 'if(t<=15,15,if(t<=28,20,25))' 
-  []
-  [salt4loading]
-    type = ParsedFunction 
-    expression = 'if(t<=12,19.4,if(t<=29,23.4,27))' 
+    expression = 'if(t<=10,8.7,if(t<=40,7.5,if(t<=90,5,if(t<=140,4,3))))' 
   []
 []
 
@@ -199,17 +183,17 @@ Qsalt3 = 12.0
     [pressure_right]
       boundary = 'right'
       displacement_vars = 'disp_x disp_y disp_z'
-      value = ${Psalt3}
+      function = P_loading
     []
     [pressure_front]
       boundary = 'front'
       displacement_vars = 'disp_x disp_y disp_z'
-      value = ${Psalt3}
+      function = P_loading
     []
     [pressure_top]
       boundary = 'top'
       displacement_vars = 'disp_x disp_y disp_z'
-      function = salt3loading 
+      function = Q_loading
     []
   []
 []
@@ -220,31 +204,9 @@ Qsalt3 = 12.0
     displacements = 'disp_x disp_y disp_z'
     young_modulus = ${E}
     poisson_ratio = ${nu}
-    initial_stress = '-${Psalt3} -${Qsalt3} -${Psalt3}'
+    initial_stress = '-${P} -${Q} -${P}'
     inelastic_models = 'viscoelastic'
   []
-  #[viscoelastic]
-  #  type = BVModifiedLemaitreModelUpdate 
-  #  alpha = ${alpha}
-  #  kr1 = ${kr1}
-  #  beta1 = ${beta1} 
-  #  kr2 = ${kr2}
-  #  beta2 = ${beta2}
-  #[]
-  #[viscoelastic]
-  #  type = BVBlancoMartinModelUpdate 
-  #  alpha = ${alpha}
-  #  kr1 = ${kr1}
-  #  beta1 = ${beta1} 
-  #  kr2 = ${kr2}
-  #  beta2 = ${beta2}
-  #  A1 = ${A1}
-  #  n1 = ${n1}
-  #  A = ${A}
-  #  n = ${n}
-  #  B = 0.0
-  #  m = ${n}
-  #[]
   [viscoelastic]
     type = BVRTL2020ModelUpdate
     volumetric = false
@@ -260,11 +222,11 @@ Qsalt3 = 12.0
     n = ${n}
     B = ${B}
     m = ${m}
-    # Nz = ${Nz}
-    # nz = ${nz}
-    # Mz = ${Mz}
-    # mz = ${mz}
-    # z = ${z}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
   []
 []
 
@@ -348,7 +310,7 @@ Qsalt3 = 12.0
   solve_type = 'NEWTON'
   automatic_scaling = true
   start_time = 0.0
-  end_time = 50 # 50 days
+  end_time = 200 
   dt = 0.02
   timestep_tolerance = 1.0e-10
 []
