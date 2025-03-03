@@ -16,6 +16,7 @@ m = 2.2195
 Tr = 289
 Ar = 1725
 P = 8.7
+P_TCT = 5
 Q = 12.7
 z = 0.4523
 Nz = 0.0241
@@ -95,11 +96,19 @@ mz = 1.028
     order = CONSTANT
     family = MONOMIAL
   []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
   [strain_yy]
     order = CONSTANT
     family = MONOMIAL
   []
   [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_zz]
     order = CONSTANT
     family = MONOMIAL
   []
@@ -133,6 +142,12 @@ mz = 1.028
     property = eqv_creep_strain_L
     execute_on = 'TIMESTEP_END'
   []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = 'TIMESTEP_END'
+  []
   [strain_zz_aux]
     type = BVStrainComponentAux
     variable = strain_yy
@@ -140,11 +155,18 @@ mz = 1.028
     index_j = y
     execute_on = 'TIMESTEP_END'
   []
-  [stress_zz_aux]
+  [stress_yy_aux]
     type = BVStressComponentAux
     variable = stress_yy
     index_i = y
     index_j = y
+    execute_on = 'TIMESTEP_END'
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = z
+    index_j = z
     execute_on = 'TIMESTEP_END'
   []
 []
@@ -157,6 +179,12 @@ mz = 1.028
   [P_loading]
     type = ParsedFunction 
     expression = 'if(t<=10,8.7,if(t<=40,7.5,if(t<=90,5,if(t<=140,4,3))))' 
+  []
+  [strain_rate]
+  type = ParsedFunction
+  vars = 'e_dot L'
+  vals = '1.0e-06 130e-03'
+  expression = 'e_dot*L*t'
   []
 []
 
@@ -183,18 +211,24 @@ mz = 1.028
     [pressure_right]
       boundary = 'right'
       displacement_vars = 'disp_x disp_y disp_z'
-      function = P_loading
+      function = ${P_TCT} #P_loading, use P_TCT for the triaxial compress. test
     []
     [pressure_front]
       boundary = 'front'
       displacement_vars = 'disp_x disp_y disp_z'
-      function = P_loading
+      function = ${P_TCT} #P_loading
     []
-    [pressure_top]
-      boundary = 'top'
-      displacement_vars = 'disp_x disp_y disp_z'
-      function = Q_loading
-    []
+  #  [pressure_top]
+  #    boundary = 'top'
+  #    displacement_vars = 'disp_x disp_y disp_z'
+  #    function = Q_loading
+  #  []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_z
+    boundary = 'top'
+    function = strain_rate
   []
 []
   
@@ -246,6 +280,11 @@ mz = 1.028
     variable = eqv_creep_strain_L
     outputs = csv
   []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
   [strain_zz]
     type = ElementAverageValue
     variable = strain_yy
@@ -253,7 +292,7 @@ mz = 1.028
   []
   [stress_zz]
     type = ElementAverageValue
-    variable = stress_yy
+    variable = stress_zz
     outputs = csv
   []
   [q]
