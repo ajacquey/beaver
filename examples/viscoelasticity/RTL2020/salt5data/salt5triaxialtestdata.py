@@ -51,8 +51,8 @@ def seconds_to_days(t_seconds):
     return t_seconds / 86400  # 86400 seconds in a day
 
 # Example usage:
-γ = 8  # Example value for γ
-ζ = -1  # Example value for ζ
+γ = 0.08  # Example value for γ
+ζ = -0.01  # Example value for ζ
 ε_ax_dot = 1e-6  # Example value for ε_ax_dot
 
 # Calculate ε_ax and ε_r

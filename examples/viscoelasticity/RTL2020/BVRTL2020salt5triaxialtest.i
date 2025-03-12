@@ -15,9 +15,7 @@ B = 0.01918
 m = 2.2195
 Tr = 289
 Ar = 1725
-P = 8.7
-P_TCT = 5
-Q = 12.7
+P = 5 
 z = 0.4523
 Nz = 0.0241
 nz = 1.2644
@@ -78,7 +76,7 @@ mz = 1.028
   [temp]
     order = FIRST
     family = LAGRANGE
-    initial_condition = 313
+    initial_condition = 292.15
   []
   [eqv_stress]
     order = CONSTANT
@@ -108,7 +106,11 @@ mz = 1.028
     order = CONSTANT
     family = MONOMIAL
   []
-  [vol_eqv_strain]
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
     order = CONSTANT
     family = MONOMIAL
   []
@@ -118,7 +120,7 @@ mz = 1.028
   [temp_aux]
     type = ConstantAux
     variable = temp
-    value = 313
+    value = 292.15
     execute_on = 'TIMESTEP_END'
   []
   [eqv_stress_aux]
@@ -162,19 +164,25 @@ mz = 1.028
     index_j = y
     execute_on = 'TIMESTEP_END'
   []
-  [vol_qv_strain_aux]
+  [vol_strain_aux]
     type = BVVolStrainAux
-    variable = vol_eqv_strain
+    variable = vol_strain
     execute_on = 'TIMESTEP_END'
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  '-vol_strain'  
+    variable = vol_strain_neg
   []
 []
   
 [Functions]
   [strain_rate]
   type = ParsedFunction
-  vars = 'e_dot L'
-  vals = '1.0e-06 130e-03'
-  expression = 'e_dot*L*t'
+  symbol_names = 'e_dot L'
+  symbol_values = '1.0e-06 130e-03'
+  expression = '-e_dot*L*t*86400' #converted to per days
   []
 []
 
@@ -201,17 +209,17 @@ mz = 1.028
     [pressure_right]
       boundary = 'right'
       displacement_vars = 'disp_x disp_y disp_z'
-      function = ${P_TCT} 
+      function = ${P} 
     []
     [pressure_front]
       boundary = 'front'
       displacement_vars = 'disp_x disp_y disp_z'
-      function = ${P_TCT} 
+      function = ${P} 
     []
   []
   [strain_rate]
     type = FunctionDirichletBC
-    variable = disp_z
+    variable = disp_y
     boundary = 'top'
     function = strain_rate
   []
@@ -223,12 +231,12 @@ mz = 1.028
     displacements = 'disp_x disp_y disp_z'
     young_modulus = ${E}
     poisson_ratio = ${nu}
-    initial_stress = '-${P} -${Q} -${P}'
+    initial_stress = '-${P} -${P} -${P}'
     inelastic_models = 'viscoelastic'
   []
   [viscoelastic]
     type = BVRTL2020ModelUpdate
-    volumetric = false
+    volumetric = true
     temperature = temp
     Tr = ${Tr}
     Ar = ${Ar}
@@ -285,9 +293,9 @@ mz = 1.028
     variable = eqv_stress
     outputs = csv
   []
-  [vol_eqv_strain]
+  [vol_strain]
     type = ElementAverageValue
-    variable = vol_eqv_strain
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
     outputs = csv
   []
 []
@@ -339,8 +347,9 @@ mz = 1.028
   solve_type = 'NEWTON'
   automatic_scaling = true
   start_time = 0.0
-  end_time = 88.73456790123457  #200 
-  dt = 0.02
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
   timestep_tolerance = 1.0e-10
 []
   
