@@ -1,5 +1,5 @@
 # Modified Lemaitre creep model
-# See Fig. 7 of Azabou et al. (2021)
+# See the first three figures of Fig.8 in Azabou et al. (2021)
 # Parameters
 # Units: stress in MPa, time in days, strain in m / m
 E = 22126
@@ -76,7 +76,7 @@ mz = 1.028
   [temp]
     order = FIRST
     family = LAGRANGE
-    initial_condition = 292.15
+    initial_condition = 293.15
   []
   [eqv_stress]
     order = CONSTANT
@@ -120,7 +120,7 @@ mz = 1.028
   [temp_aux]
     type = ConstantAux
     variable = temp
-    value = 292.15
+    value = 293.15
     execute_on = 'TIMESTEP_END'
   []
   [eqv_stress_aux]
@@ -181,7 +181,7 @@ mz = 1.028
   [strain_rate]
   type = ParsedFunction
   symbol_names = 'e_dot L'
-  symbol_values = '1.0e-06 130e-03'
+  symbol_values = '1.0e-05 130e-03'
   expression = '-e_dot*L*t*86400' #converted to per days
   []
 []
