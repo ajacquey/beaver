@@ -11,21 +11,23 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVRTL2020ModelUpdate.h"
+#include "BVBlancoMartinModelUpdate.h"
 
-registerMooseObject("BeaverApp", BVRTL2020ModelUpdate);
+registerMooseObject("BeaverApp", BVBlancoMartinModelUpdate);
 
 InputParameters
-BVRTL2020ModelUpdate::validParams()
+BVBlancoMartinModelUpdate::validParams()
 {
   InputParameters params = BVTwoCreepUpdateBase::validParams();
   params.addClassDescription(
       "Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt "
       "behavior: From laboratory experiments to pertinent long-term predictions.");
-  // Lemaitre creep strain rate parameters
+  // Modified Lemaitre creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>("alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
-  params.addRequiredRangeCheckedParam<Real>("A2", "A2 > 0.0", "The A2 parameter.");
-  params.addRequiredRangeCheckedParam<Real>("n2", "n2 > 0.0", "The n2 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("kr1", "kr1 > 0.0", "The kr1 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("kr2", "kr2 > 0.0", "The kr2 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("beta1", "beta1 > 0.0", "The beta1 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("beta2", "beta2 > 0.0", "The beta2 parameter.");
   // Munson-Dawson creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>("A1", "A1 > 0.0", "The A1 parameter.");
   params.addRequiredRangeCheckedParam<Real>("n1", "n1 > 0.0", "The n1 parameter.");
@@ -36,12 +38,14 @@ BVRTL2020ModelUpdate::validParams()
   return params;
 }
 
-BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
+BVBlancoMartinModelUpdate::BVBlancoMartinModelUpdate(const InputParameters & parameters)
   : BVTwoCreepUpdateBase(parameters),
-    // Lemaitre creep strain rate parameters
+    // Modified Lemaitre creep strain rate parameters
     _alpha(getParam<Real>("alpha")),
-    _A2(getParam<Real>("A2")),
-    _n2(getParam<Real>("n2")),
+    _kr1(getParam<Real>("kr1")),
+    _kr2(getParam<Real>("kr2")),
+    _beta1(getParam<Real>("beta1")),
+    _beta2(getParam<Real>("beta2")),
     // Munson-Dawson creep strain rate parameters
     _A1(getParam<Real>("A1")),
     _n1(getParam<Real>("n1")),
@@ -58,36 +62,36 @@ BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
 }
 
 void
-BVRTL2020ModelUpdate::initQpStatefulProperties()
+BVBlancoMartinModelUpdate::initQpStatefulProperties()
 {
   _eqv_creep_strain_L[_qp] = 0.0;
   _eqv_creep_strain_R[_qp] = 0.0;
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRate(const std::vector<ADReal> & eqv_strain_incr, const unsigned int i)
+BVBlancoMartinModelUpdate::creepRate(const std::vector<ADReal> & eqv_strain_incr, const unsigned int i)
 {
   if (i == 0) // Lemaitre
     return creepRateLemaitre(eqv_strain_incr);
   else if (i == 1) // Munson-Dawson
     return creepRateMunsonDawson(eqv_strain_incr);
   else
-    throw MooseException("BVRTL2020ModelUpdate: error, unknow creep model called in `creepRate`!");
+    throw MooseException("BVBlancoMartinModelUpdate: error, unknow creep model called in `creepRate`!");
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateR(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::creepRateR(const std::vector<ADReal> & eqv_strain_incr)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
 
   if (q == 0.0)
     return 0.0;
   else
-    return 1.0e-06 * std::pow(q / _A2, _n2);
+    return 1.0e-06 * std::pow(std::pow(q / _kr1, _beta1) + std::pow(q / _kr2, _beta2), 1.0 / _alpha);
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateLemaitre(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::creepRateLemaitre(const std::vector<ADReal> & eqv_strain_incr)
 {
   ADReal gamma_l = 1.0e+06 * lemaitreCreepStrain(eqv_strain_incr);
 
@@ -98,7 +102,7 @@ BVRTL2020ModelUpdate::creepRateLemaitre(const std::vector<ADReal> & eqv_strain_i
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & eqv_strain_incr)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
   ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
@@ -114,7 +118,7 @@ BVRTL2020ModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & eqv_stra
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateDerivative(const std::vector<ADReal> & eqv_strain_incr,
+BVBlancoMartinModelUpdate::creepRateDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                           const unsigned int i,
                                           const unsigned int j)
 {
@@ -124,22 +128,25 @@ BVRTL2020ModelUpdate::creepRateDerivative(const std::vector<ADReal> & eqv_strain
     return creepRateMunsonDawsonDerivative(eqv_strain_incr, j);
   else
     throw MooseException(
-        "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
+        "BVBlancoMartinModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateRDerivative(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::creepRateRDerivative(const std::vector<ADReal> & eqv_strain_incr)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
 
   if (q == 0.0)
     return 1.0;
   else
-    return -1.0e-06 * 3.0 * _G * _n2 / _A2 * std::pow(q / _A2, _n2 - 1.0);
+    return -1.0e-06 * 3.0 * _G / _alpha *
+         std::pow(std::pow(q / _kr1, _beta1) + std::pow(q / _kr2, _beta2), 1.0 / _alpha - 1.0) *
+         (_beta1 / _kr1 * std::pow(q / _kr1, _beta1 - 1.0) +
+          _beta2 / _kr2 * std::pow(q / _kr2, _beta2 - 1.0));
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & eqv_strain_incr,
+BVBlancoMartinModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                                   const unsigned int j)
 {
   ADReal gamma_l = 1.0e+06 * lemaitreCreepStrain(eqv_strain_incr);
@@ -149,22 +156,22 @@ BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & eq
       return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
       return std::pow(gamma_l, -1.0 / _alpha) *
-             (_alpha * gamma_l * creepRateRDerivative(eqv_strain_incr) +
-              1.0e+06 * (_alpha - 1.0) * creepRateR(eqv_strain_incr));
+           (_alpha * gamma_l * creepRateRDerivative(eqv_strain_incr) +
+            1.0e+06 * (_alpha - 1.0) * creepRateR(eqv_strain_incr));
 
   else if (j == 1) // Lemaitre wrt Munson-Dawson
     if (gamma_l == 0.0)
       return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
       return _alpha * creepRateRDerivative(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
-
+  
   else
     throw MooseException(
-        "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
+        "BVBlancoMartinModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
 }
 
 ADReal
-BVRTL2020ModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> & eqv_strain_incr,
+BVBlancoMartinModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> & eqv_strain_incr,
                                                       const unsigned int j)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
@@ -192,30 +199,30 @@ BVRTL2020ModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> 
   
   else
     throw MooseException(
-        "BVRTL2020ModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
+        "BVBlancoMartinModelUpdate: error, unknow creep model called in `creepRateDerivative`!");
 }
 
 ADReal
-BVRTL2020ModelUpdate::lemaitreCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::lemaitreCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
 {
   return _eqv_creep_strain_L_old[_qp] + eqv_strain_incr[0];
 }
 
 ADReal
-BVRTL2020ModelUpdate::munsondawsonCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::munsondawsonCreepStrain(const std::vector<ADReal> & eqv_strain_incr)
 {
   return _eqv_creep_strain_R_old[_qp] + eqv_strain_incr[1];
 }
 
 void
-BVRTL2020ModelUpdate::preReturnMap()
+BVBlancoMartinModelUpdate::preReturnMap()
 {
   _eqv_creep_strain_L[_qp] = _eqv_creep_strain_L_old[_qp];
   _eqv_creep_strain_R[_qp] = _eqv_creep_strain_R_old[_qp];
 }
 
 void
-BVRTL2020ModelUpdate::postReturnMap(const std::vector<ADReal> & eqv_strain_incr)
+BVBlancoMartinModelUpdate::postReturnMap(const std::vector<ADReal> & eqv_strain_incr)
 {
   _eqv_creep_strain_L[_qp] = lemaitreCreepStrain(eqv_strain_incr);
   _eqv_creep_strain_R[_qp] = munsondawsonCreepStrain(eqv_strain_incr);

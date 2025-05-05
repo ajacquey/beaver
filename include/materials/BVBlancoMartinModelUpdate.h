@@ -15,11 +15,11 @@
 
 #include "BVTwoCreepUpdateBase.h"
 
-class BVRTL2020ModelUpdate : public BVTwoCreepUpdateBase
+class BVBlancoMartinModelUpdate : public BVTwoCreepUpdateBase
 {
 public:
   static InputParameters validParams();
-  BVRTL2020ModelUpdate(const InputParameters & parameters);
+  BVBlancoMartinModelUpdate(const InputParameters & parameters);
 
 protected:
   virtual void initQpStatefulProperties() override;
@@ -43,8 +43,10 @@ protected:
 
   // Lemaitre creep strain rate parameters
   const Real _alpha;
-  const Real _A2;
-  const Real _n2;
+  const Real _kr1;
+  const Real _kr2;
+  const Real _beta1;
+  const Real _beta2;
 
   // Munson-Dawson creep strain rate parameters
   const Real _A1;
