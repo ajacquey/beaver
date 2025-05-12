@@ -123,8 +123,6 @@
   [Periodic]
     [left_right]
       auto_direction = x
-      primary = 'left'
-      secondary = 'right'
       variable = 'disp_x disp_y'
     []
   []

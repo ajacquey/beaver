@@ -51,6 +51,9 @@ BVFaultInterfaceGenerator::generate()
 {
   std::unique_ptr<MeshBase> mesh = std::move(_input);
 
+  // Try to trick the rest of the world into thinking we're prepared
+  mesh->prepare_for_use();
+
   // Initialize the node to element map
   std::map<dof_id_type, std::vector<dof_id_type>> node_to_elem_map;
   for (const auto & elem : mesh->active_element_ptr_range())
@@ -134,6 +137,8 @@ BVFaultInterfaceGenerator::getSidesetNodes(const std::vector<BndElement *> & bnd
         }
       }
 
+    // Here we should put a boolean to specify wheter the interface is finite or if it's crossing
+    // the entire mesh
     // // Remove nodes at the end
     // for (auto it = node_ids_cnt.begin(); it != node_ids_cnt.end(); ++it)
     //   if ((*it).second < 2)

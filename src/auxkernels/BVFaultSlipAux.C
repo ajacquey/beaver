@@ -11,32 +11,28 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMaxwellViscoelasticUpdate.h"
+#include "BVFaultSlipAux.h"
 
-registerMooseObject("BeaverApp", BVMaxwellViscoelasticUpdate);
+registerMooseObject("BeaverApp", BVFaultSlipAux);
 
 InputParameters
-BVMaxwellViscoelasticUpdate::validParams()
+BVFaultSlipAux::validParams()
 {
-  InputParameters params = BVCreepUpdateBase::validParams();
-  params.addClassDescription("Material for computing a linear Maxwell viscoelastic update.");
-  params.addRequiredRangeCheckedParam<Real>("viscosity", "viscosity > 0.0", "The viscosity.");
+  InputParameters params = BVFaultDisplacementAuxBase::validParams();
+  params.addClassDescription("Calculates the slip acting on the fault.");
   return params;
 }
 
-BVMaxwellViscoelasticUpdate::BVMaxwellViscoelasticUpdate(const InputParameters & parameters)
-  : BVCreepUpdateBase(parameters), _eta0(getParam<Real>("viscosity"))
+BVFaultSlipAux::BVFaultSlipAux(const InputParameters & parameters)
+  : BVFaultDisplacementAuxBase(parameters), _u_old(uOld())
 {
 }
 
-ADReal
-BVMaxwellViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
+Real
+BVFaultSlipAux::computeValue()
 {
-  return (_eqv_stress_tr - 3.0 * _G * eqv_strain_incr) / (3.0 * _eta0);
-}
+  ADRealVectorValue shear_disp_disc_incr =
+      _displacement_jump_incr[_qp] - (_displacement_jump_incr[_qp] * _normals[_qp]) * _normals[_qp];
 
-ADReal
-BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & /*eqv_strain_incr*/)
-{
-  return - _G / _eta0;
+  return _u_old[_qp] + MetaPhysicL::raw_value(shear_disp_disc_incr.norm());
 }

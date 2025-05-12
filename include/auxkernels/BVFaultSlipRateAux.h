@@ -11,32 +11,16 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMaxwellViscoelasticUpdate.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVMaxwellViscoelasticUpdate);
+#include "BVFaultDisplacementAuxBase.h"
 
-InputParameters
-BVMaxwellViscoelasticUpdate::validParams()
+class BVFaultSlipRateAux : public BVFaultDisplacementAuxBase
 {
-  InputParameters params = BVCreepUpdateBase::validParams();
-  params.addClassDescription("Material for computing a linear Maxwell viscoelastic update.");
-  params.addRequiredRangeCheckedParam<Real>("viscosity", "viscosity > 0.0", "The viscosity.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVFaultSlipRateAux(const InputParameters & parameters);
 
-BVMaxwellViscoelasticUpdate::BVMaxwellViscoelasticUpdate(const InputParameters & parameters)
-  : BVCreepUpdateBase(parameters), _eta0(getParam<Real>("viscosity"))
-{
-}
-
-ADReal
-BVMaxwellViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
-{
-  return (_eqv_stress_tr - 3.0 * _G * eqv_strain_incr) / (3.0 * _eta0);
-}
-
-ADReal
-BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & /*eqv_strain_incr*/)
-{
-  return - _G / _eta0;
-}
+protected:
+  virtual Real computeValue() override;
+};

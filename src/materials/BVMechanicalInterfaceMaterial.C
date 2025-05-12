@@ -117,6 +117,7 @@ BVMechanicalInterfaceMaterial::initializeFrictionModel()
     _friction_model = dynamic_cast<BVFrictionUpdateBase *>(&this->getMaterialByName(model_name));
   }
 }
+
 void
 BVMechanicalInterfaceMaterial::initQpStatefulProperties()
 {
@@ -166,6 +167,7 @@ BVMechanicalInterfaceMaterial::computeQpLocalDisplacementJump()
   _interface_displacement_jump[_qp] =
       _interface_displacement_jump_old[_qp] + _interface_displacement_jump_incr[_qp];
 }
+
 void
 BVMechanicalInterfaceMaterial::computeQpLocalTraction()
 {

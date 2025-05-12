@@ -11,32 +11,23 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVMaxwellViscoelasticUpdate.h"
-
-registerMooseObject("BeaverApp", BVMaxwellViscoelasticUpdate);
+#include "BVFaultDisplacementAuxBase.h"
+#include "Assembly.h"
 
 InputParameters
-BVMaxwellViscoelasticUpdate::validParams()
+BVFaultDisplacementAuxBase::validParams()
 {
-  InputParameters params = BVCreepUpdateBase::validParams();
-  params.addClassDescription("Material for computing a linear Maxwell viscoelastic update.");
-  params.addRequiredRangeCheckedParam<Real>("viscosity", "viscosity > 0.0", "The viscosity.");
+  InputParameters params = AuxKernel::validParams();
+  params.addClassDescription("Base class for outputting fault displacement discontinuity.");
   return params;
 }
 
-BVMaxwellViscoelasticUpdate::BVMaxwellViscoelasticUpdate(const InputParameters & parameters)
-  : BVCreepUpdateBase(parameters), _eta0(getParam<Real>("viscosity"))
+BVFaultDisplacementAuxBase::BVFaultDisplacementAuxBase(const InputParameters & parameters)
+  : AuxKernel(parameters),
+    _normals(_assembly.normals()),
+    _displacement_jump_incr(
+        getADMaterialProperty<RealVectorValue>("displacement_jump_increment_global"))
 {
-}
-
-ADReal
-BVMaxwellViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
-{
-  return (_eqv_stress_tr - 3.0 * _G * eqv_strain_incr) / (3.0 * _eta0);
-}
-
-ADReal
-BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & /*eqv_strain_incr*/)
-{
-  return - _G / _eta0;
+  if (!_bnd)
+    mooseError("You need to provide a boundary for this AuxKernel!\n");
 }
