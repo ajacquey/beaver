@@ -63,18 +63,6 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
 []
 
 [AuxVariables]
-  [strain_xy]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [stress_xy]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [stress_yy]
-    order = CONSTANT
-    family = MONOMIAL
-  []
   [normal_stress]
     order = CONSTANT
     family = MONOMIAL
@@ -87,14 +75,6 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
     order = FIRST
     family = LAGRANGE
   []
-  [vel_x]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [vel_y]
-    order = CONSTANT
-    family = MONOMIAL
-  []
   [slip_rate]
     order = CONSTANT
     family = MONOMIAL
@@ -106,27 +86,6 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
 []
 
 [AuxKernels]
-  [strain_xy_aux]
-    type = BVStrainComponentAux
-    variable = strain_xy
-    index_i = x
-    index_j = y
-    execute_on = 'TIMESTEP_END'
-  []
-  [stress_xy_aux]
-    type = BVStressComponentAux
-    variable = stress_xy
-    index_i = x
-    index_j = y
-    execute_on = 'TIMESTEP_END'
-  []
-  [stress_yy_aux]
-    type = BVStressComponentAux
-    variable = stress_yy
-    index_i = y
-    index_j = y
-    execute_on = 'TIMESTEP_END'
-  []
   [normal_stress_aux]
     type = BVFaultNormalStressAux
     variable = normal_stress
@@ -145,18 +104,6 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
     variable = pressure
     boundary = 'interface'
     execute_on = 'TIMESTEP_BEGIN TIMESTEP_END'
-  []
-  [vel_x_aux]
-    type = TimeDerivativeAux
-    variable = vel_x
-    functor = disp_x
-    execute_on = 'TIMESTEP_END'
-  []
-  [vel_y_aux]
-    type = TimeDerivativeAux
-    variable = vel_y
-    functor = disp_y
-    execute_on = 'TIMESTEP_END'
   []
   [slip_rate_aux]
     type = BVFaultSlipRateAux
@@ -263,7 +210,6 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
 []
 
 [Outputs]
-  perf_graph = true
   execute_on = 'TIMESTEP_END'
   exodus = true
 []
