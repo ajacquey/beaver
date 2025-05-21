@@ -1,10 +1,8 @@
 # Fault stress parameter
-f = 0.5
+f = 1.0
 sigma = 1.0
-Delta_p = 0.4
-alpha = 0.04
 T = 0.4
-tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
+tau = ${fparse sigma - T}
 
 [Mesh]
   [file]
@@ -174,8 +172,7 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
 [Functions]
   [pressure_fct]
     type = ParsedFunction
-    expression = 'if(t<=0,0.0,${Delta_p}*(1.0-erf(abs(x)/sqrt(${alpha}*t))))' 
-    # expression = '0.0' 
+    expression = 'if(t<=0,0.0,1.0-erf(abs(x)/sqrt(t)))' 
   []
 []
 
@@ -217,16 +214,16 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
   [elasticity]
     type = BVMechanicalMaterial
     displacements = 'disp_x disp_y'
-    shear_modulus = 6.667e+02
-    bulk_modulus = 6.667e+02
+    young_modulus = 1.0e+02
+    poisson_ratio = 0.25
     initial_stress = '-${sigma} -${sigma} -${sigma} 0.0 0.0 +${tau}'
   []
   [interface]
     type = BVMechanicalInterfaceMaterial
     boundary = 'interface'
     displacements = 'disp_x disp_y'
-    normal_stiffness = 6.667e+05
-    tangent_stiffness = 6.667e+05
+    normal_stiffness = 1.0e+05
+    tangent_stiffness = 1.0e+05
     friction_model = 'constant_friction'
   []
   [constant_friction]
@@ -236,13 +233,13 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
 []
 
 [Postprocessors]
-  [slip]
+  [slip_max]
     type = ElementExtremeValue
     variable = slip
     outputs = 'max'
     execute_on = 'TIMESTEP_END'
   []
-  [slip_rate]
+  [slip_rate_max]
     type = ElementExtremeValue
     variable = slip_rate
     outputs = 'max'
@@ -261,14 +258,14 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
   []
 []
 
-# [Preconditioning]
-#   [hypre]
-#     type = SMP
-#     full = true
-#     petsc_options_iname = '-pc_type -pc_hypre_type -snes_linesearch_type'
-#     petsc_options_value = 'hypre boomeramg basic'
-#   []
-# []
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = '-pc_type -pc_hypre_type -snes_linesearch_type'
+    petsc_options_value = 'hypre boomeramg l2'
+  []
+[]
 
 # [Preconditioning]
 #   [precond]
@@ -288,98 +285,100 @@ tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
 #   []
 # []
 
-[Preconditioning]
-  active = 'asm_ilu'
-  [asm_ilu]
-    type = SMP
-    petsc_options = '-snes_ksp_ew'
-    petsc_options_iname = '-ksp_type -ksp_rtol -ksp_max_it
-                           -pc_type
-                           -sub_pc_type
-                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
-                           -ksp_gmres_restart'
-    petsc_options_value = 'fgmres 1e-10 100
-                           asm
-                           ilu
-                           newtonls 1.0e-08 1e-08 100 l2
-                           201'
-  []
-  [asm_lu]
-    type = SMP
-    full = true
-    petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'
-    petsc_options_iname = '-pc_type -sub_pc_type -pc_factor_mat_solver_type
-                           -sub_pc_factor_shift_type -pc_factor_shift_type
-                           -mat_mffd_err -pc_factor_shift_amount
-                           -snes_atol -snes_rtol -snes_stol -snes_max_it
-                           -snes_linesearch_type
-                           -ksp_type -ksp_max_it'
-    petsc_options_value = 'asm lu superlu_dist
-                           NONZERO NONZERO
-                           1e-5 1e-10
-                           1.0e-08 1.0e-03 0 20
-                           bt
-                           bcgs 200'
-  []
-  [lu]
-    type = SMP
-    full = true
-    petsc_options = '-snes_ksp_ew -ksp_diagonal_scale -ksp_diagonal_scale_fix'
-    petsc_options_iname = '-snes_type
-                           -snes_linesearch_type -snes_linesearch_maxstep -sneslinesearch_minlambda
-                           -snes_atol -snes_rtol -snes_max_it
-                           -pc_type -pc_factor_mat_solver_package -pc_factor_shift_type -pc_factor_shift_amount
-                           -ksp_type -ksp_atol -ksp_rtol -ksp_stol -ksp_max_it'
-    petsc_options_value = 'newtonls
-                           basic 2e12 1e-3
-                           1e-08 1e-08 100
-                           lu mumps NONZERO 1e-12
-                           bcgs 1e-12 1e-15 1e-8 500'
-  []
-  [mg_cheb]
-    type = SMP
-    full = true
-    petsc_options = '-ksp_diagonal_scale -ksp_diagonal_scale_fix'
-    # '-snes_ksp_ew
-    #                  -snes_converged_reason
-    #                  -ksp_converged_reason'
-                     # -ksp_diagonal_scale -ksp_diagonal_scale_fix'
-                     # -snes_view
-    petsc_options_iname = '-snes_linesearch_type -snes_linesearch_maxstep -sneslinesearch_minlambda
-                           -snes_atol -snes_rtol -snes_max_it
-                           -ksp_type -ksp_rtol -ksp_max_it
-                           -pc_type
-                           -pc_mg_type
-                           -pc_mg_galerkin
-                           -pc_mg_levels_ksp_type -pc_pc_mg_levels_ksp_max_it -pc_mg_levels_ksp_norm_type
-                           -pc_mg_levels_ksp_chebyshev_esteig -pc_mg_levels_esteig_ksp_norm_type
-                           -pc_mg_levels_pc_type
-                           -pc_mg_coarse_ksp_type -pc_mg_coarse_ksp_max_it -pc_mg_coarse_ksp_rtol
-                           -pc_mg_coarse_pc_type -pc_mg_coarse_pc_asm_overlap -pc_mg_coarse_sub_pc_type'
-    petsc_options_value = 'basic 2e12 1.0e-3
-                           1.0e-08 1.0e-08 200
-                           bcgs 1e-3 200
-                           mg
-                           full
-                           mat
-                           chebyshev 10 NONE
-                           0,0.2,0,1.1 NONE
-                           jacobi
-                           bcgs 25 1.0e-4
-                           asm 2 ilu'
-  []
-[]
+# [Preconditioning]
+#   active = 'asm_ilu'
+#   [asm_ilu]
+#     type = SMP
+#     petsc_options = '-snes_ksp_ew'
+#     petsc_options_iname = '-ksp_type
+#                            -pc_type
+#                            -sub_pc_type
+#                            -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+#                            -ksp_gmres_restart'
+#     petsc_options_value = 'gmres
+#                            asm
+#                            ilu
+#                            newtonls 1.0e-08 1e-05 100 l2
+#                            201'
+#   []
+#   [asm_lu]
+#     type = SMP
+#     full = true
+#     petsc_options = '-snes_ksp_ew -snes_converged_reason -ksp_converged_reason'
+#     petsc_options_iname = '-pc_type -sub_pc_type -pc_factor_mat_solver_type
+#                            -sub_pc_factor_shift_type -pc_factor_shift_type
+#                            -mat_mffd_err -pc_factor_shift_amount
+#                            -snes_atol -snes_rtol -snes_stol -snes_max_it
+#                            -snes_linesearch_type
+#                            -ksp_type -ksp_max_it'
+#     petsc_options_value = 'asm lu superlu_dist
+#                            NONZERO NONZERO
+#                            1e-5 1e-10
+#                            1.0e-08 1.0e-03 0 20
+#                            basic
+#                            gmres 200'
+#   []
+#   [lu]
+#     type = SMP
+#     full = true
+#     petsc_options = '-snes_ksp_ew -ksp_diagonal_scale -ksp_diagonal_scale_fix'
+#     petsc_options_iname = '-snes_type
+#                            -snes_linesearch_type -snes_linesearch_maxstep -sneslinesearch_minlambda
+#                            -snes_atol -snes_rtol -snes_max_it
+#                            -pc_type -pc_factor_mat_solver_package -pc_factor_shift_type -pc_factor_shift_amount
+#                            -ksp_type -ksp_atol -ksp_rtol -ksp_stol -ksp_max_it'
+#     petsc_options_value = 'newtonls
+#                            basic 2e12 1e-3
+#                            1e-08 1e-08 100
+#                            lu mumps NONZERO 1e-12
+#                            bcgs 1e-12 1e-15 1e-8 500'
+#   []
+#   [mg_cheb]
+#     type = SMP
+#     full = true
+#     petsc_options = '-ksp_diagonal_scale -ksp_diagonal_scale_fix'
+#     # '-snes_ksp_ew
+#     #                  -snes_converged_reason
+#     #                  -ksp_converged_reason'
+#                      # -ksp_diagonal_scale -ksp_diagonal_scale_fix'
+#                      # -snes_view
+#     petsc_options_iname = '-snes_linesearch_type -snes_linesearch_maxstep -sneslinesearch_minlambda
+#                            -snes_atol -snes_rtol -snes_max_it
+#                            -ksp_type -ksp_rtol -ksp_max_it
+#                            -pc_type
+#                            -pc_mg_type
+#                            -pc_mg_galerkin
+#                            -pc_mg_levels_ksp_type -pc_pc_mg_levels_ksp_max_it -pc_mg_levels_ksp_norm_type
+#                            -pc_mg_levels_ksp_chebyshev_esteig -pc_mg_levels_esteig_ksp_norm_type
+#                            -pc_mg_levels_pc_type
+#                            -pc_mg_coarse_ksp_type -pc_mg_coarse_ksp_max_it -pc_mg_coarse_ksp_rtol
+#                            -pc_mg_coarse_pc_type -pc_mg_coarse_pc_asm_overlap -pc_mg_coarse_sub_pc_type'
+#     petsc_options_value = 'basic 2e12 1.0e-3
+#                            1.0e-08 1.0e-08 200
+#                            bcgs 1e-3 200
+#                            mg
+#                            full
+#                            mat
+#                            chebyshev 10 NONE
+#                            0,0.2,0,1.1 NONE
+#                            jacobi
+#                            bcgs 25 1.0e-4
+#                            asm 2 ilu'
+#   []
+# []
 
 [Executioner]
   type = Transient
   solve_type = 'NEWTON'
   automatic_scaling = true
+  # compute_scaling_once = false
   start_time = 0.0
-  end_time = 600
-  num_steps = 600
+  end_time = 1.0
+  num_steps = 500
 []
 
 [Outputs]
+  print_linear_residuals = false
   perf_graph = true
   execute_on = 'TIMESTEP_END'
   [out]

@@ -1,0 +1,4 @@
+[deps]
+DDMFaultSlip = "3c52d001-2359-4feb-abce-7bd6b42a78ca"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
