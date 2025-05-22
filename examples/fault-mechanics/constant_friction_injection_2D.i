@@ -223,7 +223,7 @@ tau = ${fparse sigma - T}
     boundary = 'interface'
     displacements = 'disp_x disp_y'
     normal_stiffness = 1.0e+05
-    tangent_stiffness = 1.0e+05
+    tangent_stiffness = 4.0e+04
     friction_model = 'constant_friction'
   []
   [constant_friction]
