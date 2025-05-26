@@ -10,7 +10,7 @@ plt.style.use('../publication.mplstyle')
 if __name__ == "__main__":
     T = 0.4
     lmbda = 1.0252441
-    mu_p = 5.33e+01
+    mu_p = 2.0e+02
 
     # Analytical solution from Viesca (2023)
     x = np.linspace(0.0, 1.0, 21)

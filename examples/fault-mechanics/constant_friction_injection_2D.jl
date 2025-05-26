@@ -5,9 +5,9 @@ using LinearAlgebra
 
 ###### PHYSICAL PARAMETERS ######
 const T = parse(Float64, ARGS[1])::Float64
-const λ = 5.33e+01::Float64
-const μ = 5.33e+01::Float64
-const h = 5.33e-04::Float64
+const λ = 2.0e+02::Float64
+const μ = 2.0e+02::Float64
+const h = 2.0e-03::Float64
 const f = 1.0::Float64
 const σ₀ = 1.0::Float64
 const t₀ = 0.0::Float64 # start time

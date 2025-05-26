@@ -214,7 +214,7 @@ tau = ${fparse sigma - T}
   [elasticity]
     type = BVMechanicalMaterial
     displacements = 'disp_x disp_y'
-    young_modulus = 1.0e+02
+    young_modulus = 7.5e+02
     poisson_ratio = 0.25
     initial_stress = '-${sigma} -${sigma} -${sigma} 0.0 0.0 +${tau}'
   []
@@ -223,7 +223,7 @@ tau = ${fparse sigma - T}
     boundary = 'interface'
     displacements = 'disp_x disp_y'
     normal_stiffness = 1.0e+05
-    tangent_stiffness = 4.0e+04
+    tangent_stiffness = 1.0e+05
     friction_model = 'constant_friction'
   []
   [constant_friction]
