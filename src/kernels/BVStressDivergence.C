@@ -36,7 +36,7 @@ BVStressDivergence::validParams()
 BVStressDivergence::BVStressDivergence(const InputParameters & parameters)
   : ADKernel(parameters),
     _coupled_pf(isCoupled("fluid_pressure")),
-    _pf(coupledValue("fluid_pressure")),
+    _pf(adCoupledValue("fluid_pressure")),
     _component(getParam<MooseEnum>("component")),
     // _rho(getParam<Real>("density")),
     // _gravity(getParam<RealVectorValue>("gravity")),

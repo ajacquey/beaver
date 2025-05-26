@@ -42,7 +42,10 @@ BVFrictionUpdateBase::BVFrictionUpdateBase(const InputParameters & parameters)
   : Material(parameters),
     _abs_tol(getParam<Real>("abs_tolerance")),
     _rel_tol(getParam<Real>("rel_tolerance")),
-    _max_its(getParam<unsigned int>("max_iterations"))
+    _max_its(getParam<unsigned int>("max_iterations")),
+    _slip_rate(declareADProperty<Real>("fault_slip_rate")),
+    _slip(declareADProperty<Real>("fault_slip")),
+    _slip_old(getMaterialPropertyOld<Real>("fault_slip"))
 {
 }
 
@@ -58,7 +61,7 @@ BVFrictionUpdateBase::frictionUpdate(ADRealVectorValue & traction, const RankTwo
   // Trial traction
   _traction_tr = ADRealVectorValue(0.0, traction(1), traction(2));
   // Trial shear and normal stress
-  _sigma_tr = traction(0);
+  _sigma_tr = -traction(0);
   _tau_tr = _traction_tr.norm();
 
   // Elastic shear stiffness
@@ -75,7 +78,14 @@ BVFrictionUpdateBase::frictionUpdate(ADRealVectorValue & traction, const RankTwo
   // Update quantities
   ADRealVectorValue slip_incr = reformSlipVector(delta_dot);
   traction -= K * slip_incr;
+
   postReturnMap(delta_dot);
+}
+
+void
+BVFrictionUpdateBase::initQpStatefulProperties()
+{
+  _slip[_qp] = 0.0;
 }
 
 ADReal
@@ -127,9 +137,13 @@ BVFrictionUpdateBase::reformSlipVector(const ADReal & delta_dot)
 void
 BVFrictionUpdateBase::preReturnMap()
 {
+  _slip_rate[_qp] = 0.0;
+  _slip[_qp] = _slip_old[_qp];
 }
 
 void
 BVFrictionUpdateBase::postReturnMap(const ADReal & delta_dot)
 {
+  _slip_rate[_qp] = delta_dot;
+  _slip[_qp] = _slip_old[_qp] + delta_dot * _dt;
 }

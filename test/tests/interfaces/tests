@@ -25,4 +25,9 @@
     input = 'constant_friction_3D.i'
     exodiff = 'constant_friction_3D_out.e'
   []
+  [constant_friction_injection_2D]
+    type = 'Exodiff'
+    input = 'constant_friction_injection_2D.i'
+    exodiff = 'constant_friction_injection_2D_out.e'
+  []
 []

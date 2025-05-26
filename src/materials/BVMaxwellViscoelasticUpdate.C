@@ -36,7 +36,7 @@ BVMaxwellViscoelasticUpdate::creepRate(const ADReal & eqv_strain_incr)
 }
 
 ADReal
-BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & eqv_strain_incr)
+BVMaxwellViscoelasticUpdate::creepRateDerivative(const ADReal & /*eqv_strain_incr*/)
 {
   return - _G / _eta0;
 }
