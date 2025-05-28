@@ -14,7 +14,7 @@ Tr = 289
 # parameters for Munson-Dawson part
 A1 = 1
 n1 = 1
-A = 0.0   
+A = 0.0    #0.001
 n = 10
 B = 0.0
 m = 2.2195
@@ -239,7 +239,7 @@ mz = 1.028
   type = Transient
   solve_type = 'NEWTON'
   start_time = 0.0
-  end_time = 1 
+  end_time = 1 #10.0
   dt = 0.0001
 []
 

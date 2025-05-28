@@ -2,7 +2,7 @@
 # Note: Parameter A is set to zero to ensure the Munson-Dawson component is zero.
 # Also, volumetric part is set to false and parameter z is set to zero.  
 # Parameters
-# Units used for the simulation: stress in MPa, time in days, strain in m / m
+# Units: stress in MPa, time in days, strain in m / m
 
 E = 6000
 nu = 0.000044
@@ -14,7 +14,7 @@ Tr = 289
 # parameters for Munson-Dawson part
 A1 = 1
 n1 = 1
-A = 0.0   
+A = 0.0    #0.001
 n = 10
 B = 0.0
 m = 2.2195
@@ -166,7 +166,7 @@ mz = 1.028
     [pressure_top]
       boundary = 'top'
       displacement_vars = 'disp_x disp_y disp_z'
-      value = -2.0
+      value = -2e6
     []
   []
 []
@@ -239,7 +239,7 @@ mz = 1.028
   type = Transient
   solve_type = 'NEWTON'
   start_time = 0.0
-  end_time = 1 
+  end_time = 1 #10.0
   dt = 0.0001
 []
 
