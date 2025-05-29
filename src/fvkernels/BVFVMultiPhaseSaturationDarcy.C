@@ -40,9 +40,9 @@ BVFVMultiPhaseSaturationDarcy::BVFVMultiPhaseSaturationDarcy(const InputParamete
     _D(getADMaterialProperty<Real>("diffusivity_saturation")),
     _D_neighbor(getNeighborADMaterialProperty<Real>("diffusivity_saturation"))
 {
-  if ((_var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage) &&
-      (_tid == 0))
-    adjustRMGhostLayers(std::max((unsigned short)(3), _pars.get<unsigned short>("ghost_layers")));
+  // if ((_var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage) &&
+  //     (_tid == 0))
+  //   adjustRMGhostLayers(std::max((unsigned short)(3), _pars.get<unsigned short>("ghost_layers")));
 }
 
 ADReal
