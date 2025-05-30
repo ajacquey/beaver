@@ -15,7 +15,7 @@ alpha = 0.1
 beta = 1.48
 
 def analyticalSolution(t):
-    return 1.0e-02 * np.pow(q / A_2, beta) * np.pow(t, alpha)
+    return 1.0e-02 * np.power(q / A_2, beta) * np.power(t, alpha)
 
 def numericalSolution():
   filename = "lemaitre_csv.csv"
