@@ -25,34 +25,34 @@ def numericalSolution():
   return (t, e * 1.0e+04)
 
 def plot_lemaitre(ax):
-    ta = np.linspace(0.0, 1.0, 500)
+  ta = np.linspace(0.0, 1.0, 500)
     
-    # Analytical solution
-    ea = analyticalSolution(ta)
-    # Numerical solution
-    tn, en = numericalSolution()
+  # Analytical solution
+  ea = analyticalSolution(ta)
+  # Numerical solution
+  tn, en = numericalSolution()
 
-    # Plot analytical
-    ax.plot(ta, ea, color="xkcd:red", label="Analytical")
-    # Plot numerical
-    ax.scatter(tn, en, c="k", marker="o", linewidths=0.0, label="Numerical")
+  # Plot analytical
+  ax.plot(ta, ea, color="xkcd:red", label="Analytical")
+  # Plot numerical
+  ax.scatter(tn, en, c="k", marker="o", linewidths=0.0, label="Numerical")
 
-    # Legend
-    ax.legend(loc="best")
+  # Legend
+  ax.legend(loc="best")
 
-    # Additional plot settings
-    ax.set_ylabel(r"Shear creep strain, $\gamma_{vp}$ (\%)")
-    ax.set_xlabel(r"Time, $t$ (days)")
-    # ax.set_yscale('log')  # Uncomment if log scale is desired
+  # Additional plot settings
+  ax.set_ylabel(r"Shear creep strain, $\gamma_{vp}$ (\%)")
+  ax.set_xlabel(r"Time, $t$ (days)")
+  # ax.set_yscale('log')  # Uncomment if log scale is desired
 
 if __name__ == '__main__':
-    # Figure stress
-    fig, ax = plt.subplots()
+  # Figure stress
+  fig, ax = plt.subplots()
     
-    plot_lemaitre(ax)
+  plot_lemaitre(ax)
 
-    ax.set_xlim(-0.05, 1.0)
-    ax.set_ylim(0.0, 0.03)
+  ax.set_xlim(-0.05, 1.0)
+  ax.set_ylim(0.0, 0.03)
 
-    # plt.show()
-    fig.savefig("../../../doc/content/media/lemaitre_strain.png", format="PNG", dpi=300, bbox_inches="tight")
+  # plt.show()
+  fig.savefig("../../../doc/content/media/lemaitre_strain.png", format="PNG", dpi=300, bbox_inches="tight")
