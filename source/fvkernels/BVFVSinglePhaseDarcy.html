@@ -1,0 +1,1169 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>BVFVSinglePhaseDarcy | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li><a href="#!" class="dropdown-trigger" data-target="05559530-1529-4f1b-b1cd-57ac5e0c677a" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="4b573dac-a262-4e3e-a77d-ab4d4c23ac13" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="1084f26b-658c-480c-8d4f-68d1f4447e39"><i class="material-icons">menu</i></a><ul class="sidenav" id="1084f26b-658c-480c-8d4f-68d1f4447e39"><li><a href="#!" class="dropdown-trigger" data-target="d714c5f8-cc90-4973-9c19-6f1f3ced5804" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="50ebb1c8-83d6-4a93-8b22-ae767c780d45" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div><ul class="dropdown-content" id="05559530-1529-4f1b-b1cd-57ac5e0c677a"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="4b573dac-a262-4e3e-a77d-ab4d4c23ac13"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li></ul><ul class="dropdown-content" id="d714c5f8-cc90-4973-9c19-6f1f3ced5804"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li></ul><ul class="dropdown-content" id="50ebb1c8-83d6-4a93-8b22-ae767c780d45"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li></ul></nav><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">fvkernels</span><a href="#" class="breadcrumb">BVFVSinglePhaseDarcy</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="504add48-0283-438f-b2a0-fe3e7c045cc9" data-section-level="1" data-section-text="BVFVSinglePhaseDarcy"><h1 id="bvfvsinglephasedarcy">BVFVSinglePhaseDarcy</h1><div class="card moose-alert moose-alert-construction"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">build</i><span class="moose-alert-title-brand">construction:</span>Undocumented Class</div><div class="card-content"><div class="moose-alert-content"><p>The BVFVSinglePhaseDarcy has not been documented. The content listed below should be used as a starting point for documenting the class, which includes the typical automatic documentation associated with a MooseObject; however, what is contained is ultimately determined by what is necessary to make the documentation clear for users.</p></div></div></div><p>Kernel for the divergence of Darcy&#x27;s velocity for single phase flow.</p><section class="scrollspy" id="00cb7a72-fd98-4357-9be1-a5da5d168e4f" data-section-level="2" data-section-text="Overview"><h2 id="overview">Overview</h2><p></p></section><section class="scrollspy" id="b9bc7aa5-3c4c-41ae-8b01-c2b09cc76d45" data-section-level="2" data-section-text="Example Input File Syntax"><h2 id="example-input-file-syntax">Example Input File Syntax</h2><p></p></section><section class="scrollspy" id="5da7824f-56e8-498e-a3ca-8654d7ecb64e" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="de4e4322-5dd2-40bc-a6fb-60b28d453dd4" data-section-level="3" data-section-text="Required Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">variable</span><span class="moose-parameter-header-description">The name of the variable that this residual object operates on</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>NonlinearVariableName</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The name of the variable that this residual object operates on</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Required Parameters</h3></summary></details></section><section id="4bb82993-eafc-4753-8fa4-ab63974ab213" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">block</span><span class="moose-parameter-header-description">The list of blocks (ids or names) that this object will be applied</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;SubdomainName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of blocks (ids or names) that this object will be applied</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_interpolated_state</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">For the old and older state use projected material properties interpolated at the quadrature points. To set up projection use the ProjectedStatefulMaterialStorageAction.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>For the old and older state use projected material properties interpolated at the quadrature points. To set up projection use the ProjectedStatefulMaterialStorageAction.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="9a9a60d1-0814-4e39-a5a4-489057454b68" data-section-level="3" data-section-text="Tagging Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">absolute_value_vector_tags</span><span class="moose-parameter-header-description">The tags for the vectors this residual object should fill with the absolute value of the residual contribution</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;TagName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The tags for the vectors this residual object should fill with the absolute value of the residual contribution</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">extra_matrix_tags</span><span class="moose-parameter-header-description">The extra tags for the matrices this Kernel should fill</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;TagName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The extra tags for the matrices this Kernel should fill</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">extra_vector_tags</span><span class="moose-parameter-header-description">The extra tags for the vectors this Kernel should fill</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;TagName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The extra tags for the vectors this Kernel should fill</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">matrix_tags</span><span class="moose-parameter-header-default">system</span><span class="moose-parameter-header-description">The tag for the matrices this Kernel should fill</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>system</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MultiMooseEnum</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-options"><span>Options:</span>nontime, system</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The tag for the matrices this Kernel should fill</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">vector_tags</span><span class="moose-parameter-header-default">nontime</span><span class="moose-parameter-header-description">The tag for the vectors this Kernel should fill</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>nontime</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MultiMooseEnum</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-options"><span>Options:</span>nontime, time</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The tag for the vectors this Kernel should fill</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Tagging Parameters</h3></summary></details></section><section id="07164fa4-9e60-4387-8305-a37284e1dc4d" data-section-level="3" data-section-text="Boundary Execution Modification Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">boundaries_to_avoid</span><span class="moose-parameter-header-description">The set of sidesets to not execute this FVFluxKernel on. This takes precedence over force_boundary_execution to restrict to less external boundaries. By default flux kernels are executed on all internal boundaries and Dirichlet boundary conditions.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;BoundaryName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The set of sidesets to not execute this FVFluxKernel on. This takes precedence over force_boundary_execution to restrict to less external boundaries. By default flux kernels are executed on all internal boundaries and Dirichlet boundary conditions.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">boundaries_to_force</span><span class="moose-parameter-header-description">The set of sidesets to force execution of this FVFluxKernel on. Setting force_boundary_execution to true is equivalent to listing all external mesh boundaries in this parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;BoundaryName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The set of sidesets to force execution of this FVFluxKernel on. Setting force_boundary_execution to true is equivalent to listing all external mesh boundaries in this parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">force_boundary_execution</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether to force execution of this object on all external boundaries.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether to force execution of this object on all external boundaries.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Boundary Execution Modification Parameters</h3></summary></details></section><section id="fea0e713-bde9-4e8c-acc6-061454b739a0" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">implicit</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Determines whether this object is calculated using an implicit or explicit form</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Determines whether this object is calculated using an implicit or explicit form</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">seed</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">The seed for the master random number generator</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The seed for the master random number generator</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation. Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation. Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section><section id="b92cb334-a217-4c39-a743-9162db7aad07" data-section-level="3" data-section-text="Parallel Ghosting Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">ghost_layers</span><span class="moose-parameter-header-default">2</span><span class="moose-parameter-header-description">The number of layers of elements to ghost.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>2</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned short</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The number of layers of elements to ghost.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_point_neighbors</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether to use point neighbors, which introduces additional ghosting to that used for simple face neighbors.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether to use point neighbors, which introduces additional ghosting to that used for simple face neighbors.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Parallel Ghosting Parameters</h3></summary></details></section></section><section class="scrollspy" id="bfe9f073-6dc1-494e-a0c8-b91a6ac538c9" data-section-level="2" data-section-text="Input Files"><h2 id="input-files">Input Files</h2><ul class="moose-list-inputs browser-default"><li><a class="moose-source-filename tooltipped modal-trigger" href="#78efb8ab-f01c-4060-baea-52ea23095f2f">(test/tests/fluid_flow/fv_single_phase_1D_transient.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#7ef36f01-c260-433f-9217-615df3ba7c04">(examples/poroelasticity/terzaghi/terzaghi_fv.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#9af36cdd-810a-4c3d-a691-4520ea250279">(test/tests/fluid_flow/fv_single_phase_1D.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#b5539858-6681-42bc-b14a-44745256d71e">(examples/solute/advection-diffusion/advection-diffusion.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#b8df6c02-87b5-453b-bbf7-060ae6775d4d">(test/tests/fluid_flow/fv_single_phase_Mose.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#b3b265f8-f9da-4bff-930d-cc828310d58b">(examples/poroelasticity/mandel/mandel_fv.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#1c2e8868-3abb-420e-b2fb-cee26a187900">(examples/poroelasticity/cryer/cryer_fv.i)</a></li></ul></section></section><div class="moose-modal modal" id="78efb8ab-f01c-4060-baea-52ea23095f2f"><div class="modal-content"><h4>(test/tests/fluid_flow/fv_single_phase_1D_transient.i)</h4><pre class="moose-pre"><code class="language-text">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 50
+  ny = 1
+  nz = 1
+  xmin = -50
+  xmax = 50
+  ymin = 0
+  ymax = 5
+  zmin = 0
+  zmax = 5
+[]
+
+[Variables]
+  [pf]
+    type = MooseVariableFVReal
+  []
+[]
+
+[FVKernels]
+  [fluid_time_derivative]
+    type = BVFVSinglePhaseTimeDerivative
+    variable = pf
+  []
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+[]
+
+[Functions]
+  [pf_func]
+    type = ParsedFunction
+    expression = &#x27;p1*t&#x27;
+    symbol_names = &#x27;p1&#x27;
+    symbol_values = &#x27;23.14814815&#x27;
+  []
+[]
+
+[AuxVariables]
+  [vf_x]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [vf_x_aux]
+    type = BVDarcyVelocityAux
+    variable = vf_x
+    fluid_pressure = pf
+    component = x
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[FVBCs]
+  [p_left]
+    type = FVFunctionDirichletBC
+    variable = pf
+    boundary = left
+    function = pf_func
+  []
+  [p_right]
+    type = FVFunctionDirichletBC
+    variable = pf
+    boundary = right
+    function = pf_func
+  []
+[]
+
+[Materials]
+  [fluid_flow_mat]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [permeability]
+    type = BVConstantPermeability
+    permeability = 1.0e-14
+  []
+  [porosity]
+    type = BVConstantPorosity
+    porosity = 1.0
+  []
+  [fluid_properties]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  []
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.728e-03
+    bulk_modulus = 4.0e+09
+  []
+[]
+
+[Preconditioning]
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type -ksp_rtol -ksp_max_it
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres 1e-10 100
+                           asm
+                           ilu
+                           newtonls 1e-12 1e-08 100 basic
+                           201&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  residual_and_jacobian_together = true
+  start_time = 0.0
+  end_time = 43200
+  num_steps = 10
+[]
+
+[Outputs]
+  interval = 5
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="7ef36f01-c260-433f-9217-615df3ba7c04"><div class="modal-content"><h4>(examples/poroelasticity/terzaghi/terzaghi_fv.i)</h4><pre class="moose-pre"><code class="language-text"># Terzaghi&#x27;s problem of consolodation of a soil layer
+#
+# See Arnold Verruijt &quot;Theory and Problems of Poroelasticity&quot; 2015
+# Section 2.2 Terzaghi&#x27;s problem
+# 
+# Time dimension is t = Cv * t / h^2
+# Space dimension is z = z / h
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 5
+  ny = 100
+  nz = 5
+  xmin = -0.05
+  xmax = 0.05
+  ymin = 0
+  ymax = 1
+  zmin = -0.05
+  zmax = 0.05
+[]
+
+[Variables]
+  [pf]
+    type = MooseVariableFVReal
+  []
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+    fluid_pressure = pf
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+    fluid_pressure = pf
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+    fluid_pressure = pf
+  []
+[]
+
+[FVKernels]
+  [fluid_time_derivative]
+    type = BVFVSinglePhaseTimeDerivative
+    variable = pf
+  []
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+[]
+
+[BCs]
+  [confine_x]
+    type = DirichletBC
+    variable = disp_x
+    value = 0
+    boundary = &#x27;left right&#x27;
+  []
+  [confine_z]
+    type = DirichletBC
+    variable = disp_z
+    value = 0
+    boundary = &#x27;front back&#x27;
+  []
+  [base_fixed]
+    type = DirichletBC
+    variable = disp_y
+    value = 0
+    boundary = &#x27;bottom&#x27;
+  []
+  [top_load]
+    type = NeumannBC
+    variable = disp_y
+    value = -1
+    boundary = &#x27;top&#x27;
+  []
+[]
+
+[FVBCs]
+  [topdrained]
+    type = FVDirichletBC
+    variable = pf
+    value = 0
+    boundary = &#x27;top&#x27;
+  []
+[]
+
+[Materials]
+  [mechanical]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 4
+    shear_modulus = 3
+  []
+  [fluid_flow_mat]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [single_phase_poromech]
+    type = BVPoroMechanicsMaterial
+    biot_coefficient = 0.6
+  []
+  [permeability]
+    type = BVConstantPermeability
+    permeability = 1.5e-02 # scaled by effective space
+  []
+  [porosity]
+    type = BVConstantPorosity
+    porosity = 0.1
+  []
+  [fluid]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  [] 
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 0.13953488372093023 # scaled by effective time
+    bulk_modulus = 8.0
+  []
+[]
+
+[Preconditioning]
+  [precond]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-ksp_type -pc_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;bcgs bjacobi 1e-08 1e-10 100 basic&#x27;
+  []
+[]
+
+[Postprocessors]
+  [U]
+    type = PointValue
+    outputs = &#x27;csv_u&#x27;
+    point = &#x27;0 1 0&#x27;
+    variable = disp_y
+  []
+[]
+
+[VectorPostprocessors]
+  [line_pf]
+    type = LineValueSampler
+    variable = pf
+    start_point = &#x27;0.0 0.0 0.0&#x27;
+    end_point = &#x27;0.0 1.0 0.0&#x27;
+    num_points = 100
+    sort_by = &#x27;y&#x27;
+    outputs = &#x27;csv_p&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0
+  end_time = 10
+  [TimeStepper]
+    type = LogConstantDT
+    first_dt = 0.0001
+    log_dt = 0.022
+  []
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv_p]
+    type = CSV
+    sync_only = true
+    sync_times = &#x27;0.001 0.005 0.01 0.05 0.1 0.2 0.5 1.0&#x27;
+  []
+  [csv_u]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="9af36cdd-810a-4c3d-a691-4520ea250279"><div class="modal-content"><h4>(test/tests/fluid_flow/fv_single_phase_1D.i)</h4><pre class="moose-pre"><code class="language-text">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 10
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 100
+  ymin = 0
+  ymax = 10
+  zmin = 0
+  zmax = 10
+[]
+
+[Variables]
+  [pf]
+    type = MooseVariableFVReal
+  []
+[]
+
+[FVKernels]
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+[]
+
+[AuxVariables]
+  [vf_x]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [vf_x_aux]
+    type = BVDarcyVelocityAux
+    variable = vf_x
+    fluid_pressure = pf
+    component = x
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[FVBCs]
+  [p0_left]
+    type = FVDirichletBC
+    variable = pf
+    boundary = left
+    value = 0
+  []
+  [p1_right]
+    type = FVDirichletBC
+    variable = pf
+    boundary = right
+    value = 1.0e+06
+  []
+[]
+
+[Materials]
+  [fluid_flow_mat]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [permeability]
+    type = BVConstantPermeability
+    permeability = 1.0e-15
+  []
+  [fluid_properties]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  []
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.0e-03
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Steady
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  residual_and_jacobian_together = true
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="b5539858-6681-42bc-b14a-44745256d71e"><div class="modal-content"><h4>(examples/solute/advection-diffusion/advection-diffusion.i)</h4><pre class="moose-pre"><code class="language-text">[Mesh]
+  type = GeneratedMesh
+  dim = 1
+  nx = 400
+  xmin = 0
+  xmax = 1
+[]
+
+[Variables]
+  [pf]
+    order = CONSTANT
+    family = MONOMIAL
+    fv = true
+  []
+  [c]
+    order = CONSTANT
+    family = MONOMIAL
+    fv = true
+  []
+[]
+
+[ICs]
+  [pf_ic]
+    type = FunctionIC
+    variable = pf
+    function = &#x27;1-x&#x27;
+  []
+[]
+
+[FVKernels]
+  # [time_derivative_p]
+  #   type = BVFVSinglePhaseTimeDerivative
+  #   variable = pf
+  # []
+  [darcy_p]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+  [time_derivative_c]
+    type = BVFVSinglePhaseSoluteTimeDerivative
+    variable = c
+  []
+  [darcy_c]
+    type = BVFVSinglePhaseSoluteDarcy
+    variable = c
+    fluid_pressure = pf
+  []
+[]
+
+[AuxVariables]
+  [u]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [u_aux]
+    type = BVDarcyVelocityAux
+    variable = u
+    fluid_pressure = pf
+    component = x
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[FVBCs]
+  [p_left]
+    type = FVDirichletBC
+    variable = pf
+    boundary = &#x27;left&#x27;
+    value = 1
+  []
+  [p_right]
+    type = FVDirichletBC
+    variable = pf
+    boundary = &#x27;right&#x27;
+    value = 0
+  []
+  [c_left]
+    type = FVDirichletBC
+    variable = c
+    boundary = &#x27;left&#x27;
+    value = 1
+  []
+  [c_right]
+    type = FVDirichletBC
+    variable = c
+    boundary = &#x27;right&#x27;
+    value = 0
+  []
+[]
+
+[Materials]
+  [fluid_flow_mat]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [permeability]
+    type = BVConstantPermeability
+    permeability = 1.0
+  []
+  [porosity]
+    type = BVConstantPorosity
+    porosity = 1.0
+  []
+  [solute_mat]
+    type = BVSinglePhaseFlowSoluteMaterial
+  []
+  [dispersion]
+    type = BVConstantDispersion
+    dispersion = 1.0e-03
+  []
+  [fluid_properties]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  []
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.0
+  []
+[]
+
+[VectorPostprocessors]
+  [line_c]
+    type= LineValueSampler
+    num_points = 400
+    start_point = &#x27;0 0 0&#x27;
+    end_point = &#x27;1 0 0&#x27;
+    sort_by = x
+    variable = c
+    execute_on = &#x27;TIMESTEP_END&#x27;
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-snes_linesearch_type -pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;bt hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  # scheme = &#x27;BDF2&#x27;
+  automatic_scaling = true
+  residual_and_jacobian_together = true
+  start_time = 0
+  end_time = 0.6
+  num_steps = 600
+[]
+
+[Outputs]
+  print_linear_residuals = false
+  perf_graph = true
+  file_base = &#x27;outputs/advection-diffusion&#x27;
+  exodus = true
+  [csv]
+    type = CSV
+    sync_only = true
+    sync_times = &#x27;0.2 0.4 0.6&#x27;
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="b8df6c02-87b5-453b-bbf7-060ae6775d4d"><div class="modal-content"><h4>(test/tests/fluid_flow/fv_single_phase_Mose.i)</h4><pre class="moose-pre"><code class="language-text">[Mesh]
+  [mesh_gen]
+    type = GeneratedMeshGenerator
+    dim = 2
+    xmin = -50
+    xmax = 50
+    ymin = -50
+    ymax = 50
+    nx = 50
+    ny = 50
+  []
+  [barrier1]
+    type = SubdomainBoundingBoxGenerator
+    input = &#x27;mesh_gen&#x27;
+    block_id = 1
+    bottom_left = &#x27;-50 6 0&#x27;
+    top_right = &#x27;30 10 0&#x27;
+  []
+  [barrier2]
+    type = SubdomainBoundingBoxGenerator
+    input = &#x27;barrier1&#x27;
+    block_id = 1
+    bottom_left = &#x27;-30 -10 0&#x27;
+    top_right = &#x27;50 -6 0&#x27;
+  []
+[]
+
+[Variables]
+  [pf]
+    type = MooseVariableFVReal
+  []
+[]
+
+[FVKernels]
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+[]
+
+[AuxVariables]
+  [vf_x]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vf_y]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [vf_x_aux]
+    type = BVDarcyVelocityAux
+    variable = vf_x
+    fluid_pressure = pf
+    component = x
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vf_y_aux]
+    type = BVDarcyVelocityAux
+    variable = vf_y
+    fluid_pressure = pf
+    component = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[FVBCs]
+  [topinflux]
+    type = FVDirichletBC
+    variable = pf
+    value = 1
+    boundary = &#x27;top&#x27;
+  []
+  [bottomdrained]
+    type = FVDirichletBC
+    variable = pf
+    value = 0
+    boundary = &#x27;bottom&#x27;
+  []
+[]
+
+[Materials]
+  [single_phase]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [permeability0]
+    type = BVConstantPermeability
+    block = 0
+    permeability = 1.0
+  []
+  [permeability1]
+    type = BVConstantPermeability
+    block = 1
+    permeability = 1.0e-05
+  []
+  [fluid]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  []
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 1.0
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Steady
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  residual_and_jacobian_together = true
+[]
+
+[Outputs]
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="b3b265f8-f9da-4bff-930d-cc828310d58b"><div class="modal-content"><h4>(examples/poroelasticity/mandel/mandel_fv.i)</h4><pre class="moose-pre"><code class="language-text"># Mandel&#x27;s problem
+#
+# See Arnold Verruijt &quot;Theory and Problems of Poroelasticity&quot; 2015
+# Section 3.2 Mandel&#x27;s problem
+# Cheng and Detournay (1988), A direct boundary element method for plane strain poroelasticity
+# 
+# Time dimension is t = Cv * t / a^2
+# Space dimension is x = x / a
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 20
+  ny = 20
+  nz = 20
+  xmin = 0.0
+  xmax = 1.0
+  ymin = 0.0
+  ymax = 1.0
+  zmin = 0.0
+  zmax = 1.0
+[]
+
+[Variables]
+  [pf]
+    type = MooseVariableFVReal
+  []
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+    fluid_pressure = pf
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+    fluid_pressure = pf
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+    fluid_pressure = pf
+  []
+[]
+
+[FVKernels]
+  [fluid_time_derivative]
+    type = BVFVSinglePhaseTimeDerivative
+    variable = pf
+  []
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+[]
+
+[BCs]
+  [confine_x]
+    type = DirichletBC
+    variable = disp_x
+    value = 0
+    boundary = &#x27;left&#x27;
+  []
+  [base_fixed]
+    type = DirichletBC
+    variable = disp_y
+    value = 0
+    boundary = &#x27;bottom&#x27;
+  []
+  [top_load]
+    type = NeumannBC
+    variable = disp_y
+    value = -1
+    boundary = &#x27;top&#x27;
+  []
+  [confine_z]
+    type = DirichletBC
+    variable = disp_z
+    value = 0
+    boundary = &#x27;front back&#x27;
+  []
+[]
+
+[FVBCs]
+  [sides_drained]
+    type = FVDirichletBC
+    variable = pf
+    value = 0
+    boundary = &#x27;right&#x27;
+  []
+[]
+
+[Materials]
+  [mechanical]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1
+    poisson_ratio = 0.25
+  []
+  [fluid_flow_mat]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [single_phase_poromech]
+    type = BVPoroMechanicsMaterial
+    biot_coefficient = 0.6
+  []
+  [permeability]
+    type = BVConstantPermeability
+    permeability = 1.5 # scaled by effective space
+  []
+  [porosity]
+    type = BVConstantPorosity
+    porosity = 0.1
+  []
+  [fluid]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  [] 
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 3.636363636363636 # scaled by effective time
+    bulk_modulus = 8.0
+  []
+[]
+
+[Preconditioning]
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-08 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+
+[Postprocessors]
+  [U]
+    type = SideAverageValue
+    boundary = top
+    outputs = &#x27;csv_t&#x27;
+    variable = disp_y
+  []
+  [P1]
+    type = PointValue
+    outputs = &#x27;csv_t&#x27;
+    point = &#x27;0.0 0.0 0.0&#x27;
+    variable = pf
+  []
+  [P2]
+    type = PointValue
+    outputs = &#x27;csv_t&#x27;
+    point = &#x27;0.25 0.0 0.0&#x27;
+    variable = pf
+  []
+  [P3]
+    type = PointValue
+    outputs = &#x27;csv_t&#x27;
+    point = &#x27;0.5 0.0 0.0&#x27;
+    variable = pf
+  []
+  [P4]
+    type = PointValue
+    outputs = &#x27;csv_t&#x27;
+    point = &#x27;0.75 0.0 0.0&#x27;
+    variable = pf
+  []
+[]
+
+[VectorPostprocessors]
+  [line_pf]
+    type = LineValueSampler
+    variable = pf
+    start_point = &#x27;0.0 0.0 0.0&#x27;
+    end_point = &#x27;1.0 0.0 0.0&#x27;
+    num_points = 20
+    sort_by = &#x27;x&#x27;
+    outputs = &#x27;csv_p&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0
+  end_time = 10
+  [TimeStepper]
+    type = LogConstantDT
+    first_dt = 0.001
+    log_dt = 0.022
+  []
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv_p]
+    type = CSV
+    sync_only = true
+    sync_times = &#x27;0.01 0.1 0.5 1.0 2.0&#x27;
+  []
+  [csv_t]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="1c2e8868-3abb-420e-b2fb-cee26a187900"><div class="modal-content"><h4>(examples/poroelasticity/cryer/cryer_fv.i)</h4><pre class="moose-pre"><code class="language-text"># Cryer&#x27;s problem
+#
+# See Arnold Verruijt &quot;Theory and Problems of Poroelasticity&quot; 2015
+# Section 3.3 Cryer&#x27;s problem
+# 
+# Time dimension is t = Cv * t / a^2
+# Space dimension is x = x / a
+
+[Mesh]
+  type = FileMesh
+  file = &#x27;mesh.msh&#x27;
+[]
+
+[Variables]
+  [pf]
+    type = MooseVariableFVReal
+  []
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+    fluid_pressure = pf
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+    fluid_pressure = pf
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+    fluid_pressure = pf
+  []
+[]
+
+[FVKernels]
+  [fluid_time_derivative]
+    type = BVFVSinglePhaseTimeDerivative
+    variable = pf
+  []
+  [darcy]
+    type = BVFVSinglePhaseDarcy
+    variable = pf
+  []
+[]
+
+[BCs]
+  [confine_x]
+    type = DirichletBC
+    variable = disp_x
+    value = 0
+    boundary = &#x27;left&#x27;
+  []
+  [confine_y]
+    type = DirichletBC
+    variable = disp_y
+    value = 0
+    boundary = &#x27;back&#x27;
+  []
+  [confine_z]
+    type = DirichletBC
+    variable = disp_z
+    value = 0
+    boundary = &#x27;bottom&#x27;
+  []
+  [BVPressure]
+    [out_pressure]
+      boundary = &#x27;out&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = 1.0
+    []
+  []
+[]
+
+[FVBCs]
+  [out_drained]
+    type = FVDirichletBC
+    variable = pf
+    value = 0
+    boundary = &#x27;out&#x27;
+  []
+[]
+
+[Materials]
+  [mechanical]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1
+    poisson_ratio = 0.25
+  []
+  [fluid_flow_mat]
+    type = BVSinglePhaseFlowMaterial
+  []
+  [single_phase_poromech]
+    type = BVPoroMechanicsMaterial
+    biot_coefficient = 0.6
+  []
+  [permeability]
+    type = BVConstantPermeability
+    permeability = 1.5 # scaled by effective space
+  []
+  [porosity]
+    type = BVConstantPorosity
+    porosity = 0.1
+  []
+  [fluid]
+    type = BVFluidProperties
+    fluid_pressure = pf
+    temperature = 273
+    fp = simple_fluid
+  [] 
+[]
+
+[FluidProperties]
+  [simple_fluid]
+    type = SimpleFluidProperties
+    density0 = 1.0
+    viscosity = 3.636363636363636 # scaled by effective time
+    bulk_modulus = 8.0
+  []
+[]
+
+[Preconditioning]
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-08 1e-10 200 basic
+                           201&#x27;
+  []
+[]
+
+[Postprocessors]
+  [Pc]
+    type = PointValue
+    outputs = &#x27;csv_t&#x27;
+    point = &#x27;0.0 0.0 0.0&#x27;
+    variable = pf
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0
+  end_time = 10
+  [TimeStepper]
+    type = LogConstantDT
+    first_dt = 0.0001
+    log_dt = 0.022
+  []
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv_t]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#00cb7a72-fd98-4357-9be1-a5da5d168e4f" class="tooltipped" data-position="left" data-tooltip="Overview">Overview</a></li><li><a href="#b9bc7aa5-3c4c-41ae-8b01-c2b09cc76d45" class="tooltipped" data-position="left" data-tooltip="Example Input File Syntax">Example Input File Syntax</a></li><li><a href="#5da7824f-56e8-498e-a3ca-8654d7ecb64e" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li><li><a href="#bfe9f073-6dc1-494e-a0c8-b91a6ac538c9" class="tooltipped" data-position="left" data-tooltip="Input Files">Input Files</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>
