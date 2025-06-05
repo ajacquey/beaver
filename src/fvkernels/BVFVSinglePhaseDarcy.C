@@ -30,9 +30,9 @@ BVFVSinglePhaseDarcy::BVFVSinglePhaseDarcy(const InputParameters & parameters)
     _lambda(getADMaterialProperty<Real>("fluid_mobility")),
     _lambda_neighbor(getNeighborADMaterialProperty<Real>("fluid_mobility"))
 {
-  if ((_var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage) &&
-      (_tid == 0))
-    adjustRMGhostLayers(std::max((unsigned short)(3), _pars.get<unsigned short>("ghost_layers")));
+  // if ((_var.faceInterpolationMethod() == Moose::FV::InterpMethod::SkewCorrectedAverage) &&
+  //     (_tid == 0))
+  //   adjustRMGhostLayers(std::max((unsigned short)(3), _pars.get<unsigned short>("ghost_layers")));
 }
 
 ADReal
