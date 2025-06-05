@@ -115,32 +115,32 @@ def plot_munson_dawson(ax):
     tn, gamma_R_n, gamma_R_bar_n = numericalSolution()
 
     # Plot analytical solutions
-    ax.plot(ta, gamma_R_a, color="red", linewidth=2, label="γ_R (Analytical)")
+    ax.plot(ta, gamma_R_a, color="red", linewidth=2, label="Analytical solution")
     # ax.plot(ta, gamma_R_bar_a, color="blue", linestyle="--", linewidth=2, label="γ̄_R (Analytical)")
     
     # Plot numerical solutions
-    ax.scatter(tn, gamma_R_n, c="k", marker="o", s=20, linewidths=0.0, label="γ_R (Numerical)")
+    ax.scatter(tn, gamma_R_n, c="k", marker="o", s=20, linewidths=0.0, label="Numerical solution")
     # ax.scatter(tn, gamma_R_bar_n, c="gray", marker="s", s=20, linewidths=0.0, label="γ̄_R (Numerical)")
 
     # Add vertical line at stress switch
-    ax.axvline(x=t_switch, color='k', linestyle=':', alpha=0.7, label=f'Stress switch (t = {t_switch} days)')
+    ax.axvline(x=t_switch, color='k', linestyle=':', alpha=0.7, label=r"Stress switch ($t = {}$ days)".format(t_switch))
 
     # Legend
     ax.legend(loc="best")
 
     # Additional plot settings
-    ax.set_ylabel(r"Creep strain, $\gamma_R$ (×1e-6)")
+    ax.set_ylabel(r"Creep strain, $\gamma_{R}$ ($\mu m / m$)")
     ax.set_xlabel(r"Time, $t$ (days)")
-    ax.grid(True, alpha=0.3)
+    # ax.grid(True, alpha=0.3)
 
 if __name__ == '__main__':
     # Figure setup
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots()
     
     plot_munson_dawson(ax)
 
     ax.set_xlim(0, 30.0)
-    ax.set_ylim(None, None)  # Auto-scale y-axis
+    ax.set_ylim(0, None)  # Auto-scale y-axis
 
     fig.savefig("../../../doc/content/media/munson_dawson_strain.png", format="PNG", dpi=300, bbox_inches="tight")
     plt.show()

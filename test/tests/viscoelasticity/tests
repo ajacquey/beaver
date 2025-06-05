@@ -1,0 +1,32 @@
+[Tests]
+  [linear_maxwell]
+    type = 'Exodiff'
+    input = 'linear_maxwell.i'
+    exodiff = 'linear_maxwell_out.e'
+  []
+  [linear_kelvin]
+    type = 'Exodiff'
+    input = 'linear_kelvin.i'
+    exodiff = 'linear_kelvin_out.e'
+  []
+  [burger]
+    type = 'Exodiff'
+    input = 'burger.i'
+    exodiff = 'burger_out.e'
+  []
+  [lubby2]
+    type = 'Exodiff'
+    input = 'lubby2.i'
+    exodiff = 'lubby2_out.e'
+  []
+  [blanco-martin-lemaitre]
+    type = 'Exodiff'
+    input = 'blanco-martin-lemaitre.i'
+    exodiff = 'blanco-martin-lemaitre_out.e'
+  []
+  [blanco-martin-rtl]
+    type = 'Exodiff'
+    input = 'blanco-martin-rtl.i'
+    exodiff = 'blanco-martin-rtl_out.e'
+  []
+[]
