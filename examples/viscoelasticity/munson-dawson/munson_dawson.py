@@ -115,11 +115,11 @@ def plot_munson_dawson(ax):
     tn, gamma_R_n, gamma_R_bar_n = numericalSolution()
 
     # Plot analytical solutions
-    ax.plot(ta, gamma_R_a, color="red", linewidth=2, label="Analytical solution")
+    ax.plot(ta, gamma_R_a, color="red", linewidth=2, label="Analytical")
     # ax.plot(ta, gamma_R_bar_a, color="blue", linestyle="--", linewidth=2, label="γ̄_R (Analytical)")
     
     # Plot numerical solutions
-    ax.scatter(tn, gamma_R_n, c="k", marker="o", s=20, linewidths=0.0, label="Numerical solution")
+    ax.scatter(tn, gamma_R_n, c="k", marker="o", s=20, linewidths=0.0, label="Numerical")
     # ax.scatter(tn, gamma_R_bar_n, c="gray", marker="s", s=20, linewidths=0.0, label="γ̄_R (Numerical)")
 
     # Add vertical line at stress switch
@@ -143,4 +143,3 @@ if __name__ == '__main__':
     ax.set_ylim(0, None)  # Auto-scale y-axis
 
     fig.savefig("../../../doc/content/media/munson_dawson_strain.png", format="PNG", dpi=300, bbox_inches="tight")
-    plt.show()

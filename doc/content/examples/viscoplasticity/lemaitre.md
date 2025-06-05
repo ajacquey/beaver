@@ -4,7 +4,7 @@ This problem considers a squared medium subject to external stress leading to cr
 
 ## Setup
 
-The squared medium is subject to a compressive horizontal uniaxial stress at a constant temperature, resulting in a uniaxial deformation. The setup is sketched in [!ref](fig_linear_kelvin_setup).
+The squared medium is subject to a compressive horizontal uniaxial stress at a constant temperature, resulting in a uniaxial deformation. The setup is sketched in [!ref](fig_lemaitre_creep_model_setup).
 
 !media media/linear_kelvin.png style=display:block;margin:auto;width:80%; caption=Setup for the Lemaitre's viscoplastic medium. id=fig_lemaitre_creep_model_setup
 
@@ -36,4 +36,4 @@ The following creep curve shows a comparison between the analytical and the nume
 !bibtex bibliography
 
 !content pagination use_title=True
-                    <!-- next=viscoplasticity/munson_dawson.md -->
+                    next=viscoplasticity/munson_dawson.md
