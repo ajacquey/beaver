@@ -13,23 +13,14 @@
 
 #pragma once
 
-#include "ADKernel.h"
+#include "BVStrainAuxBase.h"
 
-class BVStressDivergence : public ADKernel
+class BVVolStrainRateAux : public BVStrainAuxBase
 {
 public:
   static InputParameters validParams();
-  BVStressDivergence(const InputParameters & parameters);
+  BVVolStrainRateAux(const InputParameters & parameters);
 
 protected:
-  virtual ADReal computeQpResidual() override;
-
-  const bool _coupled_pf;
-  const ADVariableValue & _pf;
-  const unsigned int _component;
-  //   const Real _rho;
-  //   const RealVectorValue _gravity;
-
-  const ADMaterialProperty<RankTwoTensor> & _stress;
-  const ADMaterialProperty<Real> * _biot;
+  virtual Real computeValue();
 };
