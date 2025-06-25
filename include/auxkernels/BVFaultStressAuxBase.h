@@ -13,18 +13,15 @@
 
 #pragma once
 
-#include "BVStressAuxBase.h"
+#include "AuxKernel.h"
 
-class BVFaultStressAuxBase : public BVStressAuxBase
+class BVFaultStressAuxBase : public AuxKernel
 {
 public:
   static InputParameters validParams();
   BVFaultStressAuxBase(const InputParameters & parameters);
 
 protected:
-  virtual RealVectorValue computeNormalVector();
-  virtual ADRealVectorValue computeFaultTraction();
-
   const MooseArray<Point> & _normals;
-  RealVectorValue _normal;
+  const ADMaterialProperty<RealVectorValue> & _traction;
 };

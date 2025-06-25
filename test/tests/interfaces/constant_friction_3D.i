@@ -166,9 +166,9 @@
   [elasticity]
     type = BVMechanicalMaterial
     displacements = 'disp_x disp_y disp_z'
-    young_modulus = 10.0
-    poisson_ratio = 0.25
-    initial_stress = '0.0 1.6 0.0'
+    shear_modulus = 1.0
+    bulk_modulus = 1.0
+    initial_stress = '0.0 -1.0 0.0'
   []
   [interface]
     type = BVMechanicalInterfaceMaterial
@@ -180,7 +180,7 @@
   []
   [constant_friction]
     type = BVConstantFrictionUpdate
-    friction = 0.5
+    friction = 0.1
   []
 []
 

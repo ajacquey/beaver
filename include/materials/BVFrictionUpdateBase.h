@@ -26,6 +26,7 @@ public:
   void resetProperties() final {}
 
 protected:
+  virtual void initQpStatefulProperties() override;
   virtual ADReal frictionalStrength(const ADReal & delta_dot) = 0;
   virtual ADReal frictionalStrengthDeriv(const ADReal & delta_dot) = 0;
   virtual ADReal returnMap();
@@ -39,6 +40,11 @@ protected:
   const Real _abs_tol;
   const Real _rel_tol;
   unsigned int _max_its;
+
+  // Slip properties
+  ADMaterialProperty<Real> & _slip_rate;
+  ADMaterialProperty<Real> & _slip;
+  const MaterialProperty<Real> & _slip_old;
 
   // Friction update parameters
   ADRealVectorValue _traction_tr;

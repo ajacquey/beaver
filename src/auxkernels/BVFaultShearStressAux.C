@@ -31,8 +31,7 @@ BVFaultShearStressAux::BVFaultShearStressAux(const InputParameters & parameters)
 Real
 BVFaultShearStressAux::computeValue()
 {
-  RealVectorValue normal = computeNormalVector();
-  ADRealVectorValue fault_traction = computeFaultTraction();
-  ADRealVectorValue shear_traction = fault_traction - (fault_traction * normal) * normal;
+  ADRealVectorValue shear_traction =
+      _traction[_qp] - (_traction[_qp] * _normals[_qp]) * _normals[_qp];
   return MetaPhysicL::raw_value(shear_traction.norm());
 }
