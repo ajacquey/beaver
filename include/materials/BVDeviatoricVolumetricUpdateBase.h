@@ -13,23 +13,22 @@
 
 #pragma once
 
-#include "ADKernel.h"
+#include "BVTwoCreepUpdateBase.h"
 
-class BVStressDivergence : public ADKernel
+class BVDeviatoricVolumetricUpdateBase : public BVTwoCreepUpdateBase
 {
 public:
   static InputParameters validParams();
-  BVStressDivergence(const InputParameters & parameters);
+  BVDeviatoricVolumetricUpdateBase(const InputParameters & parameters);
 
 protected:
-  virtual ADReal computeQpResidual() override;
-
-  const bool _coupled_pf;
-  const ADVariableValue & _pf;
-  const unsigned int _component;
-  //   const Real _rho;
-  //   const RealVectorValue _gravity;
-
-  const ADMaterialProperty<RankTwoTensor> & _stress;
-  const ADMaterialProperty<Real> * _biot;
+  virtual std::vector<ADReal> returnMap() override;
+  virtual void preReturnMapVol(const std::vector<ADReal> & creep_strain_incr);
+  virtual ADReal residualVol(const ADReal & vol_strain_incr);
+  virtual ADReal jacobianVol(const ADReal & vol_strain_incr);
+  virtual ADReal creepRateVol(const ADReal & vol_strain_incr);
+  virtual ADReal creepRateVolDerivative(const ADReal & vol_strain_incr);
+  virtual ADRankTwoTensor reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr) override;
+  
+  bool _volumetric;
 };

@@ -109,7 +109,7 @@ BVCreepUpdateBase::reformPlasticStrainTensor(const ADReal & eqv_strain_incr)
   ADRankTwoTensor flow_dir =
       (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
 
-  return 1.5 * creepRate(eqv_strain_incr) * _dt * flow_dir;
+  return 1.5 * eqv_strain_incr * flow_dir; 
 }
 
 void
