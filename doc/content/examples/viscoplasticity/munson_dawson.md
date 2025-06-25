@@ -7,7 +7,7 @@ The material deforms following the modified Munson-Dawson's viscoplastic constit
 
 The squared medium is subject to a compressive horizontal uniaxial stress at a constant temperature, resulting in a uniaxial deformation. 
 The setup is sketched in [!ref](fig_munson_dawson_creep_model_setup). 
-The uniaxial stress is held constant at 10MPa for a duration of 15 days before dropping to 5MPa for another 15 days to simulate a multi-stage creep test. 
+The uniaxial stress is held constant at 10 MPa for a duration of 15 days before dropping to 5 MPa for another 15 days to simulate a multi-stage creep test. 
 
 !media media/linear_kelvin.png style=display:block;margin:auto;width:80%; caption=Setup for the munson_dawson's viscoplastic medium. id=fig_munson_dawson_creep_model_setup
 
