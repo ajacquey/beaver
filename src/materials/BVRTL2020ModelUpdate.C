@@ -301,9 +301,9 @@ BVRTL2020ModelUpdate::creepRateVolDerivative(const ADReal & vol_strain_incr)
     return 1.0; // No contribution since p is zero
   else
     return -_K * _z * p / std::abs(p) *
-           (_nz * std::pow(std::abs(p / _Nz), _nz - 1.0) *
+           (_nz / _Nz * std::pow(std::abs(p / _Nz), _nz - 1.0) *
                 (std::pow(std::abs(p / _Mz), _mz) + _gamma_vp) -
-            _mz * std::pow(std::abs(p / _Mz), _mz - 1.0) *
+            _mz / _Mz * std::pow(std::abs(p / _Mz), _mz - 1.0) *
                 (std::pow(std::abs(p / _Nz), _nz) - _gamma_vp)) /
            std::pow(std::pow(std::abs(p / _Mz), _mz) + _gamma_vp, 2.0) * _gamma_dot_vp;
 }
