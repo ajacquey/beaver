@@ -1,0 +1,2688 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>BVRTL 2020 ModelUpdate | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li><a href="#!" class="dropdown-trigger" data-target="da60295a-3814-4cf8-91fb-02064b37695d" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="a5c7d2d1-a40a-4b88-a70c-c68c81445618" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="f27fe4bd-4b04-4046-922d-484bea56be09"><i class="material-icons">menu</i></a><ul class="sidenav" id="f27fe4bd-4b04-4046-922d-484bea56be09"><li><a href="#!" class="dropdown-trigger" data-target="c12779c2-6693-4e14-9509-140fdcfbe422" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="600cfa2f-b915-45df-80bd-c28f1eef0db7" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div><ul class="dropdown-content" id="da60295a-3814-4cf8-91fb-02064b37695d"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li><li><a href="../../examples/viscoplasticity/index.html">Viscoplasticity</a></li></ul><ul class="dropdown-content" id="a5c7d2d1-a40a-4b88-a70c-c68c81445618"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li></ul><ul class="dropdown-content" id="c12779c2-6693-4e14-9509-140fdcfbe422"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li><li><a href="../../examples/viscoplasticity/index.html">Viscoplasticity</a></li></ul><ul class="dropdown-content" id="600cfa2f-b915-45df-80bd-c28f1eef0db7"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li></ul></nav><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">materials</span><a href="#" class="breadcrumb">BVRTL2020ModelUpdate</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="e424362b-1d8b-4d9a-82fc-4381aa50c0f7" data-section-level="1" data-section-text="BVRTL 2020 ModelUpdate"><h1 id="bvrtl-2020-modelupdate">BVRTL2020ModelUpdate</h1><div class="card moose-alert moose-alert-construction"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">build</i><span class="moose-alert-title-brand">construction:</span>Undocumented Class</div><div class="card-content"><div class="moose-alert-content"><p>The BVRTL2020ModelUpdate has not been documented. The content listed below should be used as a starting point for documenting the class, which includes the typical automatic documentation associated with a MooseObject; however, what is contained is ultimately determined by what is necessary to make the documentation clear for users.</p></div></div></div><p>Material for computing a RTL2020 creep update. See Azabou et al. (2021), Rock salt behavior: From laboratory experiments to pertinent long-term predictions.</p><section class="scrollspy" id="f0d37f8b-b1f8-4ade-881a-a7ed02455e3b" data-section-level="2" data-section-text="Overview"><h2 id="overview">Overview</h2><p></p></section><section class="scrollspy" id="b4de602a-b075-4c35-b468-61e8902e7b78" data-section-level="2" data-section-text="Example Input File Syntax"><h2 id="example-input-file-syntax">Example Input File Syntax</h2><p></p></section><section class="scrollspy" id="a66c19bf-8cd5-4c77-9f9f-75f1f919e7fd" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="d432d515-ff9a-4b3a-9284-a0e4b3f73d36" data-section-level="3" data-section-text="Required Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">A</span><span class="moose-parameter-header-description">The A parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The A parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">A1</span><span class="moose-parameter-header-description">The A1 parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The A1 parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">A2</span><span class="moose-parameter-header-description">The A2 parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The A2 parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">B</span><span class="moose-parameter-header-description">The B parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The B parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">alpha</span><span class="moose-parameter-header-description">The alpha parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The alpha parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">m</span><span class="moose-parameter-header-description">The m parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The m parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">n</span><span class="moose-parameter-header-description">The n parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The n parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">n1</span><span class="moose-parameter-header-description">The n1 parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The n1 parameter.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">n2</span><span class="moose-parameter-header-description">The n2 parameter.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The n2 parameter.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Required Parameters</h3></summary></details></section><section id="890d953d-e8fa-4298-8d6b-3c26bd36c834" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">Ar</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">The activation temperature in Kelvin.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The activation temperature in Kelvin.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">Mz</span><span class="moose-parameter-header-default">1</span><span class="moose-parameter-header-description">volumetric creep parameter Mz</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>volumetric creep parameter Mz</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">Nz</span><span class="moose-parameter-header-default">1</span><span class="moose-parameter-header-description">volumetric creep parameter Nz</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>volumetric creep parameter Nz</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">Tr</span><span class="moose-parameter-header-default">289</span><span class="moose-parameter-header-description">The reference temperature in Kelvin.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>289</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The reference temperature in Kelvin.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">abs_tolerance</span><span class="moose-parameter-header-default">1e-10</span><span class="moose-parameter-header-description">The absolute tolerance for the iterative update.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1e-10</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The absolute tolerance for the iterative update.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">base_name</span><span class="moose-parameter-header-description">Optional parameter that defines a prefix for all material properties related to this stress update model. This allows for multiple models of the same type to be used without naming conflicts.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::string</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Optional parameter that defines a prefix for all material properties related to this stress update model. This allows for multiple models of the same type to be used without naming conflicts.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">block</span><span class="moose-parameter-header-description">The list of blocks (ids or names) that this object will be applied</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;SubdomainName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of blocks (ids or names) that this object will be applied</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">boundary</span><span class="moose-parameter-header-description">The list of boundaries (ids or names) from the mesh where this object applies</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;BoundaryName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of boundaries (ids or names) from the mesh where this object applies</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">constant_on</span><span class="moose-parameter-header-default">NONE</span><span class="moose-parameter-header-description">When ELEMENT, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps.When SUBDOMAIN, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps. Evaluations on element qps will be skipped</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>NONE</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MooseEnum</p><p class="moose-parameter-description-options"><span>Options:</span>NONE, ELEMENT, SUBDOMAIN</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>When ELEMENT, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps.When SUBDOMAIN, MOOSE will only call computeQpProperties() for the 0th quadrature point, and then copy that value to the other qps. Evaluations on element qps will be skipped</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">declare_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any declared properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any declared properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">max_iterations</span><span class="moose-parameter-header-default">200</span><span class="moose-parameter-header-description">The maximum number of iterations for the iterative update</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>200</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The maximum number of iterations for the iterative update</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">mz</span><span class="moose-parameter-header-default">1</span><span class="moose-parameter-header-description">volumetric creep parameter mz</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>volumetric creep parameter mz</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">nz</span><span class="moose-parameter-header-default">1</span><span class="moose-parameter-header-description">volumetric creep parameter nz</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>volumetric creep parameter nz</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">rel_tolerance</span><span class="moose-parameter-header-default">1e-10</span><span class="moose-parameter-header-description">The relative tolerance for the iterative update.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>1e-10</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The relative tolerance for the iterative update.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">temperature</span><span class="moose-parameter-header-description">The temperature variable in Kelvin.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;VariableName&gt;</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The temperature variable in Kelvin.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">volumetric</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether to perform a volumetric correction.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether to perform a volumetric correction.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">z</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">volumetric creep parameter z</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>double</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>volumetric creep parameter z</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="9dae438c-ed32-4942-8d80-0fd26a3aec19" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">implicit</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Determines whether this object is calculated using an implicit or explicit form</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Determines whether this object is calculated using an implicit or explicit form</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">seed</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">The seed for the master random number generator</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The seed for the master random number generator</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section><section id="64cb0c1b-992d-413c-aae9-a542bc1a8437" data-section-level="3" data-section-text="Outputs Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">output_properties</span><span class="moose-parameter-header-description">List of material properties, from this material, to output (outputs must also be defined to an output type)</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>List of material properties, from this material, to output (outputs must also be defined to an output type)</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">outputs</span><span class="moose-parameter-header-default">none </span><span class="moose-parameter-header-description">Vector of output names where you would like to restrict the output of variables(s) associated with this object</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>none </p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;OutputName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Vector of output names where you would like to restrict the output of variables(s) associated with this object</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Outputs Parameters</h3></summary></details></section><section id="d652fb84-7c9d-496e-8611-a9b935a69525" data-section-level="3" data-section-text="Material Property Retrieval Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_interpolated_state</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">For the old and older state use projected material properties interpolated at the quadrature points. To set up projection use the ProjectedStatefulMaterialStorageAction.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>For the old and older state use projected material properties interpolated at the quadrature points. To set up projection use the ProjectedStatefulMaterialStorageAction.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Material Property Retrieval Parameters</h3></summary></details></section></section><section class="scrollspy" id="cc6d469b-7198-44be-9121-7e6635b87c9f" data-section-level="2" data-section-text="Input Files"><h2 id="input-files">Input Files</h2><ul class="moose-list-inputs browser-default"><li><a class="moose-source-filename tooltipped modal-trigger" href="#e15f2135-cfdb-48c7-9403-34f9cb5d698b">(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest1.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#a7cae6db-5de8-4e44-8c46-f9955f1312e0">(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest2.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#a81623ef-e6c5-4504-bbfe-d2be12f76ae1">(examples/viscoelasticity/RTL2020/BVRTL2020ModelUpdate.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#9bea85cd-dad7-46f6-bc5c-2d50dc17bd42">(examples/viscoelasticity/lemaitre/lemaitre.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#7b1461eb-d113-44af-82f4-5c38111a4aa2">(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest3.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#278ae56b-d245-4e03-8243-10e98e91946e">(examples/viscoelasticity/parametric/parametric.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#f2064bbd-ee0f-45bc-986f-53a8c3f21bd2">(examples/viscoelasticity/munson-dawson/munson_dawson.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#20e6f3ce-e64f-4217-80d3-1bde711d5650">(examples/viscoelasticity/RTL2020/BVRTL2020salt5creeptest.i)</a></li></ul></section></section><div class="moose-modal modal" id="e15f2135-cfdb-48c7-9403-34f9cb5d698b"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest1.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See the first three figures of Fig.8 in Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 5 
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 292.15
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 292.15
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_aux]
+    type = BVVolStrainAux
+    variable = vol_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  &#x27;-vol_strain&#x27;  
+    variable = vol_strain_neg
+  []
+[]
+  
+[Functions]
+  [strain_rate]
+  type = ParsedFunction
+  symbol_names = &#x27;e_dot L&#x27;
+  symbol_values = &#x27;1.0e-06 130e-03&#x27;
+  expression = &#x27;-e_dot*L*t*86400&#x27; #converted to per days
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${P} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = true
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+  [vol_strain]
+    type = ElementAverageValue
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="a7cae6db-5de8-4e44-8c46-f9955f1312e0"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest2.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See the first three figures of Fig.8 in Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 5 
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 293.15
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 293.15
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_aux]
+    type = BVVolStrainAux
+    variable = vol_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  &#x27;-vol_strain&#x27;  
+    variable = vol_strain_neg
+  []
+[]
+  
+[Functions]
+  [strain_rate]
+  type = ParsedFunction
+  symbol_names = &#x27;e_dot L&#x27;
+  symbol_values = &#x27;1.0e-05 130e-03&#x27;
+  expression = &#x27;-e_dot*L*t*86400&#x27; #converted to per days
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${P} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = true
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+  [vol_strain]
+    type = ElementAverageValue
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="a81623ef-e6c5-4504-bbfe-d2be12f76ae1"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020ModelUpdate.i)</h4><pre style="max-height:350px;"><code class="language-moose"># RTL2020 creep model
+# See Figures 3,4,5 and 6 of Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 28567
+nu = 0.30
+alpha = 0.2601 
+# alpha = 0.4483 # * 1.72345 to account for T
+A1 = 0.0181
+n1 = 1.162
+A2 = 0.3986
+n2 = 9.6768
+A = 0.01
+# A = 0.0172 # * 1.72345 to account for T
+n = 13.5
+B = 0.0
+m = 2.0
+Tr = 289
+Ar = 1725
+#Psalt1 = 8
+#Psalt2 = 8
+Psalt3 = 10.0
+#Psalt4 = 15
+#Qsalt1 = 12.0
+#Qsalt2 = 12.0
+Qsalt3 = 12.0
+#Qsalt4 = 19.4
+# Nz = 0.0241
+# nz = 1.2644
+# Mz = 0.024
+# mz = 1.028
+# z = 0.4523
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313.15 #note: temperature for salt2 is 313.15K
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [salt1loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=14,12,if(t&lt;=28,16,20))&#x27; 
+  []
+  [salt2loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=15,12,if(t&lt;=29,16,if(t&lt;=32,20,20.2)))&#x27; 
+  []
+  [salt3loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=15,15,if(t&lt;=28,20,25))&#x27; 
+  []
+  [salt4loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=12,19.4,if(t&lt;=29,23.4,27))&#x27; 
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${Psalt3}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${Psalt3}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = salt3loading 
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${Psalt3} -${Qsalt3} -${Psalt3}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  #[viscoelastic]
+  #  type = BVModifiedLemaitreModelUpdate 
+  #  alpha = ${alpha}
+  #  kr1 = ${kr1}
+  #  beta1 = ${beta1} 
+  #  kr2 = ${kr2}
+  #  beta2 = ${beta2}
+  #[]
+  #[viscoelastic]
+  #  type = BVBlancoMartinModelUpdate 
+  #  alpha = ${alpha}
+  #  kr1 = ${kr1}
+  #  beta1 = ${beta1} 
+  #  kr2 = ${kr2}
+  #  beta2 = ${beta2}
+  #  A1 = ${A1}
+  #  n1 = ${n1}
+  #  A = ${A}
+  #  n = ${n}
+  #  B = 0.0
+  #  m = ${n}
+  #[]
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    # Nz = ${Nz}
+    # nz = ${nz}
+    # Mz = ${Mz}
+    # mz = ${mz}
+    # z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 50 # 50 days
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="9bea85cd-dad7-46f6-bc5c-2d50dc17bd42"><div class="modal-content"><h4>(examples/viscoelasticity/lemaitre/lemaitre.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Input file for purely Lemaitre creep model based on RTL2020 model (Azabou et al. (2021)). 
+# Note: Parameter A is set to zero to ensure the Munson-Dawson component is zero.
+# Also, volumetric part is set to false and parameter z is set to zero.  
+# Parameters
+# Units used for the simulation: stress in MPa, time in days, strain in m / m
+
+E = 6000
+nu = 0.000044
+alpha = 0.1 
+A2 = 1
+n2 = 14.8
+Ar = 1
+Tr = 289
+# parameters for Munson-Dawson part
+A1 = 1
+n1 = 1
+A = 0.0   
+n = 10
+B = 0.0
+m = 2.2195
+P = 1
+# parameters for volumetric part
+z = 0.0
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 1
+  ny = 1
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 289
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 289
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_yy_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = 0.0
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = -2.0
+    []
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} ${P} 0.0&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason  -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+[]
+
+[Postprocessors]
+  [e]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [e_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 1 
+  dt = 0.0001
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="7b1461eb-d113-44af-82f4-5c38111a4aa2"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest3.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See the first three figures of Fig.8 in Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 5 
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 303.15 
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 303.15 
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_aux]
+    type = BVVolStrainAux
+    variable = vol_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  &#x27;-vol_strain&#x27;  
+    variable = vol_strain_neg
+  []
+[]
+  
+[Functions]
+  [P_confining]
+  type = ParsedFunction
+  symbol_names = &#x27;p_dot&#x27;
+  symbol_values = &#x27;-1e6&#x27; # Pa/s
+  expression = &#x27;-p_dot*t&#x27; # no need to converted time to per days. final pressure is in Pa
+  []
+  [Q_axial]
+  type = ParsedFunction
+  symbol_names = &#x27;P_c&#x27;
+  symbol_values = &#x27;P_confining&#x27;
+  expression = &#x27;51-(2*P_c)&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = P_confining 
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = P_confining
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+     displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = Q_axial
+    []
+  []
+ # [axial_stress]
+ #   type = FunctionDirichletBC
+ #   variable = disp_y
+ #   boundary = &#x27;top&#x27;
+ #   function = Q_axial
+ # []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${P} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = true
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+  [vol_strain]
+    type = ElementAverageValue
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="278ae56b-d245-4e03-8243-10e98e91946e"><div class="modal-content"><h4>(examples/viscoelasticity/parametric/parametric.i)</h4><pre style="max-height:350px;"><code class="language-moose">E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 8.7
+P_TCT = 5
+Q = 12.7
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+    [efm]
+    type = FileMeshGenerator
+    file = regular.msh
+    []
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [Q_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,12.7,if(t&lt;=40,15,if(t&lt;=90,20,if(t&lt;=140,22,24))))&#x27; 
+  []
+  [P_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,8.7,if(t&lt;=40,7.5,if(t&lt;=90,5,if(t&lt;=140,4,3))))&#x27; 
+  []
+  [strain_rate]
+  type = ParsedFunction
+  vars = &#x27;e_dot L&#x27;
+  vals = &#x27;1.0e-06 130e-03&#x27;
+  expression = &#x27;e_dot*L*t&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;West&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;Bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;North&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;East&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading, use P_TCT for the triaxial compress. test
+    []
+    [pressure_front]
+      boundary = &#x27;South&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading
+    []
+  #  [pressure_top]
+  #    boundary = &#x27;Top&#x27;
+  #    displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+  #    function = Q_loading
+  #  []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_z
+    boundary = &#x27;Top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_zz
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="f2064bbd-ee0f-45bc-986f-53a8c3f21bd2"><div class="modal-content"><h4>(examples/viscoelasticity/munson-dawson/munson_dawson.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Input file for purely Lemaitre creep model based on RTL2020 model (Azabou et al. (2021)). 
+# Note: Parameter A is set to zero to ensure the Munson-Dawson component is zero.
+# Also, volumetric part is set to false and parameter z is set to zero.  
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+
+E = 0.6
+nu = 0.000044
+alpha = 0.1 
+A2 = 0.5
+n2 = 4
+Ar = 1
+Tr = 289
+# parameters for Munson-Dawson part
+A1 = 0.3
+n1 = 3
+A = 0.5
+n = 5
+B = 0.05
+m = 5
+P = 1
+# parameters for volumetric part
+z = 0.0
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 1
+  ny = 1
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 289
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 289
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_yy_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[Functions]
+  [Q_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=15,10,5)&#x27; 
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = 0.0
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = Q_loading
+     # value = -10.0
+    []
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} ${P} 0.0&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason  -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+[]
+
+[Postprocessors]
+  [e]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [e_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 30.0
+  dt = 0.01
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="20e6f3ce-e64f-4217-80d3-1bde711d5650"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5creeptest.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Fig. 7 and the first multistage creep test on Fig.8 of Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 8.7
+P_TCT = 5
+Q = 12.7
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [Q_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,12.7,if(t&lt;=40,15,if(t&lt;=90,20,if(t&lt;=140,22,24))))&#x27; 
+  []
+  [P_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,8.7,if(t&lt;=40,7.5,if(t&lt;=90,5,if(t&lt;=140,4,3))))&#x27; 
+  []
+  [strain_rate]
+  type = ParsedFunction
+  vars = &#x27;e_dot L&#x27;
+  vals = &#x27;1.0e-06 130e-03&#x27;
+  expression = &#x27;e_dot*L*t&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading, use P_TCT for the triaxial compress. test
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading
+    []
+  #  [pressure_top]
+  #    boundary = &#x27;top&#x27;
+  #    displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+  #    function = Q_loading
+  #  []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_z
+    boundary = &#x27;top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_zz
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#f0d37f8b-b1f8-4ade-881a-a7ed02455e3b" class="tooltipped" data-position="left" data-tooltip="Overview">Overview</a></li><li><a href="#b4de602a-b075-4c35-b468-61e8902e7b78" class="tooltipped" data-position="left" data-tooltip="Example Input File Syntax">Example Input File Syntax</a></li><li><a href="#a66c19bf-8cd5-4c77-9f9f-75f1f919e7fd" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li><li><a href="#cc6d469b-7198-44be-9121-7e6635b87c9f" class="tooltipped" data-position="left" data-tooltip="Input Files">Input Files</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>

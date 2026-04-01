@@ -1,0 +1,5423 @@
+<!DOCTYPE html><head><meta charset="UTF-8"><title>BVStressComponentAux | Beaver</title><link href="../../contrib/materialize/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"></link><link href="../../contrib/prism/prism.min.css" type="text/css" rel="stylesheet"></link><link href="../../css/moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/devel_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/alert_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/content_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/sqa_moose.css" type="text/css" rel="stylesheet"></link><link href="../../css/civet_moose.css" type="text/css" rel="stylesheet"></link><script type="text/javascript" src="../../contrib/jquery/jquery.min.js"></script></head><body><div class="page-wrap"><header><nav><div class="nav-wrapper container"><a href="../../index.html" class="left moose-logo hide-on-med-and-down" id="home-button">Beaver</a><a href="https://github.com/ajacquey/beaver" class="right"><img src="../../media/framework/github-logo.png" class="github-mark"></img><img src="../../media/framework/github-mark.png" class="github-logo"></img></a><ul class="right hide-on-med-and-down"><li><a href="#!" class="dropdown-trigger" data-target="0bb3e1e4-8852-4ee6-a96d-a336d6039e27" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="7521991c-a5a9-4772-b4a5-a5e7dafb1d22" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#" class="sidenav-trigger" data-target="18ea6cf0-e9e4-4b73-a592-f1a0ef7a012d"><i class="material-icons">menu</i></a><ul class="sidenav" id="18ea6cf0-e9e4-4b73-a592-f1a0ef7a012d"><li><a href="#!" class="dropdown-trigger" data-target="2555e6c5-b20d-4df0-aa53-3c8b6ffadce7" data-constrainWidth="false">Examples<i class="material-icons right">arrow_drop_down</i></a></li><li><a href="#!" class="dropdown-trigger" data-target="0f3f9990-3186-4458-a598-79869f924ef7" data-constrainWidth="false">Documentation<i class="material-icons right">arrow_drop_down</i></a></li></ul><a href="#moose-search" class="modal-trigger"><i class="material-icons">search</i></a></div><ul class="dropdown-content" id="0bb3e1e4-8852-4ee6-a96d-a336d6039e27"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li><li><a href="../../examples/viscoplasticity/index.html">Viscoplasticity</a></li></ul><ul class="dropdown-content" id="7521991c-a5a9-4772-b4a5-a5e7dafb1d22"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li></ul><ul class="dropdown-content" id="2555e6c5-b20d-4df0-aa53-3c8b6ffadce7"><li><a href="../../examples/poroelasticity/index.html">Poroelasticity</a></li><li><a href="../../examples/viscoelasticity/index.html">Viscoelasticity</a></li><li><a href="../../examples/viscoplasticity/index.html">Viscoplasticity</a></li></ul><ul class="dropdown-content" id="0f3f9990-3186-4458-a598-79869f924ef7"><li><a href="../../documentation/beaver.html">Beaver syntax</a></li></ul></nav><div class="modal modal-fixed-footer moose-search-modal" id="moose-search"><div class="modal-content container moose-search-modal-content"><div class="row"><div class="col l12"><div class="input-field"><input type_="text" onkeyup="mooseSearch()" placeholder="/index.md" id="moose-search-box"></input></div></div><div><div class="col s12" id="moose-search-results"></div></div></div></div><div class="modal-footer"><a href="#!" class="modal-close btn-flat">Close</a></div></div></header><main class="main"><div class="container"><div class="row"><div class="col hide-on-med-and-down l12"><nav class="breadcrumb-nav"><div class="nav-wrapper"><span class="breadcrumb">source</span><span class="breadcrumb">auxkernels</span><a href="#" class="breadcrumb">BVStressComponentAux</a></div></nav></div></div><div class="row"><div class="moose-content col s12 m12 l10"><section id="9001a023-3297-4ec6-a3be-581b07abd3c0" data-section-level="1" data-section-text="BVStressComponentAux"><h1 id="bvstresscomponentaux">BVStressComponentAux</h1><div class="card moose-alert moose-alert-construction"><div class="card-title moose-alert-title"><i class="material-icons moose-inline-icon">build</i><span class="moose-alert-title-brand">construction:</span>Undocumented Class</div><div class="card-content"><div class="moose-alert-content"><p>The BVStressComponentAux has not been documented. The content listed below should be used as a starting point for documenting the class, which includes the typical automatic documentation associated with a MooseObject; however, what is contained is ultimately determined by what is necessary to make the documentation clear for users.</p></div></div></div><p>Class for outputting components of the stress tensor.</p><section class="scrollspy" id="7fc9cf83-0ef1-4ba6-b4f0-1b4715b8e4a2" data-section-level="2" data-section-text="Overview"><h2 id="overview">Overview</h2><p></p></section><section class="scrollspy" id="060839d4-7cc3-499b-b56c-9fd6ed2308b7" data-section-level="2" data-section-text="Example Input File Syntax"><h2 id="example-input-file-syntax">Example Input File Syntax</h2><p></p></section><section class="scrollspy" id="2099f7c8-b016-4b5f-a42f-19803b4d8517" data-section-level="2" data-section-text="Input Parameters"><h2 id="input-parameters">Input Parameters</h2><section id="ac6f967b-73a5-4dca-9d19-545d0cb7db38" data-section-level="3" data-section-text="Required Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">index_i</span><span class="moose-parameter-header-description">The index i of ij for the stress tensor.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MooseEnum</p><p class="moose-parameter-description-options"><span>Options:</span>x, y, z</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The index i of ij for the stress tensor.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">index_j</span><span class="moose-parameter-header-description">The index j of ij for the stress tensor.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MooseEnum</p><p class="moose-parameter-description-options"><span>Options:</span>x, y, z</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The index j of ij for the stress tensor.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">variable</span><span class="moose-parameter-header-description">The name of the variable that this object applies to</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>AuxVariableName</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The name of the variable that this object applies to</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Required Parameters</h3></summary></details></section><section id="ac2f2491-6457-4978-ac83-eb35eb9ae4be" data-section-level="3" data-section-text="Optional Parameters" data-details-open="open"><details class="moose-section-content" open="open"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">block</span><span class="moose-parameter-header-description">The list of blocks (ids or names) that this object will be applied</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;SubdomainName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of blocks (ids or names) that this object will be applied</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">boundary</span><span class="moose-parameter-header-description">The list of boundaries (ids or names) from the mesh where this object applies</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;BoundaryName&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of boundaries (ids or names) from the mesh where this object applies</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">check_boundary_restricted</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Whether to check for multiple element sides on the boundary in the case of a boundary restricted, element aux variable. Setting this to false will allow contribution to a single element's elemental value(s) from multiple boundary sides on the same element (example: when the restricted boundary exists on two or more sides of an element, such as at a corner of a mesh</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether to check for multiple element sides on the boundary in the case of a boundary restricted, element aux variable. Setting this to false will allow contribution to a single element's elemental value(s) from multiple boundary sides on the same element (example: when the restricted boundary exists on two or more sides of an element, such as at a corner of a mesh</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">execute_on</span><span class="moose-parameter-header-default">LINEAR TIMESTEP_END</span><span class="moose-parameter-header-description">The list of flag(s) indicating when this object should be executed. For a description of each flag, see https://mooseframework.inl.gov/source/interfaces/SetupInterface.html.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>LINEAR TIMESTEP_END</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>ExecFlagEnum</p><p class="moose-parameter-description-options"><span>Options:</span>NONE, INITIAL, LINEAR, LINEAR_CONVERGENCE, NONLINEAR, NONLINEAR_CONVERGENCE, POSTCHECK, TIMESTEP_END, TIMESTEP_BEGIN, MULTIAPP_FIXED_POINT_END, MULTIAPP_FIXED_POINT_BEGIN, MULTIAPP_FIXED_POINT_CONVERGENCE, FINAL, CUSTOM, PRE_DISPLACE</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The list of flag(s) indicating when this object should be executed. For a description of each flag, see https://mooseframework.inl.gov/source/interfaces/SetupInterface.html.</p></div></li></ul><summary><h3 data-details-open="open"><span class="moose-section-icon"></span>Optional Parameters</h3></summary></details></section><section id="718b58f8-fb75-4094-83ae-36227cfdd97a" data-section-level="3" data-section-text="Advanced Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">control_tags</span><span class="moose-parameter-header-description">Adds user-defined labels for accessing object parameters via control logic.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>std::vector&lt;std::string&gt;</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Adds user-defined labels for accessing object parameters via control logic.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">enable</span><span class="moose-parameter-header-default">True</span><span class="moose-parameter-header-description">Set the enabled status of the MooseObject.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>True</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>Yes</p><p class="moose-parameter-description"><span>Description:</span>Set the enabled status of the MooseObject.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">seed</span><span class="moose-parameter-header-default">0</span><span class="moose-parameter-header-description">The seed for the master random number generator</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>0</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>unsigned int</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>The seed for the master random number generator</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_displaced_mesh</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>Whether or not this object should use the displaced mesh for computation.  Note that in the case this is true but no displacements are provided in the Mesh block the undisplaced mesh will still be used.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Advanced Parameters</h3></summary></details></section><section id="36a90f99-7c28-447a-94e7-699910d30acc" data-section-level="3" data-section-text="Material Property Retrieval Parameters" data-details-open="close"><details class="moose-section-content"><ul class="collapsible" data-collapsible="expandable"><li><div class="collapsible-header"><span class="moose-parameter-name">prop_getter_suffix</span><span class="moose-parameter-header-description">An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</span></div><div class="collapsible-body"><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>MaterialPropertyName</p><p class="moose-parameter-description-doc-unit"><span>Unit:</span>(no unit assumed)</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>An optional suffix parameter that can be appended to any attempt to retrieve/get material properties. The suffix will be prepended with a '_' character.</p></div></li><li><div class="collapsible-header"><span class="moose-parameter-name">use_interpolated_state</span><span class="moose-parameter-header-default">False</span><span class="moose-parameter-header-description">For the old and older state use projected material properties interpolated at the quadrature points. To set up projection use the ProjectedStatefulMaterialStorageAction.</span></div><div class="collapsible-body"><p class="moose-parameter-description-default"><span>Default:</span>False</p><p class="moose-parameter-description-cpptype"><span>C++ Type:</span>bool</p><p class="moose-parameter-description-controllable"><span>Controllable:</span>No</p><p class="moose-parameter-description"><span>Description:</span>For the old and older state use projected material properties interpolated at the quadrature points. To set up projection use the ProjectedStatefulMaterialStorageAction.</p></div></li></ul><summary><h3 data-details-open="close"><span class="moose-section-icon"></span>Material Property Retrieval Parameters</h3></summary></details></section></section><section class="scrollspy" id="e022a734-8901-448f-9a62-a8916c3c282c" data-section-level="2" data-section-text="Input Files"><h2 id="input-files">Input Files</h2><ul class="moose-list-inputs browser-default"><li><a class="moose-source-filename tooltipped modal-trigger" href="#d0119061-b6b5-4db5-a195-423966ee1546">(examples/viscoelasticity/blanco-martin/blanco-martin-lemaitre-2024.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#c65ff017-e1bd-49a2-8e08-55c8ef76ce32">(test/tests/elasticity/uniaxial.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#4bab5eaa-de8e-4e91-8fb5-36cedf1327d1">(test/tests/elasticity/uniaxial_load.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#4e7df538-e739-4359-94c6-3baa949f03f0">(test/tests/viscoelasticity/BVBlancoMartinRTL2020ModelUpdate.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#d34b7d6d-5550-4dd9-b6cb-fe2d98917a4e">(test/tests/viscoelasticity/linear_maxwell.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#70a894e8-fe45-4a6e-81d8-5b7501cf01a7">(test/tests/interfaces/stick_3D.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#f68d45c6-4cf6-4256-b183-9252cb346248">(examples/viscoelasticity/RTL2020/BVRTL2020salt5creeptest.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#c167ff87-bca3-43d2-821a-f0569d521aa4">(test/tests/viscoelasticity/blanco-martin-rtl.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#c0809760-32ec-43c5-96f6-b3926647d988">(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest1.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#e81b8287-f9ac-4b04-82b8-8b0a4be289d3">(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest2.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#7a317e72-3254-4271-8c00-c391531a0b65">(examples/viscoelasticity/parametric/parametric.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#f759ba9e-05ec-4c1b-be4b-42ae8f7af81c">(examples/viscoelasticity/blanco-martin/blanco-martin-RTL-2024.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#7e3ad288-f52f-43c6-a648-815dda90739a">(test/tests/interfaces/constant_friction_2D.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#524fbb89-0c02-4883-aaa0-9d8bf9d8c083">(test/tests/interfaces/constant_friction_3D.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#f3acb081-c18a-4cd6-9d73-73628ee9998b">(examples/viscoelasticity/linear_maxwell/linear_maxwell.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#4a358a97-8f3f-4cf2-852c-3372cdda2006">(test/tests/viscoelasticity/linear_kelvin.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#c61c267d-95fe-4a5a-93b3-fe6296027acc">(test/tests/interfaces/stick_2D.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#199084a1-739b-4909-860c-4b8e7e967c5e">(test/tests/viscoelasticity/blanco-martin-lemaitre.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#d7c0414a-a1c0-4073-ba12-5d6a91294fc1">(examples/viscoelasticity/RTL2020/BVRTL2020ModelUpdate.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#9eed49f4-a1cd-4011-9fef-6ef7c3635f77">(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest3.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#796d9e87-781d-486a-af3b-c7d0b768c327">(test/tests/elasticity/error_moduli.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#9b69f3fe-5702-447f-a9cf-707d89475b9b">(test/tests/elasticity/shear.i)</a></li><li><a class="moose-source-filename tooltipped modal-trigger" href="#07dea755-1e86-4235-91d6-f26774e7c5f4">(test/tests/elasticity/triax.i)</a></li></ul></section></section><div class="moose-modal modal" id="d0119061-b6b5-4db5-a195-423966ee1546"><div class="modal-content"><h4>(examples/viscoelasticity/blanco-martin/blanco-martin-lemaitre-2024.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Blanco-Martin et al. (2024)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 12000
+nu = 0.3
+alpha = 0.326
+kr1 = 0.7
+beta1 = 2.922
+kr2 = 0.009
+beta2 = 0.867
+P = 5.0
+Q = 5.0
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [loading2]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=20,5.5,if(t&lt;=55,6,if(t&lt;=76,7,if(t&lt;=97,10,if(t&lt;=118,15,if(t&lt;=139,20,25))))))&#x27; 
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = loading2
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  # [viscoelastic]
+  #   type = BVBlancoMartinModelUpdate 
+  #   alpha = ${alpha}
+  #   kr1 = ${kr1}
+  #   beta1 = ${beta1} 
+  #   kr2 = ${kr2}
+  #   beta2 = ${beta2}
+  #   A1 = ${A1}
+  #   n1 = ${n1}
+  #   A = ${A}
+  #   n = ${n}
+  #   B = 0.0
+  #   m = ${n}
+  # []
+  [viscoelastic]
+    type = BVModifiedLemaitreModelUpdate 
+    alpha = ${alpha}
+    kr1 = ${kr1}
+    beta1 = ${beta1} 
+    kr2 = ${kr2}
+    beta2 = ${beta2}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 # 200 days
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="c65ff017-e1bd-49a2-8e08-55c8ef76ce32"><div class="modal-content"><h4>(test/tests/elasticity/uniaxial.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 3
+  ny = 3
+  nz = 3
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [stress_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_zz
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [symmy]
+    type = DirichletBC
+    variable = disp_y
+    boundary = bottom
+    value = 0
+  []
+  [symmx]
+    type = DirichletBC
+    variable = disp_x
+    boundary = left
+    value = 0
+  []
+  [symmz]
+    type = DirichletBC
+    variable = disp_z
+    boundary = back
+    value = 0
+  []
+  [tdisp]
+    type = DirichletBC
+    variable = disp_z
+    boundary = front
+    value = 0.1
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 8.0e+09
+    shear_modulus = 3.5e+09
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  dt = 0.05
+  solve_type = &#x27;NEWTON&#x27;
+  dtmin = 0.05
+  num_steps = 1
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="4bab5eaa-de8e-4e91-8fb5-36cedf1327d1"><div class="modal-content"><h4>(test/tests/elasticity/uniaxial_load.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 10
+  ny = 2
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 0.1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [stress_xx]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [stress_xx_aux]
+    type = BVStressComponentAux
+    variable = stress_xx
+    index_i = x
+    index_j = x
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x_left]
+    type = DirichletBC
+    variable = disp_x
+    boundary = left
+    value = 0
+  []
+  [load_x_right]
+    type = NeumannBC
+    variable = disp_x
+    boundary = right
+    value = 2.0e+06
+  []
+  [no_y_bottom]
+    type = DirichletBC
+    variable = disp_y
+    boundary = bottom
+    value = 0
+  []
+  [no_z_back]
+    type = DirichletBC
+    variable = disp_z
+    boundary = back
+    value = 0
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 1.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="4e7df538-e739-4359-94c6-3baa949f03f0"><div class="modal-content"><h4>(test/tests/viscoelasticity/BVBlancoMartinRTL2020ModelUpdate.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Blanco-Martin et al. (2023)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 12000
+nu = 0.3
+alpha = 0.575
+kr1 = 1.302
+beta1 = 3.053
+kr2 = 0.091
+beta2 = 1.053
+A = 100
+n = 9
+A1 = 0.034
+n1 = 1.499
+P = 5.0
+Q = 5.0
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [loading2]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=20,5.5,if(t&lt;=55,6,if(t&lt;=76,7,if(t&lt;=97,10,if(t&lt;=118,15,if(t&lt;=139,20,25))))))&#x27; 
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = loading2
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  #[viscoelastic]
+  #  type = BVModifiedLemaitreModelUpdate 
+  #  alpha = ${alpha}
+  #  kr1 = ${kr1}
+  #  beta1 = ${beta1} 
+  #  kr2 = ${kr2}
+  #  beta2 = ${beta2}
+  #[]
+  #[viscoelastic]
+  #  type = BVBlancoMartinModelUpdate 
+  #  alpha = ${alpha}
+  #  kr1 = ${kr1}
+  #  beta1 = ${beta1} 
+  #  kr2 = ${kr2}
+  #  beta2 = ${beta2}
+  #  A1 = ${A1}
+  #  n1 = ${n1}
+  #  A = ${A}
+  #  n = ${n}
+  #  B = 0.0
+  #  m = ${n}
+  #[]
+  [viscoelastic]
+    type = BVBlancoMartinRTL2020ModelUpdate
+    alpha = ${alpha}
+    kr1 = ${kr1}
+    beta1 = ${beta1} 
+    kr2 = ${kr2}
+    beta2 = ${beta2}
+    A1 = ${A1}
+    n1 = ${n1}
+    A = ${A}
+    n = ${n}
+    B = 0.0
+    m = ${n}
+    Nz=0.0241
+    nz=1.2644
+    Mz=0.024
+    mz=1.028
+    z = 0.4523
+  num_cm = 2
+  dev_vol = true
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 # 200 days
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="d34b7d6d-5550-4dd9-b6cb-fe2d98917a4e"><div class="modal-content"><h4>(test/tests/viscoelasticity/linear_maxwell.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 8
+  ny = 8
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_yy_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [v_x]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = &#x27;right&#x27;
+    function = &#x27;-0.5*t&#x27;
+  []
+  [v_y]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;top&#x27;
+    function = &#x27;0.5*t&#x27;
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1.0
+    shear_modulus = 1.0
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVMaxwellViscoelasticUpdate
+    viscosity = 1.0
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 1.0
+  dt = 0.1
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="70a894e8-fe45-4a6e-81d8-5b7501cf01a7"><div class="modal-content"><h4>(test/tests/interfaces/stick_3D.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  [file]
+    type = FileMeshGenerator
+    file = mesh-3D.msh
+  []
+  [interface_gen]
+    type = BVFaultInterfaceGenerator
+    input = file
+    sidesets = &#x27;interface&#x27;
+  []
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[InterfaceKernels]
+  [traction_x]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = x
+    variable = disp_x
+    neighbor_var = disp_x
+  []
+  [traction_y]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = y
+    variable = disp_y
+    neighbor_var = disp_y
+  []
+  [traction_z]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = Z
+    variable = disp_z
+    neighbor_var = disp_z
+  []
+[]
+
+[AuxVariables]
+  [strain_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_xy_aux]
+    type = BVStrainComponentAux
+    variable = strain_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_xy_aux]
+    type = BVStressComponentAux
+    variable = stress_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[Functions]
+  [disp_x_func]
+    type = ParsedFunction
+    expression = &#x27;m*t*y&#x27;
+    symbol_names = &#x27;m&#x27;
+    symbol_values = &#x27;0.1&#x27;
+  []
+[]
+
+[BCs]
+  [Periodic]
+    [all]
+      variable = &#x27;disp_x disp_y disp_z&#x27;
+      auto_direction = &#x27;x&#x27;
+    []
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom top&#x27;
+    value = 0.0
+  []
+  [disp_x_plate]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = &#x27;bottom top&#x27;
+    function = disp_x_func
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;bottom top&#x27;
+    value = 0.0
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
+  []
+  [interface]
+    type = BVMechanicalInterfaceMaterial
+    boundary = &#x27;interface&#x27;
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    normal_stiffness = 1.0e+12
+    tangent_stiffness = 1.0e+12
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 2.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="f68d45c6-4cf6-4256-b183-9252cb346248"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5creeptest.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Fig. 7 and the first multistage creep test on Fig.8 of Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 8.7
+P_TCT = 5
+Q = 12.7
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [Q_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,12.7,if(t&lt;=40,15,if(t&lt;=90,20,if(t&lt;=140,22,24))))&#x27; 
+  []
+  [P_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,8.7,if(t&lt;=40,7.5,if(t&lt;=90,5,if(t&lt;=140,4,3))))&#x27; 
+  []
+  [strain_rate]
+  type = ParsedFunction
+  vars = &#x27;e_dot L&#x27;
+  vals = &#x27;1.0e-06 130e-03&#x27;
+  expression = &#x27;e_dot*L*t&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading, use P_TCT for the triaxial compress. test
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading
+    []
+  #  [pressure_top]
+  #    boundary = &#x27;top&#x27;
+  #    displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+  #    function = Q_loading
+  #  []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_z
+    boundary = &#x27;top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_zz
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="c167ff87-bca3-43d2-821a-f0569d521aa4"><div class="modal-content"><h4>(test/tests/viscoelasticity/blanco-martin-rtl.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Blanco-Martin et al. (2023)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 12000
+nu = 0.3
+alpha = 0.575
+kr1 = 1.302
+beta1 = 3.053
+kr2 = 0.091
+beta2 = 1.053
+A = 100
+n = 9
+A1 = 0.034
+n1 = 1.499
+P = 5.0
+Q = 5.0
+Q1 = 5.5
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${Q1}
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVBlancoMartinModelUpdate 
+    alpha = ${alpha}
+    kr1 = ${kr1}
+    beta1 = ${beta1} 
+    kr2 = ${kr2}
+    beta2 = ${beta2}
+    A1 = ${A1}
+    n1 = ${n1}
+    A = ${A}
+    n = ${n}
+    B = 0.0
+    m = ${n}
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 1 #
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="c0809760-32ec-43c5-96f6-b3926647d988"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest1.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See the first three figures of Fig.8 in Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 5 
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 292.15
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 292.15
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_aux]
+    type = BVVolStrainAux
+    variable = vol_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  &#x27;-vol_strain&#x27;  
+    variable = vol_strain_neg
+  []
+[]
+  
+[Functions]
+  [strain_rate]
+  type = ParsedFunction
+  symbol_names = &#x27;e_dot L&#x27;
+  symbol_values = &#x27;1.0e-06 130e-03&#x27;
+  expression = &#x27;-e_dot*L*t*86400&#x27; #converted to per days
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${P} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = true
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+  [vol_strain]
+    type = ElementAverageValue
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="e81b8287-f9ac-4b04-82b8-8b0a4be289d3"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest2.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See the first three figures of Fig.8 in Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 5 
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 293.15
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 293.15
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_aux]
+    type = BVVolStrainAux
+    variable = vol_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  &#x27;-vol_strain&#x27;  
+    variable = vol_strain_neg
+  []
+[]
+  
+[Functions]
+  [strain_rate]
+  type = ParsedFunction
+  symbol_names = &#x27;e_dot L&#x27;
+  symbol_values = &#x27;1.0e-05 130e-03&#x27;
+  expression = &#x27;-e_dot*L*t*86400&#x27; #converted to per days
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P} 
+    []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${P} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = true
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+  [vol_strain]
+    type = ElementAverageValue
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="7a317e72-3254-4271-8c00-c391531a0b65"><div class="modal-content"><h4>(examples/viscoelasticity/parametric/parametric.i)</h4><pre style="max-height:350px;"><code class="language-moose">E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 8.7
+P_TCT = 5
+Q = 12.7
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+    [efm]
+    type = FileMeshGenerator
+    file = regular.msh
+    []
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [Q_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,12.7,if(t&lt;=40,15,if(t&lt;=90,20,if(t&lt;=140,22,24))))&#x27; 
+  []
+  [P_loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=10,8.7,if(t&lt;=40,7.5,if(t&lt;=90,5,if(t&lt;=140,4,3))))&#x27; 
+  []
+  [strain_rate]
+  type = ParsedFunction
+  vars = &#x27;e_dot L&#x27;
+  vals = &#x27;1.0e-06 130e-03&#x27;
+  expression = &#x27;e_dot*L*t&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;West&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;Bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;North&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;East&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading, use P_TCT for the triaxial compress. test
+    []
+    [pressure_front]
+      boundary = &#x27;South&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${P_TCT} #P_loading
+    []
+  #  [pressure_top]
+  #    boundary = &#x27;Top&#x27;
+  #    displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+  #    function = Q_loading
+  #  []
+  []
+  [strain_rate]
+    type = FunctionDirichletBC
+    variable = disp_z
+    boundary = &#x27;Top&#x27;
+    function = strain_rate
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_zz
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="f759ba9e-05ec-4c1b-be4b-42ae8f7af81c"><div class="modal-content"><h4>(examples/viscoelasticity/blanco-martin/blanco-martin-RTL-2024.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Blanco-Martin et al. (2023)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 12000
+nu = 0.3
+alpha = 0.575
+kr1 = 1.302
+beta1 = 3.053
+kr2 = 0.091
+beta2 = 1.053
+A = 100
+n = 9
+A1 = 0.034
+n1 = 1.499
+P = 5.0
+Q = 5.0
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [loading2]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=20,5.5,if(t&lt;=55,6,if(t&lt;=76,7,if(t&lt;=97,10,if(t&lt;=118,15,if(t&lt;=139,20,25))))))&#x27; 
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = loading2
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVBlancoMartinModelUpdate 
+    alpha = ${alpha}
+    kr1 = ${kr1}
+    beta1 = ${beta1} 
+    kr2 = ${kr2}
+    beta2 = ${beta2}
+    A1 = ${A1}
+    n1 = ${n1}
+    A = ${A}
+    n = ${n}
+    B = 0.0
+    m = ${n}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 200 # 200 days
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="7e3ad288-f52f-43c6-a648-815dda90739a"><div class="modal-content"><h4>(test/tests/interfaces/constant_friction_2D.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  [file]
+    type = FileMeshGenerator
+    file = mesh-2D.msh
+  []
+  [fault_gen]
+    type = BVFaultInterfaceGenerator
+    input = file
+    sidesets = &#x27;interface&#x27;
+  []
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+[]
+
+[InterfaceKernels]
+  [traction_x]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = x
+    variable = disp_x
+    neighbor_var = disp_x
+  []
+  [traction_y]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = y
+    variable = disp_y
+    neighbor_var = disp_y
+  []
+[]
+
+[AuxVariables]
+  [strain_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [normal_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [shear_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_xy_aux]
+    type = BVStrainComponentAux
+    variable = strain_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_xy_aux]
+    type = BVStressComponentAux
+    variable = stress_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [normal_stress_aux]
+    type = BVFaultNormalStressAux
+    variable = normal_stress
+    boundary = &#x27;interface&#x27;
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [shear_stress_aux]
+    type = BVFaultShearStressAux
+    variable = shear_stress
+    boundary = &#x27;interface&#x27;
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[Functions]
+  [disp_x_func]
+    type = ParsedFunction
+    expression = &#x27;m*t*y&#x27;
+    symbol_names = &#x27;m&#x27;
+    symbol_values = &#x27;0.1&#x27;
+  []
+[]
+
+[BCs]
+  [Periodic]
+    [left_right]
+      auto_direction = x
+      # primary = &#x27;left&#x27;
+      # secondary = &#x27;right&#x27;
+      variable = &#x27;disp_x disp_y&#x27;
+    []
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom top&#x27;
+    value = 0.0
+  []
+  [disp_x_plate]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = &#x27;bottom top&#x27;
+    function = disp_x_func
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y&#x27;
+    young_modulus = 10.0
+    poisson_ratio = 0.25
+    initial_stress = &#x27;0.0 1.6 0.0&#x27;
+  []
+  [interface]
+    type = BVMechanicalInterfaceMaterial
+    boundary = &#x27;interface&#x27;
+    displacements = &#x27;disp_x disp_y&#x27;
+    normal_stiffness = 1.0e+03
+    tangent_stiffness = 1.0e+03
+    friction_model = &#x27;constant_friction&#x27;
+  []
+  [constant_friction]
+    type = BVConstantFrictionUpdate
+    friction = 0.5
+  []
+[]
+
+# [Preconditioning]
+#   [hypre]
+#     type = SMP
+#     full = true
+#     petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+#     petsc_options_value = &#x27;hypre boomeramg&#x27;
+#   []
+# []
+
+[Preconditioning]
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type -ksp_rtol -ksp_max_it
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres 1e-10 100
+                           asm
+                           ilu
+                           newtonls 1e-12 1e-08 100 basic
+                           201&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 4.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="524fbb89-0c02-4883-aaa0-9d8bf9d8c083"><div class="modal-content"><h4>(test/tests/interfaces/constant_friction_3D.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  [file]
+    type = FileMeshGenerator
+    file = mesh-3D.msh
+  []
+  [fault_gen]
+    type = BVFaultInterfaceGenerator
+    input = file
+    sidesets = &#x27;interface&#x27;
+  []
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[InterfaceKernels]
+  [traction_x]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = x
+    variable = disp_x
+    neighbor_var = disp_x
+  []
+  [traction_y]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = y
+    variable = disp_y
+    neighbor_var = disp_y
+  []
+  [traction_z]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = Z
+    variable = disp_z
+    neighbor_var = disp_z
+  []
+[]
+
+[AuxVariables]
+  [strain_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [normal_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [shear_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_xy_aux]
+    type = BVStrainComponentAux
+    variable = strain_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_xy_aux]
+    type = BVStressComponentAux
+    variable = stress_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [normal_stress_aux]
+    type = BVFaultNormalStressAux
+    variable = normal_stress
+    boundary = &#x27;interface&#x27;
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [shear_stress_aux]
+    type = BVFaultShearStressAux
+    variable = shear_stress
+    boundary = &#x27;interface&#x27;
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[Functions]
+  [disp_x_func]
+    type = ParsedFunction
+    expression = &#x27;m*t*y&#x27;
+    symbol_names = &#x27;m&#x27;
+    symbol_values = &#x27;0.1&#x27;
+  []
+[]
+
+[BCs]
+  [Periodic]
+    [all]
+      variable = &#x27;disp_x disp_y disp_z&#x27;
+      auto_direction = &#x27;x z&#x27;
+    []
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom top&#x27;
+    value = 0.0
+  []
+  [disp_x_plate]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = &#x27;bottom top&#x27;
+    function = disp_x_func
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;bottom top&#x27;
+    value = 0.0
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = 10.0
+    poisson_ratio = 0.25
+    initial_stress = &#x27;0.0 1.6 0.0&#x27;
+  []
+  [interface]
+    type = BVMechanicalInterfaceMaterial
+    boundary = &#x27;interface&#x27;
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    normal_stiffness = 1.0e+03
+    tangent_stiffness = 1.0e+03
+    friction_model = &#x27;constant_friction&#x27;
+  []
+  [constant_friction]
+    type = BVConstantFrictionUpdate
+    friction = 0.5
+  []
+[]
+
+# [Preconditioning]
+#   [hypre]
+#     type = SMP
+#     full = true
+#     petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+#     petsc_options_value = &#x27;hypre boomeramg&#x27;
+#   []
+# []
+
+[Preconditioning]
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type -ksp_rtol -ksp_max_it
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres 1e-10 100
+                           asm
+                           ilu
+                           newtonls 1e-12 1e-08 100 basic
+                           201&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 4.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="f3acb081-c18a-4cd6-9d73-73628ee9998b"><div class="modal-content"><h4>(examples/viscoelasticity/linear_maxwell/linear_maxwell.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 20
+  ny = 20
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [v_x]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = &#x27;right&#x27;
+    function = &#x27;-0.5*t&#x27;
+  []
+  [v_y]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;top&#x27;
+    function = &#x27;0.5*t&#x27;
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1.0
+    shear_modulus = 1.0
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVMaxwellViscoelasticUpdate
+    viscosity = 1.0
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Postprocessors]
+  [tau]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 10.0
+  dt = 0.05
+[]
+
+[Outputs]
+  perf_graph = true
+  execute_on = &#x27;TIMESTEP_END&#x27;
+  print_linear_residuals = false
+  exodus = true
+  [csv]
+    type = CSV
+  []
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="4a358a97-8f3f-4cf2-852c-3372cdda2006"><div class="modal-content"><h4>(test/tests/viscoelasticity/linear_kelvin.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 8
+  ny = 8
+  nz = 2
+  xmin = 0
+  xmax = 1
+  ymin = 0
+  ymax = 1
+  zmin = 0
+  zmax = 0.1
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_yy_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_yy_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;front back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = 1.0
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = -1.0
+    []
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    bulk_modulus = 1.0
+    shear_modulus = 1.0
+    initial_stress = &#x27;-1.0 1.0 0.0&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVKelvinViscoelasticUpdate
+    viscosity = 1.0
+    shear_modulus = 1.0
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 1.0
+  dt = 0.1
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="c61c267d-95fe-4a5a-93b3-fe6296027acc"><div class="modal-content"><h4>(test/tests/interfaces/stick_2D.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  [file]
+    type = FileMeshGenerator
+    file = mesh-2D.msh
+  []
+  [interface_gen]
+    type = BVFaultInterfaceGenerator
+    input = file
+    sidesets = &#x27;interface&#x27;
+  []
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+[]
+
+[InterfaceKernels]
+  [traction_x]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = x
+    variable = disp_x
+    neighbor_var = disp_x
+  []
+  [traction_y]
+    type = BVMechanicalInterface
+    boundary = &#x27;interface&#x27;
+    component = y
+    variable = disp_y
+    neighbor_var = disp_y
+  []
+[]
+
+[AuxVariables]
+  [strain_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_xy_aux]
+    type = BVStrainComponentAux
+    variable = strain_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_xy_aux]
+    type = BVStressComponentAux
+    variable = stress_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[Functions]
+  [disp_x_func]
+    type = ParsedFunction
+    expression = &#x27;m*t*y&#x27;
+    symbol_names = &#x27;m&#x27;
+    symbol_values = &#x27;0.1&#x27;
+  []
+[]
+
+[BCs]
+  [Periodic]
+    [all]
+      variable = &#x27;disp_x disp_y&#x27;
+      auto_direction = &#x27;x&#x27;
+    []
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom top&#x27;
+    value = 0.0
+  []
+  [disp_x_plate]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = &#x27;bottom top&#x27;
+    function = disp_x_func
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y&#x27;
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
+  []
+  [interface]
+    type = BVMechanicalInterfaceMaterial
+    boundary = &#x27;interface&#x27;
+    displacements = &#x27;disp_x disp_y&#x27;
+    normal_stiffness = 1.0e+12
+    tangent_stiffness = 1.0e+12
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 2.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="199084a1-739b-4909-860c-4b8e7e967c5e"><div class="modal-content"><h4>(test/tests/viscoelasticity/blanco-martin-lemaitre.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See Blanco-Martin et al. (2024)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 12000
+nu = 0.3
+alpha = 0.326
+kr1 = 0.7
+beta1 = 2.922
+kr2 = 0.009
+beta2 = 0.867
+P = 5.0
+Q = 5.0
+Q1 = 5.5
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${P}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = ${Q1}
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${Q} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  # [viscoelastic]
+  #   type = BVBlancoMartinModelUpdate 
+  #   alpha = ${alpha}
+  #   kr1 = ${kr1}
+  #   beta1 = ${beta1} 
+  #   kr2 = ${kr2}
+  #   beta2 = ${beta2}
+  #   A1 = ${A1}
+  #   n1 = ${n1}
+  #   A = ${A}
+  #   n = ${n}
+  #   B = 0.0
+  #   m = ${n}
+  # []
+  [viscoelastic]
+    type = BVModifiedLemaitreModelUpdate 
+    alpha = ${alpha}
+    kr1 = ${kr1}
+    beta1 = ${beta1} 
+    kr2 = ${kr2}
+    beta2 = ${beta2}
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 1
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="d7c0414a-a1c0-4073-ba12-5d6a91294fc1"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020ModelUpdate.i)</h4><pre style="max-height:350px;"><code class="language-moose"># RTL2020 creep model
+# See Figures 3,4,5 and 6 of Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 28567
+nu = 0.30
+alpha = 0.2601 
+# alpha = 0.4483 # * 1.72345 to account for T
+A1 = 0.0181
+n1 = 1.162
+A2 = 0.3986
+n2 = 9.6768
+A = 0.01
+# A = 0.0172 # * 1.72345 to account for T
+n = 13.5
+B = 0.0
+m = 2.0
+Tr = 289
+Ar = 1725
+#Psalt1 = 8
+#Psalt2 = 8
+Psalt3 = 10.0
+#Psalt4 = 15
+#Qsalt1 = 12.0
+#Qsalt2 = 12.0
+Qsalt3 = 12.0
+#Qsalt4 = 19.4
+# Nz = 0.0241
+# nz = 1.2644
+# Mz = 0.024
+# mz = 1.028
+# z = 0.4523
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 313.15 #note: temperature for salt2 is 313.15K
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 313
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+  
+[Functions]
+  [salt1loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=14,12,if(t&lt;=28,16,20))&#x27; 
+  []
+  [salt2loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=15,12,if(t&lt;=29,16,if(t&lt;=32,20,20.2)))&#x27; 
+  []
+  [salt3loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=15,15,if(t&lt;=28,20,25))&#x27; 
+  []
+  [salt4loading]
+    type = ParsedFunction 
+    expression = &#x27;if(t&lt;=12,19.4,if(t&lt;=29,23.4,27))&#x27; 
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${Psalt3}
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      value = ${Psalt3}
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = salt3loading 
+    []
+  []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${Psalt3} -${Qsalt3} -${Psalt3}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  #[viscoelastic]
+  #  type = BVModifiedLemaitreModelUpdate 
+  #  alpha = ${alpha}
+  #  kr1 = ${kr1}
+  #  beta1 = ${beta1} 
+  #  kr2 = ${kr2}
+  #  beta2 = ${beta2}
+  #[]
+  #[viscoelastic]
+  #  type = BVBlancoMartinModelUpdate 
+  #  alpha = ${alpha}
+  #  kr1 = ${kr1}
+  #  beta1 = ${beta1} 
+  #  kr2 = ${kr2}
+  #  beta2 = ${beta2}
+  #  A1 = ${A1}
+  #  n1 = ${n1}
+  #  A = ${A}
+  #  n = ${n}
+  #  B = 0.0
+  #  m = ${n}
+  #[]
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = false
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    # Nz = ${Nz}
+    # nz = ${nz}
+    # Mz = ${Mz}
+    # mz = ${mz}
+    # z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time = 50 # 50 days
+  dt = 0.02
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="9eed49f4-a1cd-4011-9fef-6ef7c3635f77"><div class="modal-content"><h4>(examples/viscoelasticity/RTL2020/BVRTL2020salt5triaxialtest3.i)</h4><pre style="max-height:350px;"><code class="language-moose"># Modified Lemaitre creep model
+# See the first three figures of Fig.8 in Azabou et al. (2021)
+# Parameters
+# Units: stress in MPa, time in days, strain in m / m
+E = 22126
+nu = 0.2
+alpha = 0.5812 
+A1 = 0.1854
+n1 = 2.1012
+A2 = 3.7009
+n2 = 6.7562
+A = 155.6582
+n = 11.989
+B = 0.01918
+m = 2.2195
+Tr = 289
+Ar = 1725
+P = 5 
+z = 0.4523
+Nz = 0.0241
+nz = 1.2644
+Mz = 0.024
+mz = 1.028
+
+[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  # nx = 5
+  # ny = 10
+  # nz = 5
+  nx = 1
+  ny = 1
+  nz = 1
+  xmin = 0
+  xmax = 65e-03
+  ymin = 0
+  ymax = 130e-03
+  zmin = 0
+  zmax = 65e-03
+[]
+  
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+  
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+  
+[AuxVariables]
+  [temp]
+    order = FIRST
+    family = LAGRANGE
+    initial_condition = 303.15 
+  []
+  [eqv_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_strain_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_L]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [eqv_creep_strain_R]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [strain_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_yy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vol_strain_neg]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+  
+[AuxKernels]
+  [temp_aux]
+    type = ConstantAux
+    variable = temp
+    value = 303.15 
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_stress_aux]
+    type = BVMisesStressAux
+    variable = eqv_stress
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_aux]
+    type = BVEqvStrainAux
+    variable = eqv_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_strain_rate_aux]
+    type = BVEqvStrainRateAux
+    variable = eqv_strain_rate
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_L_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_L
+    property = eqv_creep_strain_L
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [eqv_creep_strain_R_aux]
+    type = ADMaterialRealAux
+    variable = eqv_creep_strain_R
+    property = eqv_creep_strain_R
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_yy
+    index_i = y
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_aux]
+    type = BVVolStrainAux
+    variable = vol_strain
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [vol_strain_neg]
+    type = ParsedAux
+    coupled_variables = vol_strain 
+    expression =  &#x27;-vol_strain&#x27;  
+    variable = vol_strain_neg
+  []
+[]
+  
+[Functions]
+  [P_confining]
+  type = ParsedFunction
+  symbol_names = &#x27;p_dot&#x27;
+  symbol_values = &#x27;-1e6&#x27; # Pa/s
+  expression = &#x27;-p_dot*t&#x27; # no need to converted time to per days. final pressure is in Pa
+  []
+  [Q_axial]
+  type = ParsedFunction
+  symbol_names = &#x27;P_c&#x27;
+  symbol_values = &#x27;P_confining&#x27;
+  expression = &#x27;51-(2*P_c)&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;bottom&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [BVPressure]
+    [pressure_right]
+      boundary = &#x27;right&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = P_confining 
+    []
+    [pressure_front]
+      boundary = &#x27;front&#x27;
+      displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = P_confining
+    []
+    [pressure_top]
+      boundary = &#x27;top&#x27;
+     displacement_vars = &#x27;disp_x disp_y disp_z&#x27;
+      function = Q_axial
+    []
+  []
+ # [axial_stress]
+ #   type = FunctionDirichletBC
+ #   variable = disp_y
+ #   boundary = &#x27;top&#x27;
+ #   function = Q_axial
+ # []
+[]
+  
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = ${E}
+    poisson_ratio = ${nu}
+    initial_stress = &#x27;-${P} -${P} -${P}&#x27;
+    inelastic_models = &#x27;viscoelastic&#x27;
+  []
+  [viscoelastic]
+    type = BVRTL2020ModelUpdate
+    volumetric = true
+    temperature = temp
+    Tr = ${Tr}
+    Ar = ${Ar}
+    alpha = ${alpha}
+    A1 = ${A1}
+    n1 = ${n1}
+    A2 = ${A2}
+    n2 = ${n2}
+    A = ${A}
+    n = ${n}
+    B = ${B}
+    m = ${m}
+    Nz = ${Nz}
+    nz = ${nz}
+    Mz = ${Mz}
+    mz = ${mz}
+    z = ${z}
+  []
+[]
+
+[Postprocessors]
+   [eqv_strain_rate]
+    type = ElementAverageValue
+    variable = eqv_strain_rate
+    outputs = csv
+  []
+  [eqv_strain]
+    type = ElementAverageValue
+    variable = eqv_strain
+    outputs = csv
+  []
+  [eqv_strain_L]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_L
+    outputs = csv
+  []
+  [eqv_strain_R]
+    type = ElementAverageValue
+    variable = eqv_creep_strain_R
+    outputs = csv
+  []
+  [strain_zz]
+    type = ElementAverageValue
+    variable = strain_yy
+    outputs = csv
+  []
+  [stress_zz]
+    type = ElementAverageValue
+    variable = stress_yy
+    outputs = csv
+  []
+  [q]
+    type = ElementAverageValue
+    variable = eqv_stress
+    outputs = csv
+  []
+  [vol_strain]
+    type = ElementAverageValue
+    variable = vol_strain_neg   #used parsedaux kernel to turn the vol strain into negative 
+    outputs = csv
+  []
+[]
+
+[Preconditioning]
+  active = &#x27;hypre&#x27;
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_stol -snes_max_it
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg
+                           1.0e-10 1.0e-12 0 20
+                           basic&#x27;
+  []
+  [superlu]
+    type = SMP
+    full = true
+    petsc_options = &#x27;-snes_ksp_ew -snes_converged_reason -ksp_converged_reason -ksp_gmres_modifiedgramschmidt -ksp_diagonal_scale -ksp_diagonal_scale_fix&#x27;
+    petsc_options_iname = &#x27;-snes_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -pc_type -pc_factor_mat_solver_package
+                           -snes_linesearch_type&#x27;
+    petsc_options_value = &#x27;newtonls
+                           1e-10 1e-12 50
+                           lu superlu_dist
+                           l2&#x27;
+  []
+  [asm]
+    type = SMP
+    petsc_options = &#x27;-snes_ksp_ew&#x27;
+    petsc_options_iname = &#x27;-ksp_type
+                           -pc_type
+                           -sub_pc_type
+                           -snes_type -snes_atol -snes_rtol -snes_max_it -snes_linesearch_type
+                           -ksp_gmres_restart&#x27;
+    petsc_options_value = &#x27;fgmres
+                           asm
+                           ilu
+                           newtonls 1e-10 1e-10 120 basic
+                           201&#x27;
+  []
+[]
+  
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  automatic_scaling = true
+  start_time = 0.0
+  end_time =  0.8873456790123455  #200 
+  num_steps = 800
+  #dt = 0.001
+  timestep_tolerance = 1.0e-10
+[]
+  
+[Outputs]
+  perf_graph = true
+  exodus = true
+  [csv]
+  type = CSV
+  execute_on = &#x27;timestep_end&#x27;
+  []
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="796d9e87-781d-486a-af3b-c7d0b768c327"><div class="modal-content"><h4>(test/tests/elasticity/error_moduli.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+    type = GeneratedMesh
+    dim = 3
+    nx = 3
+    ny = 3
+    nz = 3
+  []
+  
+  [Variables]
+    [disp_x]
+      order = FIRST
+      family = LAGRANGE
+    []
+    [disp_y]
+      order = FIRST
+      family = LAGRANGE
+    []
+    [disp_z]
+      order = FIRST
+      family = LAGRANGE
+    []
+  []
+  
+  [Kernels]
+    [stress_x]
+      type = BVStressDivergence
+      component = x
+      variable = disp_x
+    []
+    [stress_y]
+      type = BVStressDivergence
+      component = y
+      variable = disp_y
+    []
+    [stress_z]
+      type = BVStressDivergence
+      component = z
+      variable = disp_z
+    []
+  []
+  
+  [AuxVariables]
+    [stress_zz]
+      order = CONSTANT
+      family = MONOMIAL
+    []
+  []
+  
+  [AuxKernels]
+    [stress_zz_aux]
+      type = BVStressComponentAux
+      variable = stress_zz
+      index_i = z
+      index_j = z
+      execute_on = &#x27;TIMESTEP_END&#x27;
+    []
+  []
+  
+  [BCs]
+    [symmy]
+      type = DirichletBC
+      variable = disp_y
+      boundary = bottom
+      value = 0
+    []
+    [symmx]
+      type = DirichletBC
+      variable = disp_x
+      boundary = left
+      value = 0
+    []
+    [symmz]
+      type = DirichletBC
+      variable = disp_z
+      boundary = back
+      value = 0
+    []
+    [tdisp]
+      type = DirichletBC
+      variable = disp_z
+      boundary = front
+      value = 0.1
+    []
+  []
+  
+  [Materials]
+    [elasticity]
+      type = BVMechanicalMaterial
+      displacements = &#x27;disp_x disp_y disp_z&#x27;
+      shear_modulus = 8.0e+09
+      poisson_ratio = 0.25
+    []
+  []
+  
+  [Preconditioning]
+    [hypre]
+      type = SMP
+      full = true
+      petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+      petsc_options_value = &#x27;hypre boomeramg&#x27;
+    []
+  []
+  [Executioner]
+    type = Transient
+    dt = 0.05
+    solve_type = &#x27;NEWTON&#x27;
+    dtmin = 0.05
+    num_steps = 1
+  []
+  
+  [Outputs]
+    exodus = true
+  []
+  </code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="9b69f3fe-5702-447f-a9cf-707d89475b9b"><div class="modal-content"><h4>(test/tests/elasticity/shear.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  type = GeneratedMesh
+  dim = 3
+  nx = 8
+  ny = 8
+  nz = 2
+  xmin = 0
+  xmax = 10
+  ymin = 0
+  ymax = 10
+  zmin = 0
+  zmax = 2.5
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [strain_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_xy]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_xy_aux]
+    type = BVStrainComponentAux
+    variable = strain_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_xy_aux]
+    type = BVStressComponentAux
+    variable = stress_xy
+    index_i = x
+    index_j = y
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+[]
+
+[Functions]
+  [disp_y_func]
+    type = ParsedFunction
+    expression = &#x27;m*t*x&#x27;
+    symbol_names = &#x27;m&#x27;
+    symbol_values = &#x27;-0.1&#x27;
+  []
+[]
+
+[BCs]
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;left right bottom top front back&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;left right bottom top front back&#x27;
+    value = 0.0
+  []
+  [disp_y_plate]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = &#x27;left right bottom top front back&#x27;
+    function = disp_y_func
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type&#x27;
+    petsc_options_value = &#x27;hypre boomeramg&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 2.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]
+</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div><div class="moose-modal modal" id="07dea755-1e86-4235-91d6-f26774e7c5f4"><div class="modal-content"><h4>(test/tests/elasticity/triax.i)</h4><pre style="max-height:350px;"><code class="language-moose">[Mesh]
+  [gen]
+    type = GeneratedMeshGenerator
+    dim = 3
+    nx = 4
+    ny = 4
+    nz = 8
+    xmin = -0.25
+    xmax = 0.25
+    ymin = -0.25
+    ymax = 0.25
+    zmin = 0
+    zmax = 1
+  []
+  [no_ux]
+    type = ExtraNodesetGenerator
+    input = gen
+    coord = &#x27;0.0 -0.25 0.0; 0.0 0.25 0.0&#x27;
+    new_boundary = &#x27;no_disp_x&#x27;
+  []
+  [no_uy]
+    type = ExtraNodesetGenerator
+    input = no_ux
+    coord = &#x27;-0.25 0.0 0.0; 0.25 0.0 0.0&#x27;
+    new_boundary = &#x27;no_disp_y&#x27;
+  []
+[]
+
+[Variables]
+  [disp_x]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_y]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [disp_z]
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
+
+[Kernels]
+  [stress_x]
+    type = BVStressDivergence
+    component = x
+    variable = disp_x
+  []
+  [stress_y]
+    type = BVStressDivergence
+    component = y
+    variable = disp_y
+  []
+  [stress_z]
+    type = BVStressDivergence
+    component = z
+    variable = disp_z
+  []
+[]
+
+[AuxVariables]
+  [strain_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [stress_zz]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [pressure]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [dev_stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+[]
+
+[AuxKernels]
+  [strain_zz_aux]
+    type = BVStrainComponentAux
+    variable = strain_zz
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [stress_zz_aux]
+    type = BVStressComponentAux
+    variable = stress_zz
+    index_i = z
+    index_j = z
+    execute_on = &#x27;TIMESTEP_END&#x27;
+  []
+  [pressure_aux]
+    type = BVPressureAux
+    variable = pressure
+    execute_on = &#x27;INITIAL TIMESTEP_END&#x27;
+  []
+  [dev_stress_aux]
+    type = BVMisesStressAux
+    variable = dev_stress
+    execute_on = &#x27;INITIAL TIMESTEP_END&#x27;
+  []
+[]
+
+[BCs]
+  [BVPressure]
+    [pressure_conf]
+      boundary = &#x27;left right bottom top front&#x27;
+      displacement_vars = &#x27;disp_x disp_y&#x27;
+      value = 10.0e+06
+    []
+  []
+  [no_x]
+    type = DirichletBC
+    variable = disp_x
+    boundary = &#x27;no_disp_x&#x27;
+    value = 0.0
+  []
+  [no_y]
+    type = DirichletBC
+    variable = disp_y
+    boundary = &#x27;no_disp_y&#x27;
+    value = 0.0
+  []
+  [no_z]
+    type = DirichletBC
+    variable = disp_z
+    boundary = &#x27;back&#x27;
+    value = 0.0
+  []
+  [axial_load]
+    type = FunctionDirichletBC
+    variable = disp_z
+    boundary = &#x27;front&#x27;
+    function = &#x27;-1.0e-02*t&#x27;
+  []
+[]
+
+[Materials]
+  [elasticity]
+    type = BVMechanicalMaterial
+    displacements = &#x27;disp_x disp_y disp_z&#x27;
+    young_modulus = 10.0e+09
+    poisson_ratio = 0.25
+    initial_stress = &#x27;-10.0e+06 -10.0e+06 -10.0e+06&#x27;
+  []
+[]
+
+[Preconditioning]
+  [hypre]
+    type = SMP
+    full = true
+    petsc_options_iname = &#x27;-pc_type -pc_hypre_type -snes_atol&#x27;
+    petsc_options_value = &#x27;hypre boomeramg 1.0e-12&#x27;
+  []
+[]
+
+[Executioner]
+  type = Transient
+  automatic_scaling = true
+  solve_type = &#x27;NEWTON&#x27;
+  start_time = 0.0
+  end_time = 2.0
+  dt = 1.0
+[]
+
+[Outputs]
+  exodus = true
+[]</code></pre></div><div class="modal-footer"><a class="modal-close btn-flat">Close</a></div></div></div><div class="col hide-on-med-and-down l2"><div class="toc-wrapper pin-top"><ul class="section table-of-contents"><li><a href="#7fc9cf83-0ef1-4ba6-b4f0-1b4715b8e4a2" class="tooltipped" data-position="left" data-tooltip="Overview">Overview</a></li><li><a href="#060839d4-7cc3-499b-b56c-9fd6ed2308b7" class="tooltipped" data-position="left" data-tooltip="Example Input File Syntax">Example Input File Syntax</a></li><li><a href="#2099f7c8-b016-4b5f-a42f-19803b4d8517" class="tooltipped" data-position="left" data-tooltip="Input Parameters">Input Parameters</a></li><li><a href="#e022a734-8901-448f-9a62-a8916c3c282c" class="tooltipped" data-position="left" data-tooltip="Input Files">Input Files</a></li></ul></div></div></div></div></main></div></body><script type="text/javascript" src="../../contrib/materialize/materialize.min.js"></script><script type="text/javascript" src="../../contrib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="../../contrib/prism/prism.min.js"></script><script type="text/javascript" src="../../js/init.js"></script><script type="text/javascript" src="../../js/navigation.js"></script><script type="text/javascript" src="../../contrib/fuse/fuse.min.js"></script><script type="text/javascript" src="../../js/search_index.js"></script><script type="text/javascript" src="../../js/sqa_moose.js"></script>
