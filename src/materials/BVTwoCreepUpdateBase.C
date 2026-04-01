@@ -30,7 +30,6 @@ BVTwoCreepUpdateBase::validParams()
 BVTwoCreepUpdateBase::BVTwoCreepUpdateBase(const InputParameters & parameters)
   : BVInelasticUpdateBase(parameters),
     _base_name(isParamValid("base_name") ? getParam<std::string>("base_name") + "_" : ""),
-    _num_cm(2),
     _creep_strain_incr(declareADProperty<RankTwoTensor>(_base_name + "creep_strain_increment"))
 {
 }
@@ -50,7 +49,7 @@ BVTwoCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTe
   _stress_tr = stress;
   // Trial effective stress
   _eqv_stress_tr = std::sqrt(1.5) * _stress_tr.deviatoric().L2norm();
-  _avg_stress_tr = _stress_tr.trace();
+  _avg_stress_tr = -_stress_tr.trace() / 3.0;
   // Shear and bulk modulus
   _G = BVElasticityTensorTools::getIsotropicShearModulus(Cijkl);
   _K = BVElasticityTensorTools::getIsotropicBulkModulus(Cijkl);
@@ -66,7 +65,7 @@ BVTwoCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTe
 
   // Update quantities
   _creep_strain_incr[_qp] = reformPlasticStrainTensor(creep_strain_incr);
-  stress -= 2.0 * _G * _creep_strain_incr[_qp];
+  stress -= Cijkl * _creep_strain_incr[_qp];
   postReturnMap(creep_strain_incr);
 }
 
@@ -74,7 +73,7 @@ std::vector<ADReal>
 BVTwoCreepUpdateBase::returnMap()
 {
   // Initialize scalar creep strain incr
-  std::vector<ADReal> creep_strain_incr(_num_cm, 0.0);
+  std::vector<ADReal> creep_strain_incr(2, 0.0);
 
   // Initial residual
   std::vector<ADReal> res_ini = residual(creep_strain_incr);
@@ -103,8 +102,6 @@ BVTwoCreepUpdateBase::nrStep(const std::vector<ADReal> & res,
                              const std::vector<std::vector<ADReal>> & jac,
                              std::vector<ADReal> & creep_strain_incr)
 {
-  std::vector<ADReal> dx(_num_cm, 0.0);
-
   // Check determinant
   ADReal det = jac[0][0] * jac[1][1] - jac[0][1] * jac[1][0];
 
@@ -130,8 +127,8 @@ BVTwoCreepUpdateBase::norm(const std::vector<ADReal> & vec)
 std::vector<ADReal>
 BVTwoCreepUpdateBase::residual(const std::vector<ADReal> & creep_strain_incr)
 {
-  std::vector<ADReal> res(_num_cm);
-  for (unsigned int i = 0; i < _num_cm; ++i)
+  std::vector<ADReal> res(2);
+  for (unsigned int i = 0; i < 2; ++i)
     res[i] = creepRate(creep_strain_incr, i) * _dt - creep_strain_incr[i];
 
   return res;
@@ -140,10 +137,10 @@ BVTwoCreepUpdateBase::residual(const std::vector<ADReal> & creep_strain_incr)
 std::vector<std::vector<ADReal>>
 BVTwoCreepUpdateBase::jacobian(const std::vector<ADReal> & creep_strain_incr)
 {
-  std::vector<std::vector<ADReal>> jac(_num_cm, std::vector<ADReal>(_num_cm));
+  std::vector<std::vector<ADReal>> jac(2, std::vector<ADReal>(2));
 
-  for (unsigned int i = 0; i < _num_cm; ++i)
-    for (unsigned int j = 0; j < _num_cm; ++j)
+  for (unsigned int i = 0; i < 2; ++i)
+    for (unsigned int j = 0; j < 2; ++j)
       jac[i][j] = creepRateDerivative(creep_strain_incr, i, j) * _dt - ((i == j) ? 1.0 : 0.0);
 
   return jac;
@@ -152,13 +149,12 @@ BVTwoCreepUpdateBase::jacobian(const std::vector<ADReal> & creep_strain_incr)
 ADRankTwoTensor
 BVTwoCreepUpdateBase::reformPlasticStrainTensor(const std::vector<ADReal> & creep_strain_incr)
 {
-  ADRankTwoTensor res;
-  res.zero();
+  ADRankTwoTensor res = ADRankTwoTensor();
 
   ADRankTwoTensor flow_dir =
       (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
 
-  for (unsigned int i = 0; i < _num_cm; ++i)
+  for (unsigned int i = 0; i < 2; ++i)
     res += 1.5 * creep_strain_incr[i] * flow_dir;
 
   return res;

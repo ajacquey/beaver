@@ -11,25 +11,25 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#pragma once
+#include "BVVolStrainRateAux.h"
 
-#include "ADKernel.h"
+registerMooseObject("BeaverApp", BVVolStrainRateAux);
 
-class BVStressDivergence : public ADKernel
+InputParameters
+BVVolStrainRateAux::validParams()
 {
-public:
-  static InputParameters validParams();
-  BVStressDivergence(const InputParameters & parameters);
+  InputParameters params = BVStrainAuxBase::validParams();
+  params.addClassDescription("Class for outputting the volumetric strain rate.");
+  return params;
+}
 
-protected:
-  virtual ADReal computeQpResidual() override;
+BVVolStrainRateAux::BVVolStrainRateAux(const InputParameters & parameters)
+  : BVStrainAuxBase(parameters)
+{
+}
 
-  const bool _coupled_pf;
-  const ADVariableValue & _pf;
-  const unsigned int _component;
-  //   const Real _rho;
-  //   const RealVectorValue _gravity;
-
-  const ADMaterialProperty<RankTwoTensor> & _stress;
-  const ADMaterialProperty<Real> * _biot;
-};
+Real
+BVVolStrainRateAux::computeValue()
+{
+  return MetaPhysicL::raw_value(_strain_increment[_qp].trace()) / _dt;
+}
