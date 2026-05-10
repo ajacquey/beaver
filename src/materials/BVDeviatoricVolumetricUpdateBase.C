@@ -60,7 +60,7 @@ BVDeviatoricVolumetricUpdateBase::returnMap()
       jac = jacobianVol(vol_strain_incr);
 
       // Convergence check
-      if ((std::abs(res) <= _abs_tol) || (std::abs(res / res_ini) <= _rel_tol))
+      if ((abs(res) <= _abs_tol) || (abs(res / res_ini) <= _rel_tol))
       {
         creep_strain_incr.resize(3);
         creep_strain_incr[2] = vol_strain_incr;

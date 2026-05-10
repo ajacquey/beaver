@@ -20,7 +20,7 @@ BeaverTestApp::validParams()
   return params;
 }
 
-BeaverTestApp::BeaverTestApp(InputParameters parameters) : MooseApp(parameters)
+BeaverTestApp::BeaverTestApp(const InputParameters & parameters) : MooseApp(parameters)
 {
   BeaverTestApp::registerAll(
       _factory, _action_factory, _syntax, getParam<bool>("allow_test_objects"));

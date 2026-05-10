@@ -10,14 +10,9 @@
 #include "BeaverTestApp.h"
 #include "MooseMain.h"
 
-// Create a performance log
-PerfLog Moose::perf_log("Beaver");
-
 // Begin the main program.
 int
 main(int argc, char * argv[])
 {
-  Moose::main<BeaverTestApp>(argc, argv);
-
-  return 0;
+  return Moose::main<BeaverTestApp>(argc, argv);
 }

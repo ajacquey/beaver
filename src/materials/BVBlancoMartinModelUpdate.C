@@ -87,7 +87,7 @@ BVBlancoMartinModelUpdate::creepRateR(const std::vector<ADReal> & eqv_strain_inc
   if (q == 0.0)
     return 0.0;
   else
-    return 1.0e-06 * std::pow(std::pow(q / _kr1, _beta1) + std::pow(q / _kr2, _beta2), 1.0 / _alpha);
+    return 1.0e-06 * pow(pow(q / _kr1, _beta1) + pow(q / _kr2, _beta2), 1.0 / _alpha);
 }
 
 ADReal
@@ -98,22 +98,22 @@ BVBlancoMartinModelUpdate::creepRateLemaitre(const std::vector<ADReal> & eqv_str
   if (gamma_l == 0.0)
     return _alpha * creepRateR(eqv_strain_incr);
   else
-    return _alpha * creepRateR(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+    return _alpha * creepRateR(eqv_strain_incr) * pow(gamma_l, 1.0 - 1.0 / _alpha);
 }
 
 ADReal
 BVBlancoMartinModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & eqv_strain_incr)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
-  ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
+  ADReal saturation_strain = (q != 0.0) ? pow(q / _A1, _n1) : 1.0e+06;
 
   ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(eqv_strain_incr);
 
   if (gamma_ms < saturation_strain)
-    return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
+    return _A * pow(1.0 - gamma_ms / saturation_strain, _n) *
            creepRateR(eqv_strain_incr);
   else
-    return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
+    return -_B * pow(gamma_ms / saturation_strain - 1.0, _m) *
            creepRateR(eqv_strain_incr);
 }
 
@@ -140,9 +140,9 @@ BVBlancoMartinModelUpdate::creepRateRDerivative(const std::vector<ADReal> & eqv_
     return 1.0;
   else
     return -1.0e-06 * 3.0 * _G / _alpha *
-         std::pow(std::pow(q / _kr1, _beta1) + std::pow(q / _kr2, _beta2), 1.0 / _alpha - 1.0) *
-         (_beta1 / _kr1 * std::pow(q / _kr1, _beta1 - 1.0) +
-          _beta2 / _kr2 * std::pow(q / _kr2, _beta2 - 1.0));
+         pow(pow(q / _kr1, _beta1) + pow(q / _kr2, _beta2), 1.0 / _alpha - 1.0) *
+         (_beta1 / _kr1 * pow(q / _kr1, _beta1 - 1.0) +
+          _beta2 / _kr2 * pow(q / _kr2, _beta2 - 1.0));
 }
 
 ADReal
@@ -155,7 +155,7 @@ BVBlancoMartinModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal>
     if (gamma_l == 0.0)
       return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
-      return std::pow(gamma_l, -1.0 / _alpha) *
+      return pow(gamma_l, -1.0 / _alpha) *
            (_alpha * gamma_l * creepRateRDerivative(eqv_strain_incr) +
             1.0e+06 * (_alpha - 1.0) * creepRateR(eqv_strain_incr));
 
@@ -163,7 +163,7 @@ BVBlancoMartinModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal>
     if (gamma_l == 0.0)
       return _alpha * creepRateRDerivative(eqv_strain_incr);
     else
-      return _alpha * creepRateRDerivative(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+      return _alpha * creepRateRDerivative(eqv_strain_incr) * pow(gamma_l, 1.0 - 1.0 / _alpha);
   
   else
     throw MooseException(
@@ -175,25 +175,25 @@ BVBlancoMartinModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADR
                                                       const unsigned int j)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1]);
-  ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
+  ADReal saturation_strain = (q != 0.0) ? pow(q / _A1, _n1) : 1.0e+06;
 
   ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(eqv_strain_incr);
 
   if (j == 0) // Munson-Dawson wrt Lemaitre
     if (gamma_ms < saturation_strain)
-      return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
+      return _A * pow(1.0 - gamma_ms / saturation_strain, _n) *
              creepRateRDerivative(eqv_strain_incr);
     else
-      return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
+      return -_B * pow(gamma_ms / saturation_strain - 1.0, _m) *
              creepRateRDerivative(eqv_strain_incr);
              
   else if (j == 1) // Munson-Dawson wrt Munson-Dawson
     if (gamma_ms < saturation_strain)
-      return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
+      return _A * pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
              ((1.0 - gamma_ms / saturation_strain) * creepRateRDerivative(eqv_strain_incr) -
               1.0e+06 * _n / saturation_strain * creepRateR(eqv_strain_incr));
     else
-      return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
+      return -_B * pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
              ((gamma_ms / saturation_strain - 1.0) * creepRateRDerivative(eqv_strain_incr) +
               1.0e+06 * _m / saturation_strain * creepRateR(eqv_strain_incr));
   

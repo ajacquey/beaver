@@ -57,7 +57,7 @@ BVModifiedLemaitreModelUpdate::creepRateR(const ADReal & eqv_strain_incr)
   if (q == 0.0)
     return 0.0;
   else
-    return 1.0e-06 * std::pow(std::pow(q / _kr1, _beta1) + std::pow(q / _kr2, _beta2), 1.0 / _alpha);
+    return 1.0e-06 * pow(pow(q / _kr1, _beta1) + pow(q / _kr2, _beta2), 1.0 / _alpha);
 }
 
 ADReal
@@ -68,7 +68,7 @@ BVModifiedLemaitreModelUpdate::creepRate(const ADReal & eqv_strain_incr)
   if (gamma_l == 0.0)
     return _alpha * creepRateR(eqv_strain_incr);
   else
-    return _alpha * creepRateR(eqv_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+    return _alpha * creepRateR(eqv_strain_incr) * pow(gamma_l, 1.0 - 1.0 / _alpha);
 }
 
 ADReal
@@ -80,9 +80,9 @@ BVModifiedLemaitreModelUpdate::creepRateRDerivative(const ADReal & eqv_strain_in
     return 1.0;
   else
     return -1.0e-06 * 3.0 * _G / _alpha *
-         std::pow(std::pow(q / _kr1, _beta1) + std::pow(q / _kr2, _beta2), 1.0 / _alpha - 1.0) *
-         (_beta1 / _kr1 * std::pow(q / _kr1, _beta1 - 1.0) +
-          _beta2 / _kr2 * std::pow(q / _kr2, _beta2 - 1.0));
+         pow(pow(q / _kr1, _beta1) + pow(q / _kr2, _beta2), 1.0 / _alpha - 1.0) *
+         (_beta1 / _kr1 * pow(q / _kr1, _beta1 - 1.0) +
+          _beta2 / _kr2 * pow(q / _kr2, _beta2 - 1.0));
 }
 
 ADReal
@@ -93,7 +93,7 @@ BVModifiedLemaitreModelUpdate::creepRateDerivative(const ADReal & eqv_strain_inc
   if (gamma_l == 0.0)
     return _alpha * creepRateRDerivative(eqv_strain_incr);
   else
-    return std::pow(gamma_l, -1.0 / _alpha) *
+    return pow(gamma_l, -1.0 / _alpha) *
            (_alpha * gamma_l * creepRateRDerivative(eqv_strain_incr) +
             1.0e+06 * (_alpha - 1.0) * creepRateR(eqv_strain_incr));
 }

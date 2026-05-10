@@ -28,7 +28,7 @@ BeaverApp::validParams()
   return params;
 }
 
-BeaverApp::BeaverApp(InputParameters parameters) : MooseApp(parameters)
+BeaverApp::BeaverApp(const InputParameters & parameters) : MooseApp(parameters)
 {
   BeaverApp::registerAll(_factory, _action_factory, _syntax);
 }

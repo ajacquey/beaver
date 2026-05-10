@@ -40,7 +40,7 @@ ADReal
 BVLubby2ModelUpdate::viscosityMaxwell(const std::vector<ADReal> & eqv_strain_incr)
 {
   return _etaM0 *
-         std::exp(-_m1 * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+         exp(-_m1 * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
                   _s0);
 }
 
@@ -48,7 +48,7 @@ ADReal
 BVLubby2ModelUpdate::viscosityKelvin(const std::vector<ADReal> & eqv_strain_incr)
 {
   return _etaK0 *
-         std::exp(-_m2 * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+         exp(-_m2 * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
                   _s0);
 }
 
@@ -70,7 +70,7 @@ ADReal
 BVLubby2ModelUpdate::shearModulusKelvin(const std::vector<ADReal> & eqv_strain_incr)
 {
   return _GK0 *
-         std::exp(-_mG * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
+         exp(-_mG * (_eqv_stress_tr - 3.0 * _G * (eqv_strain_incr[0] + eqv_strain_incr[1])) /
                   _s0);
 }
 

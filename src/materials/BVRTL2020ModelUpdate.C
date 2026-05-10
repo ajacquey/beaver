@@ -117,10 +117,10 @@ BVRTL2020ModelUpdate::creepRateR(const std::vector<ADReal> & creep_strain_incr)
   else
   {
     if (_temp)
-      _exponential = std::exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
+      _exponential = exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
       
     return 1.0e-06 * _exponential *
-                  std::pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
+                  pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
                            _n2); // macaulay brackets to guide against negative values
   }
 }
@@ -133,22 +133,22 @@ BVRTL2020ModelUpdate::creepRateLemaitre(const std::vector<ADReal> & creep_strain
   if (gamma_l == 0.0)
     return _alpha * creepRateR(creep_strain_incr);
   else
-    return _alpha * creepRateR(creep_strain_incr) * std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+    return _alpha * creepRateR(creep_strain_incr) * pow(gamma_l, 1.0 - 1.0 / _alpha);
 }
 
 ADReal
 BVRTL2020ModelUpdate::creepRateMunsonDawson(const std::vector<ADReal> & creep_strain_incr)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (creep_strain_incr[0] + creep_strain_incr[1]);
-  ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
-  // ADReal saturation_strain = (_eqv_stress_tr != 0.0) ? std::pow(_eqv_stress_tr / _A1, _n1) : 1.0e+06;
+  ADReal saturation_strain = (q != 0.0) ? pow(q / _A1, _n1) : 1.0e+06;
+  // ADReal saturation_strain = (_eqv_stress_tr != 0.0) ? pow(_eqv_stress_tr / _A1, _n1) : 1.0e+06;
 
   ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(creep_strain_incr);
 
   if (gamma_ms < saturation_strain)
-    return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) * creepRateR(creep_strain_incr);
+    return _A * pow(1.0 - gamma_ms / saturation_strain, _n) * creepRateR(creep_strain_incr);
   else
-    return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) * creepRateR(creep_strain_incr);
+    return -_B * pow(gamma_ms / saturation_strain - 1.0, _m) * creepRateR(creep_strain_incr);
 }
 
 ADReal
@@ -175,9 +175,9 @@ BVRTL2020ModelUpdate::creepRateRDerivative(const std::vector<ADReal> & creep_str
   else
   {
     if (_temp)
-      _exponential = std::exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
+      _exponential = exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
 
-    return -1.0e-06 * _exponential * 3.0 * _G * _n2 / _A2 * std::pow(q / _A2, _n2 - 1.0);
+    return -1.0e-06 * _exponential * 3.0 * _G * _n2 / _A2 * pow(q / _A2, _n2 - 1.0);
   }
 }
 
@@ -191,7 +191,7 @@ BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & cr
     if (gamma_l == 0.0)
       return _alpha * creepRateRDerivative(creep_strain_incr);
     else
-      return std::pow(gamma_l, -1.0 / _alpha) *
+      return pow(gamma_l, -1.0 / _alpha) *
              (_alpha * gamma_l * creepRateRDerivative(creep_strain_incr) +
               1.0e+06 * (_alpha - 1.0) * creepRateR(creep_strain_incr));
 
@@ -200,7 +200,7 @@ BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & cr
       return _alpha * creepRateRDerivative(creep_strain_incr);
     else
       return _alpha * creepRateRDerivative(creep_strain_incr) *
-             std::pow(gamma_l, 1.0 - 1.0 / _alpha);
+             pow(gamma_l, 1.0 - 1.0 / _alpha);
 
   else
     throw MooseException(
@@ -212,26 +212,26 @@ BVRTL2020ModelUpdate::creepRateMunsonDawsonDerivative(const std::vector<ADReal> 
                                                       const unsigned int j)
 {
   ADReal q = _eqv_stress_tr - 3.0 * _G * (creep_strain_incr[0] + creep_strain_incr[1]);
-  ADReal saturation_strain = (q != 0.0) ? std::pow(q / _A1, _n1) : 1.0e+06;
-  // ADReal saturation_strain = (_eqv_stress_tr != 0.0) ? std::pow(_eqv_stress_tr / _A1, _n1) : 1.0e+06;
+  ADReal saturation_strain = (q != 0.0) ? pow(q / _A1, _n1) : 1.0e+06;
+  // ADReal saturation_strain = (_eqv_stress_tr != 0.0) ? pow(_eqv_stress_tr / _A1, _n1) : 1.0e+06;
 
   ADReal gamma_ms = 1.0e+06 * munsondawsonCreepStrain(creep_strain_incr);
 
   if (j == 0) // Munson-Dawson wrt Lemaitre
     if (gamma_ms < saturation_strain)
-      return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n) *
+      return _A * pow(1.0 - gamma_ms / saturation_strain, _n) *
              creepRateRDerivative(creep_strain_incr);
     else
-      return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m) *
+      return -_B * pow(gamma_ms / saturation_strain - 1.0, _m) *
              creepRateRDerivative(creep_strain_incr);
 
   else if (j == 1) // Munson-Dawson wrt Munson-Dawson
     if (gamma_ms < saturation_strain)
-      return _A * std::pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
+      return _A * pow(1.0 - gamma_ms / saturation_strain, _n - 1.0) *
              ((1.0 - gamma_ms / saturation_strain) * creepRateRDerivative(creep_strain_incr) -
               1.0e+06 * _n / saturation_strain * creepRateR(creep_strain_incr));
     else
-      return -_B * std::pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
+      return -_B * pow(gamma_ms / saturation_strain - 1.0, _m - 1.0) *
              ((gamma_ms / saturation_strain - 1.0) * creepRateRDerivative(creep_strain_incr) +
               1.0e+06 * _m / saturation_strain * creepRateR(creep_strain_incr));
 
@@ -289,8 +289,8 @@ BVRTL2020ModelUpdate::creepRateVol(const ADReal & vol_strain_incr)
   if (p == 0.0)
     return 0.0; // No contribution since p is zero
   else
-    return _z * (std::pow(std::abs(p / _Nz), _nz) - _gamma_vp) /
-           (std::pow(std::abs(p / _Mz), _mz) + _gamma_vp) * _gamma_dot_vp;
+    return _z * (pow(abs(p / _Nz), _nz) - _gamma_vp) /
+           (pow(abs(p / _Mz), _mz) + _gamma_vp) * _gamma_dot_vp;
 }
 
 ADReal
@@ -300,10 +300,10 @@ BVRTL2020ModelUpdate::creepRateVolDerivative(const ADReal & vol_strain_incr)
   if (p == 0.0)
     return 1.0; // No contribution since p is zero
   else
-    return -_K * _z * p / std::abs(p) *
-           (_nz / _Nz * std::pow(std::abs(p / _Nz), _nz - 1.0) *
-                (std::pow(std::abs(p / _Mz), _mz) + _gamma_vp) -
-            _mz / _Mz * std::pow(std::abs(p / _Mz), _mz - 1.0) *
-                (std::pow(std::abs(p / _Nz), _nz) - _gamma_vp)) /
-           std::pow(std::pow(std::abs(p / _Mz), _mz) + _gamma_vp, 2.0) * _gamma_dot_vp;
+    return -_K * _z * p / abs(p) *
+           (_nz / _Nz * pow(abs(p / _Nz), _nz - 1.0) *
+                (pow(abs(p / _Mz), _mz) + _gamma_vp) -
+            _mz / _Mz * pow(abs(p / _Mz), _mz - 1.0) *
+                (pow(abs(p / _Nz), _nz) - _gamma_vp)) /
+           pow(pow(abs(p / _Mz), _mz) + _gamma_vp, 2.0) * _gamma_dot_vp;
 }

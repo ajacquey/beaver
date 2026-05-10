@@ -121,7 +121,7 @@ BVTwoCreepUpdateBase::norm(const std::vector<ADReal> & vec)
   for (const auto & r : vec)
     res += r * r;
 
-  return std::sqrt(res);
+  return sqrt(res);
 }
 
 std::vector<ADReal>

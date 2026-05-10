@@ -16,7 +16,7 @@ class BeaverTestApp : public MooseApp
 public:
   static InputParameters validParams();
 
-  BeaverTestApp(InputParameters parameters);
+  BeaverTestApp(const InputParameters & parameters);
   virtual ~BeaverTestApp();
 
   static void registerApps();
