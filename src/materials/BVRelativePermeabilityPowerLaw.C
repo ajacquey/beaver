@@ -34,9 +34,9 @@ void
 BVRelativePermeabilityPowerLaw::computeQpProperties()
 {
   // Wetting phase
-  _kr_w[_qp] = std::pow(_sw[_qp], _n);
+  _kr_w[_qp] = pow(_sw[_qp], _n);
   // _dkr_w[_qp] = _n * std::pow(_sw[_qp], _n - 1.0);
   // Non-wetting phase
-  _kr_n[_qp] = std::pow(1.0 - _sw[_qp], _n);
+  _kr_n[_qp] = pow(1.0 - _sw[_qp], _n);
   // _dkr_n[_qp] = -_n * std::pow(1.0 - _sw[_qp], _n - 1.0);
 }

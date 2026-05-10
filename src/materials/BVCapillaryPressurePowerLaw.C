@@ -36,6 +36,6 @@ void
 BVCapillaryPressurePowerLaw::computeQpProperties()
 {
   // Capillary pressure
-  _pc[_qp] = _pce * std::pow(_sw[_qp], -_n);
-  _dpc[_qp] = -_n * _pce * std::pow(_sw[_qp], -(_n + 1.0));
+  _pc[_qp] = _pce * pow(_sw[_qp], -_n);
+  _dpc[_qp] = -_n * _pce * pow(_sw[_qp], -(_n + 1.0));
 }

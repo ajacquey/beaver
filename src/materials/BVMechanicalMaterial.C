@@ -37,7 +37,7 @@ BVMechanicalMaterial::validParams()
   params.addRangeCheckedParam<Real>(
       "young_modulus", "young_modulus > 0.0", "The Young's modulus of the material.");
   params.addRangeCheckedParam<Real>(
-      "poisson_ratio", "poisson_ratio > 0.0", "The Poisson's ratio of the material.");
+      "poisson_ratio", "poisson_ratio >= 0.0", "The Poisson's ratio of the material.");
   // Initial stress
   params.addParam<std::vector<FunctionName>>(
       "initial_stress", {}, "The initial stress principal components (negative in compression).");

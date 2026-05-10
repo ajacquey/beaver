@@ -109,7 +109,7 @@ BVFrictionUpdateBase::returnMap()
     jac = jacobian(delta_dot);
 
     // Convergence check
-    if ((std::abs(res) <= _abs_tol) || (std::abs(res / res_ini) <= _rel_tol))
+    if ((abs(res) <= _abs_tol) || (abs(res / res_ini) <= _rel_tol))
       return delta_dot;
   }
   throw MooseException(

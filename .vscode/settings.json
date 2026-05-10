@@ -1,0 +1,28 @@
+{
+    "gitlens.hovers.currentLine.over": "line",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "telemetry.telemetryLevel": "off",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "${env.CONDA_PREFIX}/**",
+        "/usr/include/**"
+    ],
+    "files.associations": {
+        "*.C": "cpp",
+        "*.h": "cpp"
+    },
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "[moose]": {
+        "outline.showProperties": false,
+        "outline.showStrings": false,
+        "gitlens.codeLens.scopes": [
+            "document"
+        ]
+    }
+}

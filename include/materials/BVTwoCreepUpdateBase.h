@@ -41,9 +41,6 @@ protected:
   // Name used as a prefix for all material properties related to this creep model
   const std::string _base_name;
 
-  // Number of creep models
-  const unsigned int _num_cm;
-
   // Creep strain increment
   ADMaterialProperty<RankTwoTensor> & _creep_strain_incr;
 

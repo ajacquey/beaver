@@ -45,7 +45,7 @@ BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTenso
   // Trial stress
   _stress_tr = stress;
   // Trial effective stress
-  _eqv_stress_tr = std::sqrt(1.5) * _stress_tr.deviatoric().L2norm();
+  _eqv_stress_tr = sqrt(1.5) * _stress_tr.deviatoric().L2norm();
   // Shear modulus
   _G = BVElasticityTensorTools::getIsotropicShearModulus(Cijkl);
 
@@ -85,7 +85,7 @@ BVCreepUpdateBase::returnMap()
     jac = jacobian(eqv_strain_incr);
 
     // Convergence check
-    if ((std::abs(res) <= _abs_tol) || (std::abs(res / res_ini) <= _rel_tol))
+    if ((abs(res) <= _abs_tol) || (abs(res / res_ini) <= _rel_tol))
       return eqv_strain_incr;
   }
   throw MooseException("BVCreepUpdateBase: maximum number of iterations exceeded in 'returnMap'!");
@@ -109,7 +109,7 @@ BVCreepUpdateBase::reformPlasticStrainTensor(const ADReal & eqv_strain_incr)
   ADRankTwoTensor flow_dir =
       (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
 
-  return 1.5 * creepRate(eqv_strain_incr) * _dt * flow_dir;
+  return 1.5 * eqv_strain_incr * flow_dir; 
 }
 
 void

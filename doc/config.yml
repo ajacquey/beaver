@@ -20,6 +20,7 @@ Extensions:
             Examples:
                 Poroelasticity: examples/poroelasticity/index.md
                 Viscoelasticity: examples/viscoelasticity/index.md
+                Viscoplasticity: examples/viscoplasticity/index.md
             Documentation:
                 Beaver syntax: documentation/beaver.md
     MooseDocs.extensions.appsyntax:
