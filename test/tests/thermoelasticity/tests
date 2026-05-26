@@ -1,0 +1,12 @@
+[Tests]
+  [expansion]
+    type = 'Exodiff'
+    input = 'expansion.i'
+    exodiff = 'expansion_out.e'
+  []
+  [stress_build_up]
+    type = 'Exodiff'
+    input = 'stress_build_up.i'
+    exodiff = 'stress_build_up_out.e'
+  []
+[]

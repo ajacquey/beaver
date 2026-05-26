@@ -25,6 +25,12 @@ BVMechanicalMaterial::validParams()
   params.addRequiredCoupledVar(
       "displacements",
       "The displacements appropriate for the simulation geometry and coordinate system.");
+  // Temperature coupling
+  params.addCoupledVar("temperature", "The temperature variable in Kelvin.");
+  params.addRangeCheckedParam<Real>("thermal_expansion_coefficient",
+                                    0.0,
+                                    "thermal_expansion_coefficient >= 0.0",
+                                    "The linear thermal expansion coefficient.");
   // Strain parameters
   MooseEnum strain_model("small=0 finite=1", "small");
   params.addParam<MooseEnum>(
@@ -58,6 +64,11 @@ BVMechanicalMaterial::BVMechanicalMaterial(const InputParameters & parameters)
     _ndisp(coupledComponents("displacements")),
     _grad_disp(3),
     _grad_disp_old(3),
+    // Temperature coupling
+    _coupled_temp(isCoupled("temperature")),
+    _temp(_coupled_temp ? adCoupledValue("temperature") : _ad_zero),
+    _temp_old(_coupled_temp ? coupledValueOld("temperature") : _zero),
+    _thermal_exp(getParam<Real>("thermal_expansion_coefficient")),
     // Strain parameters
     _strain_model(getParam<MooseEnum>("strain_model")),
     // Strain properties
@@ -84,6 +95,8 @@ BVMechanicalMaterial::initialSetup()
   initializeInelasticModels();
 
   initializeInitialStress();
+
+  initializeThermalStrain();
 
   // Fetch coupled variables and gradients
   for (unsigned int i = 0; i < _ndisp; ++i)
@@ -181,6 +194,15 @@ BVMechanicalMaterial::initializeInitialStress()
 }
 
 void
+BVMechanicalMaterial::initializeThermalStrain()
+{
+  if (_coupled_temp && (_thermal_exp == 0.0))
+    paramError("thermal_expansion_coefficient", "Coupled temperature is provided but no thermal expansion coefficient!");
+  if (!_coupled_temp && (_thermal_exp != 0.0))
+    paramError("temperature", "Thermal expansion coefficient is provided but no coupled temperature!");
+}
+
+void
 BVMechanicalMaterial::initQpStatefulProperties()
 {
   _stress[_qp].zero();
@@ -222,6 +244,10 @@ BVMechanicalMaterial::computeQpStrainIncrement()
     default:
       paramError("strain_model", "Unknown strain model. Specify 'small' or 'finite'!");
   }
+
+  // Thermal strain correction
+  if (_coupled_temp) 
+    _strain_increment[_qp].addIa(-_thermal_exp * (_temp[_qp] -_temp_old[_qp]));
 }
 
 void

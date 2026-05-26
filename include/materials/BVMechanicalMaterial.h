@@ -26,6 +26,7 @@ public:
   void displacementIntegrityCheck();
   void initializeInelasticModels();
   void initializeInitialStress();
+  void initializeThermalStrain();
 
 protected:
   virtual void initQpStatefulProperties() override;
@@ -43,6 +44,12 @@ protected:
   const unsigned int _ndisp;
   std::vector<const ADVariableGradient *> _grad_disp;
   std::vector<const VariableGradient *> _grad_disp_old;
+
+  // Temperature coupling
+  const bool _coupled_temp;
+  const ADVariableValue & _temp;
+  const VariableValue & _temp_old;
+  const Real _thermal_exp;
 
   // Strain parameters
   const unsigned int _strain_model;
