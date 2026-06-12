@@ -27,9 +27,9 @@ BVStressDivergence::validParams()
                                      component,
                                      "The direction "
                                      "the variable this kernel acts in.");
-  //   params.addRangeCheckedParam<Real>(
-  //       "density", 0.0, "density >= 0.0", "The density of the material.");
-  //   params.addParam<RealVectorValue>("gravity", RealVectorValue(), "The gravity vector.");
+  params.addRangeCheckedParam<Real>(
+      "density", 0.0, "density >= 0.0", "The density of the material.");
+  params.addParam<RealVectorValue>("gravity", RealVectorValue(), "The gravity vector.");
   return params;
 }
 
@@ -38,8 +38,8 @@ BVStressDivergence::BVStressDivergence(const InputParameters & parameters)
     _coupled_pf(isCoupled("fluid_pressure")),
     _pf(adCoupledValue("fluid_pressure")),
     _component(getParam<MooseEnum>("component")),
-    // _rho(getParam<Real>("density")),
-    // _gravity(getParam<RealVectorValue>("gravity")),
+    _rho(getParam<Real>("density")),
+    _gravity(getParam<RealVectorValue>("gravity")),
     _stress(getADMaterialProperty<RankTwoTensor>("stress")),
     _biot(_coupled_pf ? &getADMaterialProperty<Real>("biot_coefficient") : nullptr)
 {
@@ -48,11 +48,11 @@ BVStressDivergence::BVStressDivergence(const InputParameters & parameters)
 ADReal
 BVStressDivergence::computeQpResidual()
 {
-  //   RealVectorValue grav_term = -_rho * _gravity;
+  RealVectorValue grav_term = -_rho * _gravity;
 
   ADRealVectorValue stress_row = _stress[_qp].row(_component);
   if (_coupled_pf)
     stress_row(_component) -= (*_biot)[_qp] * _pf[_qp];
 
-  return stress_row * _grad_test[_i][_qp]; // + grav_term(_component) * _test[_i][_qp];
+  return stress_row * _grad_test[_i][_qp] + grav_term(_component) * _test[_i][_qp];
 }
