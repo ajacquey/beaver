@@ -20,7 +20,9 @@ class BVCreepUpdateBase : public BVInelasticUpdateBase
 public:
   static InputParameters validParams();
   BVCreepUpdateBase(const InputParameters & parameters);
-  virtual void inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl) override;
+  virtual void inelasticUpdate(ADRankTwoTensor & stress,
+                               const RankTwoTensor & stress_old,
+                               const RankFourTensor & Cijkl) override;
 
 protected:
   virtual ADReal returnMap();

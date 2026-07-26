@@ -24,8 +24,10 @@ BVRTL2020ModelUpdate::validParams()
       "behavior: From laboratory experiments to pertinent long-term predictions.");
   // Temperature coupling
   params.addCoupledVar("temperature", "The temperature variable in Kelvin.");
-  params.addRangeCheckedParam<Real>("Tr", 289.0, "Tr > 0.0", "The reference temperature in Kelvin.");
-  params.addRangeCheckedParam<Real>("Ar", 0.0, "Ar >= 0.0", "The activation temperature in Kelvin.");  
+  params.addRangeCheckedParam<Real>(
+      "Tr", 289.0, "Tr > 0.0", "The reference temperature in Kelvin.");
+  params.addRangeCheckedParam<Real>(
+      "Ar", 0.0, "Ar >= 0.0", "The activation temperature in Kelvin.");
   // Lemaitre creep strain rate parameters
   params.addRequiredRangeCheckedParam<Real>(
       "alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
@@ -77,15 +79,19 @@ BVRTL2020ModelUpdate::BVRTL2020ModelUpdate(const InputParameters & parameters)
     _eqv_creep_strain_R(declareADProperty<Real>(_base_name + "eqv_creep_strain_R")),
     _eqv_creep_strain_R_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_R")),
     // Internal variable for volumetric creep strain
-    _vol_creep_strain(declareADProperty<Real>(_base_name + "_vol_creep_strain")),
-    _vol_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "_vol_creep_strain"))
+    _vol_creep_strain(declareADProperty<Real>(_base_name + "vol_creep_strain")),
+    _vol_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "vol_creep_strain"))
 {
   // Check temperature coupling
   if (_temp && !isParamSetByUser("Ar"))
-    paramWarning("Ar", "Coupled temperature is set but Ar is not. Temperature coupling is not set properly!");
+    paramWarning(
+        "Ar",
+        "Coupled temperature is set but Ar is not. Temperature coupling is not set properly!");
 
   if (isParamSetByUser("Ar") && !_temp)
-    paramWarning("temperature", "Ar is set but coupled temperature is not. Temperature coupling is not set properly!");
+    paramWarning(
+        "temperature",
+        "Ar is set but coupled temperature is not. Temperature coupling is not set properly!");
 }
 
 void
@@ -118,10 +124,10 @@ BVRTL2020ModelUpdate::creepRateR(const std::vector<ADReal> & creep_strain_incr)
   {
     if (_temp)
       _exponential = exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
-      
+
     return 1.0e-06 * _exponential *
-                  pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
-                           _n2); // macaulay brackets to guide against negative values
+           pow((q / _A2 >= 0.0 ? q / _A2 : 0.0),
+               _n2); // macaulay brackets to guide against negative values
   }
 }
 
@@ -199,8 +205,7 @@ BVRTL2020ModelUpdate::creepRateLemaitreDerivative(const std::vector<ADReal> & cr
     if (gamma_l == 0.0)
       return _alpha * creepRateRDerivative(creep_strain_incr);
     else
-      return _alpha * creepRateRDerivative(creep_strain_incr) *
-             pow(gamma_l, 1.0 - 1.0 / _alpha);
+      return _alpha * creepRateRDerivative(creep_strain_incr) * pow(gamma_l, 1.0 - 1.0 / _alpha);
 
   else
     throw MooseException(
@@ -271,7 +276,8 @@ BVRTL2020ModelUpdate::postReturnMap(const std::vector<ADReal> & creep_strain_inc
 {
   _eqv_creep_strain_L[_qp] = lemaitreCreepStrain(creep_strain_incr);
   _eqv_creep_strain_R[_qp] = munsondawsonCreepStrain(creep_strain_incr);
-  _vol_creep_strain[_qp] = volumetricCreepStrain(creep_strain_incr);
+  if (_volumetric)
+    _vol_creep_strain[_qp] = volumetricCreepStrain(creep_strain_incr);
 }
 
 void
@@ -289,8 +295,8 @@ BVRTL2020ModelUpdate::creepRateVol(const ADReal & vol_strain_incr)
   if (p == 0.0)
     return 0.0; // No contribution since p is zero
   else
-    return _z * (pow(abs(p / _Nz), _nz) - _gamma_vp) /
-           (pow(abs(p / _Mz), _mz) + _gamma_vp) * _gamma_dot_vp;
+    return _z * (pow(abs(p / _Nz), _nz) - _gamma_vp) / (pow(abs(p / _Mz), _mz) + _gamma_vp) *
+           _gamma_dot_vp;
 }
 
 ADReal
@@ -301,9 +307,7 @@ BVRTL2020ModelUpdate::creepRateVolDerivative(const ADReal & vol_strain_incr)
     return 1.0; // No contribution since p is zero
   else
     return -_K * _z * p / abs(p) *
-           (_nz / _Nz * pow(abs(p / _Nz), _nz - 1.0) *
-                (pow(abs(p / _Mz), _mz) + _gamma_vp) -
-            _mz / _Mz * pow(abs(p / _Mz), _mz - 1.0) *
-                (pow(abs(p / _Nz), _nz) - _gamma_vp)) /
+           (_nz / _Nz * pow(abs(p / _Nz), _nz - 1.0) * (pow(abs(p / _Mz), _mz) + _gamma_vp) -
+            _mz / _Mz * pow(abs(p / _Mz), _mz - 1.0) * (pow(abs(p / _Nz), _nz) - _gamma_vp)) /
            pow(pow(abs(p / _Mz), _mz) + _gamma_vp, 2.0) * _gamma_dot_vp;
 }

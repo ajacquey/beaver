@@ -35,7 +35,9 @@ BVCreepUpdateBase::BVCreepUpdateBase(const InputParameters & parameters)
 }
 
 void
-BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl)
+BVCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress,
+                                   const RankTwoTensor & /*stress_old*/,
+                                   const RankFourTensor & Cijkl)
 {
   // Here we do an iterative update with a single variable being the scalar creep strain increment
   // We are trying to find the zero of the function F which is defined as:
@@ -109,7 +111,7 @@ BVCreepUpdateBase::reformPlasticStrainTensor(const ADReal & eqv_strain_incr)
   ADRankTwoTensor flow_dir =
       (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
 
-  return 1.5 * eqv_strain_incr * flow_dir; 
+  return 1.5 * eqv_strain_incr * flow_dir;
 }
 
 void

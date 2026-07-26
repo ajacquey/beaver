@@ -35,7 +35,9 @@ BVTwoCreepUpdateBase::BVTwoCreepUpdateBase(const InputParameters & parameters)
 }
 
 void
-BVTwoCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl)
+BVTwoCreepUpdateBase::inelasticUpdate(ADRankTwoTensor & stress,
+                                      const RankTwoTensor & /*stress_old*/,
+                                      const RankFourTensor & Cijkl)
 {
   // Here we do an iterative update with a single variable being the scalar effective stress
   // We are trying to find the zero of the function F which is defined as:

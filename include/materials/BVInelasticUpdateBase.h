@@ -21,7 +21,9 @@ public:
   static InputParameters validParams();
   BVInelasticUpdateBase(const InputParameters & parameters);
   void setQp(unsigned int qp);
-  virtual void inelasticUpdate(ADRankTwoTensor & stress, const RankFourTensor & Cijkl) = 0;
+  virtual void inelasticUpdate(ADRankTwoTensor & stress,
+                               const RankTwoTensor & stress_old,
+                               const RankFourTensor & Cijkl) = 0;
   void resetQpProperties() final {}
   void resetProperties() final {}
 

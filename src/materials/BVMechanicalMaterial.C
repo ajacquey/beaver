@@ -158,7 +158,8 @@ BVMechanicalMaterial::displacementIntegrityCheck()
 void
 BVMechanicalMaterial::initializeInelasticModels()
 {
-  const std::vector<MaterialName> model_names = getParam<std::vector<MaterialName>>("inelastic_models");
+  const std::vector<MaterialName> model_names =
+      getParam<std::vector<MaterialName>>("inelastic_models");
   _num_inelastic = model_names.size();
   _has_inelastic = _num_inelastic > 0;
   if (_has_inelastic)
@@ -197,9 +198,11 @@ void
 BVMechanicalMaterial::initializeThermalStrain()
 {
   if (_coupled_temp && (_thermal_exp == 0.0))
-    paramError("thermal_expansion_coefficient", "Coupled temperature is provided but no thermal expansion coefficient!");
+    paramError("thermal_expansion_coefficient",
+               "Coupled temperature is provided but no thermal expansion coefficient!");
   if (!_coupled_temp && (_thermal_exp != 0.0))
-    paramError("temperature", "Thermal expansion coefficient is provided but no coupled temperature!");
+    paramError("temperature",
+               "Thermal expansion coefficient is provided but no coupled temperature!");
 }
 
 void
@@ -246,8 +249,8 @@ BVMechanicalMaterial::computeQpStrainIncrement()
   }
 
   // Thermal strain correction
-  if (_coupled_temp) 
-    _strain_increment[_qp].addIa(-_thermal_exp * (_temp[_qp] -_temp_old[_qp]));
+  if (_coupled_temp)
+    _strain_increment[_qp].addIa(-_thermal_exp * (_temp[_qp] - _temp_old[_qp]));
 }
 
 void
@@ -299,7 +302,7 @@ BVMechanicalMaterial::computeQpStress()
     for (unsigned int i = 0; i < _num_inelastic; ++i)
     {
       _inelastic_models[i]->setQp(_qp);
-      _inelastic_models[i]->inelasticUpdate(_stress[_qp], _Cijkl);
+      _inelastic_models[i]->inelasticUpdate(_stress[_qp], _stress_old[_qp], _Cijkl);
     }
   }
 }

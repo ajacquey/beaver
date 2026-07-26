@@ -1,0 +1,266 @@
+/******************************************************************************/
+/*                            This file is part of                            */
+/*                       BEAVER, a MOOSE-based application                    */
+/*       Multiphase Flow Poromechanics for Induced Seismicity Problems        */
+/*                                                                            */
+/*                  Copyright (C) 2024 by Antoine B. Jacquey                  */
+/*                           Polytechnique Montréal                           */
+/*                                                                            */
+/*            Licensed under GNU Lesser General Public License v2.1           */
+/*                       please see LICENSE for details                       */
+/*                 or http://www.gnu.org/licenses/lgpl.html                   */
+/******************************************************************************/
+
+#include "BVRTL2020ModelExplicitUpdate.h"
+#include "BVElasticityTensorTools.h"
+
+registerMooseObject("BeaverApp", BVRTL2020ModelExplicitUpdate);
+
+InputParameters
+BVRTL2020ModelExplicitUpdate::validParams()
+{
+  InputParameters params = BVInelasticUpdateBase::validParams();
+  params.addClassDescription(
+      "Material for computing a RTL2020 creep explicit update. See Azabou et al. (2021), Rock salt "
+      "behavior: From laboratory experiments to pertinent long-term predictions.");
+  params.addParam<bool>("volumetric", false, "Whether to perform a volumetric correction.");
+  // Temperature coupling
+  params.addCoupledVar("temperature", "The temperature variable in Kelvin.");
+  params.addRangeCheckedParam<Real>(
+      "Tr", 289.0, "Tr > 0.0", "The reference temperature in Kelvin.");
+  params.addRangeCheckedParam<Real>(
+      "Ar", 0.0, "Ar >= 0.0", "The activation temperature in Kelvin.");
+  // Lemaitre creep strain rate parameters
+  params.addRequiredRangeCheckedParam<Real>(
+      "alpha", "0.0 < alpha & alpha < 1.0", "The alpha parameter.");
+  params.addRequiredRangeCheckedParam<Real>("A2", "A2 > 0.0", "The A2 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("n2", "n2 > 0.0", "The n2 parameter.");
+  // Munson-Dawson creep strain rate parameters
+  params.addRequiredRangeCheckedParam<Real>("A1", "A1 > 0.0", "The A1 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("n1", "n1 > 0.0", "The n1 parameter.");
+  params.addRequiredRangeCheckedParam<Real>("A", "A >= 0.0", "The A parameter.");
+  params.addRequiredRangeCheckedParam<Real>("B", "B >= 0.0", "The B parameter.");
+  params.addRequiredRangeCheckedParam<Real>("m", "m > 1.0", "The m parameter.");
+  params.addRequiredRangeCheckedParam<Real>("n", "n > 1.0", "The n parameter.");
+  // volume creep parameters
+  params.addParam<Real>("z", 0.0, "volumetric creep parameter z");
+  params.addParam<Real>("Nz", 1.0, "volumetric creep parameter Nz");
+  params.addParam<Real>("nz", 1.0, "volumetric creep parameter nz");
+  params.addParam<Real>("Mz", 1.0, "volumetric creep parameter Mz");
+  params.addParam<Real>("mz", 1.0, "volumetric creep parameter mz");
+  return params;
+}
+
+BVRTL2020ModelExplicitUpdate::BVRTL2020ModelExplicitUpdate(const InputParameters & parameters)
+  : BVInelasticUpdateBase(parameters),
+    _base_name(isParamValid("base_name") ? getParam<std::string>("base_name") + "_" : ""),
+    _creep_strain_incr(declareADProperty<RankTwoTensor>(_base_name + "creep_strain_increment")),
+    _volumetric(parameters.get<bool>("volumetric")),
+    // Temperature coupling
+    _temp(isParamValid("temperature") ? &adCoupledValue("temperature") : nullptr),
+    _temp_ref(getParam<Real>("Tr")),
+    _Ar(getParam<Real>("Ar")),
+    _exponential(1.0),
+    // Lemaitre creep strain rate parameters
+    _alpha(getParam<Real>("alpha")),
+    _A2(getParam<Real>("A2")),
+    _n2(getParam<Real>("n2")),
+    // Munson-Dawson creep strain rate parameters
+    _A1(getParam<Real>("A1")),
+    _n1(getParam<Real>("n1")),
+    _A(getParam<Real>("A")),
+    _B(getParam<Real>("B")),
+    _m(getParam<Real>("m")),
+    _n(getParam<Real>("n")),
+    // Volumetric creep strain rate parameters
+    _z(getParam<Real>("z")),
+    _Nz(getParam<Real>("Nz")),
+    _nz(getParam<Real>("nz")),
+    _Mz(getParam<Real>("Mz")),
+    _mz(getParam<Real>("mz")),
+    // Internal variable for Lemaitre and Munson-Dawson creep strain
+    _eqv_creep_strain_L(declareADProperty<Real>(_base_name + "eqv_creep_strain_L")),
+    _eqv_creep_strain_L_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_L")),
+    _eqv_creep_strain_R(declareADProperty<Real>(_base_name + "eqv_creep_strain_R")),
+    _eqv_creep_strain_R_old(getMaterialPropertyOld<Real>(_base_name + "eqv_creep_strain_R")),
+    // Internal variable for volumetric creep strain
+    _vol_creep_strain(declareADProperty<Real>(_base_name + "vol_creep_strain")),
+    _vol_creep_strain_old(getMaterialPropertyOld<Real>(_base_name + "vol_creep_strain"))
+{
+  // Check temperature coupling
+  if (_temp && !isParamSetByUser("Ar"))
+    paramWarning(
+        "Ar",
+        "Coupled temperature is set but Ar is not. Temperature coupling is not set properly!");
+
+  if (isParamSetByUser("Ar") && !_temp)
+    paramWarning(
+        "temperature",
+        "Ar is set but coupled temperature is not. Temperature coupling is not set properly!");
+}
+
+void
+BVRTL2020ModelExplicitUpdate::inelasticUpdate(ADRankTwoTensor & stress,
+                                              const RankTwoTensor & stress_old,
+                                              const RankFourTensor & Cijkl)
+{
+  // Here we do an explicit update using the old stress to compute the viscoplastic strain rate.
+
+  // Trial stress
+  _stress_tr = stress;
+  // Trial effective stress
+  _eqv_stress_tr = std::sqrt(1.5) * _stress_tr.deviatoric().L2norm();
+  _avg_stress_tr = -_stress_tr.trace() / 3.0;
+  // Shear and bulk modulus
+  _G = BVElasticityTensorTools::getIsotropicShearModulus(Cijkl);
+  _K = BVElasticityTensorTools::getIsotropicBulkModulus(Cijkl);
+  // Old equivalent stress for explicit update
+  _eqv_stress_old = std::sqrt(1.5) * stress_old.deviatoric().L2norm();
+  _avg_stress_old = -stress_old.trace() / 3.0;
+
+  // Initialize creep strain increment
+  _creep_strain_incr[_qp].zero();
+
+  // Initialize scalar creep strain incr
+  std::vector<ADReal> creep_strain_incr(3, 0.0);
+
+  // Pre-update
+  preUpdate();
+
+  // Deviatoric explicit update
+  creep_strain_incr[0] = creepRateLemaitre() * _dt;
+  creep_strain_incr[1] = creepRateMunsonDawson() * _dt;
+
+  // mooseWarning("Lemaitre creep rate: ", creep_strain_incr[0]);
+  // mooseWarning("Old Lemaitre strain: ", _eqv_creep_strain_L[_qp]);
+
+  // Post-update
+  postUpdate(creep_strain_incr);
+
+  // mooseWarning("New Lemaitre strain: ", _eqv_creep_strain_L[_qp]);
+
+  // if (creep_strain_incr[0] > 0.0)
+  //   mooseError("Stop!");
+
+  if (_volumetric)
+  {
+    // Pre-update volumetric
+    preUpdateVol(creep_strain_incr);
+
+    // Volumetric explicit update
+    creep_strain_incr[2] = creepRateVol() * _dt;
+
+    // Post-update volumetric
+    postUpdateVol(creep_strain_incr);
+  }
+
+  // Update quantities
+  _creep_strain_incr[_qp] = reformPlasticStrainTensor(creep_strain_incr);
+  stress -= Cijkl * _creep_strain_incr[_qp];
+}
+
+void
+BVRTL2020ModelExplicitUpdate::initQpStatefulProperties()
+{
+  _eqv_creep_strain_L[_qp] = 0.0;
+  _eqv_creep_strain_R[_qp] = 0.0;
+  _vol_creep_strain[_qp] = 0.0;
+}
+
+ADReal
+BVRTL2020ModelExplicitUpdate::creepRateR()
+{
+  if (_eqv_stress_old == 0.0)
+    return 0.0;
+  else
+  {
+    if (_temp)
+      _exponential = exp(_Ar * (1.0 / _temp_ref - 1.0 / (*_temp)[_qp]));
+
+    return 1.0e-06 * _exponential *
+           pow((_eqv_stress_old / _A2 >= 0.0 ? _eqv_stress_old / _A2 : 0.0),
+               _n2); // macaulay brackets to guide against negative values
+  }
+}
+
+ADReal
+BVRTL2020ModelExplicitUpdate::creepRateLemaitre()
+{
+  ADReal gamma_l = 1.0e+06 * _eqv_creep_strain_L_old[_qp];
+
+  if (gamma_l == 0.0)
+    return _alpha * creepRateR();
+  else
+    return _alpha * creepRateR() * pow(gamma_l, 1.0 - 1.0 / _alpha);
+}
+
+ADReal
+BVRTL2020ModelExplicitUpdate::creepRateMunsonDawson()
+{
+  ADReal saturation_strain = (_eqv_stress_old != 0.0) ? pow(_eqv_stress_old / _A1, _n1) : 1.0e+06;
+
+  ADReal gamma_ms = 1.0e+06 * _eqv_creep_strain_R_old[_qp];
+
+  if (gamma_ms < saturation_strain)
+    return _A * pow(1.0 - gamma_ms / saturation_strain, _n) * creepRateR();
+  else
+    return -_B * pow(gamma_ms / saturation_strain - 1.0, _m) * creepRateR();
+}
+
+ADReal
+BVRTL2020ModelExplicitUpdate::creepRateVol()
+{
+  if (_avg_stress_old == 0.0)
+    return 0.0; // No contribution since p is zero
+  else
+    return _z * (pow(abs(_avg_stress_old / _Nz), _nz) - _gamma_vp) /
+           (pow(abs(_avg_stress_old / _Mz), _mz) + _gamma_vp) * _gamma_dot_vp;
+}
+
+void
+BVRTL2020ModelExplicitUpdate::preUpdate()
+{
+  _eqv_creep_strain_L[_qp] = _eqv_creep_strain_L_old[_qp];
+  _eqv_creep_strain_R[_qp] = _eqv_creep_strain_R_old[_qp];
+}
+
+void
+BVRTL2020ModelExplicitUpdate::postUpdate(const std::vector<ADReal> & creep_strain_incr)
+{
+  _eqv_creep_strain_L[_qp] = _eqv_creep_strain_L_old[_qp] + creep_strain_incr[0];
+  _eqv_creep_strain_R[_qp] = _eqv_creep_strain_R_old[_qp] + creep_strain_incr[1];
+}
+
+void
+BVRTL2020ModelExplicitUpdate::preUpdateVol(const std::vector<ADReal> & creep_strain_incr)
+{
+  _vol_creep_strain[_qp] = _vol_creep_strain_old[_qp];
+  // Save some information from the deviatoric update
+  _gamma_vp = 1.0e+06 * (_eqv_creep_strain_L[_qp] + _eqv_creep_strain_R[_qp]);
+  _gamma_dot_vp = (creep_strain_incr[0] + creep_strain_incr[1]) / _dt;
+}
+
+void
+BVRTL2020ModelExplicitUpdate::postUpdateVol(const std::vector<ADReal> & creep_strain_incr)
+{
+  _vol_creep_strain[_qp] = _vol_creep_strain_old[_qp] + creep_strain_incr[2];
+}
+
+ADRankTwoTensor
+BVRTL2020ModelExplicitUpdate::reformPlasticStrainTensor(
+    const std::vector<ADReal> & creep_strain_incr)
+{
+  ADRankTwoTensor res = ADRankTwoTensor();
+
+  ADRankTwoTensor flow_dir =
+      (_eqv_stress_tr != 0.0) ? _stress_tr.deviatoric() / _eqv_stress_tr : ADRankTwoTensor();
+
+  for (unsigned int i = 0; i < 2; ++i)
+    res += 1.5 * creep_strain_incr[i] * flow_dir;
+
+  // Volumetric part
+  if (_volumetric)
+    res.addIa(-creep_strain_incr[2] / 3.0);
+
+  return res;
+}
