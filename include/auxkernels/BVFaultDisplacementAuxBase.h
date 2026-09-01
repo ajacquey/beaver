@@ -11,27 +11,17 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVFaultShearStressAux.h"
+#pragma once
 
-registerMooseObject("BeaverApp", BVFaultShearStressAux);
+#include "AuxKernel.h"
 
-InputParameters
-BVFaultShearStressAux::validParams()
+class BVFaultDisplacementAuxBase : public AuxKernel
 {
-  InputParameters params = BVFaultStressAuxBase::validParams();
-  params.addClassDescription("Calculates the shear stress acting on the fault.");
-  return params;
-}
+public:
+  static InputParameters validParams();
+  BVFaultDisplacementAuxBase(const InputParameters & parameters);
 
-BVFaultShearStressAux::BVFaultShearStressAux(const InputParameters & parameters)
-  : BVFaultStressAuxBase(parameters)
-{
-}
-
-Real
-BVFaultShearStressAux::computeValue()
-{
-  ADRealVectorValue shear_traction =
-      _traction[_qp] - (_traction[_qp] * _normals[_qp]) * _normals[_qp];
-  return MetaPhysicL::raw_value(shear_traction.norm());
-}
+protected:
+  const MooseArray<Point> & _normals;
+  const ADMaterialProperty<RealVectorValue> & _displacement_jump_incr;
+};

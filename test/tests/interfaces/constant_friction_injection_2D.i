@@ -1,7 +1,16 @@
+
+# Fault stress parameter
+f = 0.5
+sigma = 1.0
+Delta_p = 0.4
+alpha = 0.04
+T = 0.4
+tau = ${fparse f * sigma * (1.0 - T * Delta_p / sigma)}
+
 [Mesh]
   [file]
     type = FileMeshGenerator
-    file = mesh-3D.msh
+    file = mesh-2D.msh
   []
   [fault_gen]
     type = BVFaultInterfaceGenerator
@@ -19,10 +28,6 @@
     order = FIRST
     family = LAGRANGE
   []
-  [disp_z]
-    order = FIRST
-    family = LAGRANGE
-  []
 []
 
 [Kernels]
@@ -36,11 +41,6 @@
     component = y
     variable = disp_y
   []
-  [stress_z]
-    type = BVStressDivergence
-    component = z
-    variable = disp_z
-  []
 []
 
 [InterfaceKernels]
@@ -50,6 +50,7 @@
     component = x
     variable = disp_x
     neighbor_var = disp_x
+    fluid_pressure = pressure
   []
   [traction_y]
     type = BVMechanicalInterface
@@ -57,29 +58,11 @@
     component = y
     variable = disp_y
     neighbor_var = disp_y
-  []
-  [traction_z]
-    type = BVMechanicalInterface
-    boundary = 'interface'
-    component = Z
-    variable = disp_z
-    neighbor_var = disp_z
+    fluid_pressure = pressure
   []
 []
 
 [AuxVariables]
-  [strain_xy]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [stress_xy]
-    order = CONSTANT
-    family = MONOMIAL
-  []
-  [stress_yy]
-    order = CONSTANT
-    family = MONOMIAL
-  []
   [normal_stress]
     order = CONSTANT
     family = MONOMIAL
@@ -88,30 +71,21 @@
     order = CONSTANT
     family = MONOMIAL
   []
+  [pressure]
+    order = FIRST
+    family = LAGRANGE
+  []
+  [slip_rate]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [slip]
+    order = CONSTANT
+    family = MONOMIAL
+  []
 []
 
 [AuxKernels]
-  [strain_xy_aux]
-    type = BVStrainComponentAux
-    variable = strain_xy
-    index_i = x
-    index_j = y
-    execute_on = 'TIMESTEP_END'
-  []
-  [stress_xy_aux]
-    type = BVStressComponentAux
-    variable = stress_xy
-    index_i = x
-    index_j = y
-    execute_on = 'TIMESTEP_END'
-  []
-  [stress_yy_aux]
-    type = BVStressComponentAux
-    variable = stress_yy
-    index_i = y
-    index_j = y
-    execute_on = 'TIMESTEP_END'
-  []
   [normal_stress_aux]
     type = BVFaultNormalStressAux
     variable = normal_stress
@@ -124,77 +98,93 @@
     boundary = 'interface'
     execute_on = 'TIMESTEP_END'
   []
+  [pressure_aux]
+    type = FunctionAux
+    function = pressure_fct
+    variable = pressure
+    boundary = 'interface'
+    execute_on = 'TIMESTEP_BEGIN TIMESTEP_END'
+  []
+  [slip_rate_aux]
+    type = BVFaultSlipRateAux
+    variable = slip_rate
+    boundary = 'interface'
+    execute_on = 'TIMESTEP_END'
+  []
+  [slip_aux]
+    type = BVFaultSlipAux
+    variable = slip
+    boundary = 'interface'
+    execute_on = 'TIMESTEP_END'
+  []
 []
 
 [Functions]
-  [disp_x_func]
+  [pressure_fct]
     type = ParsedFunction
-    expression = 'm*t*y'
-    symbol_names = 'm'
-    symbol_values = '0.1'
+    expression = 'if(t<=0,0.0,${Delta_p}*(1.0-erf(abs(x)/sqrt(${alpha}*t))))' 
   []
 []
 
 [BCs]
-  [Periodic]
-    [all]
-      variable = 'disp_x disp_y disp_z'
-      auto_direction = 'x z'
+  [BVPressure]
+    [pressure]
+      boundary = 'bottom top left right'
+      displacement_vars = 'disp_x disp_y'
+      value = ${sigma}
     []
   []
-  [no_y]
-    type = DirichletBC
-    variable = disp_y
-    boundary = 'bottom top'
-    value = 0.0
+  [BVShearTraction]
+    [shear_stress_bottom_top]
+      boundary = 'bottom top'
+      displacement_vars = 'disp_x disp_y'
+      value = +${tau}
+    []
+    [shear_stress_left_right]
+      boundary = 'left right'
+      displacement_vars = 'disp_x disp_y'
+      value = -${tau}
+    []
   []
-  [disp_x_plate]
-    type = FunctionDirichletBC
-    variable = disp_x
-    boundary = 'bottom top'
-    function = disp_x_func
-  []
-  [no_z]
+  [no_disp_x]
     type = DirichletBC
-    variable = disp_z
-    boundary = 'bottom top'
+    boundary = 'no_disp_x'
     value = 0.0
+    variable = 'disp_x'
+  []
+  [no_disp_y]
+    type = DirichletBC
+    boundary = 'no_disp_y'
+    value = 0.0
+    variable = 'disp_y'
   []
 []
 
 [Materials]
   [elasticity]
     type = BVMechanicalMaterial
-    displacements = 'disp_x disp_y disp_z'
-    shear_modulus = 1.0
-    bulk_modulus = 1.0
-    initial_stress = '0.0 -1.0 0.0'
+    displacements = 'disp_x disp_y'
+    shear_modulus = 6.667e+02
+    bulk_modulus = 6.667e+02
+    initial_stress = '-${sigma} -${sigma} -${sigma} 0.0 0.0 +${tau}'
   []
   [interface]
     type = BVMechanicalInterfaceMaterial
     boundary = 'interface'
-    displacements = 'disp_x disp_y disp_z'
-    normal_stiffness = 1.0e+03
-    tangent_stiffness = 1.0e+03
+    displacements = 'disp_x disp_y'
+    normal_stiffness = 6.667e+05
+    tangent_stiffness = 6.667e+05
     friction_model = 'constant_friction'
   []
   [constant_friction]
     type = BVConstantFrictionUpdate
-    friction = 0.1
+    friction = ${f}
   []
 []
 
-# [Preconditioning]
-#   [hypre]
-#     type = SMP
-#     full = true
-#     petsc_options_iname = '-pc_type -pc_hypre_type'
-#     petsc_options_value = 'hypre boomeramg'
-#   []
-# []
-
 [Preconditioning]
-  [asm]
+  active = 'asm_ilu'
+  [asm_ilu]
     type = SMP
     petsc_options = '-snes_ksp_ew'
     petsc_options_iname = '-ksp_type -ksp_rtol -ksp_max_it
@@ -205,7 +195,7 @@
     petsc_options_value = 'fgmres 1e-10 100
                            asm
                            ilu
-                           newtonls 1e-12 1e-08 100 basic
+                           newtonls 1.0e-08 1e-08 100 l2
                            201'
   []
 []
@@ -213,11 +203,13 @@
 [Executioner]
   type = Transient
   solve_type = 'NEWTON'
+  automatic_scaling = true
   start_time = 0.0
-  end_time = 4.0
-  dt = 1.0
+  end_time = 2
+  num_steps = 5
 []
 
 [Outputs]
+  execute_on = 'TIMESTEP_END'
   exodus = true
 []

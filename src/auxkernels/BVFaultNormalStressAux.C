@@ -31,8 +31,5 @@ BVFaultNormalStressAux::BVFaultNormalStressAux(const InputParameters & parameter
 Real
 BVFaultNormalStressAux::computeValue()
 {
-  RealVectorValue normal = computeNormalVector();
-  ADRealVectorValue fault_traction = computeFaultTraction();
-
-  return -MetaPhysicL::raw_value(fault_traction * normal);
+  return -MetaPhysicL::raw_value(_traction[_qp] * _normals[_qp]);
 }

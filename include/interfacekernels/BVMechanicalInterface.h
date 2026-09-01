@@ -24,6 +24,7 @@ public:
 protected:
   virtual ADReal computeQpResidual(Moose::DGResidualType type) override;
 
+  const ADVariableValue & _pf;
   const unsigned int _component;
   const ADMaterialProperty<RealVectorValue> & _traction_global;
 };

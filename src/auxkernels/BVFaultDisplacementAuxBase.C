@@ -11,27 +11,23 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVFaultShearStressAux.h"
-
-registerMooseObject("BeaverApp", BVFaultShearStressAux);
+#include "BVFaultDisplacementAuxBase.h"
+#include "Assembly.h"
 
 InputParameters
-BVFaultShearStressAux::validParams()
+BVFaultDisplacementAuxBase::validParams()
 {
-  InputParameters params = BVFaultStressAuxBase::validParams();
-  params.addClassDescription("Calculates the shear stress acting on the fault.");
+  InputParameters params = AuxKernel::validParams();
+  params.addClassDescription("Base class for outputting fault displacement discontinuity.");
   return params;
 }
 
-BVFaultShearStressAux::BVFaultShearStressAux(const InputParameters & parameters)
-  : BVFaultStressAuxBase(parameters)
+BVFaultDisplacementAuxBase::BVFaultDisplacementAuxBase(const InputParameters & parameters)
+  : AuxKernel(parameters),
+    _normals(_assembly.normals()),
+    _displacement_jump_incr(
+        getADMaterialProperty<RealVectorValue>("displacement_jump_increment_global"))
 {
-}
-
-Real
-BVFaultShearStressAux::computeValue()
-{
-  ADRealVectorValue shear_traction =
-      _traction[_qp] - (_traction[_qp] * _normals[_qp]) * _normals[_qp];
-  return MetaPhysicL::raw_value(shear_traction.norm());
+  if (!_bnd)
+    mooseError("You need to provide a boundary for this AuxKernel!\n");
 }

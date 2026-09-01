@@ -11,27 +11,28 @@
 /*                 or http://www.gnu.org/licenses/lgpl.html                   */
 /******************************************************************************/
 
-#include "BVFaultShearStressAux.h"
+#include "BVFaultSlipRateAux.h"
 
-registerMooseObject("BeaverApp", BVFaultShearStressAux);
+registerMooseObject("BeaverApp", BVFaultSlipRateAux);
 
 InputParameters
-BVFaultShearStressAux::validParams()
+BVFaultSlipRateAux::validParams()
 {
-  InputParameters params = BVFaultStressAuxBase::validParams();
-  params.addClassDescription("Calculates the shear stress acting on the fault.");
+  InputParameters params = BVFaultDisplacementAuxBase::validParams();
+  params.addClassDescription("Calculates the slip rate acting on the fault.");
   return params;
 }
 
-BVFaultShearStressAux::BVFaultShearStressAux(const InputParameters & parameters)
-  : BVFaultStressAuxBase(parameters)
+BVFaultSlipRateAux::BVFaultSlipRateAux(const InputParameters & parameters)
+  : BVFaultDisplacementAuxBase(parameters)
 {
 }
 
 Real
-BVFaultShearStressAux::computeValue()
+BVFaultSlipRateAux::computeValue()
 {
-  ADRealVectorValue shear_traction =
-      _traction[_qp] - (_traction[_qp] * _normals[_qp]) * _normals[_qp];
-  return MetaPhysicL::raw_value(shear_traction.norm());
+  ADRealVectorValue shear_disp_disc_incr =
+      _displacement_jump_incr[_qp] - (_displacement_jump_incr[_qp] * _normals[_qp]) * _normals[_qp];
+
+  return MetaPhysicL::raw_value(shear_disp_disc_incr.norm()) / _dt;
 }
